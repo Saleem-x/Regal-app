@@ -1,5 +1,3 @@
-import 'package:google_fonts/google_fonts.dart';
+const kprimaryfont = 'assets/fonts/SFPRODISPLAYREGULAR.OTF';
 
-const kprimaryfont = GoogleFonts.poppins;
-
-const logofont = GoogleFonts.playfairDisplay;
+const kboldfont = 'assets/fonts/SFPRODISPLAYBOLD.OTF';
