@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="9.448" height="9.448" viewBox="0 0 9.448 9.448">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="plus" transform="translate(0 4.724) rotate(-45)">
+    <path id="Line_76" data-name="Line 76" class="cls-1" d="M5.638,6.306a.666.666,0,0,1-.472-.2L-.179.765A.668.668,0,0,1,.765-.179L6.11,5.165a.668.668,0,0,1-.472,1.14Z" transform="translate(0.375 0.375)"/>
+    <path id="Line_77" data-name="Line 77" class="cls-1" d="M.293,6.306a.668.668,0,0,1-.472-1.14L5.165-.179A.668.668,0,0,1,6.11.765L.765,6.11A.666.666,0,0,1,.293,6.306Z" transform="translate(0.375 0.375)"/>
+  </g>
+</svg>
