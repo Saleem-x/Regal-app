@@ -7,9 +7,11 @@ class MobileFieldWidget extends StatelessWidget {
   const MobileFieldWidget({
     super.key,
     required this.size,
+    required this.controller,
   });
 
   final Size size;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +27,30 @@ class MobileFieldWidget extends StatelessWidget {
           ),
           Expanded(
             child: TextFormField(
+              controller: controller,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'please enter mobile number';
+                } else if (value.length < 10) {
+                  return 'mobile number should be 10';
+                } else {
+                  return null;
+                }
+              },
               keyboardType: TextInputType.number,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(10),
                 FilteringTextInputFormatter.digitsOnly
               ],
               decoration: InputDecoration(
-                prefixText: '+91  ',
+                isDense: true,
+                prefixIcon: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('+91  ', textAlign: TextAlign.left),
+                  ],
+                ),
                 border: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: kcolorblack.withOpacity(

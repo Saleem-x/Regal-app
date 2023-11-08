@@ -5,9 +5,16 @@ import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
 import 'package:regal_app/feature/views/auth/widgets/mobilefield.dart';
 import 'package:regal_app/feature/views/auth/widgets/otpfieldwidget.dart';
 
-class SetNewPinScreen extends StatelessWidget {
+class SetNewPinScreen extends StatefulWidget {
   const SetNewPinScreen({super.key});
 
+  @override
+  State<SetNewPinScreen> createState() => _SetNewPinScreenState();
+}
+
+final _mobilecontroller = TextEditingController();
+
+class _SetNewPinScreenState extends State<SetNewPinScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -41,7 +48,7 @@ class SetNewPinScreen extends StatelessWidget {
               ],
             ),
           ),
-          MobileFieldWidget(size: size),
+          MobileFieldWidget(size: size, controller: _mobilecontroller),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
             child: Row(

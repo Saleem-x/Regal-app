@@ -5,10 +5,18 @@ import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
 import 'package:regal_app/feature/views/auth/widgets/mobilefield.dart';
 import 'package:regal_app/feature/views/auth/widgets/otpfieldwidget.dart';
+import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
 
-class JoinNewSchemeScreen extends StatelessWidget {
+class JoinNewSchemeScreen extends StatefulWidget {
   const JoinNewSchemeScreen({super.key});
 
+  @override
+  State<JoinNewSchemeScreen> createState() => _JoinNewSchemeScreenState();
+}
+
+final _mobilecontroller = TextEditingController();
+
+class _JoinNewSchemeScreenState extends State<JoinNewSchemeScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -93,7 +101,7 @@ class ALLJoinScreenWidgets extends StatelessWidget {
             ],
           ),
         ),
-        MobileFieldWidget(size: size),
+        MobileFieldWidget(size: size, controller: _mobilecontroller),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
           child: Row(
@@ -175,11 +183,11 @@ class ALLJoinScreenWidgets extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const JoinNewSchemeScreen(),
+                    builder: (context) => const JoinNewSchemeDetailScreen(),
                   ));
             },
             child: const Text(
-              'Join New Scheme',
+              'Proceed',
               style: TextStyle(color: kcolorwhite, fontSize: 17),
             ),
           ),
