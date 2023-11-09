@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/views/home/widgets/activeschemes.dart';
@@ -53,6 +54,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     "Active Schemes",
@@ -65,6 +67,36 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  MaterialButton(
+                    color: kgold1,
+                    height: 25.h,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        30,
+                      ),
+                    ),
+                    minWidth: 40.w,
+                    onPressed: () {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => const JoinNewSchemeScreen(),
+                      //     ));
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Iconsax.add,
+                          size: 17.sp,
+                          color: kcolorwhite,
+                        ),
+                        Text(
+                          'Join New Scheme',
+                          style: TextStyle(color: kcolorwhite, fontSize: 10.sp),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -72,7 +104,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 10.h,
             ),
-            BottomSectionWidget()
+            const BottomSectionWidget()
           ],
         ),
       ),

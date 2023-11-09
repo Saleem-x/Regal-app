@@ -22,12 +22,19 @@ class ProfileTileWidget extends StatelessWidget {
               width: 50.h,
               height: 50.h,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: const DecorationImage(
-                  image: AssetImage('assets/images/bg_1.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  borderRadius: BorderRadius.circular(20),
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/Portrait_Placeholder.png'),
+                    fit: BoxFit.cover,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: const Offset(-1, 3),
+                    ),
+                  ]),
             ),
           ),
           const SizedBox(
@@ -39,10 +46,10 @@ class ProfileTileWidget extends StatelessWidget {
               width: size.width.w,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'SAJANA',
+                    'Della Evilyne',
                     style: TextStyle(
                       fontFamily: kboldfont,
                       fontWeight: FontWeight.w500,
@@ -54,7 +61,7 @@ class ProfileTileWidget extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: kboldfont,
                       fontWeight: FontWeight.w400,
-                      fontSize: 19.sp,
+                      fontSize: 16.sp,
                     ),
                   )
                 ],

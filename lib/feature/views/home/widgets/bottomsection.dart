@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
+import 'package:regal_app/feature/views/viewdetails/viewdetailscreen.dart';
 
 class BottomSectionWidget extends StatelessWidget {
   const BottomSectionWidget({super.key});
@@ -77,18 +78,31 @@ class BottomSectionWidget extends StatelessWidget {
                     )
                   ],
                 ),
-                const Column(
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.arrowRight,
-                      color: ktextgrey,
+                InkWell(
+                  splashFactory: InkSplash.splashFactory,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ViewDetailScreen(),
+                      ),
+                    );
+                  },
+                  child: const SizedBox(
+                    child: Column(
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.arrowRight,
+                          color: ktextgrey,
+                        ),
+                        Text(
+                          'View Details',
+                          style: TextStyle(
+                              fontFamily: kprimaryfont, color: ktextgrey),
+                        )
+                      ],
                     ),
-                    Text(
-                      'View Details',
-                      style:
-                          TextStyle(fontFamily: kprimaryfont, color: ktextgrey),
-                    )
-                  ],
+                  ),
                 )
               ],
             ),
