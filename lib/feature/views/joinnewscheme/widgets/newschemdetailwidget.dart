@@ -67,9 +67,7 @@ class NewSchmFieldWidget extends StatelessWidget {
                     controller: controller,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'please enter mobile number';
-                      } else if (value.length < 10) {
-                        return 'mobile number should be 10';
+                        return 'please enter $title';
                       } else {
                         return null;
                       }

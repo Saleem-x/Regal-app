@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -25,7 +24,7 @@ class ViewDetailScreen extends StatelessWidget {
           'Scheme Detail',
           style: TextStyle(
               fontFamily: kboldfont,
-              fontSize: 18.sp,
+              fontSize: 17.sp,
               fontWeight: FontWeight.w500),
         ),
       ),
@@ -36,6 +35,7 @@ class ViewDetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Card(
+                surfaceTintColor: kcolorwhite,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -217,7 +217,7 @@ class ViewDetailScreen extends StatelessWidget {
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 8,
+                itemCount: 2,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.all(3.0),
                   child: Card(

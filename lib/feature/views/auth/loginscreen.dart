@@ -187,11 +187,12 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                 if (_formkey.currentState!.validate()) {
                   if (otp.length == 4) {
                     otp = '';
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const HomeScreen(),
-                        ));
+                        ),
+                        (route) => false);
                   } else {
                     if (Platform.isIOS) {
                       showDialog(

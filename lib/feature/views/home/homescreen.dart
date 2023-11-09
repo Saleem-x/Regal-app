@@ -8,6 +8,7 @@ import 'package:regal_app/feature/views/home/widgets/bottomsection.dart';
 import 'package:regal_app/feature/views/home/widgets/goldratewidget.dart';
 import 'package:regal_app/feature/views/home/widgets/homepopupmenu.dart';
 import 'package:regal_app/feature/views/home/widgets/profiletilewidget.dart';
+import 'package:regal_app/feature/views/joinnewscheme/newschemehome.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -77,11 +78,11 @@ class HomeScreen extends StatelessWidget {
                     ),
                     minWidth: 40.w,
                     onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => const JoinNewSchemeScreen(),
-                      //     ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NewSchemefrHome(),
+                          ));
                     },
                     child: Row(
                       children: [
