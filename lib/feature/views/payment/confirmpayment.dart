@@ -42,7 +42,9 @@ class ConfirmPaymentScreen extends StatelessWidget {
                   decoration: const BoxDecoration(
                     // borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                      image: AssetImage('assets/images/miscellaneous.png'),
+                      image: AssetImage(
+                        'assets/images/miscellaneous.png',
+                      ),
                       fit: BoxFit.cover,
                     ),
                     /* boxShadow: [

@@ -64,7 +64,9 @@ class HomePopupMenu extends StatelessWidget {
             value: 'close',
             child: Icon(
               Iconsax.close_circle,
-              color: ktextgrey.withOpacity(.6),
+              color: ktextgrey.withOpacity(
+                .6,
+              ),
             ),
           ),
           PopupMenuItem(
@@ -128,7 +130,6 @@ class HomePopupMenu extends StatelessWidget {
           PopupMenuItem(
             value: 'logout',
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
@@ -139,6 +140,10 @@ class HomePopupMenu extends StatelessWidget {
                     style: TextStyle(color: ktextgrey, fontSize: 13.sp),
                   ),
                 ),
+                Divider(
+                  indent: 10,
+                  color: ktextgrey.withOpacity(.0),
+                )
               ],
             ),
           ),
@@ -146,16 +151,17 @@ class HomePopupMenu extends StatelessWidget {
             padding: const EdgeInsets.all(0),
             value: 'version',
             child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "v.1.0.0",
-                      style: TextStyle(color: ktextgrey, fontSize: 13.sp),
-                    ),
-                  ],
-                )),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "v.1.0.0",
+                    style: TextStyle(color: ktextgrey, fontSize: 13.sp),
+                  ),
+                ],
+              ),
+            ),
           )
         ];
       },
