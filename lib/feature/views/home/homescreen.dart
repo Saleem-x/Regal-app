@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
             ),
             const GoldRateWidget(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: kprimaryfont,
                       fontWeight: FontWeight.w400,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       color: ktextgrey.withOpacity(
                         .7,
                       ),

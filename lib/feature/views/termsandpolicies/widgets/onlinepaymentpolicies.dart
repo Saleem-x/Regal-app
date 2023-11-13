@@ -30,7 +30,9 @@ class OnlinePaymentPolicies extends StatelessWidget {
               ],
             ),
           ),
-          const ExpandingInfoTile()
+          ExpandingInfoTile(
+            datalist: optc,
+          )
         ],
       ),
     );

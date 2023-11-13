@@ -42,7 +42,7 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
               style: TextStyle(fontFamily: kprimaryfont, fontSize: 10.sp),
             ),
           ),
-          const ExpandingInfoTile(),
+          ExpandingInfoTile(datalist: app),
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
+import 'package:regal_app/feature/views/payment/paymentsucces.dart';
 
 class ConfirmPaymentScreen extends StatelessWidget {
   const ConfirmPaymentScreen({super.key});
@@ -263,7 +264,13 @@ class ConfirmPaymentScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PaymentSuccessScreen(),
+                    ));
+              },
               child: Text(
                 'Proceed to Pay',
                 style: TextStyle(

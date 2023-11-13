@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,9 +20,15 @@ class GoldRateWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              SvgPicture.asset(
+              /* SvgPicture.asset(
                 'assets/others/gr.svg',
                 height: 60.h,
+              ), */
+              Image.asset(
+                'assets/images/GoldRate.png',
+                height: 60.h,
+                fit: BoxFit.cover,
+                filterQuality: FilterQuality.high,
               ),
               const SizedBox(
                 width: 15,
@@ -82,6 +88,9 @@ class GoldRateWidget extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          SizedBox(
+            height: 5.h,
           ),
           Text(
             'Gold rate shown in Thrissur is shown here. It may be varies with your region',

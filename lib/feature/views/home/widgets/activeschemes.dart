@@ -12,7 +12,7 @@ class ActiveSchemeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // final Size size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 110.h,
+      height: 120.w,
       // width: size.width.w,
       child: ListView.separated(
           shrinkWrap: true,
@@ -29,12 +29,10 @@ class ActiveSchemeWidget extends StatelessWidget {
                   width: 230.w,
                   decoration: BoxDecoration(
                     color: kcolorwhite,
-                    gradient: const LinearGradient(
-                        colors: /* selected.idx == index
-                                                ?  */
-                            [kgold1, kgold2]
-                        // : [kcolorwhite, kcolorwhite],
-                        ,
+                    gradient: LinearGradient(
+                        colors: 0 == index
+                            ? [kgold1, kgold2]
+                            : [kcolorwhite, kcolorwhite],
                         begin: Alignment.bottomLeft,
                         end: Alignment.topRight),
                     borderRadius: BorderRadius.circular(20),
@@ -45,35 +43,32 @@ class ActiveSchemeWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: SvgPicture.asset(
-                              'assets/others/scheme.svg',
-                              height: 18.h,
-                              width: 15.w,
-                            ),
+                          SvgPicture.asset(
+                            'assets/others/scheme.svg',
+                            height: 18.h,
+                            width: 15.w,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Text(
-                              '35612 - AK',
-                              style: TextStyle(
-                                  fontFamily: kprimaryfont,
-                                  fontSize: 20.sp,
-                                  color: kcolorwhite,
-                                  fontWeight: FontWeight.w600),
-                            ),
+                          SizedBox(
+                            height: 5.h,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Text(
-                              'Akshayanidhi | ₹ 30000.00',
-                              style: TextStyle(
-                                  fontFamily: kprimaryfont,
-                                  fontSize: 12.sp,
-                                  color: kcolorwhite,
-                                  fontWeight: FontWeight.w500),
-                            ),
+                          Text(
+                            '35612 - AK',
+                            style: TextStyle(
+                                fontFamily: kprimaryfont,
+                                fontSize: 20.sp,
+                                color: 0 == index ? kcolorwhite : ktextgrey,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Text(
+                            'Akshayanidhi | ₹ 30000.00',
+                            style: TextStyle(
+                                fontFamily: kprimaryfont,
+                                fontSize: 12.sp,
+                                color: 0 == index ? kcolorwhite : ktextgrey,
+                                fontWeight: FontWeight.w500),
                           ),
                         ]),
                   ),

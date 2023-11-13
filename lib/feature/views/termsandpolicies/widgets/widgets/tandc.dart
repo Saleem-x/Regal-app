@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
+import 'package:regal_app/feature/views/termsandpolicies/widgets/widgets/expansiontilewidget.dart';
 
 class TandCWidget extends StatelessWidget {
   const TandCWidget({super.key});
@@ -10,7 +11,7 @@ class TandCWidget extends StatelessWidget {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: 10,
+      itemCount: tandc.length,
       itemBuilder: (context, index) => Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -23,7 +24,7 @@ class TandCWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 6),
               child: Text(
-                'If there happens any mistakes or inaccuracies in the passbook, it should be corrected immediately by contacting the management of the concerned regal showroom. No mistakes or inaccuracies are allowed at the time of completion/closure',
+                tandc[index],
                 style: TextStyle(
                   fontFamily: kprimaryfont,
                   fontSize: 10.sp,
