@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
+import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 
 class ProfileTileWidget extends StatelessWidget {
-  const ProfileTileWidget({super.key});
+  final UserBaseModel user;
+  const ProfileTileWidget({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class ProfileTileWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Della Evilyne',
+                    user.cusName,
                     style: TextStyle(
                       fontFamily: kboldfont,
                       fontWeight: FontWeight.w500,
@@ -61,7 +63,7 @@ class ProfileTileWidget extends StatelessWidget {
                     height: 3.h,
                   ),
                   Text(
-                    '+911234567890',
+                    '+91 ${user.cusMobileNumber}',
                     style: TextStyle(
                       fontFamily: kboldfont,
                       fontWeight: FontWeight.w400,

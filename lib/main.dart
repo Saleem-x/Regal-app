@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:regal_app/feature/data/di/injectable.dart';
+import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart';
+import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart';
 import 'package:regal_app/feature/state/bloc/login/login_bloc.dart';
+import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/state/bloc/splash/splash_bloc.dart';
 import 'package:regal_app/feature/state/cubit/mobilevalidator/mobilevalidator_cubit.dart';
+import 'package:regal_app/feature/state/cubit/schemeselector/schemeselector_cubit.dart';
 import 'package:regal_app/feature/views/splash/splashscreen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
+  configureinjection();
   runApp(const MyApp());
 }
 
@@ -27,6 +33,18 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<MobilevalidatorCubit>(
             create: (context) => MobilevalidatorCubit(),
+          ),
+          BlocProvider(
+            create: (context) => getit<GoldrateBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getit<ActiveschemesBloc>(),
+          ),
+          BlocProvider<SchemeselectorCubit>(
+            create: (context) => SchemeselectorCubit(),
+          ),
+          BlocProvider(
+            create: (context) => getit<SchemedetailsBloc>(),
           ),
         ],
         child: MaterialApp(

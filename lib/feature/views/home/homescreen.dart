@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const ProfileTileWidget(),
+            ProfileTileWidget(user: user),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               child: Row(
@@ -103,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const ActiveSchemeWidget(),
+            ActiveSchemeWidget(user: user),
             SizedBox(
               height: 10.h,
             ),
