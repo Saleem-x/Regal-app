@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
+import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/views/home/widgets/activeschemes.dart';
 import 'package:regal_app/feature/views/home/widgets/bottomsection.dart';
 import 'package:regal_app/feature/views/home/widgets/goldratewidget.dart';
@@ -11,7 +12,8 @@ import 'package:regal_app/feature/views/home/widgets/profiletilewidget.dart';
 import 'package:regal_app/feature/views/joinnewscheme/newschemehome.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final UserBaseModel user;
+  const HomeScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {

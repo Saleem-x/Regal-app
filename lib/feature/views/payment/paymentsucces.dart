@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
+import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
 
 class PaymentSuccessScreen extends StatelessWidget {
@@ -267,7 +268,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const HomeScreen(),
+                                            HomeScreen(user: UserBaseModel()),
                                       ),
                                       (route) => false,
                                     );
