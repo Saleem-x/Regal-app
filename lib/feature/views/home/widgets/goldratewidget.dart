@@ -48,7 +48,8 @@ class GoldRateWidget extends StatelessWidget {
                               width: size.width,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Row(
                                     children: [
@@ -75,12 +76,12 @@ class GoldRateWidget extends StatelessWidget {
                                             fontSize: 18.sp),
                                       ),
                                       Text(
-                                        '(${goldrate.weight} gram)',
+                                        '  (${goldrate.weight} gram)',
                                         style: TextStyle(
                                             fontFamily: kboldfont,
                                             fontWeight: FontWeight.w400,
-                                            fontSize: 13.sp,
-                                            color: ktextgrey.withOpacity(.6)),
+                                            fontSize: 10.sp,
+                                            color: kcolorblack.withOpacity(.8)),
                                       ),
                                     ],
                                   ),
@@ -89,7 +90,7 @@ class GoldRateWidget extends StatelessWidget {
                                     style: TextStyle(
                                         fontFamily: kboldfont,
                                         fontWeight: FontWeight.w400,
-                                        fontSize: 12.sp,
+                                        fontSize: 10.sp,
                                         color: ktextgrey.withOpacity(.6)),
                                   )
                                 ],

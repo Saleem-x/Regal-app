@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
+import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/views/payment/confirmpayment.dart';
 import 'package:regal_app/feature/views/viewdetails/viewdetailscreen.dart';
@@ -121,6 +122,9 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                               InkWell(
                                 splashFactory: InkSplash.splashFactory,
                                 onTap: () {
+                                  context
+                                      .read<InstalmenthystoryBloc>()
+                                      .add(const ResetDataEvent());
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -130,18 +134,20 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                     ),
                                   );
                                 },
-                                child: const SizedBox(
+                                child: SizedBox(
                                   child: Column(
                                     children: [
                                       Icon(
                                         FontAwesomeIcons.arrowRight,
                                         color: ktextgrey,
+                                        size: 30.sp,
                                       ),
                                       Text(
                                         'View Details',
                                         style: TextStyle(
                                             fontFamily: kprimaryfont,
-                                            color: ktextgrey),
+                                            color: ktextgrey,
+                                            fontSize: 12.sp),
                                       )
                                     ],
                                   ),
@@ -195,8 +201,8 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                 ),
                               ),
                               MaterialButton(
-                                minWidth: size.height * 0.03,
-                                height: size.height * 0.05,
+                                minWidth: size.height * 0.03.w,
+                                height: size.height * 0.05.h,
                                 color: kredbutton,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),

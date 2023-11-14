@@ -5,6 +5,7 @@ import 'package:regal_app/feature/data/di/injectable.dart';
 import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart';
 import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart';
 import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart';
+import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
 import 'package:regal_app/feature/state/bloc/login/login_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/state/bloc/splash/splash_bloc.dart';
@@ -49,6 +50,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getit<ContactusBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getit<InstalmenthystoryBloc>(),
           ),
         ],
         child: MaterialApp(

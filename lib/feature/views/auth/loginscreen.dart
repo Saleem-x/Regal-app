@@ -210,7 +210,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'Pin',
+                      'PIN',
                       style: TextStyle(
                           fontSize: 10,
                           color: kcolordarkred.withOpacity(.7),
@@ -241,7 +241,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                         );
                       },
                       child: const Text(
-                        'Set New Pin',
+                        'Forgot PIN',
                         style: TextStyle(color: kcolordark2),
                       ),
                     ),
@@ -377,7 +377,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                 children: [
                   const Text(
                     'facing any trouble?',
-                    style: TextStyle(),
+                    style: TextStyle(color: Color(0xFF646464)),
                   ),
                   TextButton(
                     onPressed: () {

@@ -6,7 +6,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
-import 'package:regal_app/feature/domain/repoimpls/contactus/contactusrepo.dart';
 import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart';
 
 class ContactUsScreen extends StatelessWidget {
@@ -39,22 +38,16 @@ class ContactUsScreen extends StatelessWidget {
                     )
                   : Column(
                       children: [
-                        GestureDetector(
-                          onTap: () async {
-                            await ContactDetailsRepo()
-                                .getContactDetails(datakey);
-                          },
-                          child: Row(
-                            children: [
-                              Text(
-                                '${contactdetails.orgName}-${contactdetails.branchName}',
-                                style: TextStyle(
-                                  fontFamily: kprimaryfont,
-                                  color: kredbutton.withOpacity(.9),
-                                ),
-                              )
-                            ],
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              '${contactdetails.orgName}-${contactdetails.branchName}',
+                              style: TextStyle(
+                                fontFamily: kprimaryfont,
+                                color: kredbutton.withOpacity(.9),
+                              ),
+                            )
+                          ],
                         ),
                         SizedBox(
                           height: size.height * 0.03,

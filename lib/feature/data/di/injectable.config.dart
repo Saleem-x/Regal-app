@@ -17,16 +17,20 @@ import 'package:regal_app/feature/domain/repoimpls/contactus/contactusrepo.dart'
     as _i4;
 import 'package:regal_app/feature/domain/repoimpls/goldraterepo/goldraterepo.dart'
     as _i5;
+import 'package:regal_app/feature/domain/repoimpls/instalmenthystory/instalmenthystiryrepo.dart'
+    as _i8;
 import 'package:regal_app/feature/domain/repoimpls/schemedetails/schemedetailsrepo.dart'
     as _i6;
 import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart'
-    as _i9;
-import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart'
-    as _i10;
-import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart'
     as _i11;
+import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart'
+    as _i12;
+import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart'
+    as _i13;
+import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart'
+    as _i9;
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart'
-    as _i8;
+    as _i10;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -43,14 +47,18 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i3.IGoldRateRepo>(() => _i5.GoldRateRepo());
     gh.lazySingleton<_i3.ISchemeDetails>(() => _i6.SchemedetailsRepo());
     gh.lazySingleton<_i3.IUserSchemes>(() => _i7.ActiveSchemesRepo());
-    gh.factory<_i8.SchemedetailsBloc>(
-        () => _i8.SchemedetailsBloc(gh<_i3.ISchemeDetails>()));
-    gh.factory<_i9.ActiveschemesBloc>(
-        () => _i9.ActiveschemesBloc(gh<_i3.IUserSchemes>()));
-    gh.factory<_i10.ContactusBloc>(
-        () => _i10.ContactusBloc(gh<_i3.IContactDetails>()));
-    gh.factory<_i11.GoldrateBloc>(
-        () => _i11.GoldrateBloc(gh<_i3.IGoldRateRepo>()));
+    gh.lazySingleton<_i3.IinstalmentHystoryRepo>(
+        () => _i8.InstalmentHystoryRepo());
+    gh.factory<_i9.InstalmenthystoryBloc>(
+        () => _i9.InstalmenthystoryBloc(gh<_i3.IinstalmentHystoryRepo>()));
+    gh.factory<_i10.SchemedetailsBloc>(
+        () => _i10.SchemedetailsBloc(gh<_i3.ISchemeDetails>()));
+    gh.factory<_i11.ActiveschemesBloc>(
+        () => _i11.ActiveschemesBloc(gh<_i3.IUserSchemes>()));
+    gh.factory<_i12.ContactusBloc>(
+        () => _i12.ContactusBloc(gh<_i3.IContactDetails>()));
+    gh.factory<_i13.GoldrateBloc>(
+        () => _i13.GoldrateBloc(gh<_i3.IGoldRateRepo>()));
     return this;
   }
 }

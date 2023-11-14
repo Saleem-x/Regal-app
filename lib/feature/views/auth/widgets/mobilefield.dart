@@ -44,9 +44,9 @@ class MobileFieldWidget extends StatelessWidget {
                 LengthLimitingTextInputFormatter(10),
                 FilteringTextInputFormatter.digitsOnly
               ],
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 isDense: true,
-                prefixIcon: const Column(
+                prefixIcon: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -55,30 +55,22 @@ class MobileFieldWidget extends StatelessWidget {
                 ),
                 border: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: kcolorblack.withOpacity(
-                      .6,
-                    ),
+                    color: Color(0xFFD1D1D1),
                   ),
                 ),
                 disabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: kcolorblack.withOpacity(
-                      .6,
-                    ),
+                    color: Color(0xFFD1D1D1),
                   ),
                 ),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: kcolorblack.withOpacity(
-                      .6,
-                    ),
+                    color: Color(0xFFD1D1D1),
                   ),
                 ),
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: kcolorblack.withOpacity(
-                      .6,
-                    ),
+                    color: Color(0xFFD1D1D1),
                   ),
                 ),
               ),
@@ -136,6 +128,8 @@ class CustomMobileField extends StatelessWidget {
                         .validatemob(controller.text);
                   },
                   decoration: InputDecoration(
+                    hintText: 'Mobile Number',
+                    hintStyle: TextStyle(color: Color(0xFFD1D1D1)),
                     isDense: false,
                     suffixIcon: state.when(
                       mobilevallidState: () {
@@ -157,32 +151,24 @@ class CustomMobileField extends StatelessWidget {
                         Text('+91  ', textAlign: TextAlign.left),
                       ],
                     ),
-                    border: UnderlineInputBorder(
+                    border: const UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: kcolorblack.withOpacity(
-                          .6,
-                        ),
+                        color: Color(0xFFD1D1D1),
                       ),
                     ),
-                    disabledBorder: UnderlineInputBorder(
+                    disabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: kcolorblack.withOpacity(
-                          .6,
-                        ),
+                        color: Color(0xFFD1D1D1),
                       ),
                     ),
-                    enabledBorder: UnderlineInputBorder(
+                    enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: kcolorblack.withOpacity(
-                          .6,
-                        ),
+                        color: Color(0xFFD1D1D1),
                       ),
                     ),
-                    focusedBorder: UnderlineInputBorder(
+                    focusedBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: kcolorblack.withOpacity(
-                          .6,
-                        ),
+                        color: Color(0xFFD1D1D1),
                       ),
                     ),
                   ),
