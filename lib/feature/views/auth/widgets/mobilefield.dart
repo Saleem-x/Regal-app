@@ -119,7 +119,7 @@ class CustomMobileField extends StatelessWidget {
                       return 'please enter mobile number';
                       // return '';
                     } else if (value.length < 10) {
-                      return 'mobile number should be 10';
+                      return 'mobile enter valid mobile number';
                       // return '';
                     } else {
                       return null;

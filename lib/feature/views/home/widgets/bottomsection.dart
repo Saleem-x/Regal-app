@@ -9,7 +9,6 @@ import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/views/payment/confirmpayment.dart';
 import 'package:regal_app/feature/views/viewdetails/viewdetailscreen.dart';
-import 'package:regal_app/feature/widgets/bottomskelton.dart';
 import 'package:shimmer/shimmer.dart';
 
 class BottomSectionWidget extends StatefulWidget {
@@ -98,7 +97,7 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                   //   height: 6.h,
                                   // ),
                                   Text(
-                                    'Total Paid: ₹ ${schemedetail!.totAmount}',
+                                    'Total Paid: ₹ ${schemedetail.totAmount}',
                                     style: TextStyle(
                                       fontFamily: kprimaryfont,
                                       color: ktextgrey,
@@ -125,8 +124,9 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ViewDetailScreen(),
+                                      builder: (context) => ViewDetailScreen(
+                                          scheme: scheme,
+                                          schemedetil: schemedetail),
                                     ),
                                   );
                                 },

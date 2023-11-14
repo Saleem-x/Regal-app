@@ -25,7 +25,7 @@ class LoginRepo {
 
           String message =
               '${responseMap['result'][0]['Title']}^${responseMap['result'][0]['Descr']}';
-          // logger.e({responseMap['result'][0]['Title']});
+          logger.e({responseMap['result'][0]['Title']});
           return left(MainFailures.networkerror(error: message));
         }
         logger.i(user);
@@ -43,7 +43,7 @@ class LoginRepo {
                 message == 'null' ? 'User Not Found' : 'something went wrong'));
       }
     } catch (e) {
-      log('error-> $e');
+      logger.e('error-> $e');
       return left(const MainFailures.clientfailure());
     }
   }

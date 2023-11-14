@@ -61,7 +61,7 @@ class ActiveSchemeWidget extends StatelessWidget {
                                   context
                                       .read<SchemeselectorCubit>()
                                       .selectscheme(index);
-                                      context.read<SchemedetailsBloc>().add(
+                                  context.read<SchemedetailsBloc>().add(
                                         GetschemedetailsEvent(
                                           cusid: user.cusId!,
                                           schmId: schemes[index].schemeNo!,
@@ -103,7 +103,9 @@ class ActiveSchemeWidget extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             SvgPicture.asset(
-                                              'assets/others/scheme.svg',
+                                              selected.idx == index
+                                                  ? 'assets/others/scheme_s.svg'
+                                                  : 'assets/others/scheme.svg',
                                               height: 18.h,
                                               width: 15.w,
                                             ),

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
+import 'package:regal_app/feature/domain/repoimpls/contactus/contactusrepo.dart';
+import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart';
 
 class ContactUsScreen extends StatelessWidget {
   const ContactUsScreen({super.key});
@@ -11,6 +15,9 @@ class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    context
+        .read<ContactusBloc>()
+        .add(const GetContactDetailsEvent(datakey: datakey));
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -23,46 +30,65 @@ class ContactUsScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  'Regal Jewellers-Edappal',
-                  style: TextStyle(
-                    fontFamily: kprimaryfont,
-                    color: kredbutton.withOpacity(.9),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: size.height * 0.03,
-            ),
-            ContactWidget(
-              size: size,
-              icon1: Iconsax.user,
-              title: 'Saneesh Kumar',
-            ),
-            ContactWidget(
-              size: size,
-              icon1: Icons.mail_outlined,
-              title: 'care@regaljewellers.net',
-              img: 'assets/images/miscellaneous.png',
-            ),
-            ContactWidget(
-              size: size,
-              icon1: FontAwesomeIcons.phone,
-              title: '+919526509990',
-              img: 'assets/images/miscellaneous.png',
-            ),
-            ContactWidget(
-              size: size,
-              icon1: FontAwesomeIcons.whatsapp,
-              title: '+919526509990',
-              img: 'assets/images/miscellaneous.png',
-            ),
-          ],
+        child: BlocBuilder<ContactusBloc, ContactusState>(
+          builder: (context, state) {
+            return state.when(
+              getcontactdetails: (contactdetails) => contactdetails == null
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            await ContactDetailsRepo()
+                                .getContactDetails(datakey);
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                '${contactdetails.orgName}-${contactdetails.branchName}',
+                                style: TextStyle(
+                                  fontFamily: kprimaryfont,
+                                  color: kredbutton.withOpacity(.9),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.03,
+                        ),
+                        ContactWidget(
+                          size: size,
+                          icon1: Iconsax.user,
+                          title: contactdetails.staffName!,
+                        ),
+                        ContactWidget(
+                          size: size,
+                          icon1: Icons.mail_outlined,
+                          title: contactdetails.email!,
+                          img: 'assets/images/miscellaneous.png',
+                        ),
+                        ContactWidget(
+                          size: size,
+                          icon1: FontAwesomeIcons.phone,
+                          title: contactdetails.mobile!,
+                          img: 'assets/images/miscellaneous.png',
+                        ),
+                        ContactWidget(
+                          size: size,
+                          icon1: FontAwesomeIcons.whatsapp,
+                          title: contactdetails.whatsApp!,
+                          img: 'assets/images/miscellaneous.png',
+                        ),
+                      ],
+                    ),
+              contactFailedState: () {
+                return const SizedBox();
+              },
+            );
+          },
         ),
       ),
     );

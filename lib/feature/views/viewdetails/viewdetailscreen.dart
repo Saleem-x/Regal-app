@@ -3,9 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/core/constents/fonts/kfonts.dart';
+import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
+import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 
 class ViewDetailScreen extends StatelessWidget {
-  const ViewDetailScreen({super.key});
+  final SchemeDetailsModel schemedetil;
+  final CustomerSchemeModel scheme;
+  const ViewDetailScreen(
+      {super.key, required this.schemedetil, required this.scheme});
 
   @override
   Widget build(BuildContext context) {
@@ -48,18 +53,22 @@ class ViewDetailScreen extends StatelessWidget {
                       ListTile(
                         contentPadding: const EdgeInsets.all(0),
                         leading: Container(
-                          height: 100,
+                          height: 90.h,
                           width: size.width / 6,
                           decoration: BoxDecoration(
-                              color: kcolorwhite,
-                              borderRadius: BorderRadius.circular(
-                                10,
+                            color: kcolorwhite,
+                            borderRadius: BorderRadius.circular(
+                              10,
+                            ),
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                'assets/images/miscellaneous.png',
                               ),
-                              image: const DecorationImage(
-                                  image: AssetImage('assets/images/user.png'))),
+                            ),
+                          ),
                         ),
                         title: Text(
-                          '35612 - AK',
+                          scheme.schemeNo ?? '',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontFamily: kprimaryfont,
@@ -69,7 +78,7 @@ class ViewDetailScreen extends StatelessWidget {
                           ),
                         ),
                         subtitle: Text(
-                          'Akshayanidhi | ₹ 30000.00',
+                          '${scheme.schemeName} | ₹${scheme.totalAmount}',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontFamily: kprimaryfont,
@@ -83,7 +92,7 @@ class ViewDetailScreen extends StatelessWidget {
                         height: size.height * 0.01,
                       ),
                       Text(
-                        'Started On : ',
+                        'Started On : ${schemedetil.issueDate}',
                         style: TextStyle(
                           fontFamily: kprimaryfont,
                           fontSize: 14.sp,
@@ -95,7 +104,7 @@ class ViewDetailScreen extends StatelessWidget {
                         height: size.height * 0.01,
                       ),
                       Text(
-                        'Closing On : ',
+                        'Closing On : ${schemedetil.closingDate}',
                         style: TextStyle(
                           fontFamily: kprimaryfont,
                           fontSize: 14.sp,
@@ -107,7 +116,7 @@ class ViewDetailScreen extends StatelessWidget {
                         height: size.height * 0.01,
                       ),
                       Text(
-                        'Due Amount : ',
+                        'Due Amount :${scheme.instAmount} ',
                         style: TextStyle(
                           fontFamily: kprimaryfont,
                           fontSize: 14.sp,
@@ -119,7 +128,7 @@ class ViewDetailScreen extends StatelessWidget {
                         height: size.height * 0.01,
                       ),
                       Text(
-                        'Total Paid : ',
+                        'Total Paid : ${schemedetil.totAmount}',
                         style: TextStyle(
                           fontFamily: kprimaryfont,
                           fontSize: 14.sp,
@@ -131,7 +140,7 @@ class ViewDetailScreen extends StatelessWidget {
                         height: size.height * 0.01,
                       ),
                       Text(
-                        'Current Total Weight : ',
+                        'Current Total Weight : ${schemedetil.goldWeight}',
                         style: TextStyle(
                           fontFamily: kprimaryfont,
                           fontSize: 14.sp,
@@ -143,7 +152,7 @@ class ViewDetailScreen extends StatelessWidget {
                         height: size.height * 0.01,
                       ),
                       Text(
-                        'Pending Installents : ',
+                        'Pending Installents : ${schemedetil.noofInst}',
                         style: TextStyle(
                           fontFamily: kprimaryfont,
                           fontSize: 14.sp,
@@ -262,10 +271,10 @@ class ViewDetailScreen extends StatelessWidget {
                           ],
                         ),
                       ), */
-
                           Theme(
-                        data: Theme.of(context)
-                            .copyWith(dividerColor: Colors.transparent),
+                        data: Theme.of(context).copyWith(
+                          dividerColor: Colors.transparent,
+                        ),
                         child: ExpansionTile(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),

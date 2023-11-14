@@ -3,6 +3,7 @@ import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/feature/data/di/injectable.dart';
 import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart';
+import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart';
 import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart';
 import 'package:regal_app/feature/state/bloc/login/login_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
@@ -46,11 +47,16 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => getit<SchemedetailsBloc>(),
           ),
+          BlocProvider(
+            create: (context) => getit<ContactusBloc>(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             fontFamily: 'SF Pro Display',
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
             colorScheme: ColorScheme.fromSeed(
               seedColor: kcolorblack.withOpacity(
                 .6,

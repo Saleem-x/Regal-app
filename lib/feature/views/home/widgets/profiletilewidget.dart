@@ -56,7 +56,7 @@ class ProfileTileWidget extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: kboldfont,
                       fontWeight: FontWeight.w500,
-                      fontSize: 22.sp,
+                      fontSize: 21.sp,
                     ),
                   ),
                   SizedBox(

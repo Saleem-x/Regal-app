@@ -95,12 +95,12 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                       title: Text(issue.split('^')[0]),
                       content: Text(issue.split('^')[1]),
                       actions: <Widget>[
-                        CupertinoDialogAction(
+                        /*  CupertinoDialogAction(
                           child: const Text("Cancel"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                        ),
+                        ), */
                         CupertinoDialogAction(
                           child: const Text("OK"),
                           onPressed: () {
@@ -283,8 +283,8 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                             builder: (context) => AlertDialog(
                               backgroundColor: kcolorwhite,
                               title: const Text("Alert"),
-                              content: const Text(
-                                  "please enter Your Four Digit Pin"),
+                              content:
+                                  const Text("please enter 4 Digit Pin number"),
                               actions: [
                                 TextButton(
                                   onPressed: () {
@@ -304,12 +304,12 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                                 content: const Text(
                                     "please enter Your Four Digit Pin"),
                                 actions: <Widget>[
-                                  CupertinoDialogAction(
+                                  /* CupertinoDialogAction(
                                     child: const Text("Cancel"),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                  ),
+                                  ), */
                                   CupertinoDialogAction(
                                     child: const Text("OK"),
                                     onPressed: () {

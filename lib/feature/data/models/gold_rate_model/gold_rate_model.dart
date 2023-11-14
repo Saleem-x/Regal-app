@@ -4,28 +4,28 @@ part 'gold_rate_model.g.dart';
 
 @JsonSerializable()
 class GoldRateModel {
-	@JsonKey(name: 'BoardRate') 
-	String? boardRate;
-  
-	String? weight;
-	@JsonKey(name: 'EntryDate') 
-	String? entryDate;
-	@JsonKey(name: 'EntryTime') 
-	String? entryTime;
-	@JsonKey(name: 'TotalPrice') 
-	String? totalPrice;
+  @JsonKey(name: 'BoardRate')
+  String? boardRate;
 
-	GoldRateModel({
-		this.boardRate, 
-		this.weight, 
-		this.entryDate, 
-		this.entryTime, 
-		this.totalPrice, 
-	});
+  String? weight;
+  @JsonKey(name: 'EntryDate')
+  String? entryDate;
+  @JsonKey(name: 'EntryTime')
+  String? entryTime;
+  @JsonKey(name: 'TotalPrice')
+  String? totalPrice;
 
-	factory GoldRateModel.fromJson(Map<String, dynamic> json) {
-		return _$GoldRateModelFromJson(json);
-	}
+  GoldRateModel({
+    this.boardRate,
+    this.weight,
+    this.entryDate,
+    this.entryTime,
+    this.totalPrice,
+  });
 
-	Map<String, dynamic> toJson() => _$GoldRateModelToJson(this);
+  factory GoldRateModel.fromJson(Map<String, dynamic> json) {
+    return _$GoldRateModelFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$GoldRateModelToJson(this);
 }
