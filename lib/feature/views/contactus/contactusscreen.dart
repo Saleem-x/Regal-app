@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
- import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart';
+import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart';
 
 class ContactUsScreen extends StatelessWidget {
   const ContactUsScreen({super.key});
@@ -21,7 +21,7 @@ class ContactUsScreen extends StatelessWidget {
         title: Text(
           'Contact Us',
           style: TextStyle(
-             fontSize: 16.sp,
+            fontSize: 16.sp,
           ),
         ),
       ),
@@ -41,7 +41,7 @@ class ContactUsScreen extends StatelessWidget {
                             Text(
                               '${contactdetails.orgName}-${contactdetails.branchName}',
                               style: TextStyle(
-                                 color: kredbutton.withOpacity(.9),
+                                color: kredbutton.withOpacity(.9),
                               ),
                             )
                           ],
@@ -114,8 +114,7 @@ class ContactWidget extends StatelessWidget {
             ),
             Text(
               title,
-              style: const TextStyle(
-                    color: ktextgrey, fontSize: 14),
+              style: const TextStyle(color: ktextgrey, fontSize: 14),
             ),
             const Spacer(),
             img == null

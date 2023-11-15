@@ -114,7 +114,7 @@ class ActiveSchemeWidget extends StatelessWidget {
                                             Text(
                                               schemes[index].schemeNo!,
                                               style: TextStyle(
-                                                 fontSize: 20.sp,
+                                                fontSize: 20.sp,
                                                 color: selected.idx == index
                                                     ? kcolorwhite
                                                     : ktextgrey,
@@ -127,7 +127,7 @@ class ActiveSchemeWidget extends StatelessWidget {
                                             Text(
                                               '${schemes[index].schemeName} | ₹${schemes[index].totalAmount}',
                                               style: TextStyle(
-                                                   fontSize: 12.sp,
+                                                  fontSize: 12.sp,
                                                   color: selected.idx == index
                                                       ? kcolorwhite
                                                       : ktextgrey,

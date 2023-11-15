@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
- 
+
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
 
@@ -22,9 +22,7 @@ class AboutUsScreen extends StatelessWidget {
         ),
         title: Text(
           'About',
-          style: TextStyle(
-               fontSize: 16.sp,
-              fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
         ),
       ),
       body: Column(
@@ -51,7 +49,7 @@ class AboutUsScreen extends StatelessWidget {
           Text(
             'App Version',
             style: TextStyle(
-               fontSize: 12.sp,
+              fontSize: 12.sp,
               color: ktextgrey,
             ),
           ),
@@ -61,7 +59,7 @@ class AboutUsScreen extends StatelessWidget {
           Text(
             'UAT_Version.1.0.0',
             style: TextStyle(
-               fontSize: 14.sp,
+              fontSize: 14.sp,
               color: kcolorblack,
             ),
           ),
@@ -81,7 +79,7 @@ class AboutUsScreen extends StatelessWidget {
           Text(
             'About Regal Jewellers',
             style: TextStyle(
-               fontSize: 10.sp,
+              fontSize: 10.sp,
               color: ktextgrey,
             ),
           ),
@@ -93,7 +91,7 @@ class AboutUsScreen extends StatelessWidget {
             child: Text(
               'www.regaljewellers.net',
               style: TextStyle(
-                 fontSize: 14.sp,
+                fontSize: 14.sp,
                 color: kredbutton,
               ),
             ),
@@ -106,7 +104,7 @@ class AboutUsScreen extends StatelessWidget {
             child: Text(
               'Terms & Policies',
               style: TextStyle(
-                 fontSize: 12.sp,
+                fontSize: 12.sp,
                 color: kredbutton,
               ),
             ),

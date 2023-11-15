@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/feature/views/payment/paymentsucces.dart';
+import 'package:regal_app/feature/views/payment/confirmpaymentw2.dart';
 
 class ConfirmPaymentScreen extends StatelessWidget {
   const ConfirmPaymentScreen({super.key});
@@ -171,8 +171,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Payable Amount',
-                        style: TextStyle(
-                             color: ktextgrey),
+                        style: TextStyle(color: ktextgrey),
                       ),
                       SizedBox(
                         width: size.width,
@@ -267,7 +266,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const PaymentSuccessScreen(),
+                      builder: (context) => const ConfirmPaymentTWO(),
                     ));
               },
               child: Text(

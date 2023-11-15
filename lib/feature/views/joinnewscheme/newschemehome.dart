@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
- import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
+import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/newschemdetailwidget.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/newschemedropdownmenu.dart';
 
@@ -31,9 +31,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
         ),
         title: Text(
           'Add New Scheme',
-          style: TextStyle(
-               fontSize: 16.sp,
-              fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
         ),
       ),
       body: Column(
@@ -44,14 +42,14 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
           NewSchmDropDownWidget(
             controller: _schemectrl,
             title: 'Select Scheme',
-            preicon: FontAwesomeIcons.coins,
+            preicon: 'assets/others/relation.svg',
           ),
           SizedBox(
             height: 15.h,
           ),
           NewSchmFieldWidget(
             title: 'instalment amount',
-            icon: FontAwesomeIcons.moneyBill,
+            icon: 'assets/others/name.svg',
             controller: _schemectrl,
             type: TextInputType.name,
           ),
@@ -66,16 +64,16 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                 Text(
                   'Scheme Details',
                   style: TextStyle(
-                      fontSize: 13.sp,
-                      color: kcolordarkred.withOpacity(.7),
-                       ),
+                    fontSize: 13.sp,
+                    color: kcolordarkred.withOpacity(.7),
+                  ),
                 ),
                 const Text(
                   ' *',
                   style: TextStyle(
-                      fontSize: 14,
-                      color: kcolordarkred,
-                      ),
+                    fontSize: 14,
+                    color: kcolordarkred,
+                  ),
                 ),
               ],
             ),
@@ -89,7 +87,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
               children: [
                 Text(
                   'Scheme Tenure:',
-                  style: TextStyle(  fontSize: 13),
+                  style: TextStyle(fontSize: 13),
                 )
               ],
             ),
@@ -100,7 +98,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
               children: [
                 Text(
                   'Instalment Amount:',
-                  style: TextStyle(  fontSize: 13),
+                  style: TextStyle(fontSize: 13),
                 )
               ],
             ),
@@ -121,17 +119,14 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                 ),
                 Text(
                   'I have Accepted the',
-                  style: TextStyle(
-                       color: ktextgrey,
-                      fontSize: 10.sp),
+                  style: TextStyle(color: ktextgrey, fontSize: 10.sp),
                 ),
                 TextButton(
                   onPressed: () {},
                   child: Text(
                     'terms & conditions',
                     style: TextStyle(
-                         color: kredbutton.withOpacity(.8),
-                        fontSize: 10.sp),
+                        color: kredbutton.withOpacity(.8), fontSize: 10.sp),
                   ),
                 ),
               ],
@@ -148,7 +143,9 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
               onPressed: () {},
               child: const Text(
                 'Proceed',
-                style: TextStyle(color: kcolorwhite,  ),
+                style: TextStyle(
+                  color: kcolorwhite,
+                ),
               ),
             ),
           ),

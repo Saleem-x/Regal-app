@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
+import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
 
+// ignore: must_be_immutable
 class OtpFIeldWidget extends StatelessWidget {
-  const OtpFIeldWidget({
+  OtpFIeldWidget({
     super.key,
     required this.size,
   });
@@ -44,6 +47,8 @@ class OtpFIeldWidget extends StatelessWidget {
               onCompleted: (pin) {
                 if (pin.length == 4) {
                   otp = pin;
+                  otpfield = pin;
+                  
                   pin = '';
                 } else {
                   showDialog(

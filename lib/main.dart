@@ -3,6 +3,7 @@ import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/feature/data/di/injectable.dart';
 import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart';
+import 'package:regal_app/feature/state/bloc/bloc/newschemeotp_bloc.dart';
 import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart';
 import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
@@ -53,6 +54,8 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getit<InstalmenthystoryBloc>(),
+          ),BlocProvider(
+            create: (context) => getit<NewschemeotpBloc>(),
           ),
         ],
         child: MaterialApp(

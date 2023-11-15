@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
- 
+
 class DobSelectorWidget extends StatelessWidget {
   const DobSelectorWidget({super.key, required this.controller});
 
@@ -21,16 +21,16 @@ class DobSelectorWidget extends StatelessWidget {
               Text(
                 'Date of Birth',
                 style: TextStyle(
-                    fontSize: 10,
-                    color: kcolordarkred.withOpacity(.7),
-                    ),
+                  fontSize: 10,
+                  color: kcolordarkred.withOpacity(.7),
+                ),
               ),
               const Text(
                 ' *',
                 style: TextStyle(
-                    fontSize: 14,
-                    color: kcolordarkred,
-                     ),
+                  fontSize: 14,
+                  color: kcolordarkred,
+                ),
               ),
             ],
           ),

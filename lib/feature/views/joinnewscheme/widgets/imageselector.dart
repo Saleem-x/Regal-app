@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
- 
+
 class ImageSelectorWidget extends StatelessWidget {
   const ImageSelectorWidget({super.key});
 
@@ -18,16 +19,16 @@ class ImageSelectorWidget extends StatelessWidget {
               Text(
                 'Attach your Photo',
                 style: TextStyle(
-                    fontSize: 10,
-                    color: kcolordarkred.withOpacity(.7),
-                    ),
+                  fontSize: 10,
+                  color: kcolordarkred.withOpacity(.7),
+                ),
               ),
               const Text(
                 ' *',
                 style: TextStyle(
-                    fontSize: 14,
-                    color: kcolordarkred,
-                   ),
+                  fontSize: 14,
+                  color: kcolordarkred,
+                ),
               ),
             ],
           ),
@@ -51,11 +52,12 @@ class ImageSelectorWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: kcolorwhite,
                   borderRadius: BorderRadius.circular(10),
-                  image: const DecorationImage(
-                      image: AssetImage(
-                        'assets/images/imageplaceholder.png',
-                      ),
-                      fit: BoxFit.cover),
+                ),
+                child: SvgPicture.asset(
+                  'assets/others/iconssvg/addimage.svg',
+                  height: size.height * 0.07,
+                  width: size.height * 0.07,
+                  fit: BoxFit.cover,
                 ),
               ),
             ],

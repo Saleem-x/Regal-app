@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:flutter/services.dart';
@@ -34,7 +35,7 @@ class MobileFieldWidget extends StatelessWidget {
                 if (value == null || value.isEmpty) {
                   return 'please enter mobile number';
                 } else if (value.length < 10) {
-                  return 'mobile number should be 10';
+                  return 'please enter valid mobile number';
                 } else {
                   return null;
                 }
@@ -95,8 +96,10 @@ class CustomMobileField extends StatelessWidget {
       padding: const EdgeInsets.only(left: 40, right: 40),
       child: Row(
         children: [
-          const SizedBox(
-            child: Icon(FontAwesomeIcons.phone),
+          SizedBox(
+            child: SvgPicture.asset(
+              'assets/others/history.svg',
+            ),
           ),
           SizedBox(
             width: size.width * 0.07,
@@ -111,7 +114,7 @@ class CustomMobileField extends StatelessWidget {
                       return 'please enter mobile number';
                       // return '';
                     } else if (value.length < 10) {
-                      return 'mobile enter valid mobile number';
+                      return 'please enter valid mobile number';
                       // return '';
                     } else {
                       return null;
@@ -123,9 +126,9 @@ class CustomMobileField extends StatelessWidget {
                     FilteringTextInputFormatter.digitsOnly
                   ],
                   onTapOutside: (event) {
-                    context
-                        .read<MobilevalidatorCubit>()
-                        .validatemob(controller.text);
+                    // context
+                    //     .read<MobilevalidatorCubit>()
+                    //     .validatemob(controller.text);
                   },
                   decoration: InputDecoration(
                     hintText: 'Mobile Number',
@@ -144,11 +147,15 @@ class CustomMobileField extends StatelessWidget {
                         ),
                       ),
                     ),
-                    prefixIcon: const Column(
+                    prefixIcon: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('+91  ', textAlign: TextAlign.left),
+                        Text(
+                          '+91  ',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(color: kcolorblack.withOpacity(.8)),
+                        ),
                       ],
                     ),
                     border: const UnderlineInputBorder(

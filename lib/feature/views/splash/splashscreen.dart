@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,7 +38,6 @@ class _SplashScreenState extends State<SplashScreen>
       backgroundColor: kcolorblack,
       body: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
-          log('$state');
           state.when(
             animatingstate: () {
               Future.delayed(const Duration(seconds: 3), () {
@@ -74,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
                 FadeTransition(
                   opacity: _controller!,
                   child: Container(
-                    color: kcolorgrey.withOpacity(.5),
+                    color: kcolorwhite.withOpacity(.7),
                     child: Center(
                       child: SvgPicture.asset(
                         'assets/others/regal_logo-optimized.svg',

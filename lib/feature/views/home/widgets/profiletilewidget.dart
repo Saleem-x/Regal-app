@@ -54,7 +54,7 @@ class ProfileTileWidget extends StatelessWidget {
                     user.cusName,
                     style: TextStyle(
                       // fontFamily: kboldfont,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       fontSize: 19.sp,
                     ),
                   ),

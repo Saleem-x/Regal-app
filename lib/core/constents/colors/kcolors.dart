@@ -7,10 +7,10 @@ const kcolorblack = Colors.black;
 const kcolorred = Colors.red;
 
 const kcolorgrey = Colors.grey;
-const kbgcolor = Color.fromARGB(255, 230, 229, 229);
+const kbgcolor = Color(0xFFFBFBFB);
 
 const kgold1 = Color(0xFFD7A025);
-const kgold2 = Color(0xFFF2D516);
+const kgold2 = Color(0xFFDDC02E);
 
 const kcolordarkred = Color(0xFFD23539);
 const kcolordark2 = Color(0xFFCB1F1F);

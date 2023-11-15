@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
- 
+
 class DocumentSelectorWidget extends StatelessWidget {
   const DocumentSelectorWidget({super.key, required this.title});
 
@@ -22,16 +22,16 @@ class DocumentSelectorWidget extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                      fontSize: 10,
-                      color: kcolordarkred.withOpacity(.7),
-                       ),
+                    fontSize: 10,
+                    color: kcolordarkred.withOpacity(.7),
+                  ),
                 ),
                 const Text(
                   ' *',
                   style: TextStyle(
-                      fontSize: 14,
-                      color: kcolordarkred,
-                       ),
+                    fontSize: 14,
+                    color: kcolordarkred,
+                  ),
                 ),
               ],
             ),
@@ -65,7 +65,7 @@ class DocumentSelectorWidget extends StatelessWidget {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Choose File',
-                          style: TextStyle( ),
+                          style: TextStyle(),
                         ),
                       ),
                     ),

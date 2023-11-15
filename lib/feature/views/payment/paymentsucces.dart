@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
@@ -40,8 +41,8 @@ class PaymentSuccessScreen extends StatelessWidget {
                     height: 80.h,
                     width: 60.w,
                     child: Center(
-                      child: Image.asset(
-                        'assets/images/greentick.png',
+                      child: SvgPicture.asset(
+                        'assets/others/iconssvg/tick.svg',
                         fit: BoxFit.cover,
                         height: 60.h,
                         width: 62.w,
@@ -149,7 +150,6 @@ class PaymentSuccessScreen extends StatelessWidget {
                                     Text(
                                       'KT123-Ak',
                                       style: TextStyle(
-                                        
                                         fontWeight: FontWeight.w500,
                                         fontSize: 18.sp,
                                       ),
@@ -157,7 +157,6 @@ class PaymentSuccessScreen extends StatelessWidget {
                                     Text(
                                       'AKSHAYANIDHI|0.00',
                                       style: TextStyle(
-                                       
                                         fontWeight: FontWeight.w400,
                                         fontSize: 16.sp,
                                       ),
@@ -177,13 +176,13 @@ class PaymentSuccessScreen extends StatelessWidget {
                                 'Trans.No:542322',
                                 style: TextStyle(
                                   color: ktextgrey,
-                                 ),
+                                ),
                               ),
                               Text(
                                 '24 Oct 2023',
                                 style: TextStyle(
                                   color: ktextgrey,
-                                 ),
+                                ),
                               )
                             ],
                           ),
@@ -207,14 +206,12 @@ class PaymentSuccessScreen extends StatelessWidget {
                                   Text(
                                     'Weight:0.02 gm(s)',
                                     style: TextStyle(
-                                        color: ktextgrey,
-                                         fontSize: 12.sp),
+                                        color: ktextgrey, fontSize: 12.sp),
                                   ),
                                   Text(
                                     'Gold Rate: ₹5655',
                                     style: TextStyle(
-                                        color: ktextgrey,
-                                         fontSize: 12.sp),
+                                        color: ktextgrey, fontSize: 12.sp),
                                   )
                                 ],
                               ),
@@ -224,8 +221,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                               Text(
                                 'Total Wt:0.117 gm(s)',
                                 style: TextStyle(
-                                    color: ktextgrey,
-                                     fontSize: 12.sp),
+                                    color: ktextgrey, fontSize: 12.sp),
                               ),
                             ],
                           ),
@@ -249,7 +245,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                                   'View History',
                                   style: TextStyle(
                                       color: ktextgrey.withOpacity(.5),
-                                       fontSize: 10.sp),
+                                      fontSize: 10.sp),
                                 ),
                               ],
                             ),
@@ -275,7 +271,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                                   'Back to Home',
                                   style: TextStyle(
                                       color: ktextgrey.withOpacity(.5),
-                                       fontSize: 10.sp),
+                                      fontSize: 10.sp),
                                 ),
                               ],
                             ),

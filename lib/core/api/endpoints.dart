@@ -9,5 +9,6 @@ const userschemesurl = 'p_user_cusSchemes.php';
 const contactusurl = 'p_user_getCustomerSupport.php';
 const akshayanidhihystory = 'p_user_akshayaNidhiLedger.php';
 const goldplushystory = 'p_user_goldPlusLedger.php';
-
+const sendotpurl = 'p_user_OTPGeneration.php';
+const verifyotpurl = 'p_user_OTPVerification.php';
 var logger = Logger();

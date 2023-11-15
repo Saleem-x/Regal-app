@@ -2,10 +2,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
- import 'package:regal_app/feature/data/models/login_model/login_model.dart';
+import 'package:regal_app/feature/data/models/login_model/login_model.dart';
 import 'package:regal_app/feature/state/bloc/login/login_bloc.dart';
 import 'package:regal_app/feature/state/cubit/mobilevalidator/mobilevalidator_cubit.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
@@ -31,8 +32,6 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-String otp = '';
-
 class AllLoginWidgets extends StatefulWidget {
   const AllLoginWidgets({
     super.key,
@@ -47,6 +46,7 @@ class AllLoginWidgets extends StatefulWidget {
 
 final _mobilecontroller = TextEditingController();
 final _formkey = GlobalKey<FormState>();
+String otp = '';
 
 class _AllLoginWidgetsState extends State<AllLoginWidgets> {
   @override
@@ -133,7 +133,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: widget.size.height * 0.07),
+              SizedBox(height: widget.size.height * 0.09),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Row(
@@ -148,9 +148,10 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                     const Text(
                       'Login',
                       style: TextStyle(
-                          color: kcolordark2,
-                           fontWeight: FontWeight.w400,
-                          fontSize: 22),
+                          color: Color(0xFF990000),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                          letterSpacing: -1),
                     ),
                     SizedBox(width: widget.size.width * 0.08),
                     LineWidget(
@@ -172,12 +173,12 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                     style: TextStyle(
                         fontSize: widget.size.height * 0.017,
                         color: kcolorblack.withOpacity(.6),
-                         fontWeight: FontWeight.w300),
+                        fontWeight: FontWeight.w300),
                   )
                 ],
               ),
               SizedBox(
-                height: widget.size.height * 0.04,
+                height: 50.h,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 90),
@@ -187,9 +188,9 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                     Text(
                       'Mobile Number',
                       style: TextStyle(
-                          fontSize: 10,
-                          color: kcolordarkred.withOpacity(.7),
-                            ),
+                        fontSize: 10,
+                        color: kcolordarkred.withOpacity(.7),
+                      ),
                     ),
                   ],
                 ),
@@ -209,9 +210,9 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                     Text(
                       'PIN',
                       style: TextStyle(
-                          fontSize: 10,
-                          color: kcolordarkred.withOpacity(.7),
-                        ),
+                        fontSize: 10,
+                        color: kcolordarkred.withOpacity(.7),
+                      ),
                     ),
                   ],
                 ),
@@ -219,7 +220,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
               SizedBox(
                 height: widget.size.height * 0.03,
               ),
-              OtpFIeldWidget(size: widget.size),
+              OtpFIeldWidget(size: widget.size, ),
               SizedBox(
                 height: widget.size.height * 0.02,
               ),
@@ -238,7 +239,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                         );
                       },
                       child: const Text(
-                        'Forgot PIN',
+                        'Set New PIN',
                         style: TextStyle(color: kcolordark2),
                       ),
                     ),
@@ -254,7 +255,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                   color: kredbutton,
                   height: 35,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   minWidth: widget.size.width,
                   onPressed: () async {
@@ -349,7 +350,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                   color: kgold1,
                   height: 35,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   minWidth: widget.size.width,
                   onPressed: () {
@@ -372,9 +373,10 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'facing any trouble?',
-                    style: TextStyle(color: Color(0xFF646464)),
+                    style: TextStyle(
+                        color: const Color(0xFF646464), fontSize: 10.sp),
                   ),
                   TextButton(
                     onPressed: () {
@@ -384,9 +386,10 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                             builder: (context) => const ContactUsScreen(),
                           ));
                     },
-                    child: const Text(
+                    child: Text(
                       'Contact Us',
-                      style: TextStyle(color: kcolorred),
+                      style: TextStyle(
+                          color: kredbutton.withOpacity(.9), fontSize: 10.sp),
                     ),
                   ),
                 ],
