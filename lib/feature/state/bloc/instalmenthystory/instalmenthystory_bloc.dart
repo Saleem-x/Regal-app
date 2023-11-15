@@ -36,7 +36,6 @@ class InstalmenthystoryBloc
       },
     );
     on<ResetDataEvent>((event, emit) {
-      logger.e('in reset event');
       return emit(const HystoryLoadigState());
     });
   }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/views/termsandpolicies/widgets/appprivacy.dart';
 import 'package:regal_app/feature/views/termsandpolicies/widgets/onlinepaymentpolicies.dart';
 import 'package:regal_app/feature/views/termsandpolicies/widgets/widgets/tandc.dart';
@@ -26,7 +25,7 @@ class TermsAndPoliciesScreen extends StatelessWidget {
         title: Text(
           'Terms & Policy',
           style: TextStyle(
-            fontFamily: kboldfont,
+            // fontFamily: kboldfont,
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
           ),
@@ -47,7 +46,7 @@ class TermsAndPoliciesScreen extends StatelessWidget {
                   Text(
                     'TERMS AND CONDITIONS',
                     style: TextStyle(
-                      fontFamily: kprimaryfont,
+                      // fontFamily: kprimaryfont,
                       fontSize: 14.sp,
                       color: kcolorblack,
                     ),

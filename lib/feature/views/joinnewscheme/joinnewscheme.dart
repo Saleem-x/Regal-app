@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
-import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
+ import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
 import 'package:regal_app/feature/views/auth/widgets/mobilefield.dart';
 import 'package:regal_app/feature/views/auth/widgets/otpfieldwidget.dart';
 import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
@@ -72,8 +71,7 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                 'New Scheme',
                 style: TextStyle(
                     color: kcolordark2,
-                    fontFamily: kboldfont,
-                    fontWeight: FontWeight.w400,
+                     fontWeight: FontWeight.w400,
                     fontSize: 18),
               ),
               SizedBox(width: size.width * 0.08),
@@ -96,7 +94,7 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 12,
                     color: kcolordarkred.withOpacity(.7),
-                    fontFamily: kprimaryfont),
+                    ),
               ),
             ],
           ),
@@ -116,7 +114,7 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                 child: const Text(
                   'Send OTP',
                   style:
-                      TextStyle(fontFamily: kprimaryfont, color: kcolorwhite),
+                      TextStyle( color: kcolorwhite),
                 ),
               )
             ],
@@ -138,8 +136,7 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                 'Verify OTP',
                 style: TextStyle(
                     color: kcolordark2,
-                    fontFamily: kboldfont,
-                    fontWeight: FontWeight.w400,
+                     fontWeight: FontWeight.w400,
                     fontSize: 18),
               ),
               SizedBox(width: size.width * 0.08),
@@ -162,7 +159,7 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 12,
                     color: kcolordarkred.withOpacity(.7),
-                    fontFamily: kprimaryfont),
+                     ),
               ),
             ],
           ),

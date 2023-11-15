@@ -1,3 +1,5 @@
-const kprimaryfont = 'assets/fonts/SFPRODISPLAYREGULAR.OTF';
+// const kprimaryfont = 'assets/fonts/sfpro/sf_pro_display_light.ttfs';
 
-const kboldfont = 'assets/fonts/SFPRODISPLAYBOLD.OTF';
+// const kboldfont = 'assets/fonts/sfpro/sf_pro_display_bold.ttf';
+// assets/fonts/SFPRODISPLAYBOLD.OTF
+// assets/fonts/SFPRODISPLAYREGULAR.OTF/

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 
 class ProfileTileWidget extends StatelessWidget {
@@ -54,9 +53,9 @@ class ProfileTileWidget extends StatelessWidget {
                   Text(
                     user.cusName,
                     style: TextStyle(
-                      fontFamily: kboldfont,
+                      // fontFamily: kboldfont,
                       fontWeight: FontWeight.w500,
-                      fontSize: 21.sp,
+                      fontSize: 19.sp,
                     ),
                   ),
                   SizedBox(
@@ -65,8 +64,8 @@ class ProfileTileWidget extends StatelessWidget {
                   Text(
                     '+91 ${user.cusMobileNumber}',
                     style: TextStyle(
-                      fontFamily: kboldfont,
-                      fontWeight: FontWeight.w400,
+                      // fontFamily: kboldfont,
+                      fontWeight: FontWeight.w500,
                       fontSize: 16.sp,
                     ),
                   ),

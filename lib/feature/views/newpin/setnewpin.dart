@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
 import 'package:regal_app/feature/views/auth/widgets/mobilefield.dart';
 import 'package:regal_app/feature/views/auth/widgets/otpfieldwidget.dart';
@@ -23,9 +22,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
       appBar: AppBar(
         title: const Text(
           'Set New Pin',
-          style: TextStyle(
-            fontFamily: kprimaryfont,
-          ),
+          style: TextStyle(),
         ),
       ),
       body: Column(
@@ -41,9 +38,9 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                 Text(
                   'Mobile Number',
                   style: TextStyle(
-                      fontSize: 12,
-                      color: kcolordarkred.withOpacity(.7),
-                      fontFamily: kprimaryfont),
+                    fontSize: 12,
+                    color: kcolordarkred.withOpacity(.7),
+                  ),
                 ),
               ],
             ),
@@ -62,8 +59,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                   onPressed: () {},
                   child: const Text(
                     'Get OTP',
-                    style:
-                        TextStyle(fontFamily: kprimaryfont, color: kcolorwhite),
+                    style: TextStyle(color: kcolorwhite),
                   ),
                 )
               ],
@@ -87,7 +83,6 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                   'Verify OTP',
                   style: TextStyle(
                       color: kcolordark2,
-                      fontFamily: kboldfont,
                       fontWeight: FontWeight.w400,
                       fontSize: 22),
                 ),
@@ -111,9 +106,9 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                 Text(
                   'Mobile Number',
                   style: TextStyle(
-                      fontSize: 12,
-                      color: kcolordarkred.withOpacity(.7),
-                      fontFamily: kprimaryfont),
+                    fontSize: 12,
+                    color: kcolordarkred.withOpacity(.7),
+                  ),
                 ),
               ],
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/views/termsandpolicies/widgets/widgets/expansiontilewidget.dart';
 
 class TandCWidget extends StatelessWidget {
@@ -26,7 +25,7 @@ class TandCWidget extends StatelessWidget {
               child: Text(
                 tandc[index],
                 style: TextStyle(
-                  fontFamily: kprimaryfont,
+                  // fontFamily: kprimaryfont,
                   fontSize: 10.sp,
                 ),
               ),

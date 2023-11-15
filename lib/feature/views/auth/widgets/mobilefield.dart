@@ -129,7 +129,7 @@ class CustomMobileField extends StatelessWidget {
                   },
                   decoration: InputDecoration(
                     hintText: 'Mobile Number',
-                    hintStyle: TextStyle(color: Color(0xFFD1D1D1)),
+                    hintStyle: const TextStyle(color: Color(0xFFD1D1D1)),
                     isDense: false,
                     suffixIcon: state.when(
                       mobilevallidState: () {

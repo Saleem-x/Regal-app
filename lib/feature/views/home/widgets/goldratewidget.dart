@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart';
 import 'package:regal_app/feature/widgets/goldrateskelton.dart';
@@ -57,10 +56,9 @@ class GoldRateWidget extends StatelessWidget {
                                         child: Text(
                                           'Last Change ${goldrate.entryDate} | ${goldrate.entryTime}',
                                           style: TextStyle(
-                                            fontFamily: kboldfont,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 10.sp,
-                                            color: ktextgrey.withOpacity(.6),
+                                            color: kcolorblack.withOpacity(.9),
                                           ),
                                         ),
                                       ),
@@ -71,14 +69,12 @@ class GoldRateWidget extends StatelessWidget {
                                       Text(
                                         '₹${goldrate.boardRate}',
                                         style: TextStyle(
-                                            fontFamily: kboldfont,
                                             fontWeight: FontWeight.w600,
                                             fontSize: 18.sp),
                                       ),
                                       Text(
                                         '  (${goldrate.weight} gram)',
                                         style: TextStyle(
-                                            fontFamily: kboldfont,
                                             fontWeight: FontWeight.w400,
                                             fontSize: 10.sp,
                                             color: kcolorblack.withOpacity(.8)),
@@ -88,7 +84,6 @@ class GoldRateWidget extends StatelessWidget {
                                   Text(
                                     '₹${goldrate.totalPrice} ( 8 grams )',
                                     style: TextStyle(
-                                        fontFamily: kboldfont,
                                         fontWeight: FontWeight.w400,
                                         fontSize: 10.sp,
                                         color: ktextgrey.withOpacity(.6)),
@@ -105,7 +100,6 @@ class GoldRateWidget extends StatelessWidget {
                       Text(
                         'Gold rate shown in Thrissur is shown here. It may be varies with your region',
                         style: TextStyle(
-                          fontFamily: kboldfont,
                           fontWeight: FontWeight.w400,
                           fontSize: 8.sp,
                           color: ktextgrey.withOpacity(.6),

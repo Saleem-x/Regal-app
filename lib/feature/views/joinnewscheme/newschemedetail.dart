@@ -3,8 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
-import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
+ import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
 import 'package:regal_app/feature/views/auth/widgets/mobilefield.dart';
 import 'package:regal_app/feature/views/auth/widgets/otpfieldwidget.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/dobselecter.dart';
@@ -66,8 +65,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                     'New Scheme',
                     style: TextStyle(
                         color: kcolordark2,
-                        fontFamily: kboldfont,
-                        fontWeight: FontWeight.w400,
+                         fontWeight: FontWeight.w400,
                         fontSize: 18),
                   ),
                   SizedBox(width: size.width * 0.08),
@@ -98,14 +96,14 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                     style: TextStyle(
                         fontSize: 10,
                         color: kcolordarkred.withOpacity(.7),
-                        fontFamily: kprimaryfont),
+                         ),
                   ),
                   const Text(
                     ' *',
                     style: TextStyle(
                         fontSize: 14,
                         color: kcolordarkred,
-                        fontFamily: kprimaryfont),
+                         ),
                   ),
                 ],
               ),
@@ -173,8 +171,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                   Text(
                     'Scheme Details',
                     style: TextStyle(
-                      fontFamily: kprimaryfont,
-                      color: kredbutton.withOpacity(.9),
+                       color: kredbutton.withOpacity(.9),
                     ),
                   ),
                 ],
@@ -186,7 +183,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                 children: [
                   Text(
                     'Regal Gold Plus',
-                    style: TextStyle(fontFamily: kprimaryfont, fontSize: 18),
+                    style: TextStyle(  fontSize: 18),
                   )
                 ],
               ),
@@ -197,7 +194,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                 children: [
                   Text(
                     'Scheme Tenure',
-                    style: TextStyle(fontFamily: kprimaryfont, fontSize: 13),
+                    style: TextStyle(  fontSize: 13),
                   )
                 ],
               ),
@@ -208,7 +205,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                 children: [
                   Text(
                     'Instalment Amount',
-                    style: TextStyle(fontFamily: kprimaryfont, fontSize: 13),
+                    style: TextStyle(  fontSize: 13),
                   )
                 ],
               ),
@@ -220,8 +217,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                   Text(
                     'Set Pin',
                     style: TextStyle(
-                        fontFamily: kprimaryfont,
-                        fontSize: 13,
+                         fontSize: 13,
                         color: kredbutton.withOpacity(.9)),
                   )
                 ],
@@ -245,8 +241,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                   const Text(
                     'I have Accepted the',
                     style: TextStyle(
-                        fontFamily: kprimaryfont,
-                        color: ktextgrey,
+                         color: ktextgrey,
                         fontSize: 10),
                   ),
                   TextButton(
@@ -254,8 +249,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                       child: Text(
                         'terms & conditions',
                         style: TextStyle(
-                            fontFamily: kprimaryfont,
-                            color: kredbutton.withOpacity(.8),
+                             color: kredbutton.withOpacity(.8),
                             fontSize: 10),
                       ))
                 ],
@@ -273,7 +267,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                 child: const Text(
                   'Proceed',
                   style:
-                      TextStyle(color: kcolorwhite, fontFamily: kprimaryfont),
+                      TextStyle(color: kcolorwhite, ),
                 ),
               ),
             ),

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
-import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
+ import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/newschemdetailwidget.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/newschemedropdownmenu.dart';
 
@@ -33,8 +32,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
         title: Text(
           'Add New Scheme',
           style: TextStyle(
-              fontFamily: kboldfont,
-              fontSize: 16.sp,
+               fontSize: 16.sp,
               fontWeight: FontWeight.w500),
         ),
       ),
@@ -70,14 +68,14 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                   style: TextStyle(
                       fontSize: 13.sp,
                       color: kcolordarkred.withOpacity(.7),
-                      fontFamily: kprimaryfont),
+                       ),
                 ),
                 const Text(
                   ' *',
                   style: TextStyle(
                       fontSize: 14,
                       color: kcolordarkred,
-                      fontFamily: kprimaryfont),
+                      ),
                 ),
               ],
             ),
@@ -91,7 +89,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
               children: [
                 Text(
                   'Scheme Tenure:',
-                  style: TextStyle(fontFamily: kprimaryfont, fontSize: 13),
+                  style: TextStyle(  fontSize: 13),
                 )
               ],
             ),
@@ -102,7 +100,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
               children: [
                 Text(
                   'Instalment Amount:',
-                  style: TextStyle(fontFamily: kprimaryfont, fontSize: 13),
+                  style: TextStyle(  fontSize: 13),
                 )
               ],
             ),
@@ -124,8 +122,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                 Text(
                   'I have Accepted the',
                   style: TextStyle(
-                      fontFamily: kprimaryfont,
-                      color: ktextgrey,
+                       color: ktextgrey,
                       fontSize: 10.sp),
                 ),
                 TextButton(
@@ -133,8 +130,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                   child: Text(
                     'terms & conditions',
                     style: TextStyle(
-                        fontFamily: kprimaryfont,
-                        color: kredbutton.withOpacity(.8),
+                         color: kredbutton.withOpacity(.8),
                         fontSize: 10.sp),
                   ),
                 ),
@@ -152,7 +148,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
               onPressed: () {},
               child: const Text(
                 'Proceed',
-                style: TextStyle(color: kcolorwhite, fontFamily: kprimaryfont),
+                style: TextStyle(color: kcolorwhite,  ),
               ),
             ),
           ),

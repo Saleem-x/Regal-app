@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/views/termsandpolicies/widgets/widgets/expansiontilewidget.dart';
 
 bool isexpanded = false;
@@ -22,7 +21,7 @@ class OnlinePaymentPolicies extends StatelessWidget {
                 Text(
                   'ONLINE PAYMENT TERMS AND CONDITIONS',
                   style: TextStyle(
-                    fontFamily: kprimaryfont,
+                    // fontFamily: kprimaryfont,
                     fontSize: 14.sp,
                     color: kcolorblack,
                   ),

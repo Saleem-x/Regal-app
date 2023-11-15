@@ -19,15 +19,12 @@ class InstalmentHystoryRepo implements IinstalmentHystoryRepo {
           body: {"datakey": datakey, 'joinID': joinID});
       if (response.statusCode == 200) {
         List<InstalmentHystoryModel> insthystry = [];
-        logger.e('bodys${response.body}');
 
         final Map<String, dynamic> json = jsonDecode(response.body);
         if (json.toString() == 'ArrayNoData') {
           return right(insthystry);
         }
         List<dynamic> resultList = json['result'];
-
-        logger.i('jsonaaan ');
 
         for (var element in resultList) {
           insthystry.add(InstalmentHystoryModel.fromJson(element));

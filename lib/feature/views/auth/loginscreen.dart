@@ -5,8 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
-import 'package:regal_app/feature/data/models/login_model/login_model.dart';
+ import 'package:regal_app/feature/data/models/login_model/login_model.dart';
 import 'package:regal_app/feature/state/bloc/login/login_bloc.dart';
 import 'package:regal_app/feature/state/cubit/mobilevalidator/mobilevalidator_cubit.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
@@ -150,8 +149,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                       'Login',
                       style: TextStyle(
                           color: kcolordark2,
-                          fontFamily: kboldfont,
-                          fontWeight: FontWeight.w400,
+                           fontWeight: FontWeight.w400,
                           fontSize: 22),
                     ),
                     SizedBox(width: widget.size.width * 0.08),
@@ -174,8 +172,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                     style: TextStyle(
                         fontSize: widget.size.height * 0.017,
                         color: kcolorblack.withOpacity(.6),
-                        fontFamily: kprimaryfont,
-                        fontWeight: FontWeight.w300),
+                         fontWeight: FontWeight.w300),
                   )
                 ],
               ),
@@ -192,7 +189,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                       style: TextStyle(
                           fontSize: 10,
                           color: kcolordarkred.withOpacity(.7),
-                          fontFamily: kprimaryfont),
+                            ),
                     ),
                   ],
                 ),
@@ -214,7 +211,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                       style: TextStyle(
                           fontSize: 10,
                           color: kcolordarkred.withOpacity(.7),
-                          fontFamily: kprimaryfont),
+                        ),
                     ),
                   ],
                 ),

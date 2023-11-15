@@ -99,7 +99,11 @@ flutter:
   fonts:
     - family: SF Pro Display
       fonts:
-        - asset: assets/fonts/SFPRODISPLAYREGULAR.OTF
-        - asset: assets/fonts/SFPRODISPLAYBOLD.OTF
+        - asset: assets/fonts/sfpro/sf_pro_display_light.ttf
+        - asset: assets/fonts/sfpro/sf_pro_display_bold.ttf
+        - asset: assets/fonts/sfpro/sf_pro_display_medium.ttf
+        - asset: assets/fonts/sfpro/sf_pro_display_regular.ttf
+        - asset: assets/fonts/sfpro/sf_pro_display_semibold.ttf
+        - asset: assets/fonts/sfpro/sf_pro_display_bold.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

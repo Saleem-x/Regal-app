@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/views/payment/confirmpayment.dart';
@@ -77,7 +76,6 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                   Text(
                                     'Instalment amount',
                                     style: TextStyle(
-                                      fontFamily: kprimaryfont,
                                       color: ktextgrey,
                                       fontSize: 12.sp,
                                     ),
@@ -88,7 +86,6 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                     child: Text(
                                       '₹${scheme.instAmount}',
                                       style: TextStyle(
-                                          fontFamily: kboldfont,
                                           color: kcolorblack,
                                           fontSize: 20.sp,
                                           fontWeight: FontWeight.w800),
@@ -100,7 +97,6 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                   Text(
                                     'Total Paid: ₹ ${schemedetail.totAmount}',
                                     style: TextStyle(
-                                      fontFamily: kprimaryfont,
                                       color: ktextgrey,
                                       fontSize: 14.sp,
                                     ),
@@ -111,7 +107,6 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                     child: Text(
                                       'Due Date: ₹ ${schemedetail.dueDate}',
                                       style: TextStyle(
-                                        fontFamily: kprimaryfont,
                                         color: ktextgrey,
                                         fontSize: 14.sp,
                                       ),
@@ -145,9 +140,7 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                       Text(
                                         'View Details',
                                         style: TextStyle(
-                                            fontFamily: kprimaryfont,
-                                            color: ktextgrey,
-                                            fontSize: 12.sp),
+                                            color: ktextgrey, fontSize: 12.sp),
                                       )
                                     ],
                                   ),
@@ -170,9 +163,7 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                   children: [
                                     const Text(
                                       'Payable Amount',
-                                      style: TextStyle(
-                                          fontFamily: kprimaryfont,
-                                          color: ktextgrey),
+                                      style: TextStyle(color: ktextgrey),
                                     ),
                                     SizedBox(
                                       width: size.width / 2,
@@ -180,7 +171,6 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                         keyboardType: TextInputType.number,
                                         controller: _payablecontroller,
                                         style: TextStyle(
-                                            fontFamily: kboldfont,
                                             color: kcolorblack,
                                             fontSize: 18.sp,
                                             fontWeight: FontWeight.w600),
@@ -201,11 +191,11 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                 ),
                               ),
                               MaterialButton(
-                                minWidth: size.height * 0.03.w,
-                                height: size.height * 0.05.h,
+                                minWidth: 55.w,
+                                height: 45.h,
                                 color: kredbutton,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.sp),
                                 ),
                                 onPressed: () {
                                   Navigator.push(
@@ -218,9 +208,7 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                 },
                                 child: const Text(
                                   'Pay',
-                                  style: TextStyle(
-                                      fontFamily: kprimaryfont,
-                                      color: kcolorwhite),
+                                  style: TextStyle(color: kcolorwhite),
                                 ),
                               )
                             ],
@@ -233,7 +221,6 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                 Text(
                                   'Enter an amount greater than or equal to the Instalment amount',
                                   style: TextStyle(
-                                    fontFamily: kprimaryfont,
                                     color: ktextgrey,
                                     fontSize: 8.sp,
                                   ),
@@ -260,7 +247,6 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                       child: Text(
                                         'A Regal Jewellery Initiative',
                                         style: TextStyle(
-                                            fontFamily: kprimaryfont,
                                             color: ktextgrey.withOpacity(.3),
                                             fontSize: 8.sp),
                                       ),

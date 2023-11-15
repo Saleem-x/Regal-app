@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
@@ -52,7 +51,7 @@ class ActiveSchemeWidget extends StatelessWidget {
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.only(left: 5, right: 10),
+                          padding: const EdgeInsets.only(left: 10, right: 10),
                           child: BlocBuilder<SchemeselectorCubit,
                               SchemeselectorState>(
                             builder: (context, selected) {
@@ -115,12 +114,12 @@ class ActiveSchemeWidget extends StatelessWidget {
                                             Text(
                                               schemes[index].schemeNo!,
                                               style: TextStyle(
-                                                  fontFamily: kprimaryfont,
-                                                  fontSize: 20.sp,
-                                                  color: selected.idx == index
-                                                      ? kcolorwhite
-                                                      : ktextgrey,
-                                                  fontWeight: FontWeight.w600),
+                                                 fontSize: 20.sp,
+                                                color: selected.idx == index
+                                                    ? kcolorwhite
+                                                    : ktextgrey,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
                                             SizedBox(
                                               height: 3.h,
@@ -128,8 +127,7 @@ class ActiveSchemeWidget extends StatelessWidget {
                                             Text(
                                               '${schemes[index].schemeName} | ₹${schemes[index].totalAmount}',
                                               style: TextStyle(
-                                                  fontFamily: kprimaryfont,
-                                                  fontSize: 12.sp,
+                                                   fontSize: 12.sp,
                                                   color: selected.idx == index
                                                       ? kcolorwhite
                                                       : ktextgrey,

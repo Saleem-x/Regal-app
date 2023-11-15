@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
-
+ 
 class ImageSelectorWidget extends StatelessWidget {
   const ImageSelectorWidget({super.key});
 
@@ -21,14 +20,14 @@ class ImageSelectorWidget extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 10,
                     color: kcolordarkred.withOpacity(.7),
-                    fontFamily: kprimaryfont),
+                    ),
               ),
               const Text(
                 ' *',
                 style: TextStyle(
                     fontSize: 14,
                     color: kcolordarkred,
-                    fontFamily: kprimaryfont),
+                   ),
               ),
             ],
           ),

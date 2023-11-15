@@ -2,7 +2,6 @@ import 'package:expansion_widget/expansion_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'dart:math' as math;
 
 class ExpandingInfoTile extends StatelessWidget {
@@ -38,7 +37,7 @@ class ExpandingInfoTile extends StatelessWidget {
                     child: Text(
                       datalist[index].split('^')[0],
                       style: const TextStyle(
-                          fontFamily: kprimaryfont,
+                          // fontFamily: kprimaryfont,
                           fontSize: 12,
                           color: kcolorblack),
                     ),
@@ -52,7 +51,7 @@ class ExpandingInfoTile extends StatelessWidget {
             child: Text(
               datalist[index].split('^')[1],
               style: TextStyle(
-                fontFamily: kprimaryfont,
+                // fontFamily: kprimaryfont,
                 fontSize: 10.sp,
               ),
             ),

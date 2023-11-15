@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/views/termsandpolicies/widgets/widgets/expansiontilewidget.dart';
 
 class AppPrivacyWidget extends StatelessWidget {
@@ -20,7 +19,6 @@ class AppPrivacyWidget extends StatelessWidget {
                 Text(
                   'APP PRIVACY POLICY',
                   style: TextStyle(
-                    fontFamily: kprimaryfont,
                     fontSize: 14.sp,
                     color: kcolorblack,
                   ),
@@ -39,7 +37,7 @@ This page is used to inform website visitors regarding our policies with the col
 If you choose to use our Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.
           
 The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at Regal as Akshaya Nidhi Scheme unless otherwise defined in this Privacy Policy. For more check Regal as Akshaya Nidhi Scheme Terms and conditions''',
-              style: TextStyle(fontFamily: kprimaryfont, fontSize: 10.sp),
+              style: TextStyle(fontSize: 10.sp,),
             ),
           ),
           ExpandingInfoTile(datalist: app),

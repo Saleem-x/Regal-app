@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/views/home/widgets/activeschemes.dart';
 import 'package:regal_app/feature/views/home/widgets/bottomsection.dart';
@@ -42,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     "Today's Gold Rate",
                     style: TextStyle(
-                      fontFamily: kprimaryfont,
+                      // fontFamily: kprimaryfont,
                       fontWeight: FontWeight.w500,
                       fontSize: 15.sp,
                       color: ktextgrey.withOpacity(
@@ -62,9 +61,9 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     "Active Schemes",
                     style: TextStyle(
-                      fontFamily: kprimaryfont,
+                      // fontFamily: kprimaryfont,
                       fontWeight: FontWeight.w400,
-                      fontSize: 16.sp,
+                      fontSize: 17.sp,
                       color: ktextgrey.withOpacity(
                         .7,
                       ),

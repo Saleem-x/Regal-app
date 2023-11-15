@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
 
@@ -54,7 +53,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                     child: Text(
                       'Amount',
                       style: TextStyle(
-                        fontFamily: kprimaryfont,
+                        // fontFamily: kprimaryfont,
                         color: kcolorwhite.withOpacity(.9),
                       ),
                     ),
@@ -64,7 +63,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                     child: Text(
                       '₹ 100',
                       style: TextStyle(
-                          fontFamily: kprimaryfont,
+                          // fontFamily: kprimaryfont,
                           color: kcolorwhite.withOpacity(.9),
                           fontSize: 22.sp,
                           fontWeight: FontWeight.w500),
@@ -73,7 +72,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                   Text(
                     'Paid Successfully',
                     style: TextStyle(
-                        fontFamily: kprimaryfont,
+                        // fontFamily: kprimaryfont,
                         color: kcolorwhite.withOpacity(.9),
                         fontSize: 15.sp),
                   )
@@ -105,7 +104,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                               'Reciept',
                               style: TextStyle(
                                 color: ktextgrey,
-                                fontFamily: kprimaryfont,
+                                // fontFamily: kprimaryfont,
                               ),
                             )
                           ],
@@ -150,7 +149,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                                     Text(
                                       'KT123-Ak',
                                       style: TextStyle(
-                                        fontFamily: kboldfont,
+                                        
                                         fontWeight: FontWeight.w500,
                                         fontSize: 18.sp,
                                       ),
@@ -158,7 +157,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                                     Text(
                                       'AKSHAYANIDHI|0.00',
                                       style: TextStyle(
-                                        fontFamily: kboldfont,
+                                       
                                         fontWeight: FontWeight.w400,
                                         fontSize: 16.sp,
                                       ),
@@ -178,15 +177,13 @@ class PaymentSuccessScreen extends StatelessWidget {
                                 'Trans.No:542322',
                                 style: TextStyle(
                                   color: ktextgrey,
-                                  fontFamily: kprimaryfont,
-                                ),
+                                 ),
                               ),
                               Text(
                                 '24 Oct 2023',
                                 style: TextStyle(
                                   color: ktextgrey,
-                                  fontFamily: kprimaryfont,
-                                ),
+                                 ),
                               )
                             ],
                           ),
@@ -211,15 +208,13 @@ class PaymentSuccessScreen extends StatelessWidget {
                                     'Weight:0.02 gm(s)',
                                     style: TextStyle(
                                         color: ktextgrey,
-                                        fontFamily: kprimaryfont,
-                                        fontSize: 12.sp),
+                                         fontSize: 12.sp),
                                   ),
                                   Text(
                                     'Gold Rate: ₹5655',
                                     style: TextStyle(
                                         color: ktextgrey,
-                                        fontFamily: kprimaryfont,
-                                        fontSize: 12.sp),
+                                         fontSize: 12.sp),
                                   )
                                 ],
                               ),
@@ -230,8 +225,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                                 'Total Wt:0.117 gm(s)',
                                 style: TextStyle(
                                     color: ktextgrey,
-                                    fontFamily: kprimaryfont,
-                                    fontSize: 12.sp),
+                                     fontSize: 12.sp),
                               ),
                             ],
                           ),
@@ -255,8 +249,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                                   'View History',
                                   style: TextStyle(
                                       color: ktextgrey.withOpacity(.5),
-                                      fontFamily: kprimaryfont,
-                                      fontSize: 10.sp),
+                                       fontSize: 10.sp),
                                 ),
                               ],
                             ),
@@ -282,8 +275,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                                   'Back to Home',
                                   style: TextStyle(
                                       color: ktextgrey.withOpacity(.5),
-                                      fontFamily: kprimaryfont,
-                                      fontSize: 10.sp),
+                                       fontSize: 10.sp),
                                 ),
                               ],
                             ),

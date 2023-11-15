@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/core/constents/fonts/kfonts.dart';
 import 'package:regal_app/feature/views/payment/paymentsucces.dart';
 
 class ConfirmPaymentScreen extends StatelessWidget {
@@ -26,7 +25,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
         title: Text(
           'Scheme Detail',
           style: TextStyle(
-              fontFamily: kboldfont,
+              // fontFamily: kboldfont,
               fontSize: 17.sp,
               fontWeight: FontWeight.w500),
         ),
@@ -72,7 +71,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                         Text(
                           'KT123-Ak',
                           style: TextStyle(
-                            fontFamily: kboldfont,
+                            // fontFamily: kboldfont,
                             fontWeight: FontWeight.w500,
                             fontSize: 20.sp,
                           ),
@@ -80,7 +79,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                         Text(
                           'AKSHAYANIDHI|0.00',
                           style: TextStyle(
-                            fontFamily: kboldfont,
+                            // fontFamily: kboldfont,
                             fontWeight: FontWeight.w400,
                             fontSize: 16.sp,
                           ),
@@ -109,7 +108,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       'Gold Rate',
                       style: TextStyle(
                         color: ktextgrey,
-                        fontFamily: kprimaryfont,
+                        // fontFamily: kprimaryfont,
                         fontSize: 13.sp,
                       ),
                     ),
@@ -120,7 +119,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       '₹5540.00',
                       style: TextStyle(
                         color: kcolorblack,
-                        fontFamily: kprimaryfont,
+                        // fontFamily: kprimaryfont,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500,
                       ),
@@ -141,7 +140,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       'instalment Amount',
                       style: TextStyle(
                         color: ktextgrey,
-                        fontFamily: kprimaryfont,
+                        // fontFamily: kprimaryfont,
                         fontSize: 13.sp,
                       ),
                     ),
@@ -152,7 +151,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       '₹100.00',
                       style: TextStyle(
                         color: kcolorblack,
-                        fontFamily: kprimaryfont,
+                        // fontFamily: kprimaryfont,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500,
                       ),
@@ -173,7 +172,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       const Text(
                         'Payable Amount',
                         style: TextStyle(
-                            fontFamily: kprimaryfont, color: ktextgrey),
+                             color: ktextgrey),
                       ),
                       SizedBox(
                         width: size.width,
@@ -210,7 +209,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       'Current Weight',
                       style: TextStyle(
                         color: ktextgrey,
-                        fontFamily: kprimaryfont,
+                        // fontFamily: kprimaryfont,
                         fontSize: 13.sp,
                       ),
                     ),
@@ -221,7 +220,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       '0.02',
                       style: TextStyle(
                         color: kcolorblack,
-                        fontFamily: kprimaryfont,
+                        // fontFamily: kprimaryfont,/
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500,
                       ),
@@ -244,7 +243,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                   'Safe And Secure Payments',
                   style: TextStyle(
                     color: ktextgrey.withOpacity(.3),
-                    fontFamily: kprimaryfont,
+                    // fontFamily: kprimaryfont,
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -275,7 +274,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                 'Proceed to Pay',
                 style: TextStyle(
                   color: kcolorwhite,
-                  fontFamily: kprimaryfont,
+                  // fontFamily: kprimaryfont,
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                 ),
