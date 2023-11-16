@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 
@@ -39,10 +41,11 @@ class DobSelectorWidget extends StatelessWidget {
           padding: const EdgeInsets.only(left: 40, right: 40),
           child: Row(
             children: [
-              const SizedBox(
-                child: Icon(
-                  Iconsax.calendar,
-                  size: 20,
+              SizedBox(
+                child: SvgPicture.asset(
+                  'assets/svg/calender.svg',
+                  height: 15.h,
+                  width: 15.w,
                 ),
               ),
               SizedBox(

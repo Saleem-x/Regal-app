@@ -24,6 +24,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: kbgcolor,
       resizeToAvoidBottomInset: false,
       body: size.height > 640
           ? AllLoginWidgets(size: size)
@@ -220,7 +221,9 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
               SizedBox(
                 height: widget.size.height * 0.03,
               ),
-              OtpFIeldWidget(size: widget.size, ),
+              OtpFIeldWidget(
+                size: widget.size,
+              ),
               SizedBox(
                 height: widget.size.height * 0.02,
               ),

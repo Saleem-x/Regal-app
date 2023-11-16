@@ -117,7 +117,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
               ),
               NewSchmFieldWidget(
                 controller: _controller,
-                icon: 'assets/others/name.svg',
+                icon: 'assets/svg/mail.svg',
                 title: 'EmailID',
                 type: TextInputType.emailAddress,
               ),
@@ -134,37 +134,40 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
               NewSchmDropDownWidget(
                   controller: _relationshipcontroller,
                   title: 'Document type',
-                  preicon: 'assets/others/name.svg'),
+                  preicon: 'assets/svg/terms.svg'),
               const DocumentSelectorWidget(
-                  title: 'Attach document- Front side'),
-              const DocumentSelectorWidget(title: 'Attach document- Back side'),
+                title: 'Attach document- Front side',
+              ),
+              const DocumentSelectorWidget(
+                title: 'Attach document- Back side',
+              ),
               NewSchmFieldWidget(
                 controller: _controller,
-                icon: 'assets/others/name.svg',
+                icon: 'assets/svg/location.svg',
                 title: 'Address',
                 type: TextInputType.streetAddress,
               ),
               NewSchmFieldWidget(
                 controller: _controller,
-                icon: 'assets/others/name.svg',
+                icon: 'assets/svg/location.svg',
                 title: 'city',
                 type: TextInputType.streetAddress,
               ),
               NewSchmDropDownWidget(
                   controller: _relationshipcontroller,
                   title: 'Branch',
-                  preicon: 'assets/others/relation.svg'),
+                  preicon: 'assets/svg/branch.svg'),
               NewSchmDropDownWidget(
                   controller: _relationshipcontroller,
                   title: 'Sales Man',
-                  preicon: 'assets/others/relation.svg'),
+                  preicon: 'assets/svg/salesman.svg'),
               NewSchmDropDownWidget(
                   controller: _relationshipcontroller,
                   title: 'Scheme',
-                  preicon: 'assets/others/relation.svg'),
+                  preicon: 'assets/svg/scheme.svg'),
               NewSchmFieldWidget(
                 controller: _controller,
-                icon: 'assets/others/name.svg',
+                icon: 'assets/svg/scheme.svg',
                 title: 'Instalment Amount',
                 type: TextInputType.number,
               ),

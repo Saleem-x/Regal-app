@@ -39,5 +39,9 @@ class NewschemeotpBloc extends Bloc<NewschemeotpEvent, NewschemeotpState> {
               ),
           (r) => const VerifyOtpState()));
     });
+
+    on<OtpscreenresetEvent>((event, emit) {
+      emit(NewschemeotpState.initial());
+    });
   }
 }

@@ -54,7 +54,7 @@ class ImageSelectorWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: SvgPicture.asset(
-                  'assets/others/iconssvg/addimage.svg',
+                  'assets/svg/addimage-optimized.svg',
                   height: size.height * 0.07,
                   width: size.height * 0.07,
                   fit: BoxFit.cover,

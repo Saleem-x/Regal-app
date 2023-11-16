@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +51,7 @@ final _formkey = GlobalKey<FormState>();
 class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
   @override
   Widget build(BuildContext context) {
-    logger.e(widget.size.width);
+    context.read<NewschemeotpBloc>().add(const OtpscreenresetEvent());
     return Form(
       key: _formkey,
       child: BlocListener<NewschemeotpBloc, NewschemeotpState>(
@@ -209,6 +208,7 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                 SizedBox(height: 10.h),
                 OtpFIeldWidget(
                   size: widget.size,
+                  mobNo: _mobilecontroller.text,
                 ),
                 state.when(
                   otpstateinitial: () => const SizedBox.shrink(),
@@ -243,62 +243,65 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                     ),
                     minWidth: widget.size.width,
                     onPressed: () async {
-                      if (otpfield.length == 4) {
-                        logger.e(otpfield);
-                        context.read<NewschemeotpBloc>().add(
-                              VerfiOtpEvent(
-                                  mobileNO: _mobilecontroller.text,
-                                  otp: otpfield),
-                            );
-                      } else {
-                        if (!Platform.isAndroid) {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              backgroundColor: kcolorwhite,
-                              title: const Text("Alert"),
-                              content: const Text("please enter 4 Digit OTP"),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('Ok'),
-                                )
-                              ],
-                            ),
-                          );
+                      if (_formkey.currentState!.validate()) {
+                        if (otpfield.length == 4) {
+                          logger.e(otpfield);
+                          context.read<NewschemeotpBloc>().add(
+                                VerfiOtpEvent(
+                                    mobileNO: _mobilecontroller.text,
+                                    otp: otpfield),
+                              );
                         } else {
-                          showCupertinoDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return CupertinoAlertDialog(
+                          if (!Platform.isAndroid) {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                backgroundColor: kcolorwhite,
                                 title: const Text("Alert"),
-                                content: const Text(
-                                    "please enter Your Four Digit OTP"),
-                                actions: <Widget>[
-                                  /* CupertinoDialogAction(
+                                content: const Text("please enter 4 Digit OTP"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Ok'),
+                                  )
+                                ],
+                              ),
+                            );
+                          } else {
+                            showCupertinoDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return CupertinoAlertDialog(
+                                  title: const Text("Alert"),
+                                  content: const Text(
+                                      "please enter Your Four Digit OTP"),
+                                  actions: <Widget>[
+                                    /* CupertinoDialogAction(
                                                 child: const Text("Cancel"),
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
                                               ), */
-                                  CupertinoDialogAction(
-                                    child: const Text("OK"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                                    CupertinoDialogAction(
+                                      child: const Text("OK"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
                         }
                       }
                       // Navigator.push(
                       //     context,
                       //     MaterialPageRoute(
-                      //       builder: (context) => const JoinNewSchemeDetailScreen(),
+                      //       builder: (context) =>
+                      //           const JoinNewSchemeDetailScreen(),
                       //     ));
                     },
                     child: Text(

@@ -16,23 +16,25 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$NewschemeotpEvent {
-  String get mobileNO => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String mobileNO) sendOtp,
     required TResult Function(String mobileNO, String otp) verfiOtpEvent,
+    required TResult Function() otpscreenresetEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String mobileNO)? sendOtp,
     TResult? Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult? Function()? otpscreenresetEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String mobileNO)? sendOtp,
     TResult Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult Function()? otpscreenresetEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,24 +42,23 @@ mixin _$NewschemeotpEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(SendOtpEvent value) sendOtp,
     required TResult Function(VerfiOtpEvent value) verfiOtpEvent,
+    required TResult Function(OtpscreenresetEvent value) otpscreenresetEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SendOtpEvent value)? sendOtp,
     TResult? Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult? Function(OtpscreenresetEvent value)? otpscreenresetEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SendOtpEvent value)? sendOtp,
     TResult Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult Function(OtpscreenresetEvent value)? otpscreenresetEvent,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $NewschemeotpEventCopyWith<NewschemeotpEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -66,8 +67,6 @@ abstract class $NewschemeotpEventCopyWith<$Res> {
   factory $NewschemeotpEventCopyWith(
           NewschemeotpEvent value, $Res Function(NewschemeotpEvent) then) =
       _$NewschemeotpEventCopyWithImpl<$Res, NewschemeotpEvent>;
-  @useResult
-  $Res call({String mobileNO});
 }
 
 /// @nodoc
@@ -79,28 +78,13 @@ class _$NewschemeotpEventCopyWithImpl<$Res, $Val extends NewschemeotpEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? mobileNO = null,
-  }) {
-    return _then(_value.copyWith(
-      mobileNO: null == mobileNO
-          ? _value.mobileNO
-          : mobileNO // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$SendOtpEventImplCopyWith<$Res>
-    implements $NewschemeotpEventCopyWith<$Res> {
+abstract class _$$SendOtpEventImplCopyWith<$Res> {
   factory _$$SendOtpEventImplCopyWith(
           _$SendOtpEventImpl value, $Res Function(_$SendOtpEventImpl) then) =
       __$$SendOtpEventImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String mobileNO});
 }
@@ -163,6 +147,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String mobileNO) sendOtp,
     required TResult Function(String mobileNO, String otp) verfiOtpEvent,
+    required TResult Function() otpscreenresetEvent,
   }) {
     return sendOtp(mobileNO);
   }
@@ -172,6 +157,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String mobileNO)? sendOtp,
     TResult? Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult? Function()? otpscreenresetEvent,
   }) {
     return sendOtp?.call(mobileNO);
   }
@@ -181,6 +167,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String mobileNO)? sendOtp,
     TResult Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult Function()? otpscreenresetEvent,
     required TResult orElse(),
   }) {
     if (sendOtp != null) {
@@ -194,6 +181,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(SendOtpEvent value) sendOtp,
     required TResult Function(VerfiOtpEvent value) verfiOtpEvent,
+    required TResult Function(OtpscreenresetEvent value) otpscreenresetEvent,
   }) {
     return sendOtp(this);
   }
@@ -203,6 +191,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SendOtpEvent value)? sendOtp,
     TResult? Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult? Function(OtpscreenresetEvent value)? otpscreenresetEvent,
   }) {
     return sendOtp?.call(this);
   }
@@ -212,6 +201,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SendOtpEvent value)? sendOtp,
     TResult Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult Function(OtpscreenresetEvent value)? otpscreenresetEvent,
     required TResult orElse(),
   }) {
     if (sendOtp != null) {
@@ -225,21 +215,17 @@ abstract class SendOtpEvent implements NewschemeotpEvent {
   const factory SendOtpEvent({required final String mobileNO}) =
       _$SendOtpEventImpl;
 
-  @override
   String get mobileNO;
-  @override
   @JsonKey(ignore: true)
   _$$SendOtpEventImplCopyWith<_$SendOtpEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$VerfiOtpEventImplCopyWith<$Res>
-    implements $NewschemeotpEventCopyWith<$Res> {
+abstract class _$$VerfiOtpEventImplCopyWith<$Res> {
   factory _$$VerfiOtpEventImplCopyWith(
           _$VerfiOtpEventImpl value, $Res Function(_$VerfiOtpEventImpl) then) =
       __$$VerfiOtpEventImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String mobileNO, String otp});
 }
@@ -310,6 +296,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String mobileNO) sendOtp,
     required TResult Function(String mobileNO, String otp) verfiOtpEvent,
+    required TResult Function() otpscreenresetEvent,
   }) {
     return verfiOtpEvent(mobileNO, otp);
   }
@@ -319,6 +306,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String mobileNO)? sendOtp,
     TResult? Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult? Function()? otpscreenresetEvent,
   }) {
     return verfiOtpEvent?.call(mobileNO, otp);
   }
@@ -328,6 +316,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String mobileNO)? sendOtp,
     TResult Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult Function()? otpscreenresetEvent,
     required TResult orElse(),
   }) {
     if (verfiOtpEvent != null) {
@@ -341,6 +330,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(SendOtpEvent value) sendOtp,
     required TResult Function(VerfiOtpEvent value) verfiOtpEvent,
+    required TResult Function(OtpscreenresetEvent value) otpscreenresetEvent,
   }) {
     return verfiOtpEvent(this);
   }
@@ -350,6 +340,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SendOtpEvent value)? sendOtp,
     TResult? Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult? Function(OtpscreenresetEvent value)? otpscreenresetEvent,
   }) {
     return verfiOtpEvent?.call(this);
   }
@@ -359,6 +350,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SendOtpEvent value)? sendOtp,
     TResult Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult Function(OtpscreenresetEvent value)? otpscreenresetEvent,
     required TResult orElse(),
   }) {
     if (verfiOtpEvent != null) {
@@ -373,13 +365,120 @@ abstract class VerfiOtpEvent implements NewschemeotpEvent {
       {required final String mobileNO,
       required final String otp}) = _$VerfiOtpEventImpl;
 
-  @override
   String get mobileNO;
   String get otp;
-  @override
   @JsonKey(ignore: true)
   _$$VerfiOtpEventImplCopyWith<_$VerfiOtpEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OtpscreenresetEventImplCopyWith<$Res> {
+  factory _$$OtpscreenresetEventImplCopyWith(_$OtpscreenresetEventImpl value,
+          $Res Function(_$OtpscreenresetEventImpl) then) =
+      __$$OtpscreenresetEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OtpscreenresetEventImplCopyWithImpl<$Res>
+    extends _$NewschemeotpEventCopyWithImpl<$Res, _$OtpscreenresetEventImpl>
+    implements _$$OtpscreenresetEventImplCopyWith<$Res> {
+  __$$OtpscreenresetEventImplCopyWithImpl(_$OtpscreenresetEventImpl _value,
+      $Res Function(_$OtpscreenresetEventImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OtpscreenresetEventImpl implements OtpscreenresetEvent {
+  const _$OtpscreenresetEventImpl();
+
+  @override
+  String toString() {
+    return 'NewschemeotpEvent.otpscreenresetEvent()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OtpscreenresetEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String mobileNO) sendOtp,
+    required TResult Function(String mobileNO, String otp) verfiOtpEvent,
+    required TResult Function() otpscreenresetEvent,
+  }) {
+    return otpscreenresetEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String mobileNO)? sendOtp,
+    TResult? Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult? Function()? otpscreenresetEvent,
+  }) {
+    return otpscreenresetEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String mobileNO)? sendOtp,
+    TResult Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult Function()? otpscreenresetEvent,
+    required TResult orElse(),
+  }) {
+    if (otpscreenresetEvent != null) {
+      return otpscreenresetEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SendOtpEvent value) sendOtp,
+    required TResult Function(VerfiOtpEvent value) verfiOtpEvent,
+    required TResult Function(OtpscreenresetEvent value) otpscreenresetEvent,
+  }) {
+    return otpscreenresetEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SendOtpEvent value)? sendOtp,
+    TResult? Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult? Function(OtpscreenresetEvent value)? otpscreenresetEvent,
+  }) {
+    return otpscreenresetEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SendOtpEvent value)? sendOtp,
+    TResult Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult Function(OtpscreenresetEvent value)? otpscreenresetEvent,
+    required TResult orElse(),
+  }) {
+    if (otpscreenresetEvent != null) {
+      return otpscreenresetEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OtpscreenresetEvent implements NewschemeotpEvent {
+  const factory OtpscreenresetEvent() = _$OtpscreenresetEventImpl;
 }
 
 /// @nodoc

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 
 class DocumentSelectorWidget extends StatelessWidget {
@@ -40,10 +41,11 @@ class DocumentSelectorWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: 40, right: 30),
             child: Row(
               children: [
-                const SizedBox(
-                  child: Icon(
-                    Iconsax.attach_circle,
-                    size: 20,
+                SizedBox(
+                  child: SvgPicture.asset(
+                    'assets/svg/attach.svg',
+                    height: 15.h,
+                    width: 15.w,
                   ),
                 ),
                 SizedBox(

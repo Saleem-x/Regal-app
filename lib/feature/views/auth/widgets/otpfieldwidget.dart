@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
-import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/state/bloc/bloc/newschemeotp_bloc.dart';
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
 
-// ignore: must_be_immutable
 class OtpFIeldWidget extends StatelessWidget {
-  OtpFIeldWidget({
+  const OtpFIeldWidget({
     super.key,
     required this.size,
+    this.mobNo,
   });
 
   final Size size;
+  final String? mobNo;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +25,12 @@ class OtpFIeldWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 40, right: 30),
       child: Row(
         children: [
-          const SizedBox(
-            child: Icon(Iconsax.lock),
+          SizedBox(
+            child: SvgPicture.asset(
+              'assets/svg/pin.svg',
+              height: 15.h,
+              width: 15.w,
+            ),
           ),
           SizedBox(
             width: size.width * 0.05,
@@ -48,7 +55,12 @@ class OtpFIeldWidget extends StatelessWidget {
                 if (pin.length == 4) {
                   otp = pin;
                   otpfield = pin;
-                  
+                  if (mobNo != null && mobNo!.length == 10) {
+                    context.read<NewschemeotpBloc>().add(
+                          VerfiOtpEvent(mobileNO: mobNo!, otp: otpfield),
+                        );
+                  }
+
                   pin = '';
                 } else {
                   showDialog(

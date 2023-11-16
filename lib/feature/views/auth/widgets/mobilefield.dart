@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:flutter/services.dart';
 import 'package:regal_app/feature/state/cubit/mobilevalidator/mobilevalidator_cubit.dart';
@@ -22,8 +22,12 @@ class MobileFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 40, right: 40),
       child: Row(
         children: [
-          const SizedBox(
-            child: Icon(FontAwesomeIcons.phone),
+          SizedBox(
+            child: SvgPicture.asset(
+              'assets/svg/phoneill2.svg',
+              height: 15.h,
+              width: 15.w,
+            ),
           ),
           SizedBox(
             width: size.width * 0.07,
@@ -98,7 +102,9 @@ class CustomMobileField extends StatelessWidget {
         children: [
           SizedBox(
             child: SvgPicture.asset(
-              'assets/others/history.svg',
+              'assets/svg/phoneill2.svg',
+              height: 15.h,
+              width: 15.w,
             ),
           ),
           SizedBox(
@@ -132,7 +138,10 @@ class CustomMobileField extends StatelessWidget {
                   },
                   decoration: InputDecoration(
                     hintText: 'Mobile Number',
-                    hintStyle: const TextStyle(color: Color(0xFFD1D1D1)),
+                    hintStyle: const TextStyle(
+                      color: Color(0xFFD1D1D1),
+                      fontWeight: FontWeight.w300,
+                    ),
                     isDense: false,
                     suffixIcon: state.when(
                       mobilevallidState: () {
