@@ -11,6 +11,7 @@ import 'package:regal_app/feature/state/bloc/login/login_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/state/bloc/splash/splash_bloc.dart';
 import 'package:regal_app/feature/state/cubit/mobilevalidator/mobilevalidator_cubit.dart';
+import 'package:regal_app/feature/state/cubit/otptimer/otptimer_cubit.dart';
 import 'package:regal_app/feature/state/cubit/schemeselector/schemeselector_cubit.dart';
 import 'package:regal_app/feature/views/splash/splashscreen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,8 +55,12 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getit<InstalmenthystoryBloc>(),
-          ),BlocProvider(
+          ),
+          BlocProvider(
             create: (context) => getit<NewschemeotpBloc>(),
+          ),
+          BlocProvider<OtptimerCubit>(
+            create: (context) => OtptimerCubit(),
           ),
         ],
         child: MaterialApp(

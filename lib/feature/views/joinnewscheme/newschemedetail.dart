@@ -81,16 +81,20 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                 ),
               ),
               NewSchmFieldWidget(
-                  controller: _controller,
-                  icon: 'assets/others/name.svg',
-                  title: 'Name',
-                  type: TextInputType.name),
+                controller: _controller,
+                icon: 'assets/others/name.svg',
+                title: 'Name',
+                type: TextInputType.name,
+              ),
               DobSelectorWidget(
                 controller: _dobcontroller,
               ),
               const ImageSelectorWidget(),
               Padding(
-                padding: const EdgeInsets.only(left: 80, top: 10),
+                padding: const EdgeInsets.only(
+                  left: 80,
+                  top: 10,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

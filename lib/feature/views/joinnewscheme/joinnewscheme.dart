@@ -7,10 +7,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/state/bloc/bloc/newschemeotp_bloc.dart';
+import 'package:regal_app/feature/state/cubit/otptimer/otptimer_cubit.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
 import 'package:regal_app/feature/views/auth/widgets/mobilefield.dart';
 import 'package:regal_app/feature/views/auth/widgets/otpfieldwidget.dart';
 import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
+import 'package:regal_app/feature/views/joinnewscheme/widgets/otptimer.dart';
 
 class JoinNewSchemeScreen extends StatefulWidget {
   const JoinNewSchemeScreen({super.key});
@@ -27,6 +29,7 @@ class _JoinNewSchemeScreenState extends State<JoinNewSchemeScreen> {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: kbgcolor,
       body: size.height >= 640
           ? SingleChildScrollView(child: ALLJoinScreenWidgets(size: size))
           : SingleChildScrollView(child: ALLJoinScreenWidgets(size: size)),
@@ -58,13 +61,17 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
         listener: (context, state) {
           state.when(
             otpstateinitial: () {},
-            otpSendState: () {},
+            otpSendState: () {
+              context.read<OtptimerCubit>().startTimer();
+            },
             verifiedOtpState: () {
               Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const JoinNewSchemeDetailScreen(),
-                  ));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const JoinNewSchemeDetailScreen(),
+                ),
+              );
+              otpfield = '';
             },
             facingissuestate: () {},
             otpVerificationFailed: (otpmodel) {},
@@ -105,7 +112,7 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                       Text(
                         'New Scheme',
                         style: TextStyle(
-                            color: kcolordark2,
+                            color: const Color(0xFF990000),
                             fontWeight: FontWeight.w400,
                             fontSize: 18.sp),
                       ),
@@ -138,30 +145,59 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                     size: widget.size, controller: _mobilecontroller),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      MaterialButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        color: kredbutton,
-                        onPressed: () async {
-                          if (_formkey.currentState!.validate()) {
-                            context.read<NewschemeotpBloc>().add(
-                                SendOtpEvent(mobileNO: _mobilecontroller.text));
-                          }
+                      state.when(
+                        otpstateinitial: () => const SizedBox.shrink(),
+                        otpSendState: () => const OtpTimerWidget(),
+                        verifiedOtpState: () => const SizedBox.shrink(),
+                        facingissuestate: () => const SizedBox.shrink(),
+                        otpVerificationFailed: (otpmodel) =>
+                            const SizedBox.shrink(),
+                      ),
+                      BlocBuilder<OtptimerCubit, OtptimerState>(
+                        builder: (context, otptimer) {
+                          return otptimer.time == 30
+                              ? MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  color: kredbutton,
+                                  onPressed: () async {
+                                    if (_formkey.currentState!.validate()) {
+                                      context.read<NewschemeotpBloc>().add(
+                                            SendOtpEvent(
+                                                mobileNO:
+                                                    _mobilecontroller.text),
+                                          );
+                                    }
+                                  },
+                                  child: const Text(
+                                    'Send OTP',
+                                    style: TextStyle(color: kcolorwhite),
+                                  ),
+                                )
+                              : MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(13),
+                                  ),
+                                  color: const Color(0xFFD1D1D1),
+                                  onPressed: () {},
+                                  child: const Text(
+                                    'Send OTP',
+                                    style: TextStyle(color: kcolorwhite),
+                                  ),
+                                );
                         },
-                        child: const Text(
-                          'Send OTP',
-                          style: TextStyle(color: kcolorwhite),
-                        ),
                       )
                     ],
                   ),
                 ),
-                SizedBox(height: 40.h),
+                SizedBox(
+                  height: 50.h,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Row(
@@ -176,9 +212,9 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                       Text(
                         'Verify OTP',
                         style: TextStyle(
-                            color: kcolordark2,
+                            color: const Color(0xFF990000),
                             fontWeight: FontWeight.w400,
-                            fontSize: 18.sp),
+                            fontSize: 16.sp),
                       ),
                       SizedBox(width: widget.size.width * 0.08),
                       LineWidget(

@@ -49,31 +49,39 @@ class MobileFieldWidget extends StatelessWidget {
                 LengthLimitingTextInputFormatter(10),
                 FilteringTextInputFormatter.digitsOnly
               ],
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 isDense: true,
                 prefixIcon: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('+91  ', textAlign: TextAlign.left),
+                    Text(
+                      '+91  ',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: kcolorblack.withOpacity(
+                          .5,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-                border: UnderlineInputBorder(
+                border: const UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: Color(0xFFD1D1D1),
                   ),
                 ),
-                disabledBorder: UnderlineInputBorder(
+                disabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: Color(0xFFD1D1D1),
                   ),
                 ),
-                enabledBorder: UnderlineInputBorder(
+                enabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: Color(0xFFD1D1D1),
                   ),
                 ),
-                focusedBorder: UnderlineInputBorder(
+                focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: Color(0xFFD1D1D1),
                   ),
@@ -163,7 +171,11 @@ class CustomMobileField extends StatelessWidget {
                         Text(
                           '+91  ',
                           textAlign: TextAlign.left,
-                          style: TextStyle(color: kcolorblack.withOpacity(.8)),
+                          style: TextStyle(
+                            color: kcolorblack.withOpacity(
+                              .5,
+                            ),
+                          ),
                         ),
                       ],
                     ),

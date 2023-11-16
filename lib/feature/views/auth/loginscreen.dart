@@ -28,7 +28,9 @@ class LoginScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: size.height > 640
           ? AllLoginWidgets(size: size)
-          : SingleChildScrollView(child: AllLoginWidgets(size: size)),
+          : SingleChildScrollView(
+              child: AllLoginWidgets(size: size),
+            ),
     );
   }
 }
