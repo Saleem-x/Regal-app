@@ -39,11 +39,12 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
           SizedBox(
             height: 0.h,
           ),
-          NewSchmDropDownWidget(
+          /* NewSchmDropDownWidget(
             controller: _schemectrl,
             title: 'Select Scheme',
             preicon: 'assets/others/relation.svg',
-          ),
+            ddWindget: [],
+          ), */
           SizedBox(
             height: 15.h,
           ),

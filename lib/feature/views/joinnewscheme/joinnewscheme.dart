@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/feature/state/bloc/bloc/newschemeotp_bloc.dart';
+import 'package:regal_app/feature/state/bloc/newschemeotp/newschemeotp_bloc.dart';
 import 'package:regal_app/feature/state/cubit/otptimer/otptimer_cubit.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
 import 'package:regal_app/feature/views/auth/widgets/mobilefield.dart';
@@ -60,6 +60,7 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
       child: BlocListener<NewschemeotpBloc, NewschemeotpState>(
         listener: (context, state) {
           state.when(
+            otpSendSuccess: () {},
             otpstateinitial: () {},
             otpSendState: () {
               context.read<OtptimerCubit>().startTimer();
@@ -68,13 +69,38 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const JoinNewSchemeDetailScreen(),
+                  builder: (context) => JoinNewSchemeDetailScreen(
+                      mobilenumber: _mobilecontroller.text),
                 ),
               );
               otpfield = '';
             },
             facingissuestate: () {},
-            otpVerificationFailed: (otpmodel) {},
+            otpVerificationFailed: (otpmodel) {
+              showCupertinoDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CupertinoAlertDialog(
+                    title: const Text('Alert'),
+                    content: Text(otpmodel),
+                    actions: <Widget>[
+                      /*  CupertinoDialogAction(
+                          child: const Text("Cancel"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ), */
+                      CupertinoDialogAction(
+                        child: const Text("OK"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
           );
         },
         child: BlocBuilder<NewschemeotpBloc, NewschemeotpState>(
@@ -152,46 +178,130 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                       state.when(
                         otpstateinitial: () => const SizedBox.shrink(),
                         otpSendState: () => const OtpTimerWidget(),
+                        otpSendSuccess: () => const OtpTimerWidget(),
                         verifiedOtpState: () => const SizedBox.shrink(),
                         facingissuestate: () => const SizedBox.shrink(),
                         otpVerificationFailed: (otpmodel) =>
                             const SizedBox.shrink(),
                       ),
-                      BlocBuilder<OtptimerCubit, OtptimerState>(
-                        builder: (context, otptimer) {
-                          return otptimer.time == 30
-                              ? MaterialButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  color: kredbutton,
-                                  onPressed: () async {
-                                    if (_formkey.currentState!.validate()) {
-                                      context.read<NewschemeotpBloc>().add(
-                                            SendOtpEvent(
-                                                mobileNO:
-                                                    _mobilecontroller.text),
-                                          );
-                                    }
-                                  },
-                                  child: const Text(
-                                    'Send OTP',
-                                    style: TextStyle(color: kcolorwhite),
-                                  ),
-                                )
-                              : MaterialButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(13),
-                                  ),
-                                  color: const Color(0xFFD1D1D1),
-                                  onPressed: () {},
-                                  child: const Text(
-                                    'Send OTP',
-                                    style: TextStyle(color: kcolorwhite),
-                                  ),
-                                );
-                        },
-                      )
+                      state.when(
+                        otpstateinitial: () => MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          color: kredbutton,
+                          onPressed: () async {
+                            if (_formkey.currentState!.validate()) {
+                              context
+                                  .read<NewschemeotpBloc>()
+                                  .add(const OtptimerStateEvent());
+                              context.read<NewschemeotpBloc>().add(
+                                    SendOtpEvent(
+                                        mobileNO: _mobilecontroller.text),
+                                  );
+                            }
+                          },
+                          child: const Text(
+                            'Send OTP',
+                            style: TextStyle(color: kcolorwhite),
+                          ),
+                        ),
+                        otpSendState: () => MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(13),
+                          ),
+                          color: const Color(0xFFD1D1D1),
+                          onPressed: () {},
+                          child: const Text(
+                            'Send OTP',
+                            style: TextStyle(color: kcolorwhite),
+                          ),
+                        ),
+                        otpSendSuccess: () => MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          color: kredbutton,
+                          onPressed: () async {
+                            if (_formkey.currentState!.validate()) {
+                              context
+                                  .read<NewschemeotpBloc>()
+                                  .add(const OtptimerStateEvent());
+                              context.read<NewschemeotpBloc>().add(
+                                    SendOtpEvent(
+                                        mobileNO: _mobilecontroller.text),
+                                  );
+                            }
+                          },
+                          child: const Text(
+                            'Send OTP',
+                            style: TextStyle(color: kcolorwhite),
+                          ),
+                        ),
+                        verifiedOtpState: () => MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          color: kredbutton,
+                          onPressed: () async {
+                            if (_formkey.currentState!.validate()) {
+                              context
+                                  .read<NewschemeotpBloc>()
+                                  .add(const OtptimerStateEvent());
+                              context.read<NewschemeotpBloc>().add(
+                                    SendOtpEvent(
+                                        mobileNO: _mobilecontroller.text),
+                                  );
+                            }
+                          },
+                          child: const Text(
+                            'Send OTP',
+                            style: TextStyle(color: kcolorwhite),
+                          ),
+                        ),
+                        facingissuestate: () => MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          color: kredbutton,
+                          onPressed: () async {
+                            if (_formkey.currentState!.validate()) {
+                              context
+                                  .read<NewschemeotpBloc>()
+                                  .add(const OtptimerStateEvent());
+                              context.read<NewschemeotpBloc>().add(
+                                    SendOtpEvent(
+                                        mobileNO: _mobilecontroller.text),
+                                  );
+                            }
+                          },
+                          child: const Text(
+                            'Send OTP',
+                            style: TextStyle(color: kcolorwhite),
+                          ),
+                        ),
+                        otpVerificationFailed: (otpmodel) => MaterialButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          color: kredbutton,
+                          onPressed: () async {
+                            if (_formkey.currentState!.validate()) {
+                              context
+                                  .read<NewschemeotpBloc>()
+                                  .add(const OtptimerStateEvent());
+                              context.read<NewschemeotpBloc>().add(
+                                    SendOtpEvent(
+                                        mobileNO: _mobilecontroller.text),
+                                  );
+                            }
+                          },
+                          child: const Text(
+                            'Send OTP',
+                            style: TextStyle(color: kcolorwhite),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -251,6 +361,7 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                   otpSendState: () => const SizedBox.shrink(),
                   verifiedOtpState: () => const SizedBox.shrink(),
                   facingissuestate: () => const SizedBox.shrink(),
+                  otpSendSuccess: () => const SizedBox.shrink(),
                   otpVerificationFailed: (otpmodel) => Padding(
                     padding: const EdgeInsets.only(left: 30, top: 10),
                     child: Row(
@@ -280,65 +391,65 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                     minWidth: widget.size.width,
                     onPressed: () async {
                       if (_formkey.currentState!.validate()) {
-                        if (otpfield.length == 4) {
-                          logger.e(otpfield);
-                          context.read<NewschemeotpBloc>().add(
-                                VerfiOtpEvent(
-                                    mobileNO: _mobilecontroller.text,
-                                    otp: otpfield),
-                              );
-                        } else {
-                          if (!Platform.isAndroid) {
-                            showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                backgroundColor: kcolorwhite,
-                                title: const Text("Alert"),
-                                content: const Text("please enter 4 Digit OTP"),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Ok'),
-                                  )
-                                ],
-                              ),
-                            );
-                          } else {
-                            showCupertinoDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return CupertinoAlertDialog(
-                                  title: const Text("Alert"),
-                                  content: const Text(
-                                      "please enter Your Four Digit OTP"),
-                                  actions: <Widget>[
-                                    /* CupertinoDialogAction(
-                                                child: const Text("Cancel"),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ), */
-                                    CupertinoDialogAction(
-                                      child: const Text("OK"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
-                        }
+                        //   if (otpfield.length == 4) {
+                        //     logger.e(otpfield);
+                        //     context.read<NewschemeotpBloc>().add(
+                        //           VerfiOtpEvent(
+                        //               mobileNO: _mobilecontroller.text,
+                        //               otp: otpfield),
+                        //         );
+                        //   } else {
+                        //     if (!Platform.isAndroid) {
+                        //       showDialog(
+                        //         context: context,
+                        //         builder: (context) => AlertDialog(
+                        //           backgroundColor: kcolorwhite,
+                        //           title: const Text("Alert"),
+                        //           content: const Text("please enter 4 Digit OTP"),
+                        //           actions: [
+                        //             TextButton(
+                        //               onPressed: () {
+                        //                 Navigator.pop(context);
+                        //               },
+                        //               child: const Text('Ok'),
+                        //             )
+                        //           ],
+                        //         ),
+                        //       );
+                        //     } else {
+                        //       showCupertinoDialog(
+                        //         context: context,
+                        //         builder: (BuildContext context) {
+                        //           return CupertinoAlertDialog(
+                        //             title: const Text("Alert"),
+                        //             content: const Text(
+                        //                 "please enter Your Four Digit OTP"),
+                        //             actions: <Widget>[
+                        //               /* CupertinoDialogAction(
+                        //                           child: const Text("Cancel"),
+                        //                           onPressed: () {
+                        //                             Navigator.of(context).pop();
+                        //                           },
+                        //                         ), */
+                        //               CupertinoDialogAction(
+                        //                 child: const Text("OK"),
+                        //                 onPressed: () {
+                        //                   Navigator.of(context).pop();
+                        //                 },
+                        //               ),
+                        //             ],
+                        //           );
+                        //         },
+                        //       );
+                        //     }
+                        //   }
                       }
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) =>
-                      //           const JoinNewSchemeDetailScreen(),
-                      //     ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => JoinNewSchemeDetailScreen(
+                                mobilenumber: _mobilecontroller.text),
+                          ));
                     },
                     child: Text(
                       'Proceed',

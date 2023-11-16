@@ -4,6 +4,8 @@ part of 'newschemeotp_bloc.dart';
 class NewschemeotpState with _$NewschemeotpState {
   const factory NewschemeotpState.otpstateinitial() = Otpstateinitial;
   const factory NewschemeotpState.otpSendState() = OtpSendState;
+  const factory NewschemeotpState.otpSendSuccess() = OtpSendSuccess;
+
   const factory NewschemeotpState.verifiedOtpState() = VerifyOtpState;
 
   const factory NewschemeotpState.facingissuestate() = Facingissuestate;

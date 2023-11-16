@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/feature/state/bloc/bloc/newschemeotp_bloc.dart';
+import 'package:regal_app/feature/state/bloc/newschemeotp/newschemeotp_bloc.dart';
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
 

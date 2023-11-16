@@ -18,14 +18,18 @@ class NewschemeotpBloc extends Bloc<NewschemeotpEvent, NewschemeotpState> {
     on<SendOtpEvent>((event, emit) async {
       Either<MainFailures, GenerateOtpModel> sendotp =
           await otprepo.sendOtp(event.mobileNO);
+      emit(const OtpSendState());
 
-      emit(sendotp.fold(
+      emit(
+        sendotp.fold(
           (l) => l.when(
-                clientfailure: () => const Facingissuestate(),
-                serverfailure: () => const Facingissuestate(),
-                networkerror: (error) => OtpVerificationFailed(otpmodel: error),
-              ),
-          (r) => const OtpSendState()));
+            clientfailure: () => const Facingissuestate(),
+            serverfailure: () => const Facingissuestate(),
+            networkerror: (error) => OtpVerificationFailed(otpmodel: error),
+          ),
+          (r) => const OtpSendSuccess(),
+        ),
+      );
     });
     on<VerfiOtpEvent>((event, emit) async {
       Either<MainFailures, VerifyOtpModel> sendotp =
@@ -42,6 +46,10 @@ class NewschemeotpBloc extends Bloc<NewschemeotpEvent, NewschemeotpState> {
 
     on<OtpscreenresetEvent>((event, emit) {
       emit(NewschemeotpState.initial());
+    });
+
+    on<OtptimerStateEvent>((event, emit) {
+      return emit(const OtpSendState());
     });
   }
 }

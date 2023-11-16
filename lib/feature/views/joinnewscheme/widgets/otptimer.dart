@@ -11,7 +11,7 @@ class OtpTimerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OtptimerCubit, OtptimerState>(
       builder: (context, state) {
-        return state.time == 30
+        return state.time == 30 || state.time == 0
             ? const SizedBox.shrink()
             : Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),

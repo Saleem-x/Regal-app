@@ -20,6 +20,7 @@ mixin _$NewschemeotpEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String mobileNO) sendOtp,
     required TResult Function(String mobileNO, String otp) verfiOtpEvent,
+    required TResult Function() otptimerStateEvent,
     required TResult Function() otpscreenresetEvent,
   }) =>
       throw _privateConstructorUsedError;
@@ -27,6 +28,7 @@ mixin _$NewschemeotpEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String mobileNO)? sendOtp,
     TResult? Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult? Function()? otptimerStateEvent,
     TResult? Function()? otpscreenresetEvent,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,6 +36,7 @@ mixin _$NewschemeotpEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String mobileNO)? sendOtp,
     TResult Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult Function()? otptimerStateEvent,
     TResult Function()? otpscreenresetEvent,
     required TResult orElse(),
   }) =>
@@ -42,6 +45,7 @@ mixin _$NewschemeotpEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(SendOtpEvent value) sendOtp,
     required TResult Function(VerfiOtpEvent value) verfiOtpEvent,
+    required TResult Function(OtptimerStateEvent value) otptimerStateEvent,
     required TResult Function(OtpscreenresetEvent value) otpscreenresetEvent,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +53,7 @@ mixin _$NewschemeotpEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SendOtpEvent value)? sendOtp,
     TResult? Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult? Function(OtptimerStateEvent value)? otptimerStateEvent,
     TResult? Function(OtpscreenresetEvent value)? otpscreenresetEvent,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +61,7 @@ mixin _$NewschemeotpEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SendOtpEvent value)? sendOtp,
     TResult Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult Function(OtptimerStateEvent value)? otptimerStateEvent,
     TResult Function(OtpscreenresetEvent value)? otpscreenresetEvent,
     required TResult orElse(),
   }) =>
@@ -147,6 +153,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String mobileNO) sendOtp,
     required TResult Function(String mobileNO, String otp) verfiOtpEvent,
+    required TResult Function() otptimerStateEvent,
     required TResult Function() otpscreenresetEvent,
   }) {
     return sendOtp(mobileNO);
@@ -157,6 +164,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String mobileNO)? sendOtp,
     TResult? Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult? Function()? otptimerStateEvent,
     TResult? Function()? otpscreenresetEvent,
   }) {
     return sendOtp?.call(mobileNO);
@@ -167,6 +175,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String mobileNO)? sendOtp,
     TResult Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult Function()? otptimerStateEvent,
     TResult Function()? otpscreenresetEvent,
     required TResult orElse(),
   }) {
@@ -181,6 +190,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(SendOtpEvent value) sendOtp,
     required TResult Function(VerfiOtpEvent value) verfiOtpEvent,
+    required TResult Function(OtptimerStateEvent value) otptimerStateEvent,
     required TResult Function(OtpscreenresetEvent value) otpscreenresetEvent,
   }) {
     return sendOtp(this);
@@ -191,6 +201,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SendOtpEvent value)? sendOtp,
     TResult? Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult? Function(OtptimerStateEvent value)? otptimerStateEvent,
     TResult? Function(OtpscreenresetEvent value)? otpscreenresetEvent,
   }) {
     return sendOtp?.call(this);
@@ -201,6 +212,7 @@ class _$SendOtpEventImpl implements SendOtpEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SendOtpEvent value)? sendOtp,
     TResult Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult Function(OtptimerStateEvent value)? otptimerStateEvent,
     TResult Function(OtpscreenresetEvent value)? otpscreenresetEvent,
     required TResult orElse(),
   }) {
@@ -296,6 +308,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String mobileNO) sendOtp,
     required TResult Function(String mobileNO, String otp) verfiOtpEvent,
+    required TResult Function() otptimerStateEvent,
     required TResult Function() otpscreenresetEvent,
   }) {
     return verfiOtpEvent(mobileNO, otp);
@@ -306,6 +319,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String mobileNO)? sendOtp,
     TResult? Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult? Function()? otptimerStateEvent,
     TResult? Function()? otpscreenresetEvent,
   }) {
     return verfiOtpEvent?.call(mobileNO, otp);
@@ -316,6 +330,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String mobileNO)? sendOtp,
     TResult Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult Function()? otptimerStateEvent,
     TResult Function()? otpscreenresetEvent,
     required TResult orElse(),
   }) {
@@ -330,6 +345,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(SendOtpEvent value) sendOtp,
     required TResult Function(VerfiOtpEvent value) verfiOtpEvent,
+    required TResult Function(OtptimerStateEvent value) otptimerStateEvent,
     required TResult Function(OtpscreenresetEvent value) otpscreenresetEvent,
   }) {
     return verfiOtpEvent(this);
@@ -340,6 +356,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SendOtpEvent value)? sendOtp,
     TResult? Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult? Function(OtptimerStateEvent value)? otptimerStateEvent,
     TResult? Function(OtpscreenresetEvent value)? otpscreenresetEvent,
   }) {
     return verfiOtpEvent?.call(this);
@@ -350,6 +367,7 @@ class _$VerfiOtpEventImpl implements VerfiOtpEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SendOtpEvent value)? sendOtp,
     TResult Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult Function(OtptimerStateEvent value)? otptimerStateEvent,
     TResult Function(OtpscreenresetEvent value)? otpscreenresetEvent,
     required TResult orElse(),
   }) {
@@ -370,6 +388,120 @@ abstract class VerfiOtpEvent implements NewschemeotpEvent {
   @JsonKey(ignore: true)
   _$$VerfiOtpEventImplCopyWith<_$VerfiOtpEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OtptimerStateEventImplCopyWith<$Res> {
+  factory _$$OtptimerStateEventImplCopyWith(_$OtptimerStateEventImpl value,
+          $Res Function(_$OtptimerStateEventImpl) then) =
+      __$$OtptimerStateEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OtptimerStateEventImplCopyWithImpl<$Res>
+    extends _$NewschemeotpEventCopyWithImpl<$Res, _$OtptimerStateEventImpl>
+    implements _$$OtptimerStateEventImplCopyWith<$Res> {
+  __$$OtptimerStateEventImplCopyWithImpl(_$OtptimerStateEventImpl _value,
+      $Res Function(_$OtptimerStateEventImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OtptimerStateEventImpl implements OtptimerStateEvent {
+  const _$OtptimerStateEventImpl();
+
+  @override
+  String toString() {
+    return 'NewschemeotpEvent.otptimerStateEvent()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OtptimerStateEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String mobileNO) sendOtp,
+    required TResult Function(String mobileNO, String otp) verfiOtpEvent,
+    required TResult Function() otptimerStateEvent,
+    required TResult Function() otpscreenresetEvent,
+  }) {
+    return otptimerStateEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String mobileNO)? sendOtp,
+    TResult? Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult? Function()? otptimerStateEvent,
+    TResult? Function()? otpscreenresetEvent,
+  }) {
+    return otptimerStateEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String mobileNO)? sendOtp,
+    TResult Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult Function()? otptimerStateEvent,
+    TResult Function()? otpscreenresetEvent,
+    required TResult orElse(),
+  }) {
+    if (otptimerStateEvent != null) {
+      return otptimerStateEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SendOtpEvent value) sendOtp,
+    required TResult Function(VerfiOtpEvent value) verfiOtpEvent,
+    required TResult Function(OtptimerStateEvent value) otptimerStateEvent,
+    required TResult Function(OtpscreenresetEvent value) otpscreenresetEvent,
+  }) {
+    return otptimerStateEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SendOtpEvent value)? sendOtp,
+    TResult? Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult? Function(OtptimerStateEvent value)? otptimerStateEvent,
+    TResult? Function(OtpscreenresetEvent value)? otpscreenresetEvent,
+  }) {
+    return otptimerStateEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SendOtpEvent value)? sendOtp,
+    TResult Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult Function(OtptimerStateEvent value)? otptimerStateEvent,
+    TResult Function(OtpscreenresetEvent value)? otpscreenresetEvent,
+    required TResult orElse(),
+  }) {
+    if (otptimerStateEvent != null) {
+      return otptimerStateEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OtptimerStateEvent implements NewschemeotpEvent {
+  const factory OtptimerStateEvent() = _$OtptimerStateEventImpl;
 }
 
 /// @nodoc
@@ -413,6 +545,7 @@ class _$OtpscreenresetEventImpl implements OtpscreenresetEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String mobileNO) sendOtp,
     required TResult Function(String mobileNO, String otp) verfiOtpEvent,
+    required TResult Function() otptimerStateEvent,
     required TResult Function() otpscreenresetEvent,
   }) {
     return otpscreenresetEvent();
@@ -423,6 +556,7 @@ class _$OtpscreenresetEventImpl implements OtpscreenresetEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String mobileNO)? sendOtp,
     TResult? Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult? Function()? otptimerStateEvent,
     TResult? Function()? otpscreenresetEvent,
   }) {
     return otpscreenresetEvent?.call();
@@ -433,6 +567,7 @@ class _$OtpscreenresetEventImpl implements OtpscreenresetEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String mobileNO)? sendOtp,
     TResult Function(String mobileNO, String otp)? verfiOtpEvent,
+    TResult Function()? otptimerStateEvent,
     TResult Function()? otpscreenresetEvent,
     required TResult orElse(),
   }) {
@@ -447,6 +582,7 @@ class _$OtpscreenresetEventImpl implements OtpscreenresetEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(SendOtpEvent value) sendOtp,
     required TResult Function(VerfiOtpEvent value) verfiOtpEvent,
+    required TResult Function(OtptimerStateEvent value) otptimerStateEvent,
     required TResult Function(OtpscreenresetEvent value) otpscreenresetEvent,
   }) {
     return otpscreenresetEvent(this);
@@ -457,6 +593,7 @@ class _$OtpscreenresetEventImpl implements OtpscreenresetEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SendOtpEvent value)? sendOtp,
     TResult? Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult? Function(OtptimerStateEvent value)? otptimerStateEvent,
     TResult? Function(OtpscreenresetEvent value)? otpscreenresetEvent,
   }) {
     return otpscreenresetEvent?.call(this);
@@ -467,6 +604,7 @@ class _$OtpscreenresetEventImpl implements OtpscreenresetEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SendOtpEvent value)? sendOtp,
     TResult Function(VerfiOtpEvent value)? verfiOtpEvent,
+    TResult Function(OtptimerStateEvent value)? otptimerStateEvent,
     TResult Function(OtpscreenresetEvent value)? otpscreenresetEvent,
     required TResult orElse(),
   }) {
@@ -487,6 +625,7 @@ mixin _$NewschemeotpState {
   TResult when<TResult extends Object?>({
     required TResult Function() otpstateinitial,
     required TResult Function() otpSendState,
+    required TResult Function() otpSendSuccess,
     required TResult Function() verifiedOtpState,
     required TResult Function() facingissuestate,
     required TResult Function(String otpmodel) otpVerificationFailed,
@@ -496,6 +635,7 @@ mixin _$NewschemeotpState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? otpstateinitial,
     TResult? Function()? otpSendState,
+    TResult? Function()? otpSendSuccess,
     TResult? Function()? verifiedOtpState,
     TResult? Function()? facingissuestate,
     TResult? Function(String otpmodel)? otpVerificationFailed,
@@ -505,6 +645,7 @@ mixin _$NewschemeotpState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? otpstateinitial,
     TResult Function()? otpSendState,
+    TResult Function()? otpSendSuccess,
     TResult Function()? verifiedOtpState,
     TResult Function()? facingissuestate,
     TResult Function(String otpmodel)? otpVerificationFailed,
@@ -515,6 +656,7 @@ mixin _$NewschemeotpState {
   TResult map<TResult extends Object?>({
     required TResult Function(Otpstateinitial value) otpstateinitial,
     required TResult Function(OtpSendState value) otpSendState,
+    required TResult Function(OtpSendSuccess value) otpSendSuccess,
     required TResult Function(VerifyOtpState value) verifiedOtpState,
     required TResult Function(Facingissuestate value) facingissuestate,
     required TResult Function(OtpVerificationFailed value)
@@ -525,6 +667,7 @@ mixin _$NewschemeotpState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Otpstateinitial value)? otpstateinitial,
     TResult? Function(OtpSendState value)? otpSendState,
+    TResult? Function(OtpSendSuccess value)? otpSendSuccess,
     TResult? Function(VerifyOtpState value)? verifiedOtpState,
     TResult? Function(Facingissuestate value)? facingissuestate,
     TResult? Function(OtpVerificationFailed value)? otpVerificationFailed,
@@ -534,6 +677,7 @@ mixin _$NewschemeotpState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Otpstateinitial value)? otpstateinitial,
     TResult Function(OtpSendState value)? otpSendState,
+    TResult Function(OtpSendSuccess value)? otpSendSuccess,
     TResult Function(VerifyOtpState value)? verifiedOtpState,
     TResult Function(Facingissuestate value)? facingissuestate,
     TResult Function(OtpVerificationFailed value)? otpVerificationFailed,
@@ -600,6 +744,7 @@ class _$OtpstateinitialImpl implements Otpstateinitial {
   TResult when<TResult extends Object?>({
     required TResult Function() otpstateinitial,
     required TResult Function() otpSendState,
+    required TResult Function() otpSendSuccess,
     required TResult Function() verifiedOtpState,
     required TResult Function() facingissuestate,
     required TResult Function(String otpmodel) otpVerificationFailed,
@@ -612,6 +757,7 @@ class _$OtpstateinitialImpl implements Otpstateinitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? otpstateinitial,
     TResult? Function()? otpSendState,
+    TResult? Function()? otpSendSuccess,
     TResult? Function()? verifiedOtpState,
     TResult? Function()? facingissuestate,
     TResult? Function(String otpmodel)? otpVerificationFailed,
@@ -624,6 +770,7 @@ class _$OtpstateinitialImpl implements Otpstateinitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? otpstateinitial,
     TResult Function()? otpSendState,
+    TResult Function()? otpSendSuccess,
     TResult Function()? verifiedOtpState,
     TResult Function()? facingissuestate,
     TResult Function(String otpmodel)? otpVerificationFailed,
@@ -640,6 +787,7 @@ class _$OtpstateinitialImpl implements Otpstateinitial {
   TResult map<TResult extends Object?>({
     required TResult Function(Otpstateinitial value) otpstateinitial,
     required TResult Function(OtpSendState value) otpSendState,
+    required TResult Function(OtpSendSuccess value) otpSendSuccess,
     required TResult Function(VerifyOtpState value) verifiedOtpState,
     required TResult Function(Facingissuestate value) facingissuestate,
     required TResult Function(OtpVerificationFailed value)
@@ -653,6 +801,7 @@ class _$OtpstateinitialImpl implements Otpstateinitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Otpstateinitial value)? otpstateinitial,
     TResult? Function(OtpSendState value)? otpSendState,
+    TResult? Function(OtpSendSuccess value)? otpSendSuccess,
     TResult? Function(VerifyOtpState value)? verifiedOtpState,
     TResult? Function(Facingissuestate value)? facingissuestate,
     TResult? Function(OtpVerificationFailed value)? otpVerificationFailed,
@@ -665,6 +814,7 @@ class _$OtpstateinitialImpl implements Otpstateinitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Otpstateinitial value)? otpstateinitial,
     TResult Function(OtpSendState value)? otpSendState,
+    TResult Function(OtpSendSuccess value)? otpSendSuccess,
     TResult Function(VerifyOtpState value)? verifiedOtpState,
     TResult Function(Facingissuestate value)? facingissuestate,
     TResult Function(OtpVerificationFailed value)? otpVerificationFailed,
@@ -721,6 +871,7 @@ class _$OtpSendStateImpl implements OtpSendState {
   TResult when<TResult extends Object?>({
     required TResult Function() otpstateinitial,
     required TResult Function() otpSendState,
+    required TResult Function() otpSendSuccess,
     required TResult Function() verifiedOtpState,
     required TResult Function() facingissuestate,
     required TResult Function(String otpmodel) otpVerificationFailed,
@@ -733,6 +884,7 @@ class _$OtpSendStateImpl implements OtpSendState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? otpstateinitial,
     TResult? Function()? otpSendState,
+    TResult? Function()? otpSendSuccess,
     TResult? Function()? verifiedOtpState,
     TResult? Function()? facingissuestate,
     TResult? Function(String otpmodel)? otpVerificationFailed,
@@ -745,6 +897,7 @@ class _$OtpSendStateImpl implements OtpSendState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? otpstateinitial,
     TResult Function()? otpSendState,
+    TResult Function()? otpSendSuccess,
     TResult Function()? verifiedOtpState,
     TResult Function()? facingissuestate,
     TResult Function(String otpmodel)? otpVerificationFailed,
@@ -761,6 +914,7 @@ class _$OtpSendStateImpl implements OtpSendState {
   TResult map<TResult extends Object?>({
     required TResult Function(Otpstateinitial value) otpstateinitial,
     required TResult Function(OtpSendState value) otpSendState,
+    required TResult Function(OtpSendSuccess value) otpSendSuccess,
     required TResult Function(VerifyOtpState value) verifiedOtpState,
     required TResult Function(Facingissuestate value) facingissuestate,
     required TResult Function(OtpVerificationFailed value)
@@ -774,6 +928,7 @@ class _$OtpSendStateImpl implements OtpSendState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Otpstateinitial value)? otpstateinitial,
     TResult? Function(OtpSendState value)? otpSendState,
+    TResult? Function(OtpSendSuccess value)? otpSendSuccess,
     TResult? Function(VerifyOtpState value)? verifiedOtpState,
     TResult? Function(Facingissuestate value)? facingissuestate,
     TResult? Function(OtpVerificationFailed value)? otpVerificationFailed,
@@ -786,6 +941,7 @@ class _$OtpSendStateImpl implements OtpSendState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Otpstateinitial value)? otpstateinitial,
     TResult Function(OtpSendState value)? otpSendState,
+    TResult Function(OtpSendSuccess value)? otpSendSuccess,
     TResult Function(VerifyOtpState value)? verifiedOtpState,
     TResult Function(Facingissuestate value)? facingissuestate,
     TResult Function(OtpVerificationFailed value)? otpVerificationFailed,
@@ -800,6 +956,133 @@ class _$OtpSendStateImpl implements OtpSendState {
 
 abstract class OtpSendState implements NewschemeotpState {
   const factory OtpSendState() = _$OtpSendStateImpl;
+}
+
+/// @nodoc
+abstract class _$$OtpSendSuccessImplCopyWith<$Res> {
+  factory _$$OtpSendSuccessImplCopyWith(_$OtpSendSuccessImpl value,
+          $Res Function(_$OtpSendSuccessImpl) then) =
+      __$$OtpSendSuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OtpSendSuccessImplCopyWithImpl<$Res>
+    extends _$NewschemeotpStateCopyWithImpl<$Res, _$OtpSendSuccessImpl>
+    implements _$$OtpSendSuccessImplCopyWith<$Res> {
+  __$$OtpSendSuccessImplCopyWithImpl(
+      _$OtpSendSuccessImpl _value, $Res Function(_$OtpSendSuccessImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OtpSendSuccessImpl implements OtpSendSuccess {
+  const _$OtpSendSuccessImpl();
+
+  @override
+  String toString() {
+    return 'NewschemeotpState.otpSendSuccess()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OtpSendSuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() otpstateinitial,
+    required TResult Function() otpSendState,
+    required TResult Function() otpSendSuccess,
+    required TResult Function() verifiedOtpState,
+    required TResult Function() facingissuestate,
+    required TResult Function(String otpmodel) otpVerificationFailed,
+  }) {
+    return otpSendSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? otpstateinitial,
+    TResult? Function()? otpSendState,
+    TResult? Function()? otpSendSuccess,
+    TResult? Function()? verifiedOtpState,
+    TResult? Function()? facingissuestate,
+    TResult? Function(String otpmodel)? otpVerificationFailed,
+  }) {
+    return otpSendSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? otpstateinitial,
+    TResult Function()? otpSendState,
+    TResult Function()? otpSendSuccess,
+    TResult Function()? verifiedOtpState,
+    TResult Function()? facingissuestate,
+    TResult Function(String otpmodel)? otpVerificationFailed,
+    required TResult orElse(),
+  }) {
+    if (otpSendSuccess != null) {
+      return otpSendSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Otpstateinitial value) otpstateinitial,
+    required TResult Function(OtpSendState value) otpSendState,
+    required TResult Function(OtpSendSuccess value) otpSendSuccess,
+    required TResult Function(VerifyOtpState value) verifiedOtpState,
+    required TResult Function(Facingissuestate value) facingissuestate,
+    required TResult Function(OtpVerificationFailed value)
+        otpVerificationFailed,
+  }) {
+    return otpSendSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Otpstateinitial value)? otpstateinitial,
+    TResult? Function(OtpSendState value)? otpSendState,
+    TResult? Function(OtpSendSuccess value)? otpSendSuccess,
+    TResult? Function(VerifyOtpState value)? verifiedOtpState,
+    TResult? Function(Facingissuestate value)? facingissuestate,
+    TResult? Function(OtpVerificationFailed value)? otpVerificationFailed,
+  }) {
+    return otpSendSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Otpstateinitial value)? otpstateinitial,
+    TResult Function(OtpSendState value)? otpSendState,
+    TResult Function(OtpSendSuccess value)? otpSendSuccess,
+    TResult Function(VerifyOtpState value)? verifiedOtpState,
+    TResult Function(Facingissuestate value)? facingissuestate,
+    TResult Function(OtpVerificationFailed value)? otpVerificationFailed,
+    required TResult orElse(),
+  }) {
+    if (otpSendSuccess != null) {
+      return otpSendSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OtpSendSuccess implements NewschemeotpState {
+  const factory OtpSendSuccess() = _$OtpSendSuccessImpl;
 }
 
 /// @nodoc
@@ -842,6 +1125,7 @@ class _$VerifyOtpStateImpl implements VerifyOtpState {
   TResult when<TResult extends Object?>({
     required TResult Function() otpstateinitial,
     required TResult Function() otpSendState,
+    required TResult Function() otpSendSuccess,
     required TResult Function() verifiedOtpState,
     required TResult Function() facingissuestate,
     required TResult Function(String otpmodel) otpVerificationFailed,
@@ -854,6 +1138,7 @@ class _$VerifyOtpStateImpl implements VerifyOtpState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? otpstateinitial,
     TResult? Function()? otpSendState,
+    TResult? Function()? otpSendSuccess,
     TResult? Function()? verifiedOtpState,
     TResult? Function()? facingissuestate,
     TResult? Function(String otpmodel)? otpVerificationFailed,
@@ -866,6 +1151,7 @@ class _$VerifyOtpStateImpl implements VerifyOtpState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? otpstateinitial,
     TResult Function()? otpSendState,
+    TResult Function()? otpSendSuccess,
     TResult Function()? verifiedOtpState,
     TResult Function()? facingissuestate,
     TResult Function(String otpmodel)? otpVerificationFailed,
@@ -882,6 +1168,7 @@ class _$VerifyOtpStateImpl implements VerifyOtpState {
   TResult map<TResult extends Object?>({
     required TResult Function(Otpstateinitial value) otpstateinitial,
     required TResult Function(OtpSendState value) otpSendState,
+    required TResult Function(OtpSendSuccess value) otpSendSuccess,
     required TResult Function(VerifyOtpState value) verifiedOtpState,
     required TResult Function(Facingissuestate value) facingissuestate,
     required TResult Function(OtpVerificationFailed value)
@@ -895,6 +1182,7 @@ class _$VerifyOtpStateImpl implements VerifyOtpState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Otpstateinitial value)? otpstateinitial,
     TResult? Function(OtpSendState value)? otpSendState,
+    TResult? Function(OtpSendSuccess value)? otpSendSuccess,
     TResult? Function(VerifyOtpState value)? verifiedOtpState,
     TResult? Function(Facingissuestate value)? facingissuestate,
     TResult? Function(OtpVerificationFailed value)? otpVerificationFailed,
@@ -907,6 +1195,7 @@ class _$VerifyOtpStateImpl implements VerifyOtpState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Otpstateinitial value)? otpstateinitial,
     TResult Function(OtpSendState value)? otpSendState,
+    TResult Function(OtpSendSuccess value)? otpSendSuccess,
     TResult Function(VerifyOtpState value)? verifiedOtpState,
     TResult Function(Facingissuestate value)? facingissuestate,
     TResult Function(OtpVerificationFailed value)? otpVerificationFailed,
@@ -963,6 +1252,7 @@ class _$FacingissuestateImpl implements Facingissuestate {
   TResult when<TResult extends Object?>({
     required TResult Function() otpstateinitial,
     required TResult Function() otpSendState,
+    required TResult Function() otpSendSuccess,
     required TResult Function() verifiedOtpState,
     required TResult Function() facingissuestate,
     required TResult Function(String otpmodel) otpVerificationFailed,
@@ -975,6 +1265,7 @@ class _$FacingissuestateImpl implements Facingissuestate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? otpstateinitial,
     TResult? Function()? otpSendState,
+    TResult? Function()? otpSendSuccess,
     TResult? Function()? verifiedOtpState,
     TResult? Function()? facingissuestate,
     TResult? Function(String otpmodel)? otpVerificationFailed,
@@ -987,6 +1278,7 @@ class _$FacingissuestateImpl implements Facingissuestate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? otpstateinitial,
     TResult Function()? otpSendState,
+    TResult Function()? otpSendSuccess,
     TResult Function()? verifiedOtpState,
     TResult Function()? facingissuestate,
     TResult Function(String otpmodel)? otpVerificationFailed,
@@ -1003,6 +1295,7 @@ class _$FacingissuestateImpl implements Facingissuestate {
   TResult map<TResult extends Object?>({
     required TResult Function(Otpstateinitial value) otpstateinitial,
     required TResult Function(OtpSendState value) otpSendState,
+    required TResult Function(OtpSendSuccess value) otpSendSuccess,
     required TResult Function(VerifyOtpState value) verifiedOtpState,
     required TResult Function(Facingissuestate value) facingissuestate,
     required TResult Function(OtpVerificationFailed value)
@@ -1016,6 +1309,7 @@ class _$FacingissuestateImpl implements Facingissuestate {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Otpstateinitial value)? otpstateinitial,
     TResult? Function(OtpSendState value)? otpSendState,
+    TResult? Function(OtpSendSuccess value)? otpSendSuccess,
     TResult? Function(VerifyOtpState value)? verifiedOtpState,
     TResult? Function(Facingissuestate value)? facingissuestate,
     TResult? Function(OtpVerificationFailed value)? otpVerificationFailed,
@@ -1028,6 +1322,7 @@ class _$FacingissuestateImpl implements Facingissuestate {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Otpstateinitial value)? otpstateinitial,
     TResult Function(OtpSendState value)? otpSendState,
+    TResult Function(OtpSendSuccess value)? otpSendSuccess,
     TResult Function(VerifyOtpState value)? verifiedOtpState,
     TResult Function(Facingissuestate value)? facingissuestate,
     TResult Function(OtpVerificationFailed value)? otpVerificationFailed,
@@ -1113,6 +1408,7 @@ class _$OtpVerificationFailedImpl implements OtpVerificationFailed {
   TResult when<TResult extends Object?>({
     required TResult Function() otpstateinitial,
     required TResult Function() otpSendState,
+    required TResult Function() otpSendSuccess,
     required TResult Function() verifiedOtpState,
     required TResult Function() facingissuestate,
     required TResult Function(String otpmodel) otpVerificationFailed,
@@ -1125,6 +1421,7 @@ class _$OtpVerificationFailedImpl implements OtpVerificationFailed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? otpstateinitial,
     TResult? Function()? otpSendState,
+    TResult? Function()? otpSendSuccess,
     TResult? Function()? verifiedOtpState,
     TResult? Function()? facingissuestate,
     TResult? Function(String otpmodel)? otpVerificationFailed,
@@ -1137,6 +1434,7 @@ class _$OtpVerificationFailedImpl implements OtpVerificationFailed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? otpstateinitial,
     TResult Function()? otpSendState,
+    TResult Function()? otpSendSuccess,
     TResult Function()? verifiedOtpState,
     TResult Function()? facingissuestate,
     TResult Function(String otpmodel)? otpVerificationFailed,
@@ -1153,6 +1451,7 @@ class _$OtpVerificationFailedImpl implements OtpVerificationFailed {
   TResult map<TResult extends Object?>({
     required TResult Function(Otpstateinitial value) otpstateinitial,
     required TResult Function(OtpSendState value) otpSendState,
+    required TResult Function(OtpSendSuccess value) otpSendSuccess,
     required TResult Function(VerifyOtpState value) verifiedOtpState,
     required TResult Function(Facingissuestate value) facingissuestate,
     required TResult Function(OtpVerificationFailed value)
@@ -1166,6 +1465,7 @@ class _$OtpVerificationFailedImpl implements OtpVerificationFailed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Otpstateinitial value)? otpstateinitial,
     TResult? Function(OtpSendState value)? otpSendState,
+    TResult? Function(OtpSendSuccess value)? otpSendSuccess,
     TResult? Function(VerifyOtpState value)? verifiedOtpState,
     TResult? Function(Facingissuestate value)? facingissuestate,
     TResult? Function(OtpVerificationFailed value)? otpVerificationFailed,
@@ -1178,6 +1478,7 @@ class _$OtpVerificationFailedImpl implements OtpVerificationFailed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Otpstateinitial value)? otpstateinitial,
     TResult Function(OtpSendState value)? otpSendState,
+    TResult Function(OtpSendSuccess value)? otpSendSuccess,
     TResult Function(VerifyOtpState value)? verifiedOtpState,
     TResult Function(Facingissuestate value)? facingissuestate,
     TResult Function(OtpVerificationFailed value)? otpVerificationFailed,

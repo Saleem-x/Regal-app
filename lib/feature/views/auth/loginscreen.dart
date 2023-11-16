@@ -7,6 +7,7 @@ import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/feature/data/models/login_model/login_model.dart';
+import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.dart';
 import 'package:regal_app/feature/state/bloc/login/login_bloc.dart';
 import 'package:regal_app/feature/state/cubit/mobilevalidator/mobilevalidator_cubit.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
@@ -359,6 +360,9 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                   ),
                   minWidth: widget.size.width,
                   onPressed: () {
+                    context
+                        .read<DropdownitemsBloc>()
+                        .add(const GetAllDropDownEvent());
                     Navigator.push(
                       context,
                       MaterialPageRoute(

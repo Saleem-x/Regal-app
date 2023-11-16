@@ -24,7 +24,9 @@ class OTPRepo implements IManageOTPRepo {
         final otpmodel = GenerateOtpModel.fromJson(json['result'][0]);
 
         // log(response.statusCode.toString());
-
+        if (otpmodel.verStatus == '0') {
+          return left(MainFailures.networkerror(error: otpmodel.otp!));
+        }
         return right(otpmodel);
       } else {
         return left(const MainFailures.clientfailure());

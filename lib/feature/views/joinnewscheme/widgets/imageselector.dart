@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/state/cubit/pickimage/pickimage_cubit.dart';
 
 class ImageSelectorWidget extends StatelessWidget {
   const ImageSelectorWidget({super.key});
@@ -37,27 +42,117 @@ class ImageSelectorWidget extends StatelessWidget {
           padding: const EdgeInsets.only(left: 40, right: 40),
           child: Row(
             children: [
-              const SizedBox(
-                child: Icon(
-                  Iconsax.camera,
-                  size: 20,
+              SizedBox(
+                child: SvgPicture.asset(
+                  'assets/svg/cam.svg',
+                  height: 15.h,
+                  width: 15.w,
                 ),
               ),
               SizedBox(
                 width: size.width * 0.07,
               ),
-              Container(
-                height: size.height * 0.07,
-                width: size.height * 0.07,
-                decoration: BoxDecoration(
-                  color: kcolorwhite,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: SvgPicture.asset(
-                  'assets/svg/addimage-optimized.svg',
-                  height: size.height * 0.07,
-                  width: size.height * 0.07,
-                  fit: BoxFit.cover,
+              GestureDetector(
+                onTap: () {
+                  if (!Platform.isAndroid) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        surfaceTintColor: kcolorwhite,
+                        backgroundColor: kcolorwhite,
+                        title: const Text("Choose"),
+                        content: SizedBox(
+                          height: 80.h,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  context
+                                      .read<PickimageCubit>()
+                                      .pickfromcamera();
+                                  Navigator.pop(context);
+                                },
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Camera',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () async {
+                                  context
+                                      .read<PickimageCubit>()
+                                      .pickimagefromgallery();
+                                  Navigator.pop(context);
+                                },
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'gallery',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  } else {
+                    showCupertinoDialog(
+                      barrierDismissible: true,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CupertinoAlertDialog(
+                          title: const Text('Choose'),
+                          actions: <Widget>[
+                            CupertinoDialogAction(
+                              child: const Text("Camera"),
+                              onPressed: () {
+                                context.read<PickimageCubit>().pickfromcamera();
+                                Navigator.pop(context);
+                              },
+                            ),
+                            CupertinoDialogAction(
+                              child: const Text("Gallery"),
+                              onPressed: () {
+                                context
+                                    .read<PickimageCubit>()
+                                    .pickimagefromgallery();
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+                child: Container(
+                  height: 80.h,
+                  width: 80.w,
+                  decoration: BoxDecoration(
+                    color: kcolorwhite,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/svg/AddImage.svg',
+                    height: size.height * 0.07,
+                    width: size.height * 0.07,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ],

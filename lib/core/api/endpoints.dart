@@ -11,4 +11,10 @@ const akshayanidhihystory = 'p_user_akshayaNidhiLedger.php';
 const goldplushystory = 'p_user_goldPlusLedger.php';
 const sendotpurl = 'p_user_OTPGeneration.php';
 const verifyotpurl = 'p_user_OTPVerification.php';
+const relationshipurl = 'p_user_SelRelationship.php';
+const documenttypeurl = 'p_user_SeltDocumentType.php';
+const getbranchesurl = 'p_user_SelBranch.php';
+const getbranchschemesurl = 'p_user_SelBranchSchemes.php';
+const schemetenureurl = 'p_user_SelTenure.php';
+
 var logger = Logger();
