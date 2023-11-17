@@ -22,6 +22,7 @@ class JoinNewSchemeScreen extends StatefulWidget {
 }
 
 final _mobilecontroller = TextEditingController();
+final _formkey = GlobalKey<FormState>();
 
 class _JoinNewSchemeScreenState extends State<JoinNewSchemeScreen> {
   @override
@@ -37,7 +38,7 @@ class _JoinNewSchemeScreenState extends State<JoinNewSchemeScreen> {
   }
 }
 
-class ALLJoinScreenWidgets extends StatefulWidget {
+class ALLJoinScreenWidgets extends StatelessWidget {
   const ALLJoinScreenWidgets({
     super.key,
     required this.size,
@@ -46,19 +47,12 @@ class ALLJoinScreenWidgets extends StatefulWidget {
   final Size size;
 
   @override
-  State<ALLJoinScreenWidgets> createState() => _ALLJoinScreenWidgetsState();
-}
-
-final _formkey = GlobalKey<FormState>();
-
-class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
-  @override
   Widget build(BuildContext context) {
-    context.read<NewschemeotpBloc>().add(const OtpscreenresetEvent());
     return Form(
       key: _formkey,
       child: BlocListener<NewschemeotpBloc, NewschemeotpState>(
         listener: (context, state) {
+          logger.e(state);
           state.when(
             otpSendSuccess: () {},
             otpstateinitial: () {},
@@ -112,12 +106,11 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(
-                          top: widget.size.height > 640 ? 0 : 0),
+                      padding: EdgeInsets.only(top: size.height > 640 ? 0 : 0),
                       child: SvgPicture.asset(
                         'assets/others/regal_logo-optimized.svg',
-                        width: widget.size.width / 2,
-                        height: widget.size.height * 0.06,
+                        width: size.width / 2,
+                        height: size.height * 0.06,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -130,11 +123,11 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       LineWidget(
-                        size: widget.size,
+                        size: size,
                         color2: kcolorblack.withOpacity(.6),
                         color1: kcolorgrey.withOpacity(.0),
                       ),
-                      SizedBox(width: widget.size.width * 0.08),
+                      SizedBox(width: size.width * 0.08),
                       Text(
                         'New Scheme',
                         style: TextStyle(
@@ -142,9 +135,9 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                             fontWeight: FontWeight.w400,
                             fontSize: 18.sp),
                       ),
-                      SizedBox(width: widget.size.width * 0.08),
+                      SizedBox(width: size.width * 0.08),
                       LineWidget(
-                        size: widget.size,
+                        size: size,
                         color1: kcolorblack.withOpacity(.6),
                         color2: kcolorgrey.withOpacity(.0),
                       ),
@@ -167,8 +160,7 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                     ],
                   ),
                 ),
-                MobileFieldWidget(
-                    size: widget.size, controller: _mobilecontroller),
+                MobileFieldWidget(size: size, controller: _mobilecontroller),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
@@ -197,7 +189,8 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                                   .add(const OtptimerStateEvent());
                               context.read<NewschemeotpBloc>().add(
                                     SendOtpEvent(
-                                        mobileNO: _mobilecontroller.text),
+                                      mobileNO: _mobilecontroller.text,
+                                    ),
                                   );
                             }
                           },
@@ -206,37 +199,83 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                             style: TextStyle(color: kcolorwhite),
                           ),
                         ),
-                        otpSendState: () => MaterialButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(13),
-                          ),
-                          color: const Color(0xFFD1D1D1),
-                          onPressed: () {},
-                          child: const Text(
-                            'Send OTP',
-                            style: TextStyle(color: kcolorwhite),
-                          ),
-                        ),
-                        otpSendSuccess: () => MaterialButton(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          color: kredbutton,
-                          onPressed: () async {
-                            if (_formkey.currentState!.validate()) {
-                              context
-                                  .read<NewschemeotpBloc>()
-                                  .add(const OtptimerStateEvent());
-                              context.read<NewschemeotpBloc>().add(
-                                    SendOtpEvent(
-                                        mobileNO: _mobilecontroller.text),
+                        otpSendState: () =>
+                            BlocBuilder<OtptimerCubit, OtptimerState>(
+                          builder: (context, otptimer) {
+                            return otptimer.time <= 29
+                                ? MaterialButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(13),
+                                    ),
+                                    color: const Color(0xFFD1D1D1),
+                                    onPressed: () {},
+                                    child: const Text(
+                                      'Send OTP',
+                                      style: TextStyle(color: kcolorwhite),
+                                    ),
+                                  )
+                                : MaterialButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    color: kredbutton,
+                                    onPressed: () async {
+                                      if (_formkey.currentState!.validate()) {
+                                        context
+                                            .read<NewschemeotpBloc>()
+                                            .add(const OtptimerStateEvent());
+                                        context.read<NewschemeotpBloc>().add(
+                                              SendOtpEvent(
+                                                  mobileNO:
+                                                      _mobilecontroller.text),
+                                            );
+                                      }
+                                    },
+                                    child: const Text(
+                                      'Send OTP',
+                                      style: TextStyle(color: kcolorwhite),
+                                    ),
                                   );
-                            }
                           },
-                          child: const Text(
-                            'Send OTP',
-                            style: TextStyle(color: kcolorwhite),
-                          ),
+                        ),
+                        otpSendSuccess: () =>
+                            BlocBuilder<OtptimerCubit, OtptimerState>(
+                          builder: (context, otptimer) {
+                            return otptimer.time <= 29
+                                ? MaterialButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(13),
+                                    ),
+                                    color: const Color(0xFFD1D1D1),
+                                    onPressed: () {},
+                                    child: const Text(
+                                      'Send OTP',
+                                      style: TextStyle(color: kcolorwhite),
+                                    ),
+                                  )
+                                : MaterialButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    color: kredbutton,
+                                    onPressed: () async {
+                                      if (_formkey.currentState!.validate()) {
+                                        context
+                                            .read<NewschemeotpBloc>()
+                                            .add(const OtptimerStateEvent());
+                                        context.read<NewschemeotpBloc>().add(
+                                              SendOtpEvent(
+                                                  mobileNO:
+                                                      _mobilecontroller.text),
+                                            );
+                                      }
+                                    },
+                                    child: const Text(
+                                      'Send OTP',
+                                      style: TextStyle(color: kcolorwhite),
+                                    ),
+                                  );
+                          },
                         ),
                         verifiedOtpState: () => MaterialButton(
                           shape: RoundedRectangleBorder(
@@ -314,11 +353,11 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       LineWidget(
-                        size: widget.size,
+                        size: size,
                         color2: kcolorblack.withOpacity(.6),
                         color1: kcolorgrey.withOpacity(.0),
                       ),
-                      SizedBox(width: widget.size.width * 0.08),
+                      SizedBox(width: size.width * 0.08),
                       Text(
                         'Verify OTP',
                         style: TextStyle(
@@ -326,9 +365,9 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                             fontWeight: FontWeight.w400,
                             fontSize: 16.sp),
                       ),
-                      SizedBox(width: widget.size.width * 0.08),
+                      SizedBox(width: size.width * 0.08),
                       LineWidget(
-                        size: widget.size,
+                        size: size,
                         color1: kcolorblack.withOpacity(.6),
                         color2: kcolorgrey.withOpacity(.0),
                       ),
@@ -353,7 +392,7 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                 ),
                 SizedBox(height: 10.h),
                 OtpFIeldWidget(
-                  size: widget.size,
+                  size: size,
                   mobNo: _mobilecontroller.text,
                 ),
                 state.when(
@@ -388,68 +427,68 @@ class _ALLJoinScreenWidgetsState extends State<ALLJoinScreenWidgets> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    minWidth: widget.size.width,
+                    minWidth: size.width,
                     onPressed: () async {
                       if (_formkey.currentState!.validate()) {
-                        //   if (otpfield.length == 4) {
-                        //     logger.e(otpfield);
-                        //     context.read<NewschemeotpBloc>().add(
-                        //           VerfiOtpEvent(
-                        //               mobileNO: _mobilecontroller.text,
-                        //               otp: otpfield),
-                        //         );
-                        //   } else {
-                        //     if (!Platform.isAndroid) {
-                        //       showDialog(
-                        //         context: context,
-                        //         builder: (context) => AlertDialog(
-                        //           backgroundColor: kcolorwhite,
-                        //           title: const Text("Alert"),
-                        //           content: const Text("please enter 4 Digit OTP"),
-                        //           actions: [
-                        //             TextButton(
-                        //               onPressed: () {
-                        //                 Navigator.pop(context);
-                        //               },
-                        //               child: const Text('Ok'),
-                        //             )
-                        //           ],
-                        //         ),
-                        //       );
-                        //     } else {
-                        //       showCupertinoDialog(
-                        //         context: context,
-                        //         builder: (BuildContext context) {
-                        //           return CupertinoAlertDialog(
-                        //             title: const Text("Alert"),
-                        //             content: const Text(
-                        //                 "please enter Your Four Digit OTP"),
-                        //             actions: <Widget>[
-                        //               /* CupertinoDialogAction(
-                        //                           child: const Text("Cancel"),
-                        //                           onPressed: () {
-                        //                             Navigator.of(context).pop();
-                        //                           },
-                        //                         ), */
-                        //               CupertinoDialogAction(
-                        //                 child: const Text("OK"),
-                        //                 onPressed: () {
-                        //                   Navigator.of(context).pop();
-                        //                 },
-                        //               ),
-                        //             ],
-                        //           );
-                        //         },
-                        //       );
-                        //     }
-                        //   }
+                        if (otpfield.length == 4) {
+                          logger.e(otpfield);
+                          context.read<NewschemeotpBloc>().add(
+                                VerfiOtpEvent(
+                                    mobileNO: _mobilecontroller.text,
+                                    otp: otpfield),
+                              );
+                        } else {
+                          if (!Platform.isAndroid) {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                backgroundColor: kcolorwhite,
+                                title: const Text("Alert"),
+                                content: const Text("please enter 4 Digit OTP"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Ok'),
+                                  )
+                                ],
+                              ),
+                            );
+                          } else {
+                            showCupertinoDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return CupertinoAlertDialog(
+                                  title: const Text("Alert"),
+                                  content: const Text(
+                                      "please enter Your Four Digit OTP"),
+                                  actions: <Widget>[
+                                    /* CupertinoDialogAction(
+                                                  child: const Text("Cancel"),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ), */
+                                    CupertinoDialogAction(
+                                      child: const Text("OK"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        }
                       }
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => JoinNewSchemeDetailScreen(
-                                mobilenumber: _mobilecontroller.text),
-                          ));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => JoinNewSchemeDetailScreen(
+                      //           mobilenumber: _mobilecontroller.text),
+                      //     ));
                     },
                     child: Text(
                       'Proceed',

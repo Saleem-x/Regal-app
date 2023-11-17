@@ -6,8 +6,7 @@ class NewschemeotpEvent with _$NewschemeotpEvent {
       SendOtpEvent;
   const factory NewschemeotpEvent.verfiOtpEvent(
       {required String mobileNO, required String otp}) = VerfiOtpEvent;
-      const factory NewschemeotpEvent.otptimerStateEvent() = OtptimerStateEvent;
-      
+  const factory NewschemeotpEvent.otptimerStateEvent() = OtptimerStateEvent;
 
   const factory NewschemeotpEvent.otpscreenresetEvent() = OtpscreenresetEvent;
 }

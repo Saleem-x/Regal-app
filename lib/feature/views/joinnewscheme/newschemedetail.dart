@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/feature/domain/repoimpls/dropdownrepo/dropdownrepo.dart';
 import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.dart';
+import 'package:regal_app/feature/state/cubit/cubit/checkbranchslection_cubit.dart';
+import 'package:regal_app/feature/state/cubit/pickimage/pickimage_cubit.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
-import 'package:regal_app/feature/views/auth/widgets/mobilefield.dart';
 import 'package:regal_app/feature/views/auth/widgets/otpfieldwidget.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/dobselecter.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/docselector.dart';
@@ -28,7 +28,12 @@ class JoinNewSchemeDetailScreen extends StatefulWidget {
       _JoinNewSchemeDetailScreenState();
 }
 
-final _controller = TextEditingController();
+final _instalmentcontroller = TextEditingController();
+TextEditingController _citycontroller = TextEditingController();
+TextEditingController _addresscontroller = TextEditingController();
+TextEditingController _namecontroller = TextEditingController();
+TextEditingController _nomineecontroller = TextEditingController();
+TextEditingController _emailcontroller = TextEditingController();
 TextEditingController _dobcontroller = TextEditingController();
 TextEditingController _mobilecontroller = TextEditingController();
 TextEditingController _relationshipcontroller = TextEditingController();
@@ -46,6 +51,9 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
     final Size size = MediaQuery.of(context).size;
 
     context.read<DropdownitemsBloc>().add(const GetAllDropDownEvent());
+    context
+        .read<CheckbranchslectionCubit>()
+        .checkisselected(_branchcontroller.text);
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder<DropdownitemsBloc, DropdownitemsState>(
@@ -107,7 +115,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                             ),
                           ),
                           NewSchmFieldWidget(
-                            controller: _controller,
+                            controller: _namecontroller,
                             icon: 'assets/others/name.svg',
                             title: 'Name',
                             type: TextInputType.name,
@@ -188,8 +196,9 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                             '+91  ',
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                color: kcolorblack),
+                                              fontWeight: FontWeight.w400,
+                                              color: kcolorblack,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -221,13 +230,13 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                             ),
                           ),
                           NewSchmFieldWidget(
-                            controller: _controller,
+                            controller: _emailcontroller,
                             icon: 'assets/svg/mail.svg',
                             title: 'EmailID',
                             type: TextInputType.emailAddress,
                           ),
                           NewSchmFieldWidget(
-                            controller: _controller,
+                            controller: _nomineecontroller,
                             icon: 'assets/others/name.svg',
                             title: 'Nominee Name',
                             type: TextInputType.name,
@@ -249,20 +258,40 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                 doctypes: state.documentlist!,
                                 controller: _doctypecontroller),
                           ),
-                          const DocumentSelectorWidget(
-                            title: 'Attach document- Front side',
-                          ),
-                          const DocumentSelectorWidget(
-                            title: 'Attach document- Back side',
+                          BlocBuilder<PickimageCubit, PickimageState>(
+                            builder: (context, state) {
+                              return Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () => context
+                                        .read<PickimageCubit>()
+                                        .pickdocumentfront(),
+                                    child: DocumentSelectorWidget(
+                                      title: 'Attach document- Front side',
+                                      imagedata: state.docfrnt,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () => context
+                                        .read<PickimageCubit>()
+                                        .pickdocumentback(),
+                                    child: DocumentSelectorWidget(
+                                      title: 'Attach document- Back side',
+                                      imagedata: state.docback,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
                           NewSchmFieldWidget(
-                            controller: _controller,
+                            controller: _addresscontroller,
                             icon: 'assets/svg/location.svg',
                             title: 'Address',
                             type: TextInputType.streetAddress,
                           ),
                           NewSchmFieldWidget(
-                            controller: _controller,
+                            controller: _citycontroller,
                             icon: 'assets/svg/location.svg',
                             title: 'city',
                             type: TextInputType.streetAddress,
@@ -280,11 +309,119 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                             controller: _salesmancontroller,
                             title: 'Sales Man',
                             preicon: 'assets/svg/salesman.svg',
-                            ddWindget: SaleSMAnDD(
+                            ddWindget: /* SaleSMAnDD(
                               schemes: state.schemeslist!,
                               controller: _salesmancontroller,
                               issalman: true,
                               branchctrl: _branchcontroller,
+                            ) */
+                                BlocBuilder<CheckbranchslectionCubit,
+                                    CheckbranchslectionState>(
+                              builder: (context, isselectedbranch) {
+                                return isselectedbranch.selectedbranch.isEmpty
+                                    ? TextFormField(
+                                        onTap: () {
+                                          showCupertinoDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return CupertinoAlertDialog(
+                                                title: const Text("Alert"),
+                                                content: const Text(
+                                                    "please Selct Branch"),
+                                                actions: <Widget>[
+                                                  CupertinoDialogAction(
+                                                    child: const Text("OK"),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                        // controller: controller,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'please enter mobile number';
+                                          } else if (value.length < 10) {
+                                            return 'mobile number should be 10';
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        keyboardType: TextInputType.none,
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          hintText: 'Select',
+                                          hintStyle: const TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              color: kcolorblack),
+                                          border: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: kcolorblack.withOpacity(
+                                                .3,
+                                              ),
+                                            ),
+                                          ),
+                                          disabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: kcolorblack.withOpacity(
+                                                .3,
+                                              ),
+                                            ),
+                                          ),
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: kcolorblack.withOpacity(
+                                                .3,
+                                              ),
+                                            ),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: kcolorblack.withOpacity(
+                                                .3,
+                                              ),
+                                            ),
+                                          ),
+                                          suffixIcon: IconButton(
+                                            onPressed: () {
+                                              showCupertinoDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return CupertinoAlertDialog(
+                                                    title: const Text("Alert"),
+                                                    content: const Text(
+                                                        "please Selct Branch"),
+                                                    actions: <Widget>[
+                                                      CupertinoDialogAction(
+                                                        child: const Text("OK"),
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            icon: const Icon(
+                                              Icons.arrow_drop_down,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : SaleSMAnDD(
+                                        schemes: state.schemeslist!,
+                                        controller: _salesmancontroller,
+                                        issalman: true,
+                                        branchctrl: _branchcontroller,
+                                      );
+                              },
                             ),
                           ),
                           NewSchmDropDownWidget(
@@ -297,7 +434,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                             ),
                           ),
                           NewSchmFieldWidget(
-                            controller: _controller,
+                            controller: _instalmentcontroller,
                             icon: 'assets/svg/scheme.svg',
                             title: 'Instalment Amount',
                             type: TextInputType.number,

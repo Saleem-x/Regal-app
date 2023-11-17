@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
@@ -8,6 +9,7 @@ import 'package:regal_app/feature/data/models/document_type_model/document_type_
 import 'package:regal_app/feature/data/models/relation_ship_model/relation_ship_model.dart';
 import 'package:regal_app/feature/data/models/scheme_list_model/scheme_list_model.dart';
 import 'package:regal_app/feature/data/models/scheme_tenure_model/scheme_tenure_model.dart';
+import 'package:regal_app/feature/state/cubit/cubit/checkbranchslection_cubit.dart';
 
 import '../newschemedetail.dart';
 
@@ -222,6 +224,9 @@ class BranchDropDown extends StatelessWidget {
       }).toList(),
       onChanged: (value) {
         controller.text = value!;
+        context
+            .read<CheckbranchslectionCubit>()
+            .checkisselected(controller.text);
       },
       decoration: InputDecoration(
         // labelText: 'Select an item',
@@ -327,148 +332,51 @@ class SaleSMAnDD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return issalman == true && branchctrl == null || branchctrl!.text.isEmpty
-        ? TextFormField(
-            onTap: () {
-              showCupertinoDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return CupertinoAlertDialog(
-                    title: const Text("Alert"),
-                    content: const Text("please Selct Branch"),
-                    actions: <Widget>[
-                      CupertinoDialogAction(
-                        child: const Text("OK"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-            controller: controller,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'please enter mobile number';
-              } else if (value.length < 10) {
-                return 'mobile number should be 10';
-              } else {
-                return null;
-              }
-            },
-            keyboardType: TextInputType.none,
-            decoration: InputDecoration(
-              isDense: true,
-              hintText: 'Select',
-              hintStyle: const TextStyle(
-                  fontWeight: FontWeight.w400, color: kcolorblack),
-              border: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: kcolorblack.withOpacity(
-                    .3,
-                  ),
-                ),
-              ),
-              disabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: kcolorblack.withOpacity(
-                    .3,
-                  ),
-                ),
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: kcolorblack.withOpacity(
-                    .3,
-                  ),
-                ),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: kcolorblack.withOpacity(
-                    .3,
-                  ),
-                ),
-              ),
-              suffixIcon: IconButton(
-                onPressed: () {
-                  showCupertinoDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return CupertinoAlertDialog(
-                        title: const Text("Alert"),
-                        content: const Text("please Selct Branch"),
-                        actions: <Widget>[
-                          /* CupertinoDialogAction(
-                                    child: const Text("Cancel"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ), */
-                          CupertinoDialogAction(
-                            child: const Text("OK"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                icon: const Icon(
-                  Icons.arrow_drop_down,
-                ),
-              ),
+    return DropdownButtonFormField<String>(
+      items: schemes.map((SchemeListModel item) {
+        return DropdownMenuItem<String>(
+          value: item.schemeId.toString(),
+          child: Text(
+            item.schemeName!,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: ktextgrey,
             ),
-          )
-        : DropdownButtonFormField<String>(
-            items: schemes.map((SchemeListModel item) {
-              return DropdownMenuItem<String>(
-                value: item.schemeId.toString(),
-                child: Text(
-                  item.schemeName!,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: ktextgrey,
-                  ),
-                ),
-              );
-            }).toList(),
-            onChanged: (value) {
-              controller.text = value!;
-            },
-            decoration: InputDecoration(
-              // labelText: 'Select an item',
-              hintText: 'Select',
-              hintStyle: const TextStyle(
-                  fontWeight: FontWeight.w400, color: kcolorblack),
+          ),
+        );
+      }).toList(),
+      onChanged: (value) {
+        controller.text = value!;
+      },
+      decoration: InputDecoration(
+        // labelText: 'Select an item',
+        hintText: 'Select',
+        hintStyle:
+            const TextStyle(fontWeight: FontWeight.w400, color: kcolorblack),
 
-              border: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: kcolorblack.withOpacity(
-                    .3,
-                  ),
-                ),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: kcolorblack.withOpacity(
-                    .3,
-                  ),
-                ),
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: kcolorblack.withOpacity(
-                    .3,
-                  ),
-                ),
-              ),
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: kcolorblack.withOpacity(
+              .3,
             ),
-          );
+          ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: kcolorblack.withOpacity(
+              .3,
+            ),
+          ),
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: kcolorblack.withOpacity(
+              .3,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

@@ -2,11 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:regal_app/core/failures/failures.dart';
 import 'package:regal_app/feature/data/models/branch_model/branch_model.dart';
 import 'package:regal_app/feature/data/models/contact_us_model/contact_us_model.dart';
+import 'package:regal_app/feature/data/models/create_new_user_scheme_model/create_new_user_scheme_model.dart';
+import 'package:regal_app/feature/data/models/create_user_out_model/create_user_out_model.dart';
 import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
 import 'package:regal_app/feature/data/models/document_type_model/document_type_model.dart';
 import 'package:regal_app/feature/data/models/generate_otp_model/generate_otp_model.dart';
 import 'package:regal_app/feature/data/models/gold_rate_model/gold_rate_model.dart';
 import 'package:regal_app/feature/data/models/instalment_hystory_model/instalment_hystory_model.dart';
+import 'package:regal_app/feature/data/models/pin_reset_otp_model/pin_reset_otp_model.dart';
 import 'package:regal_app/feature/data/models/relation_ship_model/relation_ship_model.dart';
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/data/models/scheme_list_model/scheme_list_model.dart';
@@ -49,4 +52,17 @@ abstract class IDropdownRepo {
   Future<Either<MainFailures, List<BranchModel>>> getAllbranches();
   Future<Either<MainFailures, List<SchemeListModel>>> getbranchScheme();
   Future<Either<MainFailures, List<SchemeTenureModel>>> getschemetenure();
+}
+
+abstract class ICreateUserRepo {
+  Future<Either<MainFailures, CreateUserOutModel>> createNewUserScheme(
+      CreateNewUserSchemeModel newuser);
+}
+abstract class IResetPinRepo {
+  Future<Either<MainFailures, PinResetOtpModel>> sendOtp(String mobileNo);
+  Future<Either<MainFailures, PinResetOtpModel>> verifyOtP(
+      String cusId, String otp);
+
+       Future<Either<MainFailures, PinResetOtpModel>> resetPin(
+      String cusId, String pin,);
 }

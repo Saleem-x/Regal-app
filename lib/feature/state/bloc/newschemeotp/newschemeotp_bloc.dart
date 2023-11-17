@@ -18,7 +18,7 @@ class NewschemeotpBloc extends Bloc<NewschemeotpEvent, NewschemeotpState> {
     on<SendOtpEvent>((event, emit) async {
       Either<MainFailures, GenerateOtpModel> sendotp =
           await otprepo.sendOtp(event.mobileNO);
-      emit(const OtpSendState());
+      // emit(const OtpSendState());
 
       emit(
         sendotp.fold(

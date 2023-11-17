@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/feature/data/models/login_model/login_model.dart';
 import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.dart';
 import 'package:regal_app/feature/state/bloc/login/login_bloc.dart';
+import 'package:regal_app/feature/state/bloc/newschemeotp/newschemeotp_bloc.dart';
 import 'package:regal_app/feature/state/cubit/mobilevalidator/mobilevalidator_cubit.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
 import 'package:regal_app/feature/views/auth/widgets/mobilefield.dart';
@@ -342,8 +343,6 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                 children: [
                   Text(
                     'OR',
-                    style: TextStyle(
-                        fontFamily: 'assets/fonts/SFPRODISPLAYREGULAR.OTF'),
                   )
                 ],
               ),
@@ -360,6 +359,10 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                   ),
                   minWidth: widget.size.width,
                   onPressed: () {
+                    context
+                        .read<NewschemeotpBloc>()
+                        .add(const OtpscreenresetEvent());
+
                     context
                         .read<DropdownitemsBloc>()
                         .add(const GetAllDropDownEvent());
