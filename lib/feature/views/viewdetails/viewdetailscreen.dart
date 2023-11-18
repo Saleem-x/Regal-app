@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
+import 'package:regal_app/feature/views/viewdetails/schemtandc.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ViewDetailScreen extends StatelessWidget {
@@ -282,11 +284,23 @@ class ViewDetailScreen extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                const Icon(
-                                  Icons.document_scanner_rounded,
+                                SizedBox(
+                                  child: SvgPicture.asset(
+                                    'assets/svg/terms.svg',
+                                    height: 15.h,
+                                    width: 15.w,
+                                  ),
                                 ),
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SchemTAndC(),
+                                      ),
+                                    );
+                                  },
                                   child: Text(
                                     'View Terms & Conditions',
                                     style: TextStyle(

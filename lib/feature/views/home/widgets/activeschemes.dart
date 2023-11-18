@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +23,7 @@ class ActiveSchemeWidget extends StatelessWidget {
         .read<ActiveschemesBloc>()
         .add(GetActiveSchemes(datakey: datakey, cusid: user.cusId!));
     return SizedBox(
-      height: 120.w,
+      height: 110.h,
       // width: size.width.w,
       child: BlocListener<ActiveschemesBloc, ActiveschemesState>(
         listener: (context, state) {
@@ -47,103 +48,152 @@ class ActiveSchemeWidget extends StatelessWidget {
             return state.when(
               activeAchemesState: (schemes) => schemes == null
                   ? const ActiveSchemeSkelton()
-                  : ListView.separated(
-                      shrinkWrap: true,
+                  : SingleChildScrollView(
+                      dragStartBehavior: DragStartBehavior.start,
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
-                          child: BlocBuilder<SchemeselectorCubit,
-                              SchemeselectorState>(
-                            builder: (context, selected) {
-                              return GestureDetector(
-                                onTap: () {
-                                  context
-                                      .read<SchemeselectorCubit>()
-                                      .selectscheme(index);
-                                  context.read<SchemedetailsBloc>().add(
-                                        GetschemedetailsEvent(
-                                          cusid: user.cusId!,
-                                          schmId: schemes[index].schemeNo!,
-                                          datakeys: datakey,
-                                          scheme: schemes[index],
-                                        ),
-                                      );
-                                  context.read<SchemedetailsBloc>().add(
-                                        GetschemedetailsEvent(
-                                          cusid: user.cusId!,
-                                          schmId: schemes[index].schemeNo!,
-                                          datakeys: datakey,
-                                          scheme: schemes[index],
-                                        ),
-                                      );
-                                },
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Container(
-                                    width: 230.w,
-                                    decoration: BoxDecoration(
-                                      color: kcolorwhite,
-                                      gradient: LinearGradient(
-                                          colors: selected.idx == index
-                                              ? [kgold1, kgold2]
-                                              : [kcolorwhite, kcolorwhite],
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SvgPicture.asset(
-                                              selected.idx == index
-                                                  ? 'assets/others/scheme_s.svg'
-                                                  : 'assets/others/scheme.svg',
-                                              height: 18.h,
-                                              width: 15.w,
-                                            ),
-                                            SizedBox(
-                                              height: 5.h,
-                                            ),
-                                            Text(
-                                              schemes[index].schemeNo!,
-                                              style: TextStyle(
-                                                fontSize: 20.sp,
-                                                color: selected.idx == index
-                                                    ? kcolorwhite
-                                                    : ktextgrey,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 3.h,
-                                            ),
-                                            Text(
-                                              '${schemes[index].schemeName} | ₹${schemes[index].totalAmount}',
-                                              style: TextStyle(
-                                                  fontSize: 12.sp,
-                                                  color: selected.idx == index
-                                                      ? kcolorwhite
-                                                      : ktextgrey,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          ]),
-                                    ),
-                                  ),
+                      padding: const EdgeInsets.all(0),
+                      physics: const BouncingScrollPhysics(),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: schemes.length == 1 ? 0 : 10.w,
+                          ),
+                          ListView.separated(
+                            shrinkWrap: true,
+                            padding: EdgeInsets.zero,
+                            physics: const NeverScrollableScrollPhysics(),
+                            dragStartBehavior: DragStartBehavior.start,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => Padding(
+                                padding: EdgeInsets.only(
+                                  left: schemes.length == 1 ? 0 : 14,
                                 ),
-                              );
-                            },
-                          )),
-                      separatorBuilder: (context, index) => const SizedBox(
-                        width: 0,
+                                child: BlocBuilder<SchemeselectorCubit,
+                                    SchemeselectorState>(
+                                  builder: (context, selected) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        context
+                                            .read<SchemeselectorCubit>()
+                                            .selectscheme(index);
+                                        context.read<SchemedetailsBloc>().add(
+                                              GetschemedetailsEvent(
+                                                cusid: user.cusId!,
+                                                schmId:
+                                                    schemes[index].schemeNo!,
+                                                datakeys: datakey,
+                                                scheme: schemes[index],
+                                              ),
+                                            );
+                                        context.read<SchemedetailsBloc>().add(
+                                              GetschemedetailsEvent(
+                                                cusid: user.cusId!,
+                                                schmId:
+                                                    schemes[index].schemeNo!,
+                                                datakeys: datakey,
+                                                scheme: schemes[index],
+                                              ),
+                                            );
+                                      },
+                                      child: Card(
+                                        shadowColor: ktextgrey,
+                                        elevation: 3,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                        ),
+                                        child: Container(
+                                          width: 230.w,
+                                          decoration: BoxDecoration(
+                                              color: kcolorwhite,
+                                              gradient: LinearGradient(
+                                                  colors: selected.idx == index
+                                                      ? [kgold1, kgold2]
+                                                      : [
+                                                          kcolorwhite,
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              236,
+                                                              235,
+                                                              235)
+                                                        ],
+                                                  begin: Alignment.bottomLeft,
+                                                  end: Alignment.topRight),
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: ktextgrey
+                                                        .withOpacity(.2),
+                                                    blurRadius: 2,
+                                                    offset:
+                                                        const Offset(-2, 2.5),
+                                                    blurStyle: BlurStyle.normal,
+                                                    spreadRadius: 0.5)
+                                              ]),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    selected.idx == index
+                                                        ? 'assets/others/scheme_s.svg'
+                                                        : 'assets/others/scheme.svg',
+                                                    height: 18.h,
+                                                    width: 15.w,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5.h,
+                                                  ),
+                                                  Text(
+                                                    schemes[index].schemeNo!,
+                                                    style: TextStyle(
+                                                      fontSize: 20.sp,
+                                                      color:
+                                                          selected.idx == index
+                                                              ? kcolorwhite
+                                                              : ktextgrey,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 3.h,
+                                                  ),
+                                                  Text(
+                                                    '${schemes[index].schemeName} | ₹${schemes[index].totalAmount}',
+                                                    style: TextStyle(
+                                                        fontSize: 12.sp,
+                                                        color: selected.idx ==
+                                                                index
+                                                            ? kcolorwhite
+                                                            : ktextgrey,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ]),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                )),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                              width: 0,
+                            ),
+                            itemCount: schemes.length,
+                          ),
+                          SizedBox(
+                            width: 30.w,
+                          ),
+                        ],
                       ),
-                      itemCount: schemes.length,
                     ),
               failedstate: () => const ActiveSchemeSkelton(),
             );
@@ -165,23 +215,25 @@ class SchemesShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: SizedBox(
-                width: size.width / 2.w,
-                height: size.width / 5.h,
-                child: Shimmer.fromColors(
-                  baseColor: kcolorgrey.withOpacity(0.2),
-                  highlightColor: kcolorgrey.withOpacity(0.4),
-                  child: const Card(),
-                ),
-              ),
-            ),
-        separatorBuilder: (context, index) => const SizedBox(
-              width: 0,
-            ),
-        itemCount: 3);
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      dragStartBehavior: DragStartBehavior.start,
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: SizedBox(
+          width: size.width / 2.w,
+          height: size.width / 5.h,
+          child: Shimmer.fromColors(
+            baseColor: kcolorgrey.withOpacity(0.2),
+            highlightColor: kcolorgrey.withOpacity(0.4),
+            child: const Card(),
+          ),
+        ),
+      ),
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 0,
+      ),
+      itemCount: 3,
+    );
   }
 }

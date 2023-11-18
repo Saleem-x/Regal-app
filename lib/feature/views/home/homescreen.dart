@@ -18,13 +18,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: kscafbg.withOpacity(1),
+      backgroundColor: kbgcolor,
       appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(300),
+        preferredSize: Size.fromHeight(100),
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [HomePopupMenu()],
             ),
           ),

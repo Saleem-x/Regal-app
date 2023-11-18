@@ -63,6 +63,8 @@ class ResetPinRepo implements IResetPinRepo {
           logger.i('entho sampavichu2${response.body}');
           return left(MainFailures.networkerror(
               error: verifyOtpModel.title! + verifyOtpModel.descr!));
+        } else {
+          logger.e('ithaaan adutha adhyaayam ${response.body}');
         }
 
         return right(verifyOtpModel);

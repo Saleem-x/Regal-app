@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,7 +19,7 @@ class HomePopupMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
-      color: kcolorwhite,
+      color: kbgcolor,
       surfaceTintColor: kcolorwhite,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -50,12 +53,53 @@ class HomePopupMenu extends StatelessWidget {
             ),
           );
         } else if (value == 'logout') {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LoginScreen(),
+          if (!Platform.isAndroid) {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                backgroundColor: kcolorwhite,
+                title: const Text("Alert"),
+                content: const Text("please enter Your Four Digit Pin"),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Ok'),
+                  )
+                ],
               ),
-              (route) => false);
+            );
+          } else {
+            showCupertinoDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return CupertinoAlertDialog(
+                  title: const Text("Alert!"),
+                  content: const Text("Do You Want to Logout?"),
+                  actions: <Widget>[
+                    CupertinoDialogAction(
+                      child: const Text("No"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    CupertinoDialogAction(
+                      child: const Text("yes"),
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                            (route) => false);
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          }
         }
       },
       itemBuilder: (context) {

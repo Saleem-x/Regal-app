@@ -45,13 +45,11 @@ class ImageSelectorWidget extends StatelessWidget {
               child: Row(
                 children: [
                   SizedBox(
-                      height: 15.h,
-                      width: 15.w,
                       child: SvgPicture.asset(
-                        'assets/svg/cam.svg',
-                        height: 15.h,
-                        width: 15.w,
-                      )),
+                    'assets/svg/cam.svg',
+                    height: 17.h,
+                    width: 15.w,
+                  )),
                   SizedBox(
                     width: size.width * 0.07,
                   ),

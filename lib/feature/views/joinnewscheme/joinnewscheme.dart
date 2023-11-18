@@ -22,6 +22,7 @@ class JoinNewSchemeScreen extends StatefulWidget {
 }
 
 final _mobilecontroller = TextEditingController();
+final _otpcontroller = TextEditingController();
 final _formkey = GlobalKey<FormState>();
 
 class _JoinNewSchemeScreenState extends State<JoinNewSchemeScreen> {
@@ -52,7 +53,7 @@ class ALLJoinScreenWidgets extends StatelessWidget {
       key: _formkey,
       child: BlocListener<NewschemeotpBloc, NewschemeotpState>(
         listener: (context, state) {
-          logger.e(state);
+          logger.e('state ethhaaan$state');
           state.when(
             otpSendSuccess: () {},
             otpstateinitial: () {},
@@ -69,7 +70,31 @@ class ALLJoinScreenWidgets extends StatelessWidget {
               );
               otpfield = '';
             },
-            facingissuestate: () {},
+            facingissuestate: () {
+              showCupertinoDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CupertinoAlertDialog(
+                    title: const Text('Alert'),
+                    content: const Text('Something went Wrong'),
+                    actions: <Widget>[
+                      /*  CupertinoDialogAction(
+                          child: const Text("Cancel"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ), */
+                      CupertinoDialogAction(
+                        child: const Text("OK"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
             otpVerificationFailed: (otpmodel) {
               showCupertinoDialog(
                 context: context,
@@ -391,7 +416,8 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10.h),
-                OtpFIeldWidget(
+                ResetPinHeaderOtpField(
+                  newpin: _otpcontroller,
                   size: size,
                   mobNo: _mobilecontroller.text,
                 ),
@@ -430,12 +456,13 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                     minWidth: size.width,
                     onPressed: () async {
                       if (_formkey.currentState!.validate()) {
-                        if (otpfield.length == 4) {
-                          logger.e(otpfield);
+                        if (_otpcontroller.text.length == 4) {
+                          // logger.e(otpfield);
                           context.read<NewschemeotpBloc>().add(
                                 VerfiOtpEvent(
-                                    mobileNO: _mobilecontroller.text,
-                                    otp: otpfield),
+                                  mobileNO: _mobilecontroller.text,
+                                  otp: _otpcontroller.text,
+                                ),
                               );
                         } else {
                           if (!Platform.isAndroid) {

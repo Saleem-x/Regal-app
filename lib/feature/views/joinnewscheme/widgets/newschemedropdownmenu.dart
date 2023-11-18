@@ -288,6 +288,7 @@ class SchemeListDropDown extends StatelessWidget {
       }).toList(),
       onChanged: (value) {
         controller.text = value!;
+        context.read<CheckbranchslectionCubit>().isschemeselected(value);
       },
       decoration: InputDecoration(
         // labelText: 'Select an item',

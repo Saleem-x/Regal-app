@@ -44,6 +44,7 @@ TextEditingController _schemecontroller = TextEditingController();
 TextEditingController _adharNOcontroller = TextEditingController();
 TextEditingController _schmtenurecontroller = TextEditingController();
 String otpfield = '';
+
 final _formkey = GlobalKey<FormState>();
 
 class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
@@ -56,6 +57,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
         .read<CheckbranchslectionCubit>()
         .checkisselected(_branchcontroller.text);
     return Scaffold(
+      backgroundColor: kbgcolor,
       body: SafeArea(
         child: BlocBuilder<DropdownitemsBloc, DropdownitemsState>(
           builder: (context, state) {
@@ -254,7 +256,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                           NewSchmDropDownWidget(
                             controller: _doctypecontroller,
                             title: 'Document type',
-                            preicon: 'assets/svg/terms.svg',
+                            preicon: 'assets/svg/document.svg',
                             ddWindget: DoctypeDropdown(
                                 doctypes: state.documentlist!,
                                 controller: _doctypecontroller),
@@ -449,59 +451,72 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                           ),
                           NewSchmFieldWidget(
                             controller: _instalmentcontroller,
-                            icon: 'assets/svg/scheme.svg',
+                            icon: 'assets/svg/money.svg',
                             title: 'Instalment Amount',
                             type: TextInputType.number,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 15),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Scheme Details',
-                                  style: TextStyle(
-                                    color: kredbutton.withOpacity(.9),
+                          BlocBuilder<CheckbranchslectionCubit,
+                              CheckbranchslectionState>(
+                            builder: (context, selectedscheme) {
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 50, vertical: 15),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Scheme Details',
+                                          style: TextStyle(
+                                            color: kredbutton.withOpacity(.9),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 5),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Regal Gold Plus',
-                                  style: TextStyle(fontSize: 18),
-                                )
-                              ],
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 5),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Scheme Tenure',
-                                  style: TextStyle(fontSize: 13),
-                                )
-                              ],
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 5),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Instalment Amount',
-                                  style: TextStyle(fontSize: 13),
-                                )
-                              ],
-                            ),
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 50, vertical: 5),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Regal Gold Plus',
+                                          style: TextStyle(fontSize: 18),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 50, vertical: 5),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Scheme Tenure: ${selectedscheme.schemeselected.isEmpty ? '' : state.schemetenures![0].tenure}',
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              color: ktextgrey.withOpacity(.7)),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 50, vertical: 5),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Instalment Amount: ${selectedscheme.schemeselected.isEmpty ? '' : 'Multiples of 1000'}',
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              color: ktextgrey.withOpacity(.7)),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
@@ -552,19 +567,58 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 40),
-                            child: MaterialButton(
-                              color: ktextgrey.withOpacity(.4),
-                              minWidth: size.width,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              onPressed: () {},
-                              child: const Text(
-                                'Proceed',
-                                style: TextStyle(
-                                  color: kcolorwhite,
-                                ),
-                              ),
+                            child: BlocBuilder<PickimageCubit, PickimageState>(
+                              builder: (context, isimageselected) {
+                                return MaterialButton(
+                                  color: ktextgrey.withOpacity(.4),
+                                  minWidth: size.width,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  onPressed: () {
+                                    if (_namecontroller.text.isEmpty ||
+                                        _dobcontroller.text.isEmpty ||
+                                        _mobilecontroller.text.isEmpty ||
+                                        _emailcontroller.text.isEmpty ||
+                                        _nomineecontroller.text.isEmpty ||
+                                        _relationshipcontroller.text.isEmpty ||
+                                        _doctypecontroller.text.isEmpty ||
+                                        _addresscontroller.text.isEmpty ||
+                                        _citycontroller.text.isEmpty ||
+                                        _branchcontroller.text.isEmpty ||
+                                        _salesmancontroller.text.isEmpty ||
+                                        _schemecontroller.text.isEmpty ||
+                                        _instalmentcontroller.text.isEmpty ||
+                                        isimageselected.imageurls == null ||
+                                        isimageselected.docfrnt == null) {
+                                      showCupertinoDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return CupertinoAlertDialog(
+                                            title: const Text("Alert"),
+                                            content: const Text(
+                                                "please fill all mandatory (*) fields"),
+                                            actions: <Widget>[
+                                              CupertinoDialogAction(
+                                                child: const Text("OK"),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                  child: const Text(
+                                    'Proceed',
+                                    style: TextStyle(
+                                      color: kcolorwhite,
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                           Row(

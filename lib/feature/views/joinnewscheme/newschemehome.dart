@@ -42,7 +42,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
           NewSchmDropDownWidget(
             controller: _schemectrl,
             title: 'Select Scheme',
-            preicon: 'assets/others/relation.svg',
+            preicon: 'assetssvg/scheme.svg',
             ddWindget:
                 SchemeListDropDown(schemes: const [], controller: _schemectrl),
           ),

@@ -17,7 +17,7 @@ class ResetpinBloc extends Bloc<ResetpinEvent, ResetpinState> {
     on<SendOtpEvent>(
       (event, emit) async {
         Either<MainFailures, PinResetOtpModel> sendotp =
-            await resetPinRepo.sendOtp(event.mobileNO);
+            await resetPinRepo.sendOtp(event.mobileNO,);
         // emit(const OtpSendState());
 
         emit(

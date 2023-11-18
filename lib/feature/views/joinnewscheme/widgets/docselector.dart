@@ -30,9 +30,9 @@ class DocumentSelectorWidget extends StatelessWidget {
                     color: kcolordarkred.withOpacity(.7),
                   ),
                 ),
-                const Text(
-                  ' *',
-                  style: TextStyle(
+                Text(
+                  title == 'Attach document- Front side' ? '*' : '',
+                  style: const TextStyle(
                     fontSize: 14,
                     color: kcolordarkred,
                   ),
@@ -85,11 +85,13 @@ class DocumentSelectorWidget extends StatelessWidget {
                                   style: const TextStyle(
                                       color: Color(0xFF990000), fontSize: 10),
                                 ),
-                                const Icon(
-                                  Icons.close,
-                                  color: kcolorred,
-                                  size: 14,
-                                )
+                                imagedata == null
+                                    ? const SizedBox.shrink()
+                                    : const Icon(
+                                        Icons.close,  
+                                        color: kcolorred,
+                                        size: 14,
+                                      )
                               ],
                             ),
                           ],

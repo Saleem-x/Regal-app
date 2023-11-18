@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/feature/data/models/pin_reset_otp_model/pin_reset_otp_model.dart';
 import 'package:regal_app/feature/state/bloc/resetpin/resetpin_bloc.dart';
 import 'package:regal_app/feature/state/cubit/otptimer/otptimer_cubit.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
@@ -47,6 +46,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
             state.when(
               otpSendSuccess: (resentotpmodel) {
                 _cusIdcontroller.text = resentotpmodel.cusId!;
+                logger.e(_cusIdcontroller.text);
               },
               otpstateinitial: () {
                 _otpcontroller.clear();
@@ -64,21 +64,15 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                 _otpcontroller.clear();
               },
               facingissuestate: () {},
-              otpVerificationFailed: (otpmodel) {
-                _otpcontroller.clear();
-                showCupertinoDialog(
+              otpVerificationFailed: (otpmodel) async {
+                // _otpcontroller.clear();
+                await showCupertinoDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return CupertinoAlertDialog(
                       title: const Text('Alert'),
                       content: Text(otpmodel),
                       actions: <Widget>[
-                        /*  CupertinoDialogAction(
-                            child: const Text("Cancel"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ), */
                         CupertinoDialogAction(
                           child: const Text("OK"),
                           onPressed: () {
@@ -225,13 +219,17 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                 SizedBox(
                   height: size.height * 0.02,
                 ),
+
                 ResetPinOtpFIeldWidget(size: size, newpin: _otpcontroller),
+
+                //!cusId Issue
+
                 state.maybeWhen(
                   orElse: () => ConfirmOtpButtonDisabled(size: size),
                   otpSendSuccess: (pinResetOtpModel) {
                     logger.i(pinResetOtpModel.cusId);
                     return OtPConfirmButton(
-                        size: size, cusId: pinResetOtpModel.cusId!);
+                        size: size, cusId: _cusIdcontroller.text);
                   },
                 ),
                 SizedBox(
@@ -278,7 +276,6 @@ class OtPConfirmButton extends StatelessWidget {
         ),
         minWidth: size.width,
         onPressed: () {
-          _cusIdcontroller.text = '47663';
           if (_formkey.currentState!.validate()) {
             if (_otpcontroller.text.length == 4) {
               if (_cusIdcontroller.text.isEmpty) {
@@ -290,12 +287,6 @@ class OtPConfirmButton extends StatelessWidget {
                         content: const Text(
                             "We are unable to process your request now, please try again later"),
                         actions: <Widget>[
-                          /* CupertinoDialogAction(
-                                    child: const Text("Cancel"),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ), */
                           CupertinoDialogAction(
                             child: const Text("OK"),
                             onPressed: () {
@@ -308,9 +299,7 @@ class OtPConfirmButton extends StatelessWidget {
               } else {
                 //!change to _cusid controller
                 context.read<ResetpinBloc>().add(
-                      VerfiOtpEvent(
-                          mobileNO: _cusIdcontroller.text,
-                          otp: _otpcontroller.text),
+                      VerfiOtpEvent(mobileNO: cusId, otp: _otpcontroller.text),
                     );
               }
             } else if (_otpcontroller.text.length < 4) {
@@ -390,33 +379,35 @@ class ConfirmOtpButtonDisabled extends StatelessWidget {
         ),
         minWidth: size.width,
         onPressed: () {
-          _cusIdcontroller.text = '47663';
+          logger.d('disabled');
+
           if (_formkey.currentState!.validate()) {
             if (_otpcontroller.text.length == 4) {
               if (_cusIdcontroller.text.isEmpty) {
                 showCupertinoDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return CupertinoAlertDialog(
-                        title: const Text("Alert"),
-                        content: const Text(
-                            "We are unable to process your request now, please try again later"),
-                        actions: <Widget>[
-                          /* CupertinoDialogAction(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CupertinoAlertDialog(
+                      title: const Text("Alert"),
+                      content: const Text(
+                          "We are unable to process your request now, please try again later"),
+                      actions: <Widget>[
+                        /* CupertinoDialogAction(
                                     child: const Text("Cancel"),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
                                   ), */
-                          CupertinoDialogAction(
-                            child: const Text("OK"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    });
+                        CupertinoDialogAction(
+                          child: const Text("OK"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
               } else {
                 //!change to _cusid controller
                 context.read<ResetpinBloc>().add(

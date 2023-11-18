@@ -18,21 +18,25 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CheckbranchslectionState {
   String get selectedbranch => throw _privateConstructorUsedError;
   String get document => throw _privateConstructorUsedError;
+  String get schemeselected => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String selectedbranch, String document)
+    required TResult Function(
+            String selectedbranch, String document, String schemeselected)
         selectedbrachState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String selectedbranch, String document)?
+    TResult? Function(
+            String selectedbranch, String document, String schemeselected)?
         selectedbrachState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String selectedbranch, String document)?
+    TResult Function(
+            String selectedbranch, String document, String schemeselected)?
         selectedbrachState,
     required TResult orElse(),
   }) =>
@@ -65,7 +69,7 @@ abstract class $CheckbranchslectionStateCopyWith<$Res> {
           $Res Function(CheckbranchslectionState) then) =
       _$CheckbranchslectionStateCopyWithImpl<$Res, CheckbranchslectionState>;
   @useResult
-  $Res call({String selectedbranch, String document});
+  $Res call({String selectedbranch, String document, String schemeselected});
 }
 
 /// @nodoc
@@ -84,6 +88,7 @@ class _$CheckbranchslectionStateCopyWithImpl<$Res,
   $Res call({
     Object? selectedbranch = null,
     Object? document = null,
+    Object? schemeselected = null,
   }) {
     return _then(_value.copyWith(
       selectedbranch: null == selectedbranch
@@ -93,6 +98,10 @@ class _$CheckbranchslectionStateCopyWithImpl<$Res,
       document: null == document
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
+              as String,
+      schemeselected: null == schemeselected
+          ? _value.schemeselected
+          : schemeselected // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -106,7 +115,7 @@ abstract class _$$SelectedbrachStateImplCopyWith<$Res>
       __$$SelectedbrachStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String selectedbranch, String document});
+  $Res call({String selectedbranch, String document, String schemeselected});
 }
 
 /// @nodoc
@@ -123,6 +132,7 @@ class __$$SelectedbrachStateImplCopyWithImpl<$Res>
   $Res call({
     Object? selectedbranch = null,
     Object? document = null,
+    Object? schemeselected = null,
   }) {
     return _then(_$SelectedbrachStateImpl(
       selectedbranch: null == selectedbranch
@@ -133,6 +143,10 @@ class __$$SelectedbrachStateImplCopyWithImpl<$Res>
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
               as String,
+      schemeselected: null == schemeselected
+          ? _value.schemeselected
+          : schemeselected // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -141,16 +155,20 @@ class __$$SelectedbrachStateImplCopyWithImpl<$Res>
 
 class _$SelectedbrachStateImpl implements SelectedbrachState {
   const _$SelectedbrachStateImpl(
-      {required this.selectedbranch, required this.document});
+      {required this.selectedbranch,
+      required this.document,
+      required this.schemeselected});
 
   @override
   final String selectedbranch;
   @override
   final String document;
+  @override
+  final String schemeselected;
 
   @override
   String toString() {
-    return 'CheckbranchslectionState.selectedbrachState(selectedbranch: $selectedbranch, document: $document)';
+    return 'CheckbranchslectionState.selectedbrachState(selectedbranch: $selectedbranch, document: $document, schemeselected: $schemeselected)';
   }
 
   @override
@@ -161,11 +179,14 @@ class _$SelectedbrachStateImpl implements SelectedbrachState {
             (identical(other.selectedbranch, selectedbranch) ||
                 other.selectedbranch == selectedbranch) &&
             (identical(other.document, document) ||
-                other.document == document));
+                other.document == document) &&
+            (identical(other.schemeselected, schemeselected) ||
+                other.schemeselected == schemeselected));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedbranch, document);
+  int get hashCode =>
+      Object.hash(runtimeType, selectedbranch, document, schemeselected);
 
   @JsonKey(ignore: true)
   @override
@@ -177,30 +198,33 @@ class _$SelectedbrachStateImpl implements SelectedbrachState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String selectedbranch, String document)
+    required TResult Function(
+            String selectedbranch, String document, String schemeselected)
         selectedbrachState,
   }) {
-    return selectedbrachState(selectedbranch, document);
+    return selectedbrachState(selectedbranch, document, schemeselected);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String selectedbranch, String document)?
+    TResult? Function(
+            String selectedbranch, String document, String schemeselected)?
         selectedbrachState,
   }) {
-    return selectedbrachState?.call(selectedbranch, document);
+    return selectedbrachState?.call(selectedbranch, document, schemeselected);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String selectedbranch, String document)?
+    TResult Function(
+            String selectedbranch, String document, String schemeselected)?
         selectedbrachState,
     required TResult orElse(),
   }) {
     if (selectedbrachState != null) {
-      return selectedbrachState(selectedbranch, document);
+      return selectedbrachState(selectedbranch, document, schemeselected);
     }
     return orElse();
   }
@@ -237,12 +261,15 @@ class _$SelectedbrachStateImpl implements SelectedbrachState {
 abstract class SelectedbrachState implements CheckbranchslectionState {
   const factory SelectedbrachState(
       {required final String selectedbranch,
-      required final String document}) = _$SelectedbrachStateImpl;
+      required final String document,
+      required final String schemeselected}) = _$SelectedbrachStateImpl;
 
   @override
   String get selectedbranch;
   @override
   String get document;
+  @override
+  String get schemeselected;
   @override
   @JsonKey(ignore: true)
   _$$SelectedbrachStateImplCopyWith<_$SelectedbrachStateImpl> get copyWith =>
