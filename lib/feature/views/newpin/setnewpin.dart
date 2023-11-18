@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -238,7 +237,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                 SizedBox(
                   height: size.height * 0.08,
                 ),
-                IconButton(
+                /* IconButton(
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -247,7 +246,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                                 ResetPInScreen(otpmodel: PinResetOtpModel()),
                           ));
                     },
-                    icon: Icon(Icons.abc))
+                    icon: Icon(Icons.abc)) */
               ],
             );
           },

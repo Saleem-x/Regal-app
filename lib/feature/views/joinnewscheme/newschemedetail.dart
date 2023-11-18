@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.dart';
-import 'package:regal_app/feature/state/cubit/cubit/checkbranchslection_cubit.dart';
+import 'package:regal_app/feature/state/cubit/checkbranchselected/checkbranchslection_cubit.dart';
 import 'package:regal_app/feature/state/cubit/pickimage/pickimage_cubit.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
 import 'package:regal_app/feature/views/auth/widgets/otpfieldwidget.dart';
@@ -41,6 +41,7 @@ TextEditingController _doctypecontroller = TextEditingController();
 TextEditingController _branchcontroller = TextEditingController();
 TextEditingController _salesmancontroller = TextEditingController();
 TextEditingController _schemecontroller = TextEditingController();
+TextEditingController _adharNOcontroller = TextEditingController();
 TextEditingController _schmtenurecontroller = TextEditingController();
 String otpfield = '';
 final _formkey = GlobalKey<FormState>();
@@ -257,6 +258,19 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                             ddWindget: DoctypeDropdown(
                                 doctypes: state.documentlist!,
                                 controller: _doctypecontroller),
+                          ),
+                          BlocBuilder<CheckbranchslectionCubit,
+                              CheckbranchslectionState>(
+                            builder: (context, state) {
+                              return state.document == 'ADHAR'
+                                  ? NewSchmFieldWidget(
+                                      controller: _addresscontroller,
+                                      icon: 'assets/svg/terms.svg',
+                                      title: 'Document Number',
+                                      type: TextInputType.name,
+                                    )
+                                  : const SizedBox.shrink();
+                            },
                           ),
                           BlocBuilder<PickimageCubit, PickimageState>(
                             builder: (context, state) {

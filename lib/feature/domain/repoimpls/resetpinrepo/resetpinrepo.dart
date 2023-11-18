@@ -41,7 +41,7 @@ class ResetPinRepo implements IResetPinRepo {
     try {
       final response = await http.post(
         Uri.parse(baseurl + resetpinotpverifyurl),
-        body: {"cusID": '47663', "otp": '6253', "datakey": datakey},
+        body: {"cusID": cusId, "otp": otp, "datakey": datakey},
       );
       if (response.statusCode == 200) {
         logger.e(response.body);

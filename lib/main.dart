@@ -13,7 +13,7 @@ import 'package:regal_app/feature/state/bloc/resetpin/resetpin_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/state/bloc/splash/splash_bloc.dart';
 import 'package:regal_app/feature/state/bloc/updatenewpin/updatenewpin_bloc.dart';
-import 'package:regal_app/feature/state/cubit/cubit/checkbranchslection_cubit.dart';
+import 'package:regal_app/feature/state/cubit/checkbranchselected/checkbranchslection_cubit.dart';
 import 'package:regal_app/feature/state/cubit/mobilevalidator/mobilevalidator_cubit.dart';
 import 'package:regal_app/feature/state/cubit/otptimer/otptimer_cubit.dart';
 import 'package:regal_app/feature/state/cubit/pickimage/pickimage_cubit.dart';

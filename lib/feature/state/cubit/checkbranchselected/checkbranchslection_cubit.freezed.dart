@@ -17,19 +17,23 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CheckbranchslectionState {
   String get selectedbranch => throw _privateConstructorUsedError;
+  String get document => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String selectedbranch) selectedbrachState,
+    required TResult Function(String selectedbranch, String document)
+        selectedbrachState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String selectedbranch)? selectedbrachState,
+    TResult? Function(String selectedbranch, String document)?
+        selectedbrachState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String selectedbranch)? selectedbrachState,
+    TResult Function(String selectedbranch, String document)?
+        selectedbrachState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +65,7 @@ abstract class $CheckbranchslectionStateCopyWith<$Res> {
           $Res Function(CheckbranchslectionState) then) =
       _$CheckbranchslectionStateCopyWithImpl<$Res, CheckbranchslectionState>;
   @useResult
-  $Res call({String selectedbranch});
+  $Res call({String selectedbranch, String document});
 }
 
 /// @nodoc
@@ -79,11 +83,16 @@ class _$CheckbranchslectionStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? selectedbranch = null,
+    Object? document = null,
   }) {
     return _then(_value.copyWith(
       selectedbranch: null == selectedbranch
           ? _value.selectedbranch
           : selectedbranch // ignore: cast_nullable_to_non_nullable
+              as String,
+      document: null == document
+          ? _value.document
+          : document // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -97,7 +106,7 @@ abstract class _$$SelectedbrachStateImplCopyWith<$Res>
       __$$SelectedbrachStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String selectedbranch});
+  $Res call({String selectedbranch, String document});
 }
 
 /// @nodoc
@@ -113,11 +122,16 @@ class __$$SelectedbrachStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? selectedbranch = null,
+    Object? document = null,
   }) {
     return _then(_$SelectedbrachStateImpl(
       selectedbranch: null == selectedbranch
           ? _value.selectedbranch
           : selectedbranch // ignore: cast_nullable_to_non_nullable
+              as String,
+      document: null == document
+          ? _value.document
+          : document // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -126,14 +140,17 @@ class __$$SelectedbrachStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SelectedbrachStateImpl implements SelectedbrachState {
-  const _$SelectedbrachStateImpl({required this.selectedbranch});
+  const _$SelectedbrachStateImpl(
+      {required this.selectedbranch, required this.document});
 
   @override
   final String selectedbranch;
+  @override
+  final String document;
 
   @override
   String toString() {
-    return 'CheckbranchslectionState.selectedbrachState(selectedbranch: $selectedbranch)';
+    return 'CheckbranchslectionState.selectedbrachState(selectedbranch: $selectedbranch, document: $document)';
   }
 
   @override
@@ -142,11 +159,13 @@ class _$SelectedbrachStateImpl implements SelectedbrachState {
         (other.runtimeType == runtimeType &&
             other is _$SelectedbrachStateImpl &&
             (identical(other.selectedbranch, selectedbranch) ||
-                other.selectedbranch == selectedbranch));
+                other.selectedbranch == selectedbranch) &&
+            (identical(other.document, document) ||
+                other.document == document));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedbranch);
+  int get hashCode => Object.hash(runtimeType, selectedbranch, document);
 
   @JsonKey(ignore: true)
   @override
@@ -158,27 +177,30 @@ class _$SelectedbrachStateImpl implements SelectedbrachState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String selectedbranch) selectedbrachState,
+    required TResult Function(String selectedbranch, String document)
+        selectedbrachState,
   }) {
-    return selectedbrachState(selectedbranch);
+    return selectedbrachState(selectedbranch, document);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String selectedbranch)? selectedbrachState,
+    TResult? Function(String selectedbranch, String document)?
+        selectedbrachState,
   }) {
-    return selectedbrachState?.call(selectedbranch);
+    return selectedbrachState?.call(selectedbranch, document);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String selectedbranch)? selectedbrachState,
+    TResult Function(String selectedbranch, String document)?
+        selectedbrachState,
     required TResult orElse(),
   }) {
     if (selectedbrachState != null) {
-      return selectedbrachState(selectedbranch);
+      return selectedbrachState(selectedbranch, document);
     }
     return orElse();
   }
@@ -213,11 +235,14 @@ class _$SelectedbrachStateImpl implements SelectedbrachState {
 }
 
 abstract class SelectedbrachState implements CheckbranchslectionState {
-  const factory SelectedbrachState({required final String selectedbranch}) =
-      _$SelectedbrachStateImpl;
+  const factory SelectedbrachState(
+      {required final String selectedbranch,
+      required final String document}) = _$SelectedbrachStateImpl;
 
   @override
   String get selectedbranch;
+  @override
+  String get document;
   @override
   @JsonKey(ignore: true)
   _$$SelectedbrachStateImplCopyWith<_$SelectedbrachStateImpl> get copyWith =>

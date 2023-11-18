@@ -5,6 +5,8 @@ import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 
+OtpFieldController otpFieldController = OtpFieldController();
+
 class ResetPinOtpFIeldWidget extends StatelessWidget {
   const ResetPinOtpFIeldWidget(
       {super.key, required this.size, this.mobNo, required this.newpin});
@@ -38,6 +40,7 @@ class ResetPinOtpFIeldWidget extends StatelessWidget {
               style: const TextStyle(fontSize: 17),
               textFieldAlignment: MainAxisAlignment.spaceAround,
               fieldStyle: FieldStyle.box,
+              controller: otpFieldController,
               otpFieldStyle: OtpFieldStyle(
                 backgroundColor: kcolorgrey.withOpacity(.09),
                 borderColor: kcolorwhite,
@@ -49,7 +52,6 @@ class ResetPinOtpFIeldWidget extends StatelessWidget {
               onCompleted: (pin) {
                 if (pin.length == 4) {
                   newpin.text = pin;
-                  pin = '';
                 } else {
                   showDialog(
                     context: context,

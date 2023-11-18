@@ -8,6 +8,12 @@ class CheckbranchslectionCubit extends Cubit<CheckbranchslectionState> {
   CheckbranchslectionCubit() : super(CheckbranchslectionState.initial());
 
   void checkisselected(String branchctrl) {
-    emit(SelectedbrachState(selectedbranch: branchctrl));
+    emit(state.copyWith(selectedbranch: branchctrl));
+  }
+
+  void isdocumentAdhar(String document) {
+    emit(
+      state.copyWith(document: document),
+    );
   }
 }

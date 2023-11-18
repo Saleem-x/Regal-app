@@ -9,7 +9,7 @@ import 'package:regal_app/feature/data/models/document_type_model/document_type_
 import 'package:regal_app/feature/data/models/relation_ship_model/relation_ship_model.dart';
 import 'package:regal_app/feature/data/models/scheme_list_model/scheme_list_model.dart';
 import 'package:regal_app/feature/data/models/scheme_tenure_model/scheme_tenure_model.dart';
-import 'package:regal_app/feature/state/cubit/cubit/checkbranchslection_cubit.dart';
+import 'package:regal_app/feature/state/cubit/checkbranchselected/checkbranchslection_cubit.dart';
 
 import '../newschemedetail.dart';
 
@@ -167,6 +167,10 @@ class DoctypeDropdown extends StatelessWidget {
       }).toList(),
       onChanged: (value) {
         controller.text = value!;
+        // print(controller.text);
+        context
+            .read<CheckbranchslectionCubit>()
+            .isdocumentAdhar(value == '1' ? 'ADHAR' : 'Other');
       },
       decoration: InputDecoration(
         // labelText: 'Select an item',

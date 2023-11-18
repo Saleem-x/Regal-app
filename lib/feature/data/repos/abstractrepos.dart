@@ -58,11 +58,14 @@ abstract class ICreateUserRepo {
   Future<Either<MainFailures, CreateUserOutModel>> createNewUserScheme(
       CreateNewUserSchemeModel newuser);
 }
+
 abstract class IResetPinRepo {
   Future<Either<MainFailures, PinResetOtpModel>> sendOtp(String mobileNo);
   Future<Either<MainFailures, PinResetOtpModel>> verifyOtP(
       String cusId, String otp);
 
-       Future<Either<MainFailures, PinResetOtpModel>> resetPin(
-      String cusId, String pin,);
+  Future<Either<MainFailures, PinResetOtpModel>> resetPin(
+    String cusId,
+    String pin,
+  );
 }
