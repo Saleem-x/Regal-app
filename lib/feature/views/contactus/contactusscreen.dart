@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart';
@@ -20,9 +20,7 @@ class ContactUsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Contact Us',
-          style: TextStyle(
-            fontSize: 16.sp,
-          ),
+          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
         ),
       ),
       body: Padding(
@@ -51,26 +49,26 @@ class ContactUsScreen extends StatelessWidget {
                         ),
                         ContactWidget(
                           size: size,
-                          icon1: Iconsax.user,
+                          icon1: 'assets/svg/profile.svg',
                           title: contactdetails.staffName!,
                         ),
                         ContactWidget(
                           size: size,
-                          icon1: Icons.mail_outlined,
+                          icon1: 'assets/svg/mail.svg',
                           title: contactdetails.email!,
-                          img: 'assets/images/miscellaneous.png',
+                          img: 'assets/svg/sendmail.svg',
                         ),
                         ContactWidget(
                           size: size,
-                          icon1: FontAwesomeIcons.phone,
+                          icon1: 'assets/svg/phoneill2.svg',
                           title: contactdetails.mobile!,
-                          img: 'assets/images/miscellaneous.png',
+                          img: 'assets/svg/phone.svg',
                         ),
                         ContactWidget(
                           size: size,
-                          icon1: FontAwesomeIcons.whatsapp,
+                          icon1: 'assets/svg/whatsapp_1.svg',
                           title: contactdetails.whatsApp!,
-                          img: 'assets/images/miscellaneous.png',
+                          img: 'assets/svg/whatsapp.svg',
                         ),
                       ],
                     ),
@@ -95,7 +93,7 @@ class ContactWidget extends StatelessWidget {
   });
 
   final Size size;
-  final IconData icon1;
+  final String icon1;
   final String? img;
   final String title;
 
@@ -105,9 +103,10 @@ class ContactWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(
+            SvgPicture.asset(
               icon1,
-              size: 18,
+              height: 15.h,
+              width: 15.w,
             ),
             SizedBox(
               width: size.width * 0.03,
@@ -119,10 +118,10 @@ class ContactWidget extends StatelessWidget {
             const Spacer(),
             img == null
                 ? const SizedBox()
-                : Image.asset(
-                    'assets/images/miscellaneous.png',
-                    height: size.height * 0.03,
-                    width: size.height * 0.03,
+                : SvgPicture.asset(
+                    img!,
+                    height: 15.h,
+                    width: 15.w,
                   )
           ],
         ),
