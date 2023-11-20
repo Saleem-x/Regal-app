@@ -7,6 +7,7 @@ import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
+import 'package:regal_app/feature/views/payment/confirmpayment.dart';
 import 'package:regal_app/feature/views/viewdetails/schemtandc.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -610,7 +611,15 @@ class ViewDetailScreen extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ConfirmPaymentScreen(
+                  scheme: scheme, schemedetail: schemedetil),
+            ),
+          );
+        },
         child: Text(
           'Pay',
           style: TextStyle(

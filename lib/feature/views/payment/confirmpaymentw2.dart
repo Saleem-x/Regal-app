@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/views/payment/paymentfailedscreen.dart';
+import 'package:regal_app/feature/views/payment/paymentsucces.dart';
 
 class ConfirmPaymentTWO extends StatelessWidget {
   const ConfirmPaymentTWO({super.key});
@@ -79,50 +81,68 @@ class ConfirmPaymentTWO extends StatelessWidget {
             SizedBox(
               height: 10.h,
             ),
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: kcolorwhite,
-                  radius: 20,
-                  child: Image.asset(
-                    'assets/images/Google_Pay_Logo.svg.png',
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PaymentSuccessScreen(),
+                    ));
+              },
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: kcolorwhite,
+                    radius: 20,
+                    child: Image.asset(
+                      'assets/images/Google_Pay_Logo.svg.png',
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 20.w,
-                ),
-                Text(
-                  'Google Pay',
-                  style: TextStyle(
-                    color: kcolorblack,
-                    fontSize: 16.sp,
+                  SizedBox(
+                    width: 20.w,
                   ),
-                ),
-              ],
+                  Text(
+                    'Google Pay',
+                    style: TextStyle(
+                      color: kcolorblack,
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                ],
+              ),
             ),
             const Divider(
               color: Color(0xFFD1D1D1),
             ),
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: kcolorwhite,
-                  radius: 20,
-                  child: Image.asset(
-                    'assets/images/Paytm_Logo.jpg',
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PaymentFailedScreeen(),
+                    ));
+              },
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: kcolorwhite,
+                    radius: 20,
+                    child: Image.asset(
+                      'assets/images/Paytm_Logo.jpg',
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 20.w,
-                ),
-                Text(
-                  'Paytm',
-                  style: TextStyle(
-                    color: kcolorblack,
-                    fontSize: 16.sp,
+                  SizedBox(
+                    width: 20.w,
                   ),
-                ),
-              ],
+                  Text(
+                    'Paytm',
+                    style: TextStyle(
+                      color: kcolorblack,
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                ],
+              ),
             ),
             const Divider(
               color: Color(0xFFD1D1D1),

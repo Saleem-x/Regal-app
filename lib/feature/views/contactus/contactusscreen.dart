@@ -60,9 +60,9 @@ class ContactUsScreen extends StatelessWidget {
                         ),
                         ContactWidget(
                           size: size,
-                          icon1: 'assets/svg/phoneill2.svg',
+                          icon1: 'assets/svg/phone.svg',
                           title: contactdetails.mobile!,
-                          img: 'assets/svg/phone.svg',
+                          img: 'assets/svg/call.svg',
                         ),
                         ContactWidget(
                           size: size,
@@ -102,11 +102,12 @@ class ContactWidget extends StatelessWidget {
     return Column(
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(
               icon1,
-              height: 15.h,
-              width: 15.w,
+              height: 10.h,
+              width: 10.w,
             ),
             SizedBox(
               width: size.width * 0.03,
@@ -120,8 +121,8 @@ class ContactWidget extends StatelessWidget {
                 ? const SizedBox()
                 : SvgPicture.asset(
                     img!,
-                    height: 15.h,
-                    width: 15.w,
+                    height: 13.h,
+                    width: 13.w,
                   )
           ],
         ),

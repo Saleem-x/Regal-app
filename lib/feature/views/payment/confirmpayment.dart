@@ -3,10 +3,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
+import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/views/payment/confirmpaymentw2.dart';
 
-class ConfirmPaymentScreen extends StatelessWidget {
-  const ConfirmPaymentScreen({super.key});
+class ConfirmPaymentScreen extends StatefulWidget {
+  final CustomerSchemeModel scheme;
+  final SchemeDetailsModel schemedetail;
+  const ConfirmPaymentScreen(
+      {super.key, required this.scheme, required this.schemedetail});
+
+  @override
+  State<ConfirmPaymentScreen> createState() => _ConfirmPaymentScreenState();
+}
+
+final TextEditingController _payablecontroller = TextEditingController();
+
+class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
+  @override
+  void initState() {
+    _payablecontroller.text = widget.scheme.instAmount!;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +41,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Scheme Detail',
+          'Confirm Payment',
           style: TextStyle(
               // fontFamily: kboldfont,
               fontSize: 17.sp,
@@ -37,8 +55,8 @@ class ConfirmPaymentScreen extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  width: 40.h,
-                  height: 40.h,
+                  width: 37.h,
+                  height: 37.h,
                   decoration: const BoxDecoration(
                     // borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
@@ -69,19 +87,19 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'KT123-Ak',
+                          widget.scheme.schemeNo!,
                           style: TextStyle(
                             // fontFamily: kboldfont,
                             fontWeight: FontWeight.w500,
-                            fontSize: 20.sp,
+                            fontSize: 18.sp,
                           ),
                         ),
                         Text(
-                          'AKSHAYANIDHI|0.00',
+                          '${widget.scheme.schemeName!} | ₹${double.parse(widget.scheme.totalAmount!).abs()}',
                           style: TextStyle(
                             // fontFamily: kboldfont,
                             fontWeight: FontWeight.w400,
-                            fontSize: 16.sp,
+                            fontSize: 14.sp,
                           ),
                         ),
                       ],
@@ -116,7 +134,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       height: 10.h,
                     ),
                     Text(
-                      '₹5540.00',
+                      '₹${widget.schemedetail.goldRate!}',
                       style: TextStyle(
                         color: kcolorblack,
                         // fontFamily: kprimaryfont,
@@ -148,7 +166,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                       height: 10.h,
                     ),
                     Text(
-                      '₹100.00',
+                      '₹${widget.scheme.instAmount!}',
                       style: TextStyle(
                         color: kcolorblack,
                         // fontFamily: kprimaryfont,
@@ -177,7 +195,11 @@ class ConfirmPaymentScreen extends StatelessWidget {
                         width: size.width,
                         child: TextFormField(
                           keyboardType: TextInputType.number,
-                          // controller: _payablecontroller,
+                          controller: _payablecontroller,
+                          style: TextStyle(
+                              color: kcolorblack,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600),
                           decoration: const InputDecoration(
                               border: UnderlineInputBorder(
                                 borderSide: BorderSide(
@@ -197,38 +219,43 @@ class ConfirmPaymentScreen extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            child: Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Current Weight',
-                      style: TextStyle(
-                        color: ktextgrey,
-                        // fontFamily: kprimaryfont,
-                        fontSize: 13.sp,
+          widget.schemedetail.goldWeight == null ||
+                  widget.schemedetail.goldWeight!.isEmpty ||
+                  double.parse(widget.schemedetail.goldWeight!) <= .000
+              ? const SizedBox.shrink()
+              : Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Current Weight',
+                            style: TextStyle(
+                              color: ktextgrey,
+                              // fontFamily: kprimaryfont,
+                              fontSize: 13.sp,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Text(
+                            widget.schemedetail.goldWeight!,
+                            style: TextStyle(
+                              color: kcolorblack,
+                              // fontFamily: kprimaryfont,/
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Text(
-                      '0.02',
-                      style: TextStyle(
-                        color: kcolorblack,
-                        // fontFamily: kprimaryfont,/
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
           const Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),

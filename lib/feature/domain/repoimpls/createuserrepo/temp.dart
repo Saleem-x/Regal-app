@@ -16,7 +16,7 @@ abstract class ApiService {
   @MultiPart()
   Future<String> uploadImage(
     @Part(
-      fileName: 'userimage',
+      fileName: 'userprofileimage',
     )
     File file,
     @Field('datakey') String dataKey,

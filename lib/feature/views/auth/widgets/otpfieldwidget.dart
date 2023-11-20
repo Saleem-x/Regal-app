@@ -9,7 +9,7 @@ import 'package:regal_app/feature/state/bloc/newschemeotp/newschemeotp_bloc.dart
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
 
-class OtpFIeldWidget extends StatelessWidget {
+class OtpFIeldWidget extends StatefulWidget {
   const OtpFIeldWidget(
       {super.key, required this.size, this.mobNo, this.newpin});
 
@@ -17,6 +17,13 @@ class OtpFIeldWidget extends StatelessWidget {
   final String? mobNo;
   final TextEditingController? newpin;
 
+  @override
+  State<OtpFIeldWidget> createState() => _OtpFIeldWidgetState();
+}
+
+final OtpFieldController _otpFieldController = OtpFieldController();
+
+class _OtpFIeldWidgetState extends State<OtpFIeldWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,34 +38,42 @@ class OtpFIeldWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: size.width * 0.05,
+            width: widget.size.width * 0.05,
           ),
           Expanded(
             child: OTPTextField(
               length: 4,
               keyboardType: TextInputType.number,
-              width: size.width,
-              fieldWidth: size.width * 0.13,
+              width: widget.size.width,
+              fieldWidth: widget.size.width * 0.13,
               style: const TextStyle(fontSize: 17),
+              controller: _otpFieldController,
               textFieldAlignment: MainAxisAlignment.spaceAround,
               fieldStyle: FieldStyle.box,
               otpFieldStyle: OtpFieldStyle(
                 backgroundColor: kcolorgrey.withOpacity(.09),
-                borderColor: kcolorwhite,
-                disabledBorderColor: kcolorwhite,
-                enabledBorderColor: kcolorwhite,
-                errorBorderColor: kcolorwhite,
-                focusBorderColor: kcolorwhite,
+                borderColor: kbgcolor,
+                disabledBorderColor: kbgcolor,
+                enabledBorderColor: kbgcolor,
+                errorBorderColor: kbgcolor,
+                focusBorderColor: kbgcolor,
               ),
+              onChanged: (value) {
+                otp = value;
+                otpfield = value;
+              },
               onCompleted: (pin) {
                 if (pin.length == 4) {
                   otp = pin;
                   otpfield = pin;
 
-                  if (mobNo != null && mobNo!.length == 10) {
+                  if (widget.mobNo != null && widget.mobNo!.length == 10) {
                     context.read<NewschemeotpBloc>().add(
-                          VerfiOtpEvent(mobileNO: mobNo!, otp: otpfield),
+                          VerfiOtpEvent(mobileNO: widget.mobNo!, otp: otpfield),
                         );
+                  }
+                  if (pin.isEmpty) {
+                    otp = '';
                   }
 
                   pin = '';
@@ -123,11 +138,11 @@ class NewPinOtpFIeldWidget extends StatelessWidget {
               fieldStyle: FieldStyle.box,
               otpFieldStyle: OtpFieldStyle(
                 backgroundColor: kcolorgrey.withOpacity(.09),
-                borderColor: kcolorwhite,
-                disabledBorderColor: kcolorwhite,
-                enabledBorderColor: kcolorwhite,
-                errorBorderColor: kcolorwhite,
-                focusBorderColor: kcolorwhite,
+                borderColor: kbgcolor,
+                disabledBorderColor: kbgcolor,
+                enabledBorderColor: kbgcolor,
+                errorBorderColor: kbgcolor,
+                focusBorderColor: kbgcolor,
               ),
               onCompleted: (pin) {
                 if (pin.length == 4) {
@@ -194,11 +209,11 @@ class ResetPinHeaderOtpField extends StatelessWidget {
               fieldStyle: FieldStyle.box,
               otpFieldStyle: OtpFieldStyle(
                 backgroundColor: kcolorgrey.withOpacity(.09),
-                borderColor: kcolorwhite,
-                disabledBorderColor: kcolorwhite,
-                enabledBorderColor: kcolorwhite,
-                errorBorderColor: kcolorwhite,
-                focusBorderColor: kcolorwhite,
+                borderColor: kbgcolor,
+                disabledBorderColor: kbgcolor,
+                enabledBorderColor: kbgcolor,
+                errorBorderColor: kbgcolor,
+                focusBorderColor: kbgcolor,
               ),
               onCompleted: (pin) {
                 if (pin.length == 4) {

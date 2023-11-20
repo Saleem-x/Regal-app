@@ -86,7 +86,7 @@ class GoldRateWidget extends StatelessWidget {
                                     style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 10.sp,
-                                        color: ktextgrey.withOpacity(.6)),
+                                        color: kcolorblack.withOpacity(.8)),
                                   )
                                 ],
                               ),
@@ -102,7 +102,7 @@ class GoldRateWidget extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 8.sp,
-                          color: ktextgrey.withOpacity(.6),
+                          color: kcolorblack.withOpacity(.8),
                         ),
                       )
                     ],

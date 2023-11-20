@@ -105,7 +105,7 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                     padding:
                                         const EdgeInsets.symmetric(vertical: 5),
                                     child: Text(
-                                      'Due Date: ₹ ${schemedetail.dueDate}',
+                                      'Due Date: ${schemedetail.dueDate}',
                                       style: TextStyle(
                                         color: ktextgrey,
                                         fontSize: 14.sp,
@@ -202,7 +202,9 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          const ConfirmPaymentScreen(),
+                                          ConfirmPaymentScreen(
+                                              scheme: scheme,
+                                              schemedetail: schemedetail),
                                     ),
                                   );
                                 },

@@ -38,14 +38,14 @@ class PaymentSuccessScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 80.h,
-                    width: 60.w,
+                    // height: 80.h,
+                    // width: 60.w,
                     child: Center(
                       child: SvgPicture.asset(
-                        'assets/others/iconssvg/tick.svg',
+                        'assets/svg/tick.svg',
                         fit: BoxFit.cover,
-                        height: 60.h,
-                        width: 62.w,
+                        height: 90.h,
+                        width: 80.w,
                       ),
                     ),
                   ),
@@ -62,7 +62,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Text(
-                      '₹ 100',
+                      '₹100',
                       style: TextStyle(
                           // fontFamily: kprimaryfont,
                           color: kcolorwhite.withOpacity(.9),

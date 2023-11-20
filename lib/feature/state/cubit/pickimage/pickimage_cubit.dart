@@ -1,11 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-
-import 'package:regal_app/core/api/endpoints.dart';
-
 part 'pickimage_state.dart';
 part 'pickimage_cubit.freezed.dart';
 

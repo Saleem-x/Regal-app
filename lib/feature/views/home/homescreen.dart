@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                     "Today's Gold Rate",
                     style: TextStyle(
                       // fontFamily: kprimaryfont,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontSize: 15.sp,
                       color: ktextgrey.withOpacity(
                         .7,
@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                     style: TextStyle(
                       // fontFamily: kprimaryfont,
                       fontWeight: FontWeight.w400,
-                      fontSize: 17.sp,
+                      fontSize: 15.sp,
                       color: ktextgrey.withOpacity(
                         .7,
                       ),

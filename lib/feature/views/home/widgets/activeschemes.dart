@@ -67,7 +67,7 @@ class ActiveSchemeWidget extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) => Padding(
                                 padding: EdgeInsets.only(
-                                  left: schemes.length == 1 ? 0 : 14,
+                                  left: schemes.length == 1 ? 0 : 10,
                                 ),
                                 child: BlocBuilder<SchemeselectorCubit,
                                     SchemeselectorState>(
@@ -101,7 +101,7 @@ class ActiveSchemeWidget extends StatelessWidget {
                                         elevation: 3,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(30),
+                                              BorderRadius.circular(30.sp),
                                         ),
                                         child: Container(
                                           width: 230.w,
@@ -121,19 +121,20 @@ class ActiveSchemeWidget extends StatelessWidget {
                                                   begin: Alignment.bottomLeft,
                                                   end: Alignment.topRight),
                                               borderRadius:
-                                                  BorderRadius.circular(30),
+                                                  BorderRadius.circular(30.sp),
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: ktextgrey
-                                                        .withOpacity(.2),
+                                                        .withOpacity(.18),
                                                     blurRadius: 2,
                                                     offset:
-                                                        const Offset(-2, 2.5),
+                                                        const Offset(-4, 2.5),
                                                     blurStyle: BlurStyle.normal,
-                                                    spreadRadius: 0.5)
+                                                    spreadRadius: 0.2)
                                               ]),
                                           child: Padding(
-                                            padding: const EdgeInsets.all(10.0),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 15, vertical: 10.h),
                                             child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
