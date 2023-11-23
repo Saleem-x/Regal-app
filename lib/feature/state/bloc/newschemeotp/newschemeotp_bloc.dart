@@ -32,8 +32,10 @@ class NewschemeotpBloc extends Bloc<NewschemeotpEvent, NewschemeotpState> {
       );
     });
     on<VerfiOtpEvent>((event, emit) async {
-      Either<MainFailures, VerifyOtpModel> sendotp =
-          await otprepo.verifyOtP(event.mobileNO, event.otp,);
+      Either<MainFailures, VerifyOtpModel> sendotp = await otprepo.verifyOtP(
+        event.mobileNO,
+        event.otp,
+      );
 
       emit(sendotp.fold(
           (l) => l.when(

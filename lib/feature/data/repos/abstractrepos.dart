@@ -9,6 +9,8 @@ import 'package:regal_app/feature/data/models/document_type_model/document_type_
 import 'package:regal_app/feature/data/models/generate_otp_model/generate_otp_model.dart';
 import 'package:regal_app/feature/data/models/gold_rate_model/gold_rate_model.dart';
 import 'package:regal_app/feature/data/models/instalment_hystory_model/instalment_hystory_model.dart';
+import 'package:regal_app/feature/data/models/payment_hystory_in_model/payment_hystory_in_model.dart';
+import 'package:regal_app/feature/data/models/payment_hystoryout_model/payment_hystoryout_model.dart';
 import 'package:regal_app/feature/data/models/pin_reset_otp_model/pin_reset_otp_model.dart';
 import 'package:regal_app/feature/data/models/relation_ship_model/relation_ship_model.dart';
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
@@ -68,4 +70,9 @@ abstract class IResetPinRepo {
     String cusId,
     String pin,
   );
+}
+
+abstract class IPaymentHystoryRepo {
+  Future<Either<MainFailures, PaymentHystoryoutModel>> getpaymenthystory(
+      PaymentHystoryInModel userpaymentmodel);
 }

@@ -24,7 +24,7 @@ class MobileFieldWidget extends StatelessWidget {
         children: [
           SizedBox(
             child: SvgPicture.asset(
-              'assets/svg/phoneill2.svg',
+              'assets/svg/phoneoutline.svg',
               height: 15.h,
               width: 15.w,
             ),
@@ -49,20 +49,25 @@ class MobileFieldWidget extends StatelessWidget {
                 LengthLimitingTextInputFormatter(10),
                 FilteringTextInputFormatter.digitsOnly
               ],
+              style: TextStyle(
+                  color: kcolorblack.withOpacity(
+                    .8,
+                  ),
+                  fontSize: 14.sp),
               decoration: InputDecoration(
-                isDense: true,
+                isDense: false,
                 prefixIcon: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      '+91  ',
+                      '+91 ',
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                        color: kcolorblack.withOpacity(
-                          .5,
-                        ),
-                      ),
+                          color: kcolorblack.withOpacity(
+                            .7,
+                          ),
+                          fontSize: 13.sp),
                     ),
                   ],
                 ),
@@ -110,8 +115,8 @@ class CustomMobileField extends StatelessWidget {
         children: [
           SizedBox(
             child: SvgPicture.asset(
-              'assets/svg/phoneill2.svg',
-              height: 15.h,
+              'assets/svg/phoneoutline.svg',
+              height: 18.h,
               width: 15.w,
             ),
           ),
@@ -122,6 +127,7 @@ class CustomMobileField extends StatelessWidget {
             child: BlocBuilder<MobilevalidatorCubit, MobilevalidatorState>(
               builder: (context, state) {
                 return TextFormField(
+                  autofocus: false,
                   controller: controller,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -134,6 +140,11 @@ class CustomMobileField extends StatelessWidget {
                       return null;
                     }
                   },
+                  style: TextStyle(
+                      color: kcolorblack.withOpacity(
+                        .8,
+                      ),
+                      fontSize: 14.sp),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(10),
@@ -166,19 +177,29 @@ class CustomMobileField extends StatelessWidget {
                     ),
                     prefixIcon: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          '+91  ',
+                          '+91 ',
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                            color: kcolorblack.withOpacity(
-                              .5,
-                            ),
-                          ),
+                              color: kcolorblack.withOpacity(
+                                .7,
+                              ),
+                              fontSize: 13.sp),
                         ),
                       ],
-                    ),
+                    )
+                    /*  Text(
+                      '+91  ',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: kcolorblack.withOpacity(
+                          .5,
+                        ),
+                      ),
+                    ) */
+                    ,
                     border: const UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: Color(0xFFD1D1D1),

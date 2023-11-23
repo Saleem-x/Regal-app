@@ -53,7 +53,6 @@ class ProfileTileWidget extends StatelessWidget {
                   Text(
                     user.cusName,
                     style: TextStyle(
-                      // fontFamily: kboldfont,
                       fontWeight: FontWeight.w600,
                       fontSize: 19.sp,
                     ),
@@ -64,7 +63,6 @@ class ProfileTileWidget extends StatelessWidget {
                   Text(
                     '+91 ${user.cusMobileNumber}',
                     style: TextStyle(
-                      // fontFamily: kboldfont,
                       fontWeight: FontWeight.w500,
                       fontSize: 16.sp,
                     ),

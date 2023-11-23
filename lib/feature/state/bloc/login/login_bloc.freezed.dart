@@ -20,18 +20,21 @@ mixin _$LoginEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(LoginModel logindata) loginEvent,
     required TResult Function() loginresetEvent,
+    required TResult Function() addLoadingEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(LoginModel logindata)? loginEvent,
     TResult? Function()? loginresetEvent,
+    TResult? Function()? addLoadingEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(LoginModel logindata)? loginEvent,
     TResult Function()? loginresetEvent,
+    TResult Function()? addLoadingEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$LoginEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(UserLoginEvent value) loginEvent,
     required TResult Function(LoginresetEvent value) loginresetEvent,
+    required TResult Function(AddLoadingEvent value) addLoadingEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(UserLoginEvent value)? loginEvent,
     TResult? Function(LoginresetEvent value)? loginresetEvent,
+    TResult? Function(AddLoadingEvent value)? addLoadingEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UserLoginEvent value)? loginEvent,
     TResult Function(LoginresetEvent value)? loginresetEvent,
+    TResult Function(AddLoadingEvent value)? addLoadingEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,6 +148,7 @@ class _$UserLoginEventImpl implements UserLoginEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(LoginModel logindata) loginEvent,
     required TResult Function() loginresetEvent,
+    required TResult Function() addLoadingEvent,
   }) {
     return loginEvent(logindata);
   }
@@ -151,6 +158,7 @@ class _$UserLoginEventImpl implements UserLoginEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(LoginModel logindata)? loginEvent,
     TResult? Function()? loginresetEvent,
+    TResult? Function()? addLoadingEvent,
   }) {
     return loginEvent?.call(logindata);
   }
@@ -160,6 +168,7 @@ class _$UserLoginEventImpl implements UserLoginEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(LoginModel logindata)? loginEvent,
     TResult Function()? loginresetEvent,
+    TResult Function()? addLoadingEvent,
     required TResult orElse(),
   }) {
     if (loginEvent != null) {
@@ -173,6 +182,7 @@ class _$UserLoginEventImpl implements UserLoginEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(UserLoginEvent value) loginEvent,
     required TResult Function(LoginresetEvent value) loginresetEvent,
+    required TResult Function(AddLoadingEvent value) addLoadingEvent,
   }) {
     return loginEvent(this);
   }
@@ -182,6 +192,7 @@ class _$UserLoginEventImpl implements UserLoginEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(UserLoginEvent value)? loginEvent,
     TResult? Function(LoginresetEvent value)? loginresetEvent,
+    TResult? Function(AddLoadingEvent value)? addLoadingEvent,
   }) {
     return loginEvent?.call(this);
   }
@@ -191,6 +202,7 @@ class _$UserLoginEventImpl implements UserLoginEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UserLoginEvent value)? loginEvent,
     TResult Function(LoginresetEvent value)? loginresetEvent,
+    TResult Function(AddLoadingEvent value)? addLoadingEvent,
     required TResult orElse(),
   }) {
     if (loginEvent != null) {
@@ -250,6 +262,7 @@ class _$LoginresetEventImpl implements LoginresetEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(LoginModel logindata) loginEvent,
     required TResult Function() loginresetEvent,
+    required TResult Function() addLoadingEvent,
   }) {
     return loginresetEvent();
   }
@@ -259,6 +272,7 @@ class _$LoginresetEventImpl implements LoginresetEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(LoginModel logindata)? loginEvent,
     TResult? Function()? loginresetEvent,
+    TResult? Function()? addLoadingEvent,
   }) {
     return loginresetEvent?.call();
   }
@@ -268,6 +282,7 @@ class _$LoginresetEventImpl implements LoginresetEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(LoginModel logindata)? loginEvent,
     TResult Function()? loginresetEvent,
+    TResult Function()? addLoadingEvent,
     required TResult orElse(),
   }) {
     if (loginresetEvent != null) {
@@ -281,6 +296,7 @@ class _$LoginresetEventImpl implements LoginresetEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(UserLoginEvent value) loginEvent,
     required TResult Function(LoginresetEvent value) loginresetEvent,
+    required TResult Function(AddLoadingEvent value) addLoadingEvent,
   }) {
     return loginresetEvent(this);
   }
@@ -290,6 +306,7 @@ class _$LoginresetEventImpl implements LoginresetEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(UserLoginEvent value)? loginEvent,
     TResult? Function(LoginresetEvent value)? loginresetEvent,
+    TResult? Function(AddLoadingEvent value)? addLoadingEvent,
   }) {
     return loginresetEvent?.call(this);
   }
@@ -299,6 +316,7 @@ class _$LoginresetEventImpl implements LoginresetEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UserLoginEvent value)? loginEvent,
     TResult Function(LoginresetEvent value)? loginresetEvent,
+    TResult Function(AddLoadingEvent value)? addLoadingEvent,
     required TResult orElse(),
   }) {
     if (loginresetEvent != null) {
@@ -310,6 +328,114 @@ class _$LoginresetEventImpl implements LoginresetEvent {
 
 abstract class LoginresetEvent implements LoginEvent {
   const factory LoginresetEvent() = _$LoginresetEventImpl;
+}
+
+/// @nodoc
+abstract class _$$AddLoadingEventImplCopyWith<$Res> {
+  factory _$$AddLoadingEventImplCopyWith(_$AddLoadingEventImpl value,
+          $Res Function(_$AddLoadingEventImpl) then) =
+      __$$AddLoadingEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AddLoadingEventImplCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$AddLoadingEventImpl>
+    implements _$$AddLoadingEventImplCopyWith<$Res> {
+  __$$AddLoadingEventImplCopyWithImpl(
+      _$AddLoadingEventImpl _value, $Res Function(_$AddLoadingEventImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AddLoadingEventImpl implements AddLoadingEvent {
+  const _$AddLoadingEventImpl();
+
+  @override
+  String toString() {
+    return 'LoginEvent.addLoadingEvent()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AddLoadingEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(LoginModel logindata) loginEvent,
+    required TResult Function() loginresetEvent,
+    required TResult Function() addLoadingEvent,
+  }) {
+    return addLoadingEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(LoginModel logindata)? loginEvent,
+    TResult? Function()? loginresetEvent,
+    TResult? Function()? addLoadingEvent,
+  }) {
+    return addLoadingEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(LoginModel logindata)? loginEvent,
+    TResult Function()? loginresetEvent,
+    TResult Function()? addLoadingEvent,
+    required TResult orElse(),
+  }) {
+    if (addLoadingEvent != null) {
+      return addLoadingEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UserLoginEvent value) loginEvent,
+    required TResult Function(LoginresetEvent value) loginresetEvent,
+    required TResult Function(AddLoadingEvent value) addLoadingEvent,
+  }) {
+    return addLoadingEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(UserLoginEvent value)? loginEvent,
+    TResult? Function(LoginresetEvent value)? loginresetEvent,
+    TResult? Function(AddLoadingEvent value)? addLoadingEvent,
+  }) {
+    return addLoadingEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UserLoginEvent value)? loginEvent,
+    TResult Function(LoginresetEvent value)? loginresetEvent,
+    TResult Function(AddLoadingEvent value)? addLoadingEvent,
+    required TResult orElse(),
+  }) {
+    if (addLoadingEvent != null) {
+      return addLoadingEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddLoadingEvent implements LoginEvent {
+  const factory AddLoadingEvent() = _$AddLoadingEventImpl;
 }
 
 /// @nodoc

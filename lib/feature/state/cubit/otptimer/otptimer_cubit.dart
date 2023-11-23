@@ -20,20 +20,18 @@ class OtptimerCubit extends Cubit<OtptimerState> {
 
   void startTimer() {
     start = 30;
-    if (timer != null && !timer!.isActive) {
-      const oneSec = Duration(seconds: 1);
-      timer = Timer.periodic(
-        oneSec,
-        (Timer timer) {
-          if (start == 0) {
-            timer.cancel();
+    const oneSec = Duration(seconds: 1);
+    timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (start == 0) {
+          timer.cancel();
 
-            emit(const SetotpTimerState(time: 30));
-          } else {
-            emit(SetotpTimerState(time: start--));
-          }
-        },
-      );
-    }
+          emit(const SetotpTimerState(time: 30));
+        } else {
+          emit(SetotpTimerState(time: start--));
+        }
+      },
+    );
   }
 }

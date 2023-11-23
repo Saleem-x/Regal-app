@@ -1,13 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pay/pay.dart';
+import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/views/payment/paymentconfig.dart';
 import 'package:regal_app/feature/views/payment/paymentfailedscreen.dart';
-import 'package:regal_app/feature/views/payment/paymentsucces.dart';
 
-class ConfirmPaymentTWO extends StatelessWidget {
+class ConfirmPaymentTWO extends StatefulWidget {
   const ConfirmPaymentTWO({super.key});
 
+  @override
+  State<ConfirmPaymentTWO> createState() => _ConfirmPaymentTWOState();
+}
+
+var gpaybutton = GooglePayButton(
+  paymentConfiguration: PaymentConfiguration.fromJsonString(defaultGooglePay),
+  paymentItems: _paymentItems,
+  type: GooglePayButtonType.buy,
+  margin: const EdgeInsets.only(top: 15.0),
+  onPaymentResult: (result) {
+    logger.e(result);
+  },
+  loadingIndicator: const Center(
+    child: CircularProgressIndicator(),
+  ),
+);
+
+class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -81,13 +101,29 @@ class ConfirmPaymentTWO extends StatelessWidget {
             SizedBox(
               height: 10.h,
             ),
+            // GooglePayButton(
+            //   onPressed: () {},
+            //   paymentConfiguration:
+            //       PaymentConfiguration.fromJsonString(defaultGooglePay),
+            //   paymentItems: _paymentItems,
+            //   type: GooglePayButtonType.pay,
+            //   margin: const EdgeInsets.only(top: 15.0),
+            //   onPaymentResult: (result) {
+            //     logger.e(result);
+            //   },
+            //   loadingIndicator: const Center(
+            //     child: CircularProgressIndicator(),
+            //   ),
+            // ),
             GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PaymentSuccessScreen(),
-                    ));
+              onTap: () async {
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const PaymentSuccessScreen(),
+                //     ));
+
+                // await initpaymentsheet
               },
               child: Row(
                 children: [
@@ -152,4 +188,46 @@ class ConfirmPaymentTWO extends StatelessWidget {
       ),
     );
   }
+
+ /*  initpaymentsheet() async {
+    var paymentintet = await getintent();
+    // Stripe.publishableKey =
+    //     "pk_test_51OEllJSAO1FOABEim1fCjNzBIEcCyVE8ktxDDAppc6ioFeHwJnAyvbJ0kOfuneeV0TjanNYjjalEEU2LvCdMqTqs00Z52WID0G";
+    // await Stripe.instance.applySettings();
+    var gpay = const PaymentSheetGooglePay(
+        merchantCountryCode: 'USD',
+        currencyCode: 'USD',
+        testEnv: true,
+        amount: '1');
+
+    await Stripe.instance.initPaymentSheet(
+      paymentSheetParameters: SetupPaymentSheetParameters(
+        paymentIntentClientSecret: paymentintet,
+        style: ThemeMode.light,
+        merchantDisplayName: 'saleem',
+        googlePay: gpay,
+      ),
+    );
+    displaysheet();
+  } */
 }
+
+/* displaysheet() async {
+  await Stripe.instance.presentPaymentSheet();
+} */
+
+const _paymentItems = [
+  PaymentItem(
+    label: 'Total',
+    amount: '99.99',
+    status: PaymentItemStatus.final_price,
+  ),
+  PaymentItem(
+    label: 'Total',
+    amount: '88.99',
+    status: PaymentItemStatus.final_price,
+  )
+];
+
+
+

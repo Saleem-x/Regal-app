@@ -88,7 +88,7 @@ class DocumentSelectorWidget extends StatelessWidget {
                                 imagedata == null
                                     ? const SizedBox.shrink()
                                     : const Icon(
-                                        Icons.close,  
+                                        Icons.close,
                                         color: kcolorred,
                                         size: 14,
                                       )

@@ -17,15 +17,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         Either<MainFailures, UserBaseModel> login =
             await LoginRepo().login(event.logindata);
 
-        emit(const LoginState.loginLoadingState());
-
         emit(
           login.fold(
             (l) => l.when(
-              clientfailure: () =>
-                  const _loginFailedState(issue: 'Something went Wrong'),
-              serverfailure: () =>
-                  const _loginFailedState(issue: 'Something went Wrong'),
+              clientfailure: () => const _loginFailedState(
+                  issue: 'Failed ^ Something went Wrong'),
+              serverfailure: () => const _loginFailedState(
+                  issue: 'Failed ^ Something went Wrong'),
               networkerror: (error) => _loginFailedState(issue: error),
             ),
             (r) => LoginSuccessState(user: r),
@@ -36,6 +34,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     on<LoginresetEvent>((event, emit) {
       emit(LoginState.initial());
+    });
+
+    on<AddLoadingEvent>((event, emit) {
+      emit(const LoginState.loginLoadingState());
     });
   }
 }

@@ -60,7 +60,7 @@ class ContactUsScreen extends StatelessWidget {
                         ),
                         ContactWidget(
                           size: size,
-                          icon1: 'assets/svg/phone.svg',
+                          icon1: 'assets/svg/phonecontactus.svg',
                           title: contactdetails.mobile!,
                           img: 'assets/svg/call.svg',
                         ),

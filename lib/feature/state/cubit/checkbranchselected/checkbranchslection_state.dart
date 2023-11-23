@@ -9,5 +9,5 @@ class CheckbranchslectionState with _$CheckbranchslectionState {
 
   factory CheckbranchslectionState.initial() =>
       const CheckbranchslectionState.selectedbrachState(
-          selectedbranch: '', document: '',schemeselected: '');
+          selectedbranch: '', document: '', schemeselected: '');
 }

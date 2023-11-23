@@ -12,7 +12,7 @@ class LoginRepo {
     try {
       final response = await http.post(
         Uri.parse(baseurl + loginurl),
-        body: user.toJson(),
+        body: {'datakey': datakey, 'mob': user.mob, 'pin': user.pin},
       );
       if (response.statusCode == 200) {
         logger.e(response.body);
@@ -32,7 +32,7 @@ class LoginRepo {
         return right(user);
       } else {
         Map<String, dynamic> responseMap = jsonDecode(response.body);
-
+        logger.e(response.body);
         String message = responseMap['result'][0]['cus_Name'].toString();
         log(message);
         logger.e({responseMap['result'][0]['Title']});

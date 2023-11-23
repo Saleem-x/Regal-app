@@ -158,7 +158,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                               children: [
                                 SizedBox(
                                   child: SvgPicture.asset(
-                                    'assets/svg/phoneill2.svg',
+                                    'assets/svg/phoneoutline.svg',
                                     height: 15.h,
                                     width: 15.w,
                                   ),
@@ -324,7 +324,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                           NewSchmDropDownWidget(
                             controller: _salesmancontroller,
                             title: 'Sales Man',
-                            preicon: 'assets/svg/salesman.svg',
+                            preicon: 'assets/svg/salesmanopt.svg',
                             ddWindget: /* SaleSMAnDD(
                               schemes: state.schemeslist!,
                               controller: _salesmancontroller,
@@ -443,7 +443,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                           NewSchmDropDownWidget(
                             controller: _schemecontroller,
                             title: 'Scheme',
-                            preicon: 'assets/svg/scheme.svg',
+                            preicon: 'assets/svg/schemeopt.svg',
                             ddWindget: SchemeListDropDown(
                               schemes: state.schemeslist!,
                               controller: _schemecontroller,

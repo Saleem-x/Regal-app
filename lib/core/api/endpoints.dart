@@ -21,5 +21,6 @@ const uploadimageurl = 'p_user_uploadImage.php';
 const resetpinurl = 'p_user_updatePin.php';
 const resetpinotpurl = 'p_user_insOTP.php';
 const resetpinotpverifyurl = 'p_user_verifyOTP.php';
+const paymenthystoryurl = 'p_user_insPaymentHistory.php';
 
 var logger = Logger();

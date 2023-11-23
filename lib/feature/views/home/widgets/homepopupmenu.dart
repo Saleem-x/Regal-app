@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/views/about/aboutus.dart';
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
@@ -106,11 +105,11 @@ class HomePopupMenu extends StatelessWidget {
         return [
           PopupMenuItem(
             value: 'close',
-            child: Icon(
-              Iconsax.close_circle,
-              color: ktextgrey.withOpacity(
-                .6,
-              ),
+            child: SvgPicture.asset(
+              'assets/others/close.svg',
+              fit: BoxFit.cover,
+              height: 10.h,
+              width: 10.w,
             ),
           ),
           PopupMenuItem(

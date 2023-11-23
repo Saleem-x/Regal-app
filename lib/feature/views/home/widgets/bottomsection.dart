@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/views/payment/confirmpayment.dart';
@@ -12,7 +13,8 @@ import 'package:regal_app/feature/views/viewdetails/viewdetailscreen.dart';
 import 'package:shimmer/shimmer.dart';
 
 class BottomSectionWidget extends StatefulWidget {
-  const BottomSectionWidget({super.key});
+  final UserBaseModel user;
+  const BottomSectionWidget({super.key, required this.user});
 
   @override
   State<BottomSectionWidget> createState() => _BottomSectionWidgetState();
@@ -77,7 +79,7 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                     'Instalment amount',
                                     style: TextStyle(
                                       color: ktextgrey,
-                                      fontSize: 12.sp,
+                                      fontSize: 13.sp,
                                     ),
                                   ),
                                   Padding(
@@ -86,9 +88,10 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                     child: Text(
                                       '₹${scheme.instAmount}',
                                       style: TextStyle(
-                                          color: kcolorblack,
-                                          fontSize: 20.sp,
-                                          fontWeight: FontWeight.w800),
+                                        color: kcolorblack,
+                                        fontSize: 19.sp,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                   // SizedBox(
@@ -98,7 +101,8 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                     'Total Paid: ₹ ${schemedetail.totAmount}',
                                     style: TextStyle(
                                       color: ktextgrey,
-                                      fontSize: 14.sp,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                   Padding(
@@ -108,7 +112,8 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                       'Due Date: ${schemedetail.dueDate}',
                                       style: TextStyle(
                                         color: ktextgrey,
-                                        fontSize: 14.sp,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                     ),
                                   )
@@ -132,10 +137,20 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                 child: SizedBox(
                                   child: Column(
                                     children: [
-                                      Icon(
+                                      /* Icon(
                                         FontAwesomeIcons.arrowRight,
                                         color: ktextgrey,
                                         size: 30.sp,
+                                      ), */
+                                      SvgPicture.asset(
+                                        'assets/others/right_arrow.svg',
+                                        height: 17.h,
+                                        width: 17.w,
+                                        // ignore: deprecated_member_use
+                                        color: ktextgrey,
+                                      ),
+                                      SizedBox(
+                                        height: 5.h,
                                       ),
                                       Text(
                                         'View Details',
@@ -198,6 +213,23 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                   borderRadius: BorderRadius.circular(10.sp),
                                 ),
                                 onPressed: () {
+                                  /* PaymentHystoryRepo().getpaymenthystory(
+                                    PaymentHystoryInModel(
+                                        datakey: datakey,
+                                        cusId: widget.user.cusId,
+                                        orderId: generateOrderID(
+                                            'Login', widget.user.cusId!),
+                                        joinId: schemedetail.joinId,
+                                        payMode: '',
+                                        schemeNo: scheme.schemeNo,
+                                        payType: '',
+                                        payableAmt: '1',
+                                        insAmount: scheme.instAmount,
+                                        goldRate: schemedetail.goldRate,
+                                        cumlWgt:'' ,
+                                        subCode:scheme.subId),
+                                  );
+ */
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -249,8 +281,9 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                       child: Text(
                                         'A Regal Jewellery Initiative',
                                         style: TextStyle(
-                                            color: ktextgrey.withOpacity(.3),
-                                            fontSize: 8.sp),
+                                          color: ktextgrey.withOpacity(.3),
+                                          fontSize: 8.sp,
+                                        ),
                                       ),
                                     )
                                   ],
@@ -267,4 +300,26 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
       },
     );
   }
+
+  // String generateOrderID(String intentFlag, String cusID) {
+  //   int cusID1 = 0;
+  //   String orderID;
+
+  //   if (intentFlag == 'SIGNUP') {
+  //     cusID1 = int.parse(cusID);
+  //     orderID = '$cusID1' '1';
+  //   } else {
+  //     cusID1 = int.parse(widget.user.cusId!);
+  //     int seq = int.parse(widget.user.orderSeq) + 1;
+  //     orderID = '$cusID1$seq';
+  //     widget.user.orderSeq = seq;
+  //   }
+
+  //   DateTime currentDateAndTime = DateTime.now();
+  //   int timeStamp = currentDateAndTime.microsecondsSinceEpoch;
+
+  //   // orderID = '$cusID1$timeStamp';
+
+  //   return orderID;
+  // }
 }
