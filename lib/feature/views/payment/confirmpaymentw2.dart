@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pay/pay.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
+import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
+import 'package:regal_app/feature/state/bloc/bloc/payment_bloc.dart';
+import 'package:regal_app/feature/views/payment/configs/androidpayment.dart';
+import 'package:regal_app/feature/views/payment/configs/iospayment.dart';
 import 'package:regal_app/feature/views/payment/paymentconfig.dart';
 import 'package:regal_app/feature/views/payment/paymentfailedscreen.dart';
+import 'package:regal_app/feature/views/payment/paymentsucces.dart';
 
 class ConfirmPaymentTWO extends StatefulWidget {
-  const ConfirmPaymentTWO({super.key});
+  final SchemeDetailsModel schemeDetails;
+  final CustomerSchemeModel scheme;
+  final String orderID;
+  final TextEditingController payablecontroller;
+  const ConfirmPaymentTWO(
+      {super.key,
+      required this.schemeDetails,
+      required this.scheme,
+      required this.orderID,
+      required this.payablecontroller});
 
   @override
   State<ConfirmPaymentTWO> createState() => _ConfirmPaymentTWOState();
@@ -69,7 +85,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
               width: size.width,
               child: TextFormField(
                 keyboardType: TextInputType.number,
-                // controller: _payablecontroller,
+                controller: widget.payablecontroller,
                 style: TextStyle(
                     color: kcolorblack,
                     fontSize: 18.sp,
@@ -101,29 +117,60 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
             SizedBox(
               height: 10.h,
             ),
-            // GooglePayButton(
-            //   onPressed: () {},
-            //   paymentConfiguration:
-            //       PaymentConfiguration.fromJsonString(defaultGooglePay),
-            //   paymentItems: _paymentItems,
-            //   type: GooglePayButtonType.pay,
-            //   margin: const EdgeInsets.only(top: 15.0),
-            //   onPaymentResult: (result) {
-            //     logger.e(result);
-            //   },
-            //   loadingIndicator: const Center(
-            //     child: CircularProgressIndicator(),
-            //   ),
-            // ),
+            GooglePayButton(
+              paymentConfiguration:
+                  PaymentConfiguration.fromJsonString(defaultGooglePay),
+              paymentItems: _paymentItems,
+              type: GooglePayButtonType.pay,
+              margin: const EdgeInsets.only(top: 15.0),
+              onPaymentResult: (result) {
+                logger.e('gpay result$result');
+              },
+              loadingIndicator: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
             GestureDetector(
               onTap: () async {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const PaymentSuccessScreen(),
-                //     ));
+                try {
+                  final data = await initiateTransaction(
+                    widget.scheme.subId!,
+                    widget.orderID,
+                    widget.scheme.merchantCode!,
+                    app: appoptiontoenum('Google Pay'),
+                  );
+                  if (data == 'user_canceled' || data.isEmpty) {
+                    logger.e('payment status failed 2 $data');
+                  } else {
+                    logger.e('payment status success $data');
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PaymentSuccessScreen(),
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  logger.e('Error during transaction: $e');
 
-                // await initpaymentsheet
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PaymentFailedScreeen(),
+                    ),
+                  );
+                }
+
+                // context.read<PaymentBloc>().add(
+                //       InitiatePaymentEvent(
+                //         upiId: widget.scheme.subId!,
+                //         orderID: widget.orderID,
+                //         merchatcode: widget.scheme.merchantCode!,
+                //         app: appoptiontoenum('Google Pay'),
+                //       ),
+                //     );
               },
               child: Row(
                 children: [
@@ -151,12 +198,28 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
               color: Color(0xFFD1D1D1),
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PaymentFailedScreeen(),
-                    ));
+              onTap: () async {
+                final data = await initiateTransaction(
+                  widget.scheme.subId!,
+                  widget.scheme.merchantCode!,
+                  '',
+                  app: appoptiontoenum('Paytm'),
+                );
+
+                if (data == 'user_canceled') {
+                  logger.e('payment status failed 2 $data');
+                } else {
+                  logger.e('payment status success $data');
+                }
+
+                // context.read<PaymentBloc>().add(
+                //       InitiatePaymentEvent(
+                //         upiId: widget.scheme.subId!,
+                //         orderID: widget.orderID,
+                //         merchatcode: widget.scheme.merchantCode!,
+                //         app: appoptiontoenum('Paytm'),
+                //       ),
+                //     );
               },
               child: Row(
                 children: [
@@ -188,33 +251,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
       ),
     );
   }
-
- /*  initpaymentsheet() async {
-    var paymentintet = await getintent();
-    // Stripe.publishableKey =
-    //     "pk_test_51OEllJSAO1FOABEim1fCjNzBIEcCyVE8ktxDDAppc6ioFeHwJnAyvbJ0kOfuneeV0TjanNYjjalEEU2LvCdMqTqs00Z52WID0G";
-    // await Stripe.instance.applySettings();
-    var gpay = const PaymentSheetGooglePay(
-        merchantCountryCode: 'USD',
-        currencyCode: 'USD',
-        testEnv: true,
-        amount: '1');
-
-    await Stripe.instance.initPaymentSheet(
-      paymentSheetParameters: SetupPaymentSheetParameters(
-        paymentIntentClientSecret: paymentintet,
-        style: ThemeMode.light,
-        merchantDisplayName: 'saleem',
-        googlePay: gpay,
-      ),
-    );
-    displaysheet();
-  } */
 }
-
-/* displaysheet() async {
-  await Stripe.instance.presentPaymentSheet();
-} */
 
 const _paymentItems = [
   PaymentItem(
@@ -228,6 +265,3 @@ const _paymentItems = [
     status: PaymentItemStatus.final_price,
   )
 ];
-
-
-

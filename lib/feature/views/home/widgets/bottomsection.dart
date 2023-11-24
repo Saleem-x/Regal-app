@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:regal_app/core/api/endpoints.dart';
 
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/data/models/payment_hystory_in_model/payment_hystory_in_model.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
+import 'package:regal_app/feature/domain/repoimpls/paymenthstory/paymenthystoryrepo.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/views/payment/confirmpayment.dart';
@@ -129,8 +132,10 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => ViewDetailScreen(
-                                          scheme: scheme,
-                                          schemedetil: schemedetail),
+                                        scheme: scheme,
+                                        schemedetil: schemedetail,
+                                        user: widget.user,
+                                      ),
                                     ),
                                   );
                                 },
@@ -212,31 +217,19 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.sp),
                                 ),
-                                onPressed: () {
-                                  /* PaymentHystoryRepo().getpaymenthystory(
-                                    PaymentHystoryInModel(
-                                        datakey: datakey,
-                                        cusId: widget.user.cusId,
-                                        orderId: generateOrderID(
-                                            'Login', widget.user.cusId!),
-                                        joinId: schemedetail.joinId,
-                                        payMode: '',
-                                        schemeNo: scheme.schemeNo,
-                                        payType: '',
-                                        payableAmt: '1',
-                                        insAmount: scheme.instAmount,
-                                        goldRate: schemedetail.goldRate,
-                                        cumlWgt:'' ,
-                                        subCode:scheme.subId),
-                                  );
- */
+                                onPressed: () async {
+                                  
+
+                                 
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           ConfirmPaymentScreen(
-                                              scheme: scheme,
-                                              schemedetail: schemedetail),
+                                        scheme: scheme,
+                                        schemedetail: schemedetail,
+                                        user: widget.user,
+                                      ),
                                     ),
                                   );
                                 },
@@ -301,25 +294,5 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
     );
   }
 
-  // String generateOrderID(String intentFlag, String cusID) {
-  //   int cusID1 = 0;
-  //   String orderID;
-
-  //   if (intentFlag == 'SIGNUP') {
-  //     cusID1 = int.parse(cusID);
-  //     orderID = '$cusID1' '1';
-  //   } else {
-  //     cusID1 = int.parse(widget.user.cusId!);
-  //     int seq = int.parse(widget.user.orderSeq) + 1;
-  //     orderID = '$cusID1$seq';
-  //     widget.user.orderSeq = seq;
-  //   }
-
-  //   DateTime currentDateAndTime = DateTime.now();
-  //   int timeStamp = currentDateAndTime.microsecondsSinceEpoch;
-
-  //   // orderID = '$cusID1$timeStamp';
-
-  //   return orderID;
-  // }
+ 
 }

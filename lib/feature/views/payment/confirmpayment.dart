@@ -2,16 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
+import 'package:regal_app/feature/data/models/payment_hystory_in_model/payment_hystory_in_model.dart';
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
+import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
+import 'package:regal_app/feature/domain/repoimpls/paymenthstory/paymenthystoryrepo.dart';
 import 'package:regal_app/feature/views/payment/confirmpaymentw2.dart';
 
 class ConfirmPaymentScreen extends StatefulWidget {
   final CustomerSchemeModel scheme;
   final SchemeDetailsModel schemedetail;
+  final UserBaseModel user;
   const ConfirmPaymentScreen(
-      {super.key, required this.scheme, required this.schemedetail});
+      {super.key,
+      required this.scheme,
+      required this.schemedetail,
+      required this.user});
 
   @override
   State<ConfirmPaymentScreen> createState() => _ConfirmPaymentScreenState();
@@ -289,12 +297,35 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              onPressed: () {
+              onPressed: () async {
+                String orderID = generateOrderID('Login', widget.user.cusId!);
+                // await PaymentHystoryRepo().getpaymenthystory(
+                //   PaymentHystoryInModel(
+                //       datakey: datakey,
+                //       cusId: widget.user.cusId,
+                //       orderId: orderID,
+                //       joinId: widget.schemedetail.joinId,
+                //       payMode: 'opt_upi',
+                //       schemeNo: widget.scheme.schemeNo,
+                //       payType: 'opt_upi',
+                //       payableAmt: '1',
+                //       insAmount: widget.scheme.instAmount,
+                //       goldRate: widget.schemedetail.goldRate,
+                //       cumlWgt: '0',
+                //       subCode: widget.scheme.subId),
+                // );
+                // ignore: use_build_context_synchronously
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ConfirmPaymentTWO(),
-                    ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConfirmPaymentTWO(
+                      schemeDetails: widget.schemedetail,
+                      scheme: widget.scheme,
+                      orderID: orderID,
+                      payablecontroller: _payablecontroller,
+                    ),
+                  ),
+                );
               },
               child: Text(
                 'Proceed to Pay',
@@ -313,5 +344,32 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
         ],
       ),
     );
+  }
+
+  String generateOrderID(String intentFlag, String cusID) {
+    int cusID1 = 0;
+    String orderID;
+
+    if (intentFlag == 'SIGNUP') {
+      cusID1 = int.parse(cusID);
+      orderID = '$cusID1' '1'.toString();
+    } else {
+      logger.e(1);
+      cusID1 = int.parse(widget.user.cusId!);
+      logger.e(2);
+      int seq = widget.user.orderSeq + 1.toInt();
+      logger.e(3);
+      orderID = '$cusID1$seq'.toString();
+      logger.e(4);
+      widget.user.orderSeq = seq;
+    }
+
+    DateTime currentDateAndTime = DateTime.now();
+    int timeStamp = currentDateAndTime.microsecondsSinceEpoch;
+
+    orderID = '$cusID1$timeStamp';
+
+    logger.e(orderID);
+    return orderID;
   }
 }

@@ -3,6 +3,7 @@ import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/feature/data/di/injectable.dart';
 import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart';
+import 'package:regal_app/feature/state/bloc/bloc/payment_bloc.dart';
 import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart';
 import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.dart';
 import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart';
@@ -91,6 +92,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getit<UpdatenewpinBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getit<PaymentBloc>(),
           ),
         ],
         child: MaterialApp(

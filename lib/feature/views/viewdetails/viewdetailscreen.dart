@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
+import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
 import 'package:regal_app/feature/views/payment/confirmpayment.dart';
 import 'package:regal_app/feature/views/viewdetails/schemtandc.dart';
@@ -14,8 +15,12 @@ import 'package:shimmer/shimmer.dart';
 class ViewDetailScreen extends StatelessWidget {
   final SchemeDetailsModel schemedetil;
   final CustomerSchemeModel scheme;
+  final UserBaseModel user;
   const ViewDetailScreen(
-      {super.key, required this.schemedetil, required this.scheme});
+      {super.key,
+      required this.schemedetil,
+      required this.scheme,
+      required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -403,7 +408,22 @@ class ViewDetailScreen extends StatelessWidget {
                                   itemBuilder: (context, index) => Padding(
                                     padding: const EdgeInsets.all(0.0),
                                     child: Theme(
-                                      data: ThemeData(canvasColor: kcolorwhite),
+                                      data: ThemeData(
+                                        canvasColor: kcolorwhite,
+                                        colorScheme: const ColorScheme(
+                                          brightness: Brightness.dark,
+                                          primary: kcolorwhite,
+                                          onPrimary: kcolorwhite,
+                                          secondary: kcolorwhite,
+                                          onSecondary: kcolorwhite,
+                                          error: kcolorwhite,
+                                          onError: kcolorwhite,
+                                          background: kcolorwhite,
+                                          onBackground: kcolorwhite,
+                                          surface: kcolorwhite,
+                                          onSurface: kcolorwhite,
+                                        ),
+                                      ),
                                       child: Card(
                                         surfaceTintColor: kcolorwhite,
                                         shape: RoundedRectangleBorder(
@@ -616,7 +636,10 @@ class ViewDetailScreen extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => ConfirmPaymentScreen(
-                  scheme: scheme, schemedetail: schemedetil),
+                scheme: scheme,
+                schemedetail: schemedetil,
+                user: user,
+              ),
             ),
           );
         },
