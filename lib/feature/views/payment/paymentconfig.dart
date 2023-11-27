@@ -92,8 +92,8 @@ const String defaultGooglePay = '''{
       "merchantName": "Example Merchant Name"
     },
     "transactionInfo": {
-      "countryCode": "IN",
-      "currencyCode": "INR"
+      "countryCode": "US",
+      "currencyCode": "USD"
     }
   }
 }''';

@@ -7,7 +7,8 @@ import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.da
 import 'package:regal_app/feature/views/home/homescreen.dart';
 
 class PaymentFailedScreeen extends StatelessWidget {
-  const PaymentFailedScreeen({super.key});
+  final UserBaseModel user;
+  const PaymentFailedScreeen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -219,7 +220,7 @@ class PaymentFailedScreeen extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        HomeScreen(user: UserBaseModel()),
+                                        HomeScreen(user: user),
                                   ),
                                   (route) => false,
                                 );

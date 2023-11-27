@@ -323,6 +323,7 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                       scheme: widget.scheme,
                       orderID: orderID,
                       payablecontroller: _payablecontroller,
+                      user: widget.user,
                     ),
                   ),
                 );

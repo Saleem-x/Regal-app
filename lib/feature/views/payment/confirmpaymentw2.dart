@@ -1,30 +1,36 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pay/pay.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
-import 'package:regal_app/feature/state/bloc/bloc/payment_bloc.dart';
+import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/views/payment/configs/androidpayment.dart';
 import 'package:regal_app/feature/views/payment/configs/iospayment.dart';
 import 'package:regal_app/feature/views/payment/paymentconfig.dart';
 import 'package:regal_app/feature/views/payment/paymentfailedscreen.dart';
 import 'package:regal_app/feature/views/payment/paymentsucces.dart';
 
+import 'package:http/http.dart' as http;
+
 class ConfirmPaymentTWO extends StatefulWidget {
   final SchemeDetailsModel schemeDetails;
   final CustomerSchemeModel scheme;
   final String orderID;
   final TextEditingController payablecontroller;
+  final UserBaseModel user;
   const ConfirmPaymentTWO(
       {super.key,
       required this.schemeDetails,
       required this.scheme,
       required this.orderID,
-      required this.payablecontroller});
+      required this.payablecontroller,
+      required this.user});
 
   @override
   State<ConfirmPaymentTWO> createState() => _ConfirmPaymentTWOState();
@@ -125,6 +131,23 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
               margin: const EdgeInsets.only(top: 15.0),
               onPaymentResult: (result) {
                 logger.e('gpay result$result');
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentSuccessScreen(
+                      user: widget.user,
+                    ),
+                  ),
+                );
+              },
+              onError: (error) {
+                logger.e('gpay error$error');
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PaymentFailedScreeen(
+                              user: widget.user,
+                            )));
               },
               loadingIndicator: const Center(
                 child: CircularProgressIndicator(),
@@ -132,35 +155,84 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
             ),
             GestureDetector(
               onTap: () async {
-                try {
-                  final data = await initiateTransaction(
-                    widget.scheme.subId!,
-                    widget.orderID,
-                    widget.scheme.merchantCode!,
-                    app: appoptiontoenum('Google Pay'),
-                  );
-                  if (data == 'user_canceled' || data.isEmpty) {
-                    logger.e('payment status failed 2 $data');
-                  } else {
-                    logger.e('payment status success $data');
-                    // ignore: use_build_context_synchronously
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PaymentSuccessScreen(),
-                      ),
-                    );
-                  }
-                } catch (e) {
-                  logger.e('Error during transaction: $e');
+                // try {
+                //   final data = await initiateTransaction(
+                //     widget.scheme.subId!,
+                //     widget.orderID,
+                //     widget.scheme.merchantCode!,
+                //     app: appoptiontoenum('Google Pay'),
+                //   );
+                //   if (data == 'user_canceled' || data.isEmpty) {
+                //     logger.e('payment status failed 2 $data');
+                //   } else {
+                //     logger.e('payment status success $data');
+                //     // ignore: use_build_context_synchronously
+                //     Navigator.pushReplacement(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => const PaymentSuccessScreen(),
+                //       ),
+                //     );
+                //   }
+                // } catch (e) {
+                //   logger.e('Error during transaction: $e');
 
+                //   // ignore: use_build_context_synchronously
+                //   Navigator.pushReplacement(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const PaymentFailedScreeen(),
+                //     ),
+                //   );
+                // }
+                String scrt = await initpayment();
+                await Stripe.instance
+                    .initPaymentSheet(
+                      paymentSheetParameters: SetupPaymentSheetParameters(
+                        paymentIntentClientSecret: scrt,
+                        merchantDisplayName: 'Flutter Stripe Store Demo',
+                        googlePay: const PaymentSheetGooglePay(
+                          merchantCountryCode: 'US',
+                          testEnv: true,
+                        ),
+                        // customFlow: ,
+                      ),
+                    )
+                    .then((value) => logger.e(value));
+
+                try {
+                  await Stripe.instance.presentPaymentSheet();
+                  logger.e('succes');
                   // ignore: use_build_context_synchronously
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const PaymentFailedScreeen(),
+                      builder: (context) =>
+                          PaymentSuccessScreen(user: widget.user),
                     ),
                   );
+                } catch (e) {
+                  if (e is StripeException) {
+                    logger.e('failed $e');
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PaymentFailedScreeen(
+                          user: widget.user,
+                        ),
+                      ),
+                    );
+                  } else {
+                    logger.e('failed $e');
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PaymentFailedScreeen(
+                                  user: widget.user,
+                                )));
+                  }
                 }
 
                 // context.read<PaymentBloc>().add(
@@ -205,6 +277,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                   '',
                   app: appoptiontoenum('Paytm'),
                 );
+                logger.e('payment status first 2 $data');
 
                 if (data == 'user_canceled') {
                   logger.e('payment status failed 2 $data');
@@ -256,12 +329,39 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
 const _paymentItems = [
   PaymentItem(
     label: 'Total',
-    amount: '99.99',
+    amount: '1000.99',
     status: PaymentItemStatus.final_price,
   ),
   PaymentItem(
     label: 'Total',
-    amount: '88.99',
+    amount: '1000.99',
     status: PaymentItemStatus.final_price,
   )
 ];
+
+initpayment() async {
+  var body = {
+    'amount': '1000',
+    'currency': "INR",
+  };
+  try {
+    var response = await http.post(
+        Uri.parse(
+          'https://api.stripe.com/v1/payment_intents',
+        ),
+        headers: {
+          "Authorization":
+              "Bearer sk_test_51OEllJSAO1FOABEinUvrt3oQwY8Dh1QqLcDVVxa6zTPjV9gwgB3JthIesewsFQf0mjZQbsQGNP2Rzs5OtfKefoBw00Faf38K67",
+          "Content-type": "application/x-www-form-urlencoded",
+        },
+        body: body);
+    logger.e(response.body);
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    String clntscrt = json['client_secret'];
+    logger.e(clntscrt);
+
+    return clntscrt;
+  } catch (e) {
+    logger.e(e);
+  }
+}
