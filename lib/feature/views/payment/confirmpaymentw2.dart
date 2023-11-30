@@ -11,6 +11,7 @@ import 'package:regal_app/feature/data/models/customer_scheme_model/customer_sch
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/views/payment/configs/androidpayment.dart';
+import 'package:regal_app/feature/views/payment/configs/channels.dart';
 import 'package:regal_app/feature/views/payment/configs/iospayment.dart';
 import 'package:regal_app/feature/views/payment/paymentconfig.dart';
 import 'package:regal_app/feature/views/payment/paymentfailedscreen.dart';
@@ -124,8 +125,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
               height: 10.h,
             ),
             GooglePayButton(
-              paymentConfiguration:
-                  PaymentConfiguration.fromJsonString(defaultGooglePay),
+              paymentConfiguration: PaymentConfiguration.fromJsonString(custom),
               paymentItems: _paymentItems,
               type: GooglePayButtonType.pay,
               margin: const EdgeInsets.only(top: 15.0),
@@ -153,172 +153,89 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                 child: CircularProgressIndicator(),
               ),
             ),
-            GestureDetector(
+            InkWell(
               onTap: () async {
-                // try {
-                //   final data = await initiateTransaction(
-                //     widget.scheme.subId!,
-                //     widget.orderID,
-                //     widget.scheme.merchantCode!,
-                //     app: appoptiontoenum('Google Pay'),
-                //   );
-                //   if (data == 'user_canceled' || data.isEmpty) {
-                //     logger.e('payment status failed 2 $data');
-                //   } else {
-                //     logger.e('payment status success $data');
-                //     // ignore: use_build_context_synchronously
-                //     Navigator.pushReplacement(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) => const PaymentSuccessScreen(),
-                //       ),
-                //     );
-                //   }
-                // } catch (e) {
-                //   logger.e('Error during transaction: $e');
+                final paymentChannel = PaymentChannel();
+                paymentChannel.payWithGPay(
+                    'https://pay.google.com/intl/en_us/about/how-it-works/',
+                    'com.google.android.gms.wallet');
 
-                //   // ignore: use_build_context_synchronously
-                //   Navigator.pushReplacement(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const PaymentFailedScreeen(),
-                //     ),
-                //   );
-                // }
-                String scrt = await initpayment();
-                await Stripe.instance
-                    .initPaymentSheet(
-                      paymentSheetParameters: SetupPaymentSheetParameters(
-                        paymentIntentClientSecret: scrt,
-                        merchantDisplayName: 'Flutter Stripe Store Demo',
-                        googlePay: const PaymentSheetGooglePay(
-                          merchantCountryCode: 'US',
-                          testEnv: true,
-                        ),
-                        // customFlow: ,
-                      ),
-                    )
-                    .then((value) => logger.e(value));
-
-                try {
-                  await Stripe.instance.presentPaymentSheet();
-                  logger.e('succes');
-                  // ignore: use_build_context_synchronously
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          PaymentSuccessScreen(user: widget.user),
-                    ),
-                  );
-                } catch (e) {
-                  if (e is StripeException) {
-                    logger.e('failed $e');
-                    // ignore: use_build_context_synchronously
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PaymentFailedScreeen(
-                          user: widget.user,
-                        ),
-                      ),
-                    );
-                  } else {
-                    logger.e('failed $e');
-                    // ignore: use_build_context_synchronously
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PaymentFailedScreeen(
-                                  user: widget.user,
-                                )));
-                  }
-                }
-
-                // context.read<PaymentBloc>().add(
-                //       InitiatePaymentEvent(
-                //         upiId: widget.scheme.subId!,
-                //         orderID: widget.orderID,
-                //         merchatcode: widget.scheme.merchantCode!,
-                //         app: appoptiontoenum('Google Pay'),
-                //       ),
-                //     );
+                paymentChannel.payWithGPay(
+                    'https://pay.google.com/intl/en_us/about/how-it-works/',
+                    'com.google.android.gms.wallet');
               },
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: kcolorwhite,
-                    radius: 20,
-                    child: Image.asset(
-                      'assets/images/Google_Pay_Logo.svg.png',
+              child: SizedBox(
+                width: size.width,
+                height: 30.h,
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: kcolorwhite,
+                      radius: 20,
+                      child: Image.asset(
+                        'assets/images/Google_Pay_Logo.svg.png',
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 20.w,
-                  ),
-                  Text(
-                    'Google Pay',
-                    style: TextStyle(
-                      color: kcolorblack,
-                      fontSize: 16.sp,
+                    SizedBox(
+                      width: 20.w,
                     ),
-                  ),
-                ],
+                    Text(
+                      'Google Pay',
+                      style: TextStyle(
+                        color: kcolorblack,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const Divider(
               color: Color(0xFFD1D1D1),
             ),
-            GestureDetector(
+            InkWell(
               onTap: () async {
-                final data = await initiateTransaction(
+                await initiateTransaction(
                   widget.scheme.subId!,
+                  '1',
                   widget.scheme.merchantCode!,
-                  '',
                   app: appoptiontoenum('Paytm'),
                 );
-                logger.e('payment status first 2 $data');
-
-                if (data == 'user_canceled') {
-                  logger.e('payment status failed 2 $data');
-                } else {
-                  logger.e('payment status success $data');
-                }
-
-                // context.read<PaymentBloc>().add(
-                //       InitiatePaymentEvent(
-                //         upiId: widget.scheme.subId!,
-                //         orderID: widget.orderID,
-                //         merchatcode: widget.scheme.merchantCode!,
-                //         app: appoptiontoenum('Paytm'),
-                //       ),
-                //     );
               },
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: kcolorwhite,
-                    radius: 20,
-                    child: Image.asset(
-                      'assets/images/Paytm_Logo.jpg',
+              child: SizedBox(
+                width: size.width,
+                height: 30.h,
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: kcolorwhite,
+                      radius: 20,
+                      child: Image.asset(
+                        'assets/images/Paytm_Logo.jpg',
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 20.w,
-                  ),
-                  Text(
-                    'Paytm',
-                    style: TextStyle(
-                      color: kcolorblack,
-                      fontSize: 16.sp,
+                    SizedBox(
+                      width: 20.w,
                     ),
-                  ),
-                ],
+                    Text(
+                      'Paytm',
+                      style: TextStyle(
+                        color: kcolorblack,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const Divider(
               color: Color(0xFFD1D1D1),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  launchGooglePayUPIIntent();
+                },
+                child: Text('pay'))
           ],
         ),
       ),

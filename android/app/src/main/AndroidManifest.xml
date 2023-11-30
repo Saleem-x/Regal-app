@@ -35,5 +35,13 @@
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
+
+        <service
+            android:name=".IsAppInstalledModule">
+            <intent-filter>
+                <action android:name="io.flutter.plugins.GeneratedPluginRegistrant.registerWith" />
+            </intent-filter>
+        </service>
+        
     </application>
 </manifest>

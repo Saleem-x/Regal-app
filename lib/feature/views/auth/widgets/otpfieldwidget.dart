@@ -283,6 +283,7 @@ class LoginPinOtpField extends StatelessWidget {
           ),
           Expanded(
             child: OTPTextField(
+              controller: OtpFieldController(),
               length: 4,
               keyboardType: TextInputType.number,
               width: size.width,
