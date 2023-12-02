@@ -75,7 +75,7 @@ class HomePopupMenu extends StatelessWidget {
               builder: (BuildContext context) {
                 return CupertinoAlertDialog(
                   title: const Text("Alert!"),
-                  content: const Text("Do You Want to Logout?"),
+                  content: const Text("Do you want to logout?"),
                   actions: <Widget>[
                     CupertinoDialogAction(
                       child: const Text("No"),

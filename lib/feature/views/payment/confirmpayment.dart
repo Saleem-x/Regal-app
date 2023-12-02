@@ -5,10 +5,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
-import 'package:regal_app/feature/data/models/payment_hystory_in_model/payment_hystory_in_model.dart';
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
-import 'package:regal_app/feature/domain/repoimpls/paymenthstory/paymenthystoryrepo.dart';
 import 'package:regal_app/feature/views/payment/confirmpaymentw2.dart';
 
 class ConfirmPaymentScreen extends StatefulWidget {

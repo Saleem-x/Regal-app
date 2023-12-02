@@ -116,7 +116,7 @@ class CustomMobileField extends StatelessWidget {
           SizedBox(
             child: SvgPicture.asset(
               'assets/svg/phoneoutline.svg',
-              height: 18.h,
+              height: 17.h,
               width: 15.w,
             ),
           ),

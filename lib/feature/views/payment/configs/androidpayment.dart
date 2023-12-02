@@ -1,33 +1,5 @@
-import 'package:quantupi/quantupi.dart';
-import 'package:http/http.dart' as http;
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-/* Future<String> */ initiateTransaction(
-  String upiId,
-  String orderID,
-  String merchatcode, {
-  QuantUPIPaymentApps? app,
-}) async {
-  Quantupi upi = Quantupi(
-    receiverUpiId: /* upiId */ 'saleemsaly8-1@okhdfcbank',
-    receiverName: 'Regal Jewellers',
-    // transactionRefId: orderID,
-    transactionNote: 'Regal Schemes',
-    amount: 1.0,
-    appname: app, currency: "INR",
-    // merchantId: merchatcode,
-  );
-  var response = await upi.startTransaction();
-  if (response == QuantupiResponseError.nullresponse) {
-    logger.e('resp e1');
-  } else if (response == QuantupiResponseStatus.success) {
-    logger.e('resp succes');
-  } else {
-    logger.e('resp $response');
-  }
-  // return response;
-}
 
 Future<void> launchGooglePayUPIIntent() async {
   String googlePayPackageName = "com.google.android.apps.nbu.paisa.user";
@@ -61,22 +33,22 @@ Future<void> launchGooglePayUPIIntent() async {
       "upi://pay?pa=saleemsaly8-1@okhdfcbank&pn=AbduSaleem&tr=15330175804633937&tn=Test_note%20deposit%2015330175804633937%20DH0490&am=1&cu=INR&mc=621";
   // "upi://pay?pa=saleemsaly8-1@okhdfcbank&pn=AbduSaleem&mc=your-merchant-code&tr=1&tn=test note&am=1&cu=inr&url=your-transaction-url";
   final testuri = Uri.parse(
-      'gpay://upi/pay?pa=merchant%40pspbank&pn=MyNameHere&tr=15330175804633937&tn=Test%20deposit%2015330175804633937%20DH0490&am=5000&cu=INR&mc=621');
+      'upi://pay?pa=saleemsaly8-1@okhdfcbank&pn=AbduSaleem&tn=TestingGpay&am=1s&cu=INR');
   try {
     if (await canLaunchUrl(
       testuri,
     )) {
-      bool issuccess = await launchUrl(testuri,
-          mode: LaunchMode.externalNonBrowserApplication,
-          webViewConfiguration: WebViewConfiguration());
+      bool issuccess = await launchUrl(
+        testuri,
+        mode: LaunchMode.externalNonBrowserApplication,
+        webViewConfiguration: const WebViewConfiguration(),
+      );
 
       logger.e('entha$issuccess');
     } else {
-      // Handle if the URL can't be launched
       print('Cannot launch Google Pay UPI Intent');
     }
   } catch (e) {
-    // Handle exceptions
     print('Error launching Google Pay UPI Intent: $e');
   }
 }

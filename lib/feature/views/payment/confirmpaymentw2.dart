@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pay/pay.dart';
 import 'package:regal_app/core/api/endpoints.dart';
@@ -12,7 +10,6 @@ import 'package:regal_app/feature/data/models/scheme_details_model/scheme_detail
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/views/payment/configs/androidpayment.dart';
 import 'package:regal_app/feature/views/payment/configs/channels.dart';
-import 'package:regal_app/feature/views/payment/configs/iospayment.dart';
 import 'package:regal_app/feature/views/payment/paymentconfig.dart';
 import 'package:regal_app/feature/views/payment/paymentfailedscreen.dart';
 import 'package:regal_app/feature/views/payment/paymentsucces.dart';
@@ -195,12 +192,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
             ),
             InkWell(
               onTap: () async {
-                await initiateTransaction(
-                  widget.scheme.subId!,
-                  '1',
-                  widget.scheme.merchantCode!,
-                  app: appoptiontoenum('Paytm'),
-                );
+                launchGooglePayUPIIntent();
               },
               child: SizedBox(
                 width: size.width,
@@ -231,11 +223,6 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
             const Divider(
               color: Color(0xFFD1D1D1),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  launchGooglePayUPIIntent();
-                },
-                child: Text('pay'))
           ],
         ),
       ),

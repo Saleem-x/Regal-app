@@ -87,7 +87,24 @@ class ViewDetailScreen extends StatelessWidget {
                     height: 30.h,
                   ),
                   Theme(
-                    data: ThemeData(canvasColor: kcolorwhite),
+                    data: ThemeData(
+                      canvasColor: kcolorwhite,
+                      cardColor: kcolorwhite,
+                      primaryColor: kcolorwhite,
+                      colorScheme: const ColorScheme(
+                        brightness: Brightness.dark,
+                        primary: kcolorwhite,
+                        onPrimary: kcolorwhite,
+                        secondary: kcolorwhite,
+                        onSecondary: kcolorwhite,
+                        error: kcolorwhite,
+                        onError: kcolorwhite,
+                        background: kcolorwhite,
+                        onBackground: kcolorwhite,
+                        surface: kcolorwhite,
+                        onSurface: kcolorwhite,
+                      ),
+                    ),
                     child: Card(
                       surfaceTintColor: kcolorwhite,
                       shape: RoundedRectangleBorder(
@@ -158,7 +175,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     // fontFamily: kprimaryfont,
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: ktextgrey,
+                                    color: kcolorblack,
                                   ),
                                 ),
                               ],
@@ -183,7 +200,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     // fontFamily: kprimaryfont,
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: ktextgrey,
+                                    color: kcolorblack,
                                   ),
                                 ),
                               ],
@@ -208,7 +225,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     // fontFamily: kprimaryfont,
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: ktextgrey,
+                                    color: kcolorblack,
                                   ),
                                 ),
                               ],
@@ -233,7 +250,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     // fontFamily: kprimaryfont,
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: ktextgrey,
+                                    color: kcolorblack,
                                   ),
                                 ),
                               ],
@@ -253,12 +270,12 @@ class ViewDetailScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  ' ${schemedetil.goldWeight}',
+                                  ' ${schemedetil.goldWeight} grams',
                                   style: TextStyle(
                                     // fontFamily: kprimaryfont,
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: ktextgrey,
+                                    color: kcolorblack,
                                   ),
                                 ),
                               ],
@@ -278,12 +295,12 @@ class ViewDetailScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  '${schemedetil.noofInst}',
+                                  "${schemedetil.noofInst ?? '0'} ",
                                   style: TextStyle(
                                     // fontFamily: kprimaryfont,
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: ktextgrey,
+                                    color: kcolorblack,
                                   ),
                                 ),
                               ],
@@ -520,7 +537,7 @@ class ViewDetailScreen extends StatelessWidget {
                                                           ? const SizedBox
                                                               .shrink()
                                                           : Text(
-                                                              'Gold Rate: ₹${double.parse(insthystry[index].goldRate ?? '0.0').abs()}',
+                                                              'Gold Rate: ₹${double.parse(insthystry[index].goldRate ?? '0.0').toStringAsFixed(2)}',
                                                               style: TextStyle(
                                                                 // fontFamily:
                                                                 //     kprimaryfont,
@@ -569,7 +586,7 @@ class ViewDetailScreen extends StatelessWidget {
                                                           ? const SizedBox
                                                               .shrink()
                                                           : Text(
-                                                              'Total Amt. : ₹${double.parse(insthystry[index].netAmount!).abs()}',
+                                                              'Total Amt. : ₹${double.parse(insthystry[index].netAmount!).toStringAsFixed(2)}',
                                                               style: TextStyle(
                                                                 // fontFamily:
                                                                 //     kprimaryfont,

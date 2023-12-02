@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:quantupi/quantupi.dart';
 import 'package:regal_app/core/failures/failures.dart';
 import 'package:regal_app/feature/data/models/branch_model/branch_model.dart';
 import 'package:regal_app/feature/data/models/contact_us_model/contact_us_model.dart';
@@ -76,13 +75,4 @@ abstract class IResetPinRepo {
 abstract class IPaymentHystoryRepo {
   Future<Either<MainFailures, PaymentHystoryoutModel>> getpaymenthystory(
       PaymentHystoryInModel userpaymentmodel);
-}
-
-abstract class IPayMentRepo {
-  Future<Either<MainFailures, String>> initiatepyament(
-    String upiId,
-    String orderID,
-    String merchatcode, {
-    QuantUPIPaymentApps? app,
-  });
 }

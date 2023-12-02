@@ -24,31 +24,29 @@ import 'package:regal_app/feature/domain/repoimpls/goldraterepo/goldraterepo.dar
 import 'package:regal_app/feature/domain/repoimpls/instalmenthystory/instalmenthystiryrepo.dart'
     as _i13;
 import 'package:regal_app/feature/domain/repoimpls/otprepo/otprepo.dart' as _i8;
-import 'package:regal_app/feature/domain/repoimpls/paymentrepo/paymentrepo.dart'
-    as _i9;
+
 import 'package:regal_app/feature/domain/repoimpls/resetpinrepo/resetpinrepo.dart'
     as _i10;
 import 'package:regal_app/feature/domain/repoimpls/schemedetails/schemedetailsrepo.dart'
     as _i11;
 import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart'
-    as _i20;
-import 'package:regal_app/feature/state/bloc/bloc/payment_bloc.dart' as _i16;
+    as _i19;
 import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart'
-    as _i21;
+    as _i20;
 import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.dart'
-    as _i22;
+    as _i21;
 import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart'
-    as _i23;
+    as _i22;
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart'
     as _i14;
 import 'package:regal_app/feature/state/bloc/newschemeotp/newschemeotp_bloc.dart'
     as _i15;
 import 'package:regal_app/feature/state/bloc/resetpin/resetpin_bloc.dart'
-    as _i17;
+    as _i16;
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart'
-    as _i18;
+    as _i17;
 import 'package:regal_app/feature/state/bloc/updatenewpin/updatenewpin_bloc.dart'
-    as _i19;
+    as _i18;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -66,7 +64,6 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i3.IDropdownRepo>(() => _i6.RelationShipRepo());
     gh.lazySingleton<_i3.IGoldRateRepo>(() => _i7.GoldRateRepo());
     gh.lazySingleton<_i3.IManageOTPRepo>(() => _i8.OTPRepo());
-    gh.lazySingleton<_i3.IPayMentRepo>(() => _i9.PayMentRepo());
     gh.lazySingleton<_i3.IResetPinRepo>(() => _i10.ResetPinRepo());
     gh.lazySingleton<_i3.ISchemeDetails>(() => _i11.SchemedetailsRepo());
     gh.lazySingleton<_i3.IUserSchemes>(() => _i12.ActiveSchemesRepo());
@@ -76,22 +73,20 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i14.InstalmenthystoryBloc(gh<_i3.IinstalmentHystoryRepo>()));
     gh.factory<_i15.NewschemeotpBloc>(
         () => _i15.NewschemeotpBloc(gh<_i3.IManageOTPRepo>()));
-    gh.factory<_i16.PaymentBloc>(
-        () => _i16.PaymentBloc(gh<_i3.IPayMentRepo>()));
-    gh.factory<_i17.ResetpinBloc>(
-        () => _i17.ResetpinBloc(gh<_i3.IResetPinRepo>()));
-    gh.factory<_i18.SchemedetailsBloc>(
-        () => _i18.SchemedetailsBloc(gh<_i3.ISchemeDetails>()));
-    gh.factory<_i19.UpdatenewpinBloc>(
-        () => _i19.UpdatenewpinBloc(gh<_i3.IResetPinRepo>()));
-    gh.factory<_i20.ActiveschemesBloc>(
-        () => _i20.ActiveschemesBloc(gh<_i3.IUserSchemes>()));
-    gh.factory<_i21.ContactusBloc>(
-        () => _i21.ContactusBloc(gh<_i3.IContactDetails>()));
-    gh.factory<_i22.DropdownitemsBloc>(
-        () => _i22.DropdownitemsBloc(gh<_i3.IDropdownRepo>()));
-    gh.factory<_i23.GoldrateBloc>(
-        () => _i23.GoldrateBloc(gh<_i3.IGoldRateRepo>()));
+    gh.factory<_i16.ResetpinBloc>(
+        () => _i16.ResetpinBloc(gh<_i3.IResetPinRepo>()));
+    gh.factory<_i17.SchemedetailsBloc>(
+        () => _i17.SchemedetailsBloc(gh<_i3.ISchemeDetails>()));
+    gh.factory<_i18.UpdatenewpinBloc>(
+        () => _i18.UpdatenewpinBloc(gh<_i3.IResetPinRepo>()));
+    gh.factory<_i19.ActiveschemesBloc>(
+        () => _i19.ActiveschemesBloc(gh<_i3.IUserSchemes>()));
+    gh.factory<_i20.ContactusBloc>(
+        () => _i20.ContactusBloc(gh<_i3.IContactDetails>()));
+    gh.factory<_i21.DropdownitemsBloc>(
+        () => _i21.DropdownitemsBloc(gh<_i3.IDropdownRepo>()));
+    gh.factory<_i22.GoldrateBloc>(
+        () => _i22.GoldrateBloc(gh<_i3.IGoldRateRepo>()));
     return this;
   }
 }

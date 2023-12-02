@@ -218,9 +218,6 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                   borderRadius: BorderRadius.circular(10.sp),
                                 ),
                                 onPressed: () async {
-                                  
-
-                                 
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -293,6 +290,4 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
       },
     );
   }
-
- 
 }

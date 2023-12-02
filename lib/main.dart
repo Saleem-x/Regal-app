@@ -3,7 +3,6 @@ import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/feature/data/di/injectable.dart';
 import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart';
-import 'package:regal_app/feature/state/bloc/bloc/payment_bloc.dart';
 import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart';
 import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.dart';
 import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart';
@@ -26,13 +25,8 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Stripe.merchantIdentifier = "acct_1IL78e48329489014f";
-
-  // Stripe.stripeAccountId = "acct_1IL78e48329489014f";
-  // Stripe.urlScheme = "flutterstripe";
   Stripe.publishableKey =
       "pk_test_51OEllJSAO1FOABEim1fCjNzBIEcCyVE8ktxDDAppc6ioFeHwJnAyvbJ0kOfuneeV0TjanNYjjalEEU2LvCdMqTqs00Z52WID0G";
-  // await Stripe.instance.applySettings();
 
   configureinjection();
   runApp(const MyApp());
@@ -93,9 +87,6 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getit<UpdatenewpinBloc>(),
-          ),
-          BlocProvider(
-            create: (context) => getit<PaymentBloc>(),
           ),
         ],
         child: MaterialApp(

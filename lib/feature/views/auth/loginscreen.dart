@@ -71,6 +71,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                 ),
                 (route) => false);
             otp = '';
+            _pincontroller.clear();
           },
           loginFailedState: (issue) {
             Navigator.pop(context);
@@ -194,11 +195,12 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Login Using Mobile Number',
+                  'Login using mobile number',
                   style: TextStyle(
-                      fontSize: 16.sp,
-                      color: kcolorblack.withOpacity(.6),
-                      fontWeight: FontWeight.w300),
+                    fontSize: 17.sp,
+                    color: kcolorblack.withOpacity(.6),
+                    fontWeight: FontWeight.w200,
+                  ),
                 )
               ],
             ),
