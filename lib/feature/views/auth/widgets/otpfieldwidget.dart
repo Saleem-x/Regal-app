@@ -8,7 +8,7 @@ import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/login_model/login_model.dart';
 import 'package:regal_app/feature/state/bloc/login/login_bloc.dart';
-
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:regal_app/feature/state/bloc/newschemeotp/newschemeotp_bloc.dart';
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
@@ -270,19 +270,27 @@ class LoginPinOtpField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 35, right: 30),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            child: SvgPicture.asset(
-              'assets/svg/lockre.svg',
-              height: 20.h,
-              width: 14.w,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 7.sp,
+                ),
+                SvgPicture.asset(
+                  'assets/svg/lockre.svg',
+                  height: 20.h,
+                  width: 14.w,
+                ),
+              ],
             ),
           ),
           SizedBox(
             width: size.width * 0.05,
           ),
           Expanded(
-            child: OTPTextField(
+            child: /* OTPTextField(
               controller: OtpFieldController(),
               length: 4,
               keyboardType: TextInputType.number,
@@ -301,7 +309,7 @@ class LoginPinOtpField extends StatelessWidget {
               ),
               onChanged: (value) {
                 password.text = value;
-                if (value.length == 4) {
+                if (value.length == 4 && mobNo.text.length == 10) {
                   context.read<LoginBloc>().add(const AddLoadingEvent());
                   context.read<LoginBloc>().add(
                         UserLoginEvent(
@@ -315,21 +323,74 @@ class LoginPinOtpField extends StatelessWidget {
                 }
               },
               onCompleted: (pin) {
-                if (pin.length == 4) {
+                if (pin.length == 4 && mobNo.text.length == 10) {
                   context.read<LoginBloc>().add(const AddLoadingEvent());
-                  password.text = pin;
-                  logger.i(mobNo);
-                  if (mobNo.text.length == 10 && pin.length == 4) {
-                    context.read<LoginBloc>().add(
-                          UserLoginEvent(
-                            logindata: LoginModel(
-                              mob: mobNo.text,
-                              pin: password.text,
-                              datakey: datakey,
-                            ),
+                  context.read<LoginBloc>().add(
+                        UserLoginEvent(
+                          logindata: LoginModel(
+                            mob: mobNo.text,
+                            pin: password.text,
+                            datakey: datakey,
                           ),
-                        );
-                  }
+                        ),
+                      );
+                }
+              },
+            ), */
+
+                PinCodeTextField(
+              appContext: context,
+              length: 4,
+              keyboardType: TextInputType.number,
+              autoDismissKeyboard: true,
+              enableActiveFill: true,
+              textStyle: TextStyle(
+                fontSize: 17.sp,
+                fontWeight: FontWeight.normal,
+              ),
+              pinTheme: PinTheme(
+                shape: PinCodeFieldShape.box,
+                borderRadius: BorderRadius.circular(
+                  10,
+                ),
+                fieldHeight: 35.h,
+                fieldWidth: 40.w,
+                activeFillColor: kcolorgrey.withOpacity(.09),
+                inactiveFillColor: kcolorgrey.withOpacity(.09),
+                selectedFillColor: kcolorgrey.withOpacity(.09),
+                activeColor: kbgcolor,
+                selectedColor: kbgcolor,
+                disabledColor: kbgcolor,
+                inactiveColor: kbgcolor,
+                errorBorderColor: kbgcolor,
+              ),
+              onChanged: (value) {
+                password.text = value;
+                if (value.length == 4 && mobNo.text.length == 10) {
+                  context.read<LoginBloc>().add(const AddLoadingEvent());
+                  context.read<LoginBloc>().add(
+                        UserLoginEvent(
+                          logindata: LoginModel(
+                            mob: mobNo.text,
+                            pin: password.text,
+                            datakey: datakey,
+                          ),
+                        ),
+                      );
+                }
+              },
+              onCompleted: (pin) {
+                if (pin.length == 4 && mobNo.text.length == 10) {
+                  context.read<LoginBloc>().add(const AddLoadingEvent());
+                  context.read<LoginBloc>().add(
+                        UserLoginEvent(
+                          logindata: LoginModel(
+                            mob: mobNo.text,
+                            pin: password.text,
+                            datakey: datakey,
+                          ),
+                        ),
+                      );
                 }
               },
             ),
@@ -339,3 +400,32 @@ class LoginPinOtpField extends StatelessWidget {
     );
   }
 }
+
+
+ /* PinCodeTextField(
+              appContext: context,
+              length: 4,
+              keyboardType: TextInputType.number,
+              autoDismissKeyboard: true,
+              enableActiveFill: true,
+              textStyle: TextStyle(
+                fontSize: 17.sp,
+                fontWeight: FontWeight.normal,
+              ),
+              pinTheme: PinTheme(
+                shape: PinCodeFieldShape.box,
+                borderRadius: BorderRadius.circular(
+                  10,
+                ),
+                fieldHeight: 35.h,
+                fieldWidth: 40.w,
+                activeFillColor: kcolorgrey.withOpacity(.09),
+                inactiveFillColor: kcolorgrey.withOpacity(.09),
+                selectedFillColor: kcolorgrey.withOpacity(.09),
+                activeColor: kbgcolor,
+                selectedColor: kbgcolor,
+                disabledColor: kbgcolor,
+                inactiveColor: kbgcolor,
+                errorBorderColor: kbgcolor,
+              ),
+            ), */
