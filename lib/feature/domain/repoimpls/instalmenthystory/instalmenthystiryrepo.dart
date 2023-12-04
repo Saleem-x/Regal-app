@@ -23,6 +23,8 @@ class InstalmentHystoryRepo implements IinstalmentHystoryRepo {
         final Map<String, dynamic> json = jsonDecode(response.body);
         if (json.toString() == 'ArrayNoData') {
           return right(insthystry);
+        } else if (json.toString().contains('NoData')) {
+          return right(insthystry);
         }
         List<dynamic> resultList = json['result'];
 

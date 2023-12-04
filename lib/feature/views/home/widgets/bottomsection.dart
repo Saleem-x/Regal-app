@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:regal_app/core/api/endpoints.dart';
-
 import 'package:regal_app/core/constents/colors/kcolors.dart';
-import 'package:regal_app/feature/data/models/payment_hystory_in_model/payment_hystory_in_model.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
-import 'package:regal_app/feature/domain/repoimpls/paymenthstory/paymenthystoryrepo.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/views/payment/confirmpayment.dart';

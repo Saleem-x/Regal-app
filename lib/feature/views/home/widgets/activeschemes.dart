@@ -66,124 +66,117 @@ class ActiveSchemeWidget extends StatelessWidget {
                             dragStartBehavior: DragStartBehavior.start,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) => Padding(
-                                padding: EdgeInsets.only(
-                                  left: schemes.length == 1 ? 0 : 10,
-                                ),
-                                child: BlocBuilder<SchemeselectorCubit,
-                                    SchemeselectorState>(
-                                  builder: (context, selected) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        context
-                                            .read<SchemeselectorCubit>()
-                                            .selectscheme(index);
-                                        context.read<SchemedetailsBloc>().add(
-                                              GetschemedetailsEvent(
-                                                cusid: user.cusId!,
-                                                schmId:
-                                                    schemes[index].schemeNo!,
-                                                datakeys: datakey,
-                                                scheme: schemes[index],
+                              padding: EdgeInsets.only(
+                                left: schemes.length == 1 ? 0 : 10,
+                              ),
+                              child: BlocBuilder<SchemeselectorCubit,
+                                  SchemeselectorState>(
+                                builder: (context, selected) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      context
+                                          .read<SchemeselectorCubit>()
+                                          .selectscheme(index);
+                                      context.read<SchemedetailsBloc>().add(
+                                            GetschemedetailsEvent(
+                                              cusid: user.cusId!,
+                                              schmId: schemes[index].schemeNo!,
+                                              datakeys: datakey,
+                                              scheme: schemes[index],
+                                            ),
+                                          );
+                                      context.read<SchemedetailsBloc>().add(
+                                            GetschemedetailsEvent(
+                                              cusid: user.cusId!,
+                                              schmId: schemes[index].schemeNo!,
+                                              datakeys: datakey,
+                                              scheme: schemes[index],
+                                            ),
+                                          );
+                                    },
+                                    child: Card(
+                                      shadowColor: ktextgrey,
+                                      elevation: 3,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30.sp),
+                                      ),
+                                      child: Container(
+                                        width: 230.w,
+                                        decoration: BoxDecoration(
+                                            color: kcolorwhite,
+                                            gradient: LinearGradient(
+                                                colors: selected.idx == index
+                                                    ? [kgold1, kgold2]
+                                                    : [
+                                                        kcolorwhite,
+                                                        const Color.fromARGB(
+                                                            255, 236, 235, 235)
+                                                      ],
+                                                begin: Alignment.bottomLeft,
+                                                end: Alignment.topRight),
+                                            borderRadius:
+                                                BorderRadius.circular(30.sp),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: ktextgrey
+                                                      .withOpacity(.18),
+                                                  blurRadius: 2,
+                                                  offset: const Offset(-4, 2.5),
+                                                  blurStyle: BlurStyle.normal,
+                                                  spreadRadius: 0.2)
+                                            ]),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15, vertical: 10.h),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SvgPicture.asset(
+                                                selected.idx == index
+                                                    ? 'assets/others/scheme_s.svg'
+                                                    : 'assets/others/scheme.svg',
+                                                height: 18.h,
+                                                width: 15.w,
                                               ),
-                                            );
-                                        context.read<SchemedetailsBloc>().add(
-                                              GetschemedetailsEvent(
-                                                cusid: user.cusId!,
-                                                schmId:
-                                                    schemes[index].schemeNo!,
-                                                datakeys: datakey,
-                                                scheme: schemes[index],
+                                              SizedBox(
+                                                height: 5.h,
                                               ),
-                                            );
-                                      },
-                                      child: Card(
-                                        shadowColor: ktextgrey,
-                                        elevation: 3,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30.sp),
-                                        ),
-                                        child: Container(
-                                          width: 230.w,
-                                          decoration: BoxDecoration(
-                                              color: kcolorwhite,
-                                              gradient: LinearGradient(
-                                                  colors: selected.idx == index
-                                                      ? [kgold1, kgold2]
-                                                      : [
-                                                          kcolorwhite,
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              236,
-                                                              235,
-                                                              235)
-                                                        ],
-                                                  begin: Alignment.bottomLeft,
-                                                  end: Alignment.topRight),
-                                              borderRadius:
-                                                  BorderRadius.circular(30.sp),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: ktextgrey
-                                                        .withOpacity(.18),
-                                                    blurRadius: 2,
-                                                    offset:
-                                                        const Offset(-4, 2.5),
-                                                    blurStyle: BlurStyle.normal,
-                                                    spreadRadius: 0.2)
-                                              ]),
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 15, vertical: 10.h),
-                                            child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    selected.idx == index
-                                                        ? 'assets/others/scheme_s.svg'
-                                                        : 'assets/others/scheme.svg',
-                                                    height: 18.h,
-                                                    width: 15.w,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5.h,
-                                                  ),
-                                                  Text(
-                                                    schemes[index].schemeNo!,
-                                                    style: TextStyle(
-                                                      fontSize: 20.sp,
-                                                      color:
-                                                          selected.idx == index
-                                                              ? kcolorwhite
-                                                              : ktextgrey,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 3.h,
-                                                  ),
-                                                  Text(
-                                                    '${schemes[index].schemeName} | ₹${schemes[index].totalAmount}',
-                                                    style: TextStyle(
-                                                        fontSize: 12.sp,
-                                                        color: selected.idx ==
-                                                                index
-                                                            ? kcolorwhite
-                                                            : ktextgrey,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                ]),
+                                              Text(
+                                                schemes[index].schemeNo!,
+                                                style: TextStyle(
+                                                  fontSize: 20.sp,
+                                                  color: selected.idx == index
+                                                      ? kcolorwhite
+                                                      : ktextgrey,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 3.h,
+                                              ),
+                                              Text(
+                                                '${schemes[index].schemeName} | ₹${schemes[index].totalAmount}',
+                                                style: TextStyle(
+                                                    fontSize: 12.sp,
+                                                    color: selected.idx == index
+                                                        ? kcolorwhite
+                                                        : ktextgrey,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                    );
-                                  },
-                                )),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                             separatorBuilder: (context, index) =>
                                 const SizedBox(
                               width: 0,
