@@ -12,7 +12,7 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:regal_app/feature/data/repos/abstractrepos.dart' as _i3;
 import 'package:regal_app/feature/domain/repoimpls/activeschemerepo/activeschemesrepo.dart'
-    as _i12;
+    as _i11;
 import 'package:regal_app/feature/domain/repoimpls/contactus/contactusrepo.dart'
     as _i4;
 import 'package:regal_app/feature/domain/repoimpls/createuserrepo/createuserrepo.dart'
@@ -22,13 +22,12 @@ import 'package:regal_app/feature/domain/repoimpls/dropdownrepo/dropdownrepo.dar
 import 'package:regal_app/feature/domain/repoimpls/goldraterepo/goldraterepo.dart'
     as _i7;
 import 'package:regal_app/feature/domain/repoimpls/instalmenthystory/instalmenthystiryrepo.dart'
-    as _i13;
+    as _i12;
 import 'package:regal_app/feature/domain/repoimpls/otprepo/otprepo.dart' as _i8;
-
 import 'package:regal_app/feature/domain/repoimpls/resetpinrepo/resetpinrepo.dart'
-    as _i10;
+    as _i9;
 import 'package:regal_app/feature/domain/repoimpls/schemedetails/schemedetailsrepo.dart'
-    as _i11;
+    as _i10;
 import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart'
     as _i19;
 import 'package:regal_app/feature/state/bloc/contactus/contactus_bloc.dart'
@@ -38,6 +37,8 @@ import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.da
 import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart'
     as _i22;
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart'
+    as _i13;
+import 'package:regal_app/feature/state/bloc/newschemehome/newschemehome_bloc.dart'
     as _i14;
 import 'package:regal_app/feature/state/bloc/newschemeotp/newschemeotp_bloc.dart'
     as _i15;
@@ -64,13 +65,15 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i3.IDropdownRepo>(() => _i6.RelationShipRepo());
     gh.lazySingleton<_i3.IGoldRateRepo>(() => _i7.GoldRateRepo());
     gh.lazySingleton<_i3.IManageOTPRepo>(() => _i8.OTPRepo());
-    gh.lazySingleton<_i3.IResetPinRepo>(() => _i10.ResetPinRepo());
-    gh.lazySingleton<_i3.ISchemeDetails>(() => _i11.SchemedetailsRepo());
-    gh.lazySingleton<_i3.IUserSchemes>(() => _i12.ActiveSchemesRepo());
+    gh.lazySingleton<_i3.IResetPinRepo>(() => _i9.ResetPinRepo());
+    gh.lazySingleton<_i3.ISchemeDetails>(() => _i10.SchemedetailsRepo());
+    gh.lazySingleton<_i3.IUserSchemes>(() => _i11.ActiveSchemesRepo());
     gh.lazySingleton<_i3.IinstalmentHystoryRepo>(
-        () => _i13.InstalmentHystoryRepo());
-    gh.factory<_i14.InstalmenthystoryBloc>(
-        () => _i14.InstalmenthystoryBloc(gh<_i3.IinstalmentHystoryRepo>()));
+        () => _i12.InstalmentHystoryRepo());
+    gh.factory<_i13.InstalmenthystoryBloc>(
+        () => _i13.InstalmenthystoryBloc(gh<_i3.IinstalmentHystoryRepo>()));
+    gh.factory<_i14.NewschemehomeBloc>(
+        () => _i14.NewschemehomeBloc(gh<_i3.IDropdownRepo>()));
     gh.factory<_i15.NewschemeotpBloc>(
         () => _i15.NewschemeotpBloc(gh<_i3.IManageOTPRepo>()));
     gh.factory<_i16.ResetpinBloc>(

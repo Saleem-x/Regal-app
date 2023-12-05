@@ -8,6 +8,7 @@ import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.da
 import 'package:regal_app/feature/state/bloc/goldrate/goldrate_bloc.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
 import 'package:regal_app/feature/state/bloc/login/login_bloc.dart';
+import 'package:regal_app/feature/state/bloc/newschemehome/newschemehome_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newschemeotp/newschemeotp_bloc.dart';
 import 'package:regal_app/feature/state/bloc/resetpin/resetpin_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
@@ -87,6 +88,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getit<UpdatenewpinBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getit<NewschemehomeBloc>(),
           ),
         ],
         child: MaterialApp(

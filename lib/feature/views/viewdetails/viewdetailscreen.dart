@@ -97,7 +97,7 @@ class ViewDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 30.h,
+                      height: 10.h,
                     ),
                     Theme(
                       data: ThemeData(
@@ -283,7 +283,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    ' ${schemedetil.goldWeight} grams',
+                                    ' ${double.parse(schemedetil.goldWeight ?? "0")} grams',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -479,11 +479,17 @@ class ViewDetailScreen extends StatelessWidget {
                                                 ),
                                                 backgroundColor: kcolorwhite,
                                                 leading: Image.asset(
-                                                  'assets/images/phone.png',
+                                                  insthystry[index].empName ==
+                                                              null ||
+                                                          insthystry[index]
+                                                              .empName!
+                                                              .isEmpty
+                                                      ? 'assets/images/phone.png'
+                                                      : 'assets/images/user.png',
                                                   height: 30.h,
                                                 ),
                                                 title: Text(
-                                                  '₹${insthystry[index].credit}',
+                                                  '₹${double.parse(insthystry[index].credit ?? "0").toStringAsFixed(2)}',
                                                   style: TextStyle(
                                                     // fontFamily: kprimaryfont,
                                                     fontSize: 16.sp,
@@ -532,17 +538,16 @@ class ViewDetailScreen extends StatelessWidget {
                                                               padding:
                                                                   const EdgeInsets
                                                                       .symmetric(
-                                                                      horizontal:
-                                                                          10,
-                                                                      vertical:
-                                                                          5),
+                                                                horizontal: 10,
+                                                                vertical: 5,
+                                                              ),
                                                               child: Row(
                                                                 mainAxisAlignment:
                                                                     MainAxisAlignment
                                                                         .spaceBetween,
                                                                 children: [
                                                                   Text(
-                                                                    'Weight: ${insthystry[index].goldWeight} gm(s)',
+                                                                    'Weight: ${double.parse(insthystry[index].goldWeight ?? "0")} gm(s)',
                                                                     style:
                                                                         TextStyle(
                                                                       // fontFamily:
@@ -588,7 +593,7 @@ class ViewDetailScreen extends StatelessWidget {
                                                                         .spaceBetween,
                                                                 children: [
                                                                   Text(
-                                                                    'Total Wt: ${insthystry[index].closingWt} gm(s)',
+                                                                    'Total Wt: ${double.parse(insthystry[index].closingWt ?? "0")} gm(s)',
                                                                     style:
                                                                         TextStyle(
                                                                       // fontFamily:
@@ -707,6 +712,7 @@ class ViewDetailScreen extends StatelessWidget {
                   scheme: scheme,
                   schemedetail: schemedetil,
                   user: user,
+                  payablecontroller: scheme.instAmount!,
                 ),
               ),
             );

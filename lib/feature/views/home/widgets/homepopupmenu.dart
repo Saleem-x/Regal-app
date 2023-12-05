@@ -108,8 +108,8 @@ class HomePopupMenu extends StatelessWidget {
             child: SvgPicture.asset(
               'assets/others/close.svg',
               fit: BoxFit.cover,
-              height: 10.h,
-              width: 10.w,
+              height: 8.h,
+              width: 8.w,
             ),
           ),
           PopupMenuItem(
@@ -121,7 +121,7 @@ class HomePopupMenu extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
                     "About",
-                    style: TextStyle(color: ktextgrey, fontSize: 13.sp),
+                    style: TextStyle(color: ktextgrey, fontSize: 12.sp),
                   ),
                 ),
                 Divider(
@@ -137,10 +137,11 @@ class HomePopupMenu extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                   child: Text(
                     "Terms and policy",
-                    style: TextStyle(color: ktextgrey, fontSize: 13.sp),
+                    style: TextStyle(color: ktextgrey, fontSize: 12.sp),
                   ),
                 ),
                 Divider(
@@ -160,7 +161,7 @@ class HomePopupMenu extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                   child: Text(
                     "Contact Us",
-                    style: TextStyle(color: ktextgrey, fontSize: 13.sp),
+                    style: TextStyle(color: ktextgrey, fontSize: 12.sp),
                   ),
                 ),
                 Divider(
@@ -180,7 +181,7 @@ class HomePopupMenu extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                   child: Text(
                     "Logout",
-                    style: TextStyle(color: ktextgrey, fontSize: 13.sp),
+                    style: TextStyle(color: ktextgrey, fontSize: 12.sp),
                   ),
                 ),
                 Divider(
@@ -200,7 +201,7 @@ class HomePopupMenu extends StatelessWidget {
                 children: [
                   Text(
                     "v.1.0.0",
-                    style: TextStyle(color: ktextgrey, fontSize: 13.sp),
+                    style: TextStyle(color: ktextgrey, fontSize: 12.sp),
                   ),
                 ],
               ),

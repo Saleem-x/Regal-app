@@ -122,9 +122,9 @@ class ActiveSchemeWidget extends StatelessWidget {
                                                   color: ktextgrey
                                                       .withOpacity(.18),
                                                   blurRadius: 2,
-                                                  offset: const Offset(-4, 2.5),
+                                                  offset: const Offset(-1, 1),
                                                   blurStyle: BlurStyle.normal,
-                                                  spreadRadius: 0.2)
+                                                  spreadRadius: 0.1)
                                             ]),
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(
