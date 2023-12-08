@@ -1,3 +1,5 @@
+import android.Intent
+
 class PaymentChannel : PlatformChannel() {
 
     @MethodChannel("payment_channel")

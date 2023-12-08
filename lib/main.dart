@@ -21,13 +21,12 @@ import 'package:regal_app/feature/state/cubit/pickimage/pickimage_cubit.dart';
 import 'package:regal_app/feature/state/cubit/schemeselector/schemeselector_cubit.dart';
 import 'package:regal_app/feature/views/splash/splashscreen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Stripe.publishableKey =
-      "pk_test_51OEllJSAO1FOABEim1fCjNzBIEcCyVE8ktxDDAppc6ioFeHwJnAyvbJ0kOfuneeV0TjanNYjjalEEU2LvCdMqTqs00Z52WID0G";
+  // Stripe.publishableKey =
+  //     "pk_test_51OEllJSAO1FOABEim1fCjNzBIEcCyVE8ktxDDAppc6ioFeHwJnAyvbJ0kOfuneeV0TjanNYjjalEEU2LvCdMqTqs00Z52WID0G";
 
   configureinjection();
   runApp(const MyApp());

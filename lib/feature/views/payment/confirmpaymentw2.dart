@@ -1,20 +1,11 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:pay/pay.dart';
-import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/views/payment/configs/androidpayment.dart';
-import 'package:regal_app/feature/views/payment/configs/channels.dart';
-import 'package:regal_app/feature/views/payment/paymentconfig.dart';
-import 'package:regal_app/feature/views/payment/paymentfailedscreen.dart';
-import 'package:regal_app/feature/views/payment/paymentsucces.dart';
-
-import 'package:http/http.dart' as http;
 
 class ConfirmPaymentTWO extends StatefulWidget {
   final SchemeDetailsModel schemeDetails;
@@ -34,20 +25,14 @@ class ConfirmPaymentTWO extends StatefulWidget {
   State<ConfirmPaymentTWO> createState() => _ConfirmPaymentTWOState();
 }
 
-var gpaybutton = GooglePayButton(
-  paymentConfiguration: PaymentConfiguration.fromJsonString(defaultGooglePay),
-  paymentItems: _paymentItems,
-  type: GooglePayButtonType.buy,
-  margin: const EdgeInsets.only(top: 15.0),
-  onPaymentResult: (result) {
-    logger.e(result);
-  },
-  loadingIndicator: const Center(
-    child: CircularProgressIndicator(),
-  ),
-);
+String deeplink = '';
 
 class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -121,45 +106,13 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
             SizedBox(
               height: 10.h,
             ),
-            GooglePayButton(
-              paymentConfiguration: PaymentConfiguration.fromJsonString(custom),
-              paymentItems: _paymentItems,
-              type: GooglePayButtonType.pay,
-              margin: const EdgeInsets.only(top: 15.0),
-              onPaymentResult: (result) {
-                logger.e('gpay result$result');
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PaymentSuccessScreen(
-                      user: widget.user,
-                    ),
-                  ),
-                );
-              },
-              onError: (error) {
-                logger.e('gpay error$error');
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PaymentFailedScreeen(
-                              user: widget.user,
-                            )));
-              },
-              loadingIndicator: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            ),
             InkWell(
               onTap: () async {
-                final paymentChannel = PaymentChannel();
-                paymentChannel.payWithGPay(
-                    'https://pay.google.com/intl/en_us/about/how-it-works/',
-                    'com.google.android.gms.wallet');
-
-                paymentChannel.payWithGPay(
-                    'https://pay.google.com/intl/en_us/about/how-it-works/',
-                    'com.google.android.gms.wallet');
+                launchGooglePayUPIIntent(
+                  widget.scheme.subId!,
+                  widget.scheme.merchantCode!,
+                  widget.orderID,
+                );
               },
               child: SizedBox(
                 width: size.width,
@@ -192,7 +145,11 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
             ),
             InkWell(
               onTap: () async {
-                launchGooglePayUPIIntent();
+                paytmapiintent(
+                  widget.scheme.subId!,
+                  widget.scheme.merchantCode!,
+                  widget.orderID,
+                );
               },
               child: SizedBox(
                 width: size.width,
@@ -227,45 +184,5 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
         ),
       ),
     );
-  }
-}
-
-const _paymentItems = [
-  PaymentItem(
-    label: 'Total',
-    amount: '1000.99',
-    status: PaymentItemStatus.final_price,
-  ),
-  PaymentItem(
-    label: 'Total',
-    amount: '1000.99',
-    status: PaymentItemStatus.final_price,
-  )
-];
-
-initpayment() async {
-  var body = {
-    'amount': '1000',
-    'currency': "INR",
-  };
-  try {
-    var response = await http.post(
-        Uri.parse(
-          'https://api.stripe.com/v1/payment_intents',
-        ),
-        headers: {
-          "Authorization":
-              "Bearer sk_test_51OEllJSAO1FOABEinUvrt3oQwY8Dh1QqLcDVVxa6zTPjV9gwgB3JthIesewsFQf0mjZQbsQGNP2Rzs5OtfKefoBw00Faf38K67",
-          "Content-type": "application/x-www-form-urlencoded",
-        },
-        body: body);
-    logger.e(response.body);
-    final Map<String, dynamic> json = jsonDecode(response.body);
-    String clntscrt = json['client_secret'];
-    logger.e(clntscrt);
-
-    return clntscrt;
-  } catch (e) {
-    logger.e(e);
   }
 }

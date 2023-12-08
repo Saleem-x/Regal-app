@@ -104,28 +104,29 @@ class ActiveSchemeWidget extends StatelessWidget {
                                       child: Container(
                                         width: 230.w,
                                         decoration: BoxDecoration(
-                                            color: kcolorwhite,
-                                            gradient: LinearGradient(
-                                                colors: selected.idx == index
-                                                    ? [kgold1, kgold2]
-                                                    : [
-                                                        kcolorwhite,
-                                                        const Color.fromARGB(
-                                                            255, 236, 235, 235)
-                                                      ],
-                                                begin: Alignment.bottomLeft,
-                                                end: Alignment.topRight),
-                                            borderRadius:
-                                                BorderRadius.circular(30.sp),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: ktextgrey
-                                                      .withOpacity(.18),
-                                                  blurRadius: 2,
-                                                  offset: const Offset(-1, 1),
-                                                  blurStyle: BlurStyle.normal,
-                                                  spreadRadius: 0.1)
-                                            ]),
+                                          color: kcolorwhite,
+                                          gradient: LinearGradient(
+                                              colors: selected.idx == index
+                                                  ? [kgold1, kgold2]
+                                                  : [
+                                                      kcolorwhite,
+                                                      const Color.fromARGB(
+                                                          255, 236, 235, 235)
+                                                    ],
+                                              begin: Alignment.bottomLeft,
+                                              end: Alignment.topRight),
+                                          borderRadius:
+                                              BorderRadius.circular(30.sp),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: ktextgrey.withOpacity(.18),
+                                              blurRadius: 2,
+                                              offset: const Offset(-1, 1),
+                                              blurStyle: BlurStyle.normal,
+                                              spreadRadius: 0.1,
+                                            )
+                                          ],
+                                        ),
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 15, vertical: 10.h),
