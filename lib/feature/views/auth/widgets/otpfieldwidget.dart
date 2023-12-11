@@ -401,8 +401,7 @@ class LoginPinOtpField extends StatelessWidget {
   }
 }
 
-
- /* PinCodeTextField(
+/* PinCodeTextField(
               appContext: context,
               length: 4,
               keyboardType: TextInputType.number,
@@ -429,3 +428,80 @@ class LoginPinOtpField extends StatelessWidget {
                 errorBorderColor: kbgcolor,
               ),
             ), */
+
+class NewSchemeOtpField extends StatelessWidget {
+  const NewSchemeOtpField(
+      {super.key,
+      required this.size,
+      required this.mobNo,
+      required this.password});
+
+  final Size size;
+  final TextEditingController mobNo;
+  final TextEditingController password;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 35, right: 30),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 7.sp,
+                ),
+                SvgPicture.asset(
+                  'assets/svg/lockre.svg',
+                  height: 20.h,
+                  width: 14.w,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: size.width * 0.05,
+          ),
+          Expanded(
+            child: PinCodeTextField(
+              controller: password,
+              appContext: context,
+              length: 4,
+              keyboardType: TextInputType.number,
+              autoDismissKeyboard: true,
+              enableActiveFill: true,
+              textStyle: TextStyle(
+                fontSize: 17.sp,
+                fontWeight: FontWeight.normal,
+              ),
+              pinTheme: PinTheme(
+                shape: PinCodeFieldShape.box,
+                borderRadius: BorderRadius.circular(
+                  10,
+                ),
+                fieldHeight: 35.h,
+                fieldWidth: 40.w,
+                activeFillColor: kcolorgrey.withOpacity(.09),
+                inactiveFillColor: kcolorgrey.withOpacity(.09),
+                selectedFillColor: kcolorgrey.withOpacity(.09),
+                activeColor: kbgcolor,
+                selectedColor: kbgcolor,
+                disabledColor: kbgcolor,
+                inactiveColor: kbgcolor,
+                errorBorderColor: kbgcolor,
+              ),
+              onChanged: (value) {
+                password.text = value;
+              },
+              onCompleted: (pin) {
+                password.text = pin;
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

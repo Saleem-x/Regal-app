@@ -1,10 +1,6 @@
-import 'dart:io';
-
-import 'package:regal_app/core/api/endpoints.dart';
-import 'package:regal_app/feature/data/models/create_user_in_model/create_user_in_model.dart';
-import 'package:regal_app/feature/data/models/create_user_out_model/create_user_out_model.dart';
-import 'package:retrofit/http.dart';
 import 'package:dio/dio.dart';
+import 'package:regal_app/core/api/endpoints.dart';
+import 'package:retrofit/retrofit.dart';
 
 part 'temp.g.dart';
 
@@ -13,36 +9,10 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
   @POST(uploadimageurl)
-  @MultiPart()
+  @FormUrlEncoded()
   Future<String> uploadImage(
-    @Part(
-      fileName: 'userprofileimage',
-    )
-    File file,
     @Field('datakey') String dataKey,
-    @Field('custID') String cusId,
+    @Field('cusId') String customerId,
+    @Body() String fileBytes,
   );
-  @POST(uploadimageurl)
-  @MultiPart()
-  Future<String> uploaddocfrontImage(
-    @Part(
-      fileName: 'docfrontimg',
-    )
-    File file,
-    @Field('datakey') String dataKey,
-    @Field('0') String cusId,
-  );
-  @POST(uploadimageurl)
-  @MultiPart()
-  Future<String> uploaddocbackImage(
-    @Part(
-      fileName: 'docbackimg',
-    )
-    File file,
-    @Field('datakey') String dataKey,
-    @Field('0') String cusId,
-  );
-
-  @POST(createnewuserurl)
-  Future<CreateUserOutModel> createUser(@Body() CreateUserInModel request);
 }

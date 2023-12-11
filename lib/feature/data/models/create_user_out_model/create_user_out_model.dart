@@ -5,14 +5,16 @@ part 'create_user_out_model.g.dart';
 @JsonSerializable()
 class CreateUserOutModel {
   @JsonKey(name: 'transID')
-  String? transId;
+  int? transId;
   @JsonKey(name: 'Title')
   String? title;
   @JsonKey(name: 'Descr')
   String? descr;
   @JsonKey(name: 'CusId')
   String? cusId;
+  @JsonKey(name: 'goldRate')
   String? goldRate;
+  @JsonKey(name: 'subCodes')
   String? subCodes;
   @JsonKey(name: 'SchemeNo')
   String? schemeNo;

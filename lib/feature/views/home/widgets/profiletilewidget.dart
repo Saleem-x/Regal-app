@@ -16,14 +16,14 @@ class ProfileTileWidget extends StatelessWidget {
         children: [
           Card(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.h),
+              borderRadius: BorderRadius.circular(14.sp),
             ),
             color: kcolorwhite,
             child: Container(
               width: 51.h,
-              height: 52.h,
+              height: 47.h,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18.h),
+                borderRadius: BorderRadius.circular(14.sp),
                 image: const DecorationImage(
                   image: AssetImage('assets/images/Portrait_Placeholder.png'),
                   fit: BoxFit.cover,

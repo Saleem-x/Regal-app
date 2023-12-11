@@ -1,33 +1,26 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:regal_app/core/api/endpoints.dart';
-import 'package:regal_app/feature/data/models/create_user_in_model/create_user_in_model.dart';
-import 'package:regal_app/feature/data/models/create_user_out_model/create_user_out_model.dart';
 import 'package:regal_app/feature/domain/repoimpls/createuserrepo/temp.dart';
 
-Future<void> uploadImageAndCreateUser(String datakey, String imagePath,
-    CreateUserInModel userRequest, String docfrnt, String docback) async {
+Future<String> uploadimage(String imagepath) async {
+  final dio = Dio(); // You can configure Dio with additional options if needed
+  final apiService = ApiService(dio);
+
+  // Read the image file into bytes
+  final imageFile = File(imagepath);
+  final List<int> imageBytes = await imageFile.readAsBytes();
+
+  // Call the uploadImage method
   try {
-    Dio dio = Dio();
-
-    ApiService apiService = ApiService(dio);
-
     String imageUrl =
-        await apiService.uploadImage(File(imagePath), datakey, '0');
-    String docfrontUrl =
-        await apiService.uploadImage(File(imagePath), datakey, '0');
-    String docbackurl =
-        await apiService.uploadImage(File(imagePath), datakey, '0');
+        await apiService.uploadImage(datakey, '0', jsonEncode(imageBytes));
+    logger.e('Image uploaded successfully. URL: $imageUrl');
 
-    userRequest.customerImage = imageUrl;
-    userRequest.docFrontImage = docfrontUrl;
-    userRequest.docBackImage = docbackurl;
-    CreateUserOutModel userResponse = await apiService.createUser(userRequest);
-
-    logger.e(
-        "User created successfully. UserID: ${userResponse.cusId}, Username: ${userResponse.title}");
+    return imageUrl;
   } catch (e) {
-    logger.e('Error: $e');
+    logger.e('Error uploading image: $e');
+    return 'failed';
   }
 }

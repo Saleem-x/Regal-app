@@ -3,6 +3,7 @@ import 'package:regal_app/core/failures/failures.dart';
 import 'package:regal_app/feature/data/models/branch_model/branch_model.dart';
 import 'package:regal_app/feature/data/models/contact_us_model/contact_us_model.dart';
 import 'package:regal_app/feature/data/models/create_new_user_scheme_model/create_new_user_scheme_model.dart';
+import 'package:regal_app/feature/data/models/create_user_in_model/create_user_in_model.dart';
 import 'package:regal_app/feature/data/models/create_user_out_model/create_user_out_model.dart';
 import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
 import 'package:regal_app/feature/data/models/document_type_model/document_type_model.dart';
@@ -58,7 +59,10 @@ abstract class IDropdownRepo {
 
 abstract class ICreateUserRepo {
   Future<Either<MainFailures, CreateUserOutModel>> createNewUserScheme(
-      CreateNewUserSchemeModel newuser);
+      CreateUserInModel newuser,
+      String dpimageurl,
+      String docfrnt,
+      String? docback);
 }
 
 abstract class IResetPinRepo {

@@ -8,7 +8,7 @@ part of 'create_user_out_model.dart';
 
 CreateUserOutModel _$CreateUserOutModelFromJson(Map<String, dynamic> json) =>
     CreateUserOutModel(
-      transId: json['transID'] as String?,
+      transId: json['transID'] as int?,
       title: json['Title'] as String?,
       descr: json['Descr'] as String?,
       cusId: json['CusId'] as String?,

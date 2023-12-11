@@ -185,7 +185,7 @@ class ActiveSchemeWidget extends StatelessWidget {
                             itemCount: schemes.length,
                           ),
                           SizedBox(
-                            width: 30.w,
+                            width: schemes.length == 1 ? 80.w : 30.w,
                           ),
                         ],
                       ),

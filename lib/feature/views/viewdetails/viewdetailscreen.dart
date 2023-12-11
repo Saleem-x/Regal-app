@@ -73,8 +73,8 @@ class ViewDetailScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         backgroundColor: kcolorwhite,
-                        title: const Text("Fetching Hystory"),
-                        content: const Text("No Hystory Available"),
+                        title: const Text("Fetching History"),
+                        content: const Text("No History Available"),
                       ),
                     );
                     Future.delayed(
@@ -283,7 +283,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    ' ${double.parse(schemedetil.goldWeight ?? "0")} grams',
+                                    ' ${schemedetil.goldWeight == null ? schemedetil.goldWeight!.isEmpty ? "0.00" : double.parse(schemedetil.goldWeight ?? "0.00") : '0.00'} grams',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -489,7 +489,7 @@ class ViewDetailScreen extends StatelessWidget {
                                                   height: 30.h,
                                                 ),
                                                 title: Text(
-                                                  '₹${double.parse(insthystry[index].credit ?? "0").toStringAsFixed(2)}',
+                                                  '₹${double.parse(insthystry[index].credit ?? "0.00").toStringAsFixed(2)}',
                                                   style: TextStyle(
                                                     // fontFamily: kprimaryfont,
                                                     fontSize: 16.sp,
@@ -547,7 +547,7 @@ class ViewDetailScreen extends StatelessWidget {
                                                                         .spaceBetween,
                                                                 children: [
                                                                   Text(
-                                                                    'Weight: ${double.parse(insthystry[index].goldWeight ?? "0")} gm(s)',
+                                                                    'Weight: ${double.parse(insthystry[index].goldWeight ?? "0.00")} gm(s)',
                                                                     style:
                                                                         TextStyle(
                                                                       // fontFamily:
@@ -562,7 +562,7 @@ class ViewDetailScreen extends StatelessWidget {
                                                                     ),
                                                                   ),
                                                                   Text(
-                                                                    'Gold Rate: ₹${double.parse(insthystry[index].goldRate ?? '0.0').toStringAsFixed(2)}',
+                                                                    'Gold Rate: ₹${double.parse(insthystry[index].goldRate ?? '0.00').toStringAsFixed(2)}',
                                                                     style:
                                                                         TextStyle(
                                                                       // fontFamily:
@@ -593,7 +593,7 @@ class ViewDetailScreen extends StatelessWidget {
                                                                         .spaceBetween,
                                                                 children: [
                                                                   Text(
-                                                                    'Total Wt: ${double.parse(insthystry[index].closingWt ?? "0")} gm(s)',
+                                                                    'Total Wt: ${double.parse(insthystry[index].closingWt ?? "0.00")} gm(s)',
                                                                     style:
                                                                         TextStyle(
                                                                       // fontFamily:
@@ -608,7 +608,7 @@ class ViewDetailScreen extends StatelessWidget {
                                                                     ),
                                                                   ),
                                                                   Text(
-                                                                    'Total Amt. : ₹${double.parse(insthystry[index].netAmount!).toStringAsFixed(2)}',
+                                                                    'Total Amt. : ₹${double.parse(insthystry[index].netAmount ?? "0.00").toStringAsFixed(2)}',
                                                                     style:
                                                                         TextStyle(
                                                                       // fontFamily:
@@ -640,7 +640,7 @@ class ViewDetailScreen extends StatelessWidget {
                                                                     .start,
                                                             children: [
                                                               Text(
-                                                                'Total Amt. : ₹${double.parse(insthystry[index].netAmount!).toStringAsFixed(2)}',
+                                                                'Total Amt. : ₹${double.parse(insthystry[index].netAmount ?? "0.00").toStringAsFixed(2)}',
                                                                 style:
                                                                     TextStyle(
                                                                   // fontFamily:

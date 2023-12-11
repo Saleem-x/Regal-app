@@ -13,7 +13,7 @@ class _ApiService implements ApiService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://shop.pallavinamdev.com/PHP_CollApp/';
+    baseUrl ??= 'http://shop.pallavinamdev.com/PHP_Demo/';
   }
 
   final Dio _dio;
@@ -22,22 +22,19 @@ class _ApiService implements ApiService {
 
   @override
   Future<String> uploadImage(
-    File file,
     String dataKey,
-    String cusId,
+    String customerId,
+    String fileBytes,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = {
-      'datakey': dataKey,
-      'custID': cusId,
-    };
+    final _data = fileBytes;
     final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
-      contentType: 'multipart/form-data',
+      contentType: 'application/x-www-form-urlencoded',
     )
         .compose(
           _dio.options,
@@ -51,102 +48,6 @@ class _ApiService implements ApiService {
           baseUrl,
         ))));
     final value = _result.data!;
-    return value;
-  }
-
-  @override
-  Future<String> uploaddocfrontImage(
-    File file,
-    String dataKey,
-    String cusId,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = {
-      'datakey': dataKey,
-      '0': cusId,
-    };
-    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-      contentType: 'multipart/form-data',
-    )
-        .compose(
-          _dio.options,
-          'p_user_uploadImage.php',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
-    final value = _result.data!;
-    return value;
-  }
-
-  @override
-  Future<String> uploaddocbackImage(
-    File file,
-    String dataKey,
-    String cusId,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = {
-      'datakey': dataKey,
-      '0': cusId,
-    };
-    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-      contentType: 'multipart/form-data',
-    )
-        .compose(
-          _dio.options,
-          'p_user_uploadImage.php',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
-    final value = _result.data!;
-    return value;
-  }
-
-  @override
-  Future<CreateUserOutModel> createUser(CreateUserInModel request) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<CreateUserOutModel>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'p_user_InsSchemeNewCustomer.php',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = CreateUserOutModel.fromJson(_result.data!);
     return value;
   }
 

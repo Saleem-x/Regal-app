@@ -70,6 +70,25 @@ class DobSelectorWidget extends StatelessWidget {
                   //   // LengthLimitingTextInputFormatter(10),
                   //   // FilteringTextInputFormatter.digitsOnly
                   // ],
+                  onTap: () {
+                    showCupertinoModalPopup(
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                          color: kcolorwhite,
+                          height: 250,
+                          child: CupertinoDatePicker(
+                            onDateTimeChanged: (value) {
+                              controller.text =
+                                  "${value.day}/${value.month}/${value.year}";
+                            },
+                            use24hFormat: true,
+                            mode: CupertinoDatePickerMode.date,
+                          ),
+                        );
+                      },
+                    );
+                  },
                   decoration: InputDecoration(
                     isDense: true,
                     hintText: controller.text,
