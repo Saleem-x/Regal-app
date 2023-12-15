@@ -19,16 +19,20 @@ mixin _$NewschemehomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAllSchemesEvent,
+    required TResult Function(List<SchemeListModel>? schemeslist)
+        getSchemeTenureEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAllSchemesEvent,
+    TResult? Function(List<SchemeListModel>? schemeslist)? getSchemeTenureEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAllSchemesEvent,
+    TResult Function(List<SchemeListModel>? schemeslist)? getSchemeTenureEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -36,16 +40,19 @@ mixin _$NewschemehomeEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(GetAllSchemesfromHomesEvent value)
         getAllSchemesEvent,
+    required TResult Function(GetSchemeTenureEvent value) getSchemeTenureEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetAllSchemesfromHomesEvent value)? getAllSchemesEvent,
+    TResult? Function(GetSchemeTenureEvent value)? getSchemeTenureEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetAllSchemesfromHomesEvent value)? getAllSchemesEvent,
+    TResult Function(GetSchemeTenureEvent value)? getSchemeTenureEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,6 +119,8 @@ class _$GetAllSchemesfromHomesEventImpl implements GetAllSchemesfromHomesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAllSchemesEvent,
+    required TResult Function(List<SchemeListModel>? schemeslist)
+        getSchemeTenureEvent,
   }) {
     return getAllSchemesEvent();
   }
@@ -120,6 +129,7 @@ class _$GetAllSchemesfromHomesEventImpl implements GetAllSchemesfromHomesEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAllSchemesEvent,
+    TResult? Function(List<SchemeListModel>? schemeslist)? getSchemeTenureEvent,
   }) {
     return getAllSchemesEvent?.call();
   }
@@ -128,6 +138,7 @@ class _$GetAllSchemesfromHomesEventImpl implements GetAllSchemesfromHomesEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAllSchemesEvent,
+    TResult Function(List<SchemeListModel>? schemeslist)? getSchemeTenureEvent,
     required TResult orElse(),
   }) {
     if (getAllSchemesEvent != null) {
@@ -141,6 +152,7 @@ class _$GetAllSchemesfromHomesEventImpl implements GetAllSchemesfromHomesEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(GetAllSchemesfromHomesEvent value)
         getAllSchemesEvent,
+    required TResult Function(GetSchemeTenureEvent value) getSchemeTenureEvent,
   }) {
     return getAllSchemesEvent(this);
   }
@@ -149,6 +161,7 @@ class _$GetAllSchemesfromHomesEventImpl implements GetAllSchemesfromHomesEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetAllSchemesfromHomesEvent value)? getAllSchemesEvent,
+    TResult? Function(GetSchemeTenureEvent value)? getSchemeTenureEvent,
   }) {
     return getAllSchemesEvent?.call(this);
   }
@@ -157,6 +170,7 @@ class _$GetAllSchemesfromHomesEventImpl implements GetAllSchemesfromHomesEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetAllSchemesfromHomesEvent value)? getAllSchemesEvent,
+    TResult Function(GetSchemeTenureEvent value)? getSchemeTenureEvent,
     required TResult orElse(),
   }) {
     if (getAllSchemesEvent != null) {
@@ -172,23 +186,178 @@ abstract class GetAllSchemesfromHomesEvent implements NewschemehomeEvent {
 }
 
 /// @nodoc
+abstract class _$$GetSchemeTenureEventImplCopyWith<$Res> {
+  factory _$$GetSchemeTenureEventImplCopyWith(_$GetSchemeTenureEventImpl value,
+          $Res Function(_$GetSchemeTenureEventImpl) then) =
+      __$$GetSchemeTenureEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<SchemeListModel>? schemeslist});
+}
+
+/// @nodoc
+class __$$GetSchemeTenureEventImplCopyWithImpl<$Res>
+    extends _$NewschemehomeEventCopyWithImpl<$Res, _$GetSchemeTenureEventImpl>
+    implements _$$GetSchemeTenureEventImplCopyWith<$Res> {
+  __$$GetSchemeTenureEventImplCopyWithImpl(_$GetSchemeTenureEventImpl _value,
+      $Res Function(_$GetSchemeTenureEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? schemeslist = freezed,
+  }) {
+    return _then(_$GetSchemeTenureEventImpl(
+      schemeslist: freezed == schemeslist
+          ? _value._schemeslist
+          : schemeslist // ignore: cast_nullable_to_non_nullable
+              as List<SchemeListModel>?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetSchemeTenureEventImpl implements GetSchemeTenureEvent {
+  const _$GetSchemeTenureEventImpl(
+      {required final List<SchemeListModel>? schemeslist})
+      : _schemeslist = schemeslist;
+
+  final List<SchemeListModel>? _schemeslist;
+  @override
+  List<SchemeListModel>? get schemeslist {
+    final value = _schemeslist;
+    if (value == null) return null;
+    if (_schemeslist is EqualUnmodifiableListView) return _schemeslist;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'NewschemehomeEvent.getSchemeTenureEvent(schemeslist: $schemeslist)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetSchemeTenureEventImpl &&
+            const DeepCollectionEquality()
+                .equals(other._schemeslist, _schemeslist));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_schemeslist));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetSchemeTenureEventImplCopyWith<_$GetSchemeTenureEventImpl>
+      get copyWith =>
+          __$$GetSchemeTenureEventImplCopyWithImpl<_$GetSchemeTenureEventImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAllSchemesEvent,
+    required TResult Function(List<SchemeListModel>? schemeslist)
+        getSchemeTenureEvent,
+  }) {
+    return getSchemeTenureEvent(schemeslist);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAllSchemesEvent,
+    TResult? Function(List<SchemeListModel>? schemeslist)? getSchemeTenureEvent,
+  }) {
+    return getSchemeTenureEvent?.call(schemeslist);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAllSchemesEvent,
+    TResult Function(List<SchemeListModel>? schemeslist)? getSchemeTenureEvent,
+    required TResult orElse(),
+  }) {
+    if (getSchemeTenureEvent != null) {
+      return getSchemeTenureEvent(schemeslist);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetAllSchemesfromHomesEvent value)
+        getAllSchemesEvent,
+    required TResult Function(GetSchemeTenureEvent value) getSchemeTenureEvent,
+  }) {
+    return getSchemeTenureEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetAllSchemesfromHomesEvent value)? getAllSchemesEvent,
+    TResult? Function(GetSchemeTenureEvent value)? getSchemeTenureEvent,
+  }) {
+    return getSchemeTenureEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetAllSchemesfromHomesEvent value)? getAllSchemesEvent,
+    TResult Function(GetSchemeTenureEvent value)? getSchemeTenureEvent,
+    required TResult orElse(),
+  }) {
+    if (getSchemeTenureEvent != null) {
+      return getSchemeTenureEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetSchemeTenureEvent implements NewschemehomeEvent {
+  const factory GetSchemeTenureEvent(
+          {required final List<SchemeListModel>? schemeslist}) =
+      _$GetSchemeTenureEventImpl;
+
+  List<SchemeListModel>? get schemeslist;
+  @JsonKey(ignore: true)
+  _$$GetSchemeTenureEventImplCopyWith<_$GetSchemeTenureEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$NewschemehomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<SchemeListModel>? schemeslist)
+    required TResult Function(List<SchemeListModel>? schemeslist,
+            List<SchemeTenureModel>? schemetenure)
         getallSchemesState,
     required TResult Function() gettingschemefailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<SchemeListModel>? schemeslist)? getallSchemesState,
+    TResult? Function(List<SchemeListModel>? schemeslist,
+            List<SchemeTenureModel>? schemetenure)?
+        getallSchemesState,
     TResult? Function()? gettingschemefailed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<SchemeListModel>? schemeslist)? getallSchemesState,
+    TResult Function(List<SchemeListModel>? schemeslist,
+            List<SchemeTenureModel>? schemetenure)?
+        getallSchemesState,
     TResult Function()? gettingschemefailed,
     required TResult orElse(),
   }) =>
@@ -238,7 +407,9 @@ abstract class _$$GetallSchemesStateImplCopyWith<$Res> {
           $Res Function(_$GetallSchemesStateImpl) then) =
       __$$GetallSchemesStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<SchemeListModel>? schemeslist});
+  $Res call(
+      {List<SchemeListModel>? schemeslist,
+      List<SchemeTenureModel>? schemetenure});
 }
 
 /// @nodoc
@@ -253,12 +424,17 @@ class __$$GetallSchemesStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? schemeslist = freezed,
+    Object? schemetenure = freezed,
   }) {
     return _then(_$GetallSchemesStateImpl(
       schemeslist: freezed == schemeslist
           ? _value._schemeslist
           : schemeslist // ignore: cast_nullable_to_non_nullable
               as List<SchemeListModel>?,
+      schemetenure: freezed == schemetenure
+          ? _value._schemetenure
+          : schemetenure // ignore: cast_nullable_to_non_nullable
+              as List<SchemeTenureModel>?,
     ));
   }
 }
@@ -267,8 +443,10 @@ class __$$GetallSchemesStateImplCopyWithImpl<$Res>
 
 class _$GetallSchemesStateImpl implements GetallSchemesState {
   const _$GetallSchemesStateImpl(
-      {required final List<SchemeListModel>? schemeslist})
-      : _schemeslist = schemeslist;
+      {required final List<SchemeListModel>? schemeslist,
+      required final List<SchemeTenureModel>? schemetenure})
+      : _schemeslist = schemeslist,
+        _schemetenure = schemetenure;
 
   final List<SchemeListModel>? _schemeslist;
   @override
@@ -280,9 +458,19 @@ class _$GetallSchemesStateImpl implements GetallSchemesState {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<SchemeTenureModel>? _schemetenure;
+  @override
+  List<SchemeTenureModel>? get schemetenure {
+    final value = _schemetenure;
+    if (value == null) return null;
+    if (_schemetenure is EqualUnmodifiableListView) return _schemetenure;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'NewschemehomeState.getallSchemesState(schemeslist: $schemeslist)';
+    return 'NewschemehomeState.getallSchemesState(schemeslist: $schemeslist, schemetenure: $schemetenure)';
   }
 
   @override
@@ -291,12 +479,16 @@ class _$GetallSchemesStateImpl implements GetallSchemesState {
         (other.runtimeType == runtimeType &&
             other is _$GetallSchemesStateImpl &&
             const DeepCollectionEquality()
-                .equals(other._schemeslist, _schemeslist));
+                .equals(other._schemeslist, _schemeslist) &&
+            const DeepCollectionEquality()
+                .equals(other._schemetenure, _schemetenure));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_schemeslist));
+      runtimeType,
+      const DeepCollectionEquality().hash(_schemeslist),
+      const DeepCollectionEquality().hash(_schemetenure));
 
   @JsonKey(ignore: true)
   @override
@@ -308,31 +500,36 @@ class _$GetallSchemesStateImpl implements GetallSchemesState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<SchemeListModel>? schemeslist)
+    required TResult Function(List<SchemeListModel>? schemeslist,
+            List<SchemeTenureModel>? schemetenure)
         getallSchemesState,
     required TResult Function() gettingschemefailed,
   }) {
-    return getallSchemesState(schemeslist);
+    return getallSchemesState(schemeslist, schemetenure);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<SchemeListModel>? schemeslist)? getallSchemesState,
+    TResult? Function(List<SchemeListModel>? schemeslist,
+            List<SchemeTenureModel>? schemetenure)?
+        getallSchemesState,
     TResult? Function()? gettingschemefailed,
   }) {
-    return getallSchemesState?.call(schemeslist);
+    return getallSchemesState?.call(schemeslist, schemetenure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<SchemeListModel>? schemeslist)? getallSchemesState,
+    TResult Function(List<SchemeListModel>? schemeslist,
+            List<SchemeTenureModel>? schemetenure)?
+        getallSchemesState,
     TResult Function()? gettingschemefailed,
     required TResult orElse(),
   }) {
     if (getallSchemesState != null) {
-      return getallSchemesState(schemeslist);
+      return getallSchemesState(schemeslist, schemetenure);
     }
     return orElse();
   }
@@ -371,10 +568,12 @@ class _$GetallSchemesStateImpl implements GetallSchemesState {
 
 abstract class GetallSchemesState implements NewschemehomeState {
   const factory GetallSchemesState(
-          {required final List<SchemeListModel>? schemeslist}) =
+          {required final List<SchemeListModel>? schemeslist,
+          required final List<SchemeTenureModel>? schemetenure}) =
       _$GetallSchemesStateImpl;
 
   List<SchemeListModel>? get schemeslist;
+  List<SchemeTenureModel>? get schemetenure;
   @JsonKey(ignore: true)
   _$$GetallSchemesStateImplCopyWith<_$GetallSchemesStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -419,7 +618,8 @@ class _$GettingschemefailedImpl implements Gettingschemefailed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<SchemeListModel>? schemeslist)
+    required TResult Function(List<SchemeListModel>? schemeslist,
+            List<SchemeTenureModel>? schemetenure)
         getallSchemesState,
     required TResult Function() gettingschemefailed,
   }) {
@@ -429,7 +629,9 @@ class _$GettingschemefailedImpl implements Gettingschemefailed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<SchemeListModel>? schemeslist)? getallSchemesState,
+    TResult? Function(List<SchemeListModel>? schemeslist,
+            List<SchemeTenureModel>? schemetenure)?
+        getallSchemesState,
     TResult? Function()? gettingschemefailed,
   }) {
     return gettingschemefailed?.call();
@@ -438,7 +640,9 @@ class _$GettingschemefailedImpl implements Gettingschemefailed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<SchemeListModel>? schemeslist)? getallSchemesState,
+    TResult Function(List<SchemeListModel>? schemeslist,
+            List<SchemeTenureModel>? schemetenure)?
+        getallSchemesState,
     TResult Function()? gettingschemefailed,
     required TResult orElse(),
   }) {

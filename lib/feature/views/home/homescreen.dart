@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
+import 'package:regal_app/feature/state/bloc/newschemehome/newschemehome_bloc.dart';
 import 'package:regal_app/feature/views/home/widgets/activeschemes.dart';
 import 'package:regal_app/feature/views/home/widgets/bottomsection.dart';
 import 'package:regal_app/feature/views/home/widgets/goldratewidget.dart';
@@ -17,6 +19,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: kbgcolor,
       appBar: const PreferredSize(
@@ -80,10 +83,13 @@ class HomeScreen extends StatelessWidget {
                     ),
                     minWidth: 40.w,
                     onPressed: () {
+                      context
+                          .read<NewschemehomeBloc>()
+                          .add(const GetAllSchemesfromHomesEvent());
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const NewSchemefrHome(),
+                            builder: (context) => NewSchemefrHome(user: user),
                           ));
                     },
                     child: Row(

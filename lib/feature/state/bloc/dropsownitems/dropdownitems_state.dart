@@ -8,6 +8,7 @@ class DropdownitemsState with _$DropdownitemsState {
     required List<BranchModel>? branches,
     required List<SchemeListModel>? schemeslist,
     required List<SchemeTenureModel>? schemetenures,
+    required List<SalesManModel>? salesmanmodel,
   }) = GetAllDrpDwnDataState;
 
   factory DropdownitemsState.initial() =>
@@ -16,5 +17,6 @@ class DropdownitemsState with _$DropdownitemsState {
           documentlist: null,
           branches: null,
           schemeslist: null,
-          schemetenures: null);
+          schemetenures: null,
+          salesmanmodel: null);
 }

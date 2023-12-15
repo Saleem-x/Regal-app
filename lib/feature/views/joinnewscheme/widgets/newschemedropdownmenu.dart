@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,9 +9,12 @@ import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/branch_model/branch_model.dart';
 import 'package:regal_app/feature/data/models/document_type_model/document_type_model.dart';
 import 'package:regal_app/feature/data/models/relation_ship_model/relation_ship_model.dart';
+import 'package:regal_app/feature/data/models/sales_man_model/sales_man_model.dart';
 import 'package:regal_app/feature/data/models/scheme_list_model/scheme_list_model.dart';
 import 'package:regal_app/feature/data/models/scheme_tenure_model/scheme_tenure_model.dart';
+import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.dart';
 import 'package:regal_app/feature/state/cubit/checkbranchselected/checkbranchslection_cubit.dart';
+import 'package:regal_app/feature/state/cubit/salesman/salesmansearch_cubit.dart';
 
 import '../newschemedetail.dart';
 
@@ -50,7 +55,7 @@ class NewSchmDropDownWidget extends StatelessWidget {
                 const Text(
                   ' *',
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 13,
                     color: kcolordarkred,
                   ),
                 ),
@@ -99,7 +104,7 @@ class RelationDropDown extends StatelessWidget {
           child: Text(
             item.relationship!,
             style: TextStyle(
-              fontSize: 14.sp,
+              fontSize: 13.sp,
               color: ktextgrey,
             ),
           ),
@@ -159,7 +164,7 @@ class DoctypeDropdown extends StatelessWidget {
           child: Text(
             item.docType!,
             style: TextStyle(
-              fontSize: 14.sp,
+              fontSize: 13.sp,
               color: ktextgrey,
             ),
           ),
@@ -220,7 +225,7 @@ class BranchDropDown extends StatelessWidget {
           child: Text(
             item.branchName!,
             style: TextStyle(
-              fontSize: 14.sp,
+              fontSize: 13.sp,
               color: ktextgrey,
             ),
           ),
@@ -231,6 +236,10 @@ class BranchDropDown extends StatelessWidget {
         context
             .read<CheckbranchslectionCubit>()
             .checkisselected(controller.text);
+
+        context.read<DropdownitemsBloc>().add(
+              GetetsalesmansEvent(branchid: value),
+            );
       },
       decoration: InputDecoration(
         // labelText: 'Select an item',
@@ -274,13 +283,14 @@ class SchemeListDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
+      dropdownColor: kcolorwhite,
       items: schemes.map((SchemeListModel item) {
         return DropdownMenuItem<String>(
           value: item.schemeId.toString(),
           child: Text(
             item.schemeName!,
             style: TextStyle(
-              fontSize: 14.sp,
+              fontSize: 13.sp,
               color: ktextgrey,
             ),
           ),
@@ -325,65 +335,264 @@ class SchemeListDropDown extends StatelessWidget {
 class SaleSMAnDD extends StatelessWidget {
   const SaleSMAnDD(
       {super.key,
-      required this.schemes,
+      required this.salesman,
       required this.controller,
       this.issalman,
       this.branchctrl});
 
-  final List<SchemeListModel> schemes;
+  final List<SalesManModel> salesman;
   final TextEditingController controller;
   final bool? issalman;
   final TextEditingController? branchctrl;
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
-      items: schemes.map((SchemeListModel item) {
-        return DropdownMenuItem<String>(
-          value: item.schemeId.toString(),
-          child: Text(
-            item.schemeName!,
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: ktextgrey,
+    return BlocBuilder<DropdownitemsBloc, DropdownitemsState>(
+      builder: (context, state) {
+        if (state.salesmanmodel != null) {
+          context
+              .read<SalesmansearchCubit>()
+              .searchedlist(state.salesmanmodel!, '');
+        }
+        return TextFormField(
+          controller: _salesmannamectrl,
+          onTap: () {
+            showCupertinoDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.9,
+                  width: MediaQuery.of(context).size.width,
+                  child: AlertDialog(
+                    insetPadding: const EdgeInsets.all(20),
+                    backgroundColor: kcolorwhite,
+                    surfaceTintColor: kcolorwhite,
+                    contentPadding: const EdgeInsets.all(10),
+                    titlePadding: const EdgeInsets.all(0),
+                    title: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 3.2,
+                            ),
+                            Text(
+                              'Select saleman',
+                              style: TextStyle(fontSize: 13.sp),
+                            ),
+                            const Spacer(),
+                            IconButton(
+                              onPressed: () {
+                                _salesmansearchctrl.clear();
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.close,
+                                size: 16.sp,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: SizedBox(
+                            height: 30.h,
+                            child: TextFormField(
+                              controller: _salesmansearchctrl,
+                              onChanged: (query) {
+                                context
+                                    .read<SalesmansearchCubit>()
+                                    .searchedlist(state.salesmanmodel!, query);
+
+                                log(query);
+                              },
+                              decoration: InputDecoration(
+                                hintText: 'Search here',
+                                hintStyle: TextStyle(fontSize: 14.sp),
+                                prefixIcon: const Icon(Icons.search),
+                                isDense: true,
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: kcolorblack.withOpacity(
+                                      .3,
+                                    ),
+                                  ),
+                                ),
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: kcolorblack.withOpacity(
+                                      .3,
+                                    ),
+                                  ),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: kcolorblack.withOpacity(
+                                      .3,
+                                    ),
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: kcolorblack.withOpacity(
+                                      .3,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    content: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.7,
+                      width: MediaQuery.of(context).size.width,
+                      child: state.salesmanmodel == null
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : BlocBuilder<SalesmansearchCubit,
+                              SalesmansearchState>(
+                              builder: (context, searched) {
+                                return searched.salesmanlist!.isEmpty
+                                    ? const Center(
+                                        child: Text('Salesman not found'),
+                                      )
+                                    : ListView.separated(
+                                        itemBuilder: (context, index) {
+                                          return InkWell(
+                                            onTap: () {
+                                              controller.text = searched
+                                                  .salesmanlist![index].empId!;
+
+                                              _salesmannamectrl.text =
+                                                  '${searched.salesmanlist![index].empCode!.replaceAll('|', '')} | ${searched.salesmanlist![index].empName}';
+                                              log(controller.text);
+                                              Navigator.pop(context);
+                                            },
+                                            child: Card(
+                                              color: kcolorwhite,
+                                              surfaceTintColor: kcolorwhite,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child: Container(
+                                                // height: 20.h,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                      '${searched.salesmanlist![index].empCode!.replaceAll('|', '')} | ${searched.salesmanlist![index].empName}'),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        separatorBuilder: (context, index) {
+                                          return SizedBox(
+                                            height: 5.h,
+                                          );
+                                        },
+                                        itemCount:
+                                            searched.salesmanlist!.length);
+                              },
+                            ),
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+          // controller: controller,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'please enter mobile number';
+            } else if (value.length < 10) {
+              return 'mobile number should be 10';
+            } else {
+              return null;
+            }
+          },
+          keyboardType: TextInputType.none,
+          decoration: InputDecoration(
+            isDense: true,
+            hintText: 'Select',
+            hintStyle: const TextStyle(
+                fontWeight: FontWeight.w400, color: kcolorblack),
+            border: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: kcolorblack.withOpacity(
+                  .3,
+                ),
+              ),
+            ),
+            disabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: kcolorblack.withOpacity(
+                  .3,
+                ),
+              ),
+            ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: kcolorblack.withOpacity(
+                  .3,
+                ),
+              ),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: kcolorblack.withOpacity(
+                  .3,
+                ),
+              ),
+            ),
+            suffixIcon: IconButton(
+              onPressed: () {
+                showCupertinoDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CupertinoAlertDialog(
+                      title: const Text("Alert"),
+                      content: const Text(
+                        "please Selct Branch",
+                      ),
+                      actions: <Widget>[
+                        CupertinoDialogAction(
+                          child: const Text("OK"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              icon: const Icon(
+                Icons.arrow_drop_down,
+              ),
             ),
           ),
         );
-      }).toList(),
-      onChanged: (value) {
-        controller.text = value!;
       },
-      decoration: InputDecoration(
-        // labelText: 'Select an item',
-        hintText: 'Select',
-        hintStyle:
-            const TextStyle(fontWeight: FontWeight.w400, color: kcolorblack),
-
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: kcolorblack.withOpacity(
-              .3,
-            ),
-          ),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: kcolorblack.withOpacity(
-              .3,
-            ),
-          ),
-        ),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: kcolorblack.withOpacity(
-              .3,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
+
+TextEditingController _salesmannamectrl = TextEditingController();
+TextEditingController _salesmansearchctrl = TextEditingController();
 
 class SchmTEnureDRopDown extends StatelessWidget {
   const SchmTEnureDRopDown(

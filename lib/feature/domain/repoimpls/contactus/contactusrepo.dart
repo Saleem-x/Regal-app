@@ -13,13 +13,13 @@ class ContactDetailsRepo implements IContactDetails {
   Future<Either<MainFailures, ContactUsModel>> getContactDetails(
       String schmid) async {
     try {
-      final response = await http
-          .post(Uri.parse(baseurl + contactusurl), body: {"datakey": datakey});
+      final response =
+          await http.post(Uri.parse(baseurl + contactusurl), body: {
+        "datakey": datakey,
+      });
       if (response.statusCode == 200) {
         final Map<String, dynamic> json = jsonDecode(response.body);
-
         final contactdetails = ContactUsModel.fromJson(json['result'][0]);
-
         return right(contactdetails);
       } else {
         logger.e(response.statusCode.toString());

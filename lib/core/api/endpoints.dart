@@ -1,6 +1,6 @@
 import 'package:logger/logger.dart';
 
-/* http://shop.pallavinamdev.com/PHP_Demo/  */
+/* https://shop.pallavinamdev.com/PHP_CollApp/  */
 const baseurl = 'http://shop.pallavinamdev.com/PHP_Demo/';
 const loginurl = 'p_user_login.php';
 const datakey = 'R9WM1wN2ZDM5zZw+NQ==';
@@ -15,6 +15,8 @@ const verifyotpurl = 'p_user_OTPVerification.php';
 const relationshipurl = 'p_user_SelRelationship.php';
 const documenttypeurl = 'p_user_SeltDocumentType.php';
 const getbranchesurl = 'p_user_SelBranch.php';
+
+const getsalesmanurl = 'p_user_SelBranchEmployees.php';
 const getbranchschemesurl = 'p_user_SelBranchSchemes.php';
 const schemetenureurl = 'p_user_SelTenure.php';
 const createnewuserurl = 'p_user_InsSchemeNewCustomer.php';
@@ -24,4 +26,5 @@ const resetpinotpurl = 'p_user_insOTP.php';
 const resetpinotpverifyurl = 'p_user_verifyOTP.php';
 const paymenthystoryurl = 'p_user_insPaymentHistory.php';
 const paymentcallbackurl = 'p_payment_callback.php';
+const userschemehomeurl = 'p_user_InsSchemeExistingCustomer.php';
 var logger = Logger();

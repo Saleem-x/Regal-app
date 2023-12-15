@@ -348,7 +348,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                 builder: (context, state) {
                                   return state.document == 'ADHAR'
                                       ? NewSchmFieldWidget(
-                                          controller: _addresscontroller,
+                                          controller: _adharNOcontroller,
                                           icon: 'assets/svg/terms.svg',
                                           title: 'Document Number',
                                           type: TextInputType.name,
@@ -528,7 +528,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                             ),
                                           )
                                         : SaleSMAnDD(
-                                            schemes: state.schemeslist!,
+                                            salesman: state.salesmanmodel ?? [],
                                             controller: _salesmancontroller,
                                             issalman: true,
                                             branchctrl: _branchcontroller,
@@ -728,6 +728,8 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                                     _instalmentcontroller
                                                         .text.isEmpty ||
                                                     _pincontroller
+                                                        .text.isEmpty ||
+                                                    _salesmancontroller
                                                         .text.isEmpty ||
                                                     isimageselected.imageurls ==
                                                         null ||

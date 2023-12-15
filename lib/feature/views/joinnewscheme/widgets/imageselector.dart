@@ -47,8 +47,8 @@ class ImageSelectorWidget extends StatelessWidget {
                   SizedBox(
                       child: SvgPicture.asset(
                     'assets/svg/cam.svg',
-                    height: 17.h,
-                    width: 15.w,
+                    height: 14.h,
+                    width: 13.w,
                   )),
                   SizedBox(
                     width: size.width * 0.07,

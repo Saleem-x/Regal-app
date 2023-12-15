@@ -124,7 +124,7 @@ class NewPinOtpFIeldWidget extends StatelessWidget {
         children: [
           SizedBox(
             child: SvgPicture.asset(
-              'assets/svg/pin.svg',
+              'assets/svg/lockre.svg',
               height: 15.h,
               width: 15.w,
             ),
@@ -196,7 +196,7 @@ class ResetPinHeaderOtpField extends StatelessWidget {
         children: [
           SizedBox(
             child: SvgPicture.asset(
-              'assets/svg/pin.svg',
+              'assets/svg/lockre.svg',
               height: 15.h,
               width: 15.w,
             ),

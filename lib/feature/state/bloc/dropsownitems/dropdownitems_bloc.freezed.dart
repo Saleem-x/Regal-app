@@ -19,32 +19,38 @@ mixin _$DropdownitemsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAllDropDownEvent,
+    required TResult Function(String branchid) getsalesmansEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAllDropDownEvent,
+    TResult? Function(String branchid)? getsalesmansEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAllDropDownEvent,
+    TResult Function(String branchid)? getsalesmansEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetAllDropDownEvent value) getAllDropDownEvent,
+    required TResult Function(GetetsalesmansEvent value) getsalesmansEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetAllDropDownEvent value)? getAllDropDownEvent,
+    TResult? Function(GetetsalesmansEvent value)? getsalesmansEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetAllDropDownEvent value)? getAllDropDownEvent,
+    TResult Function(GetetsalesmansEvent value)? getsalesmansEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -108,6 +114,7 @@ class _$GetAllDropDownEventImpl implements GetAllDropDownEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getAllDropDownEvent,
+    required TResult Function(String branchid) getsalesmansEvent,
   }) {
     return getAllDropDownEvent();
   }
@@ -116,6 +123,7 @@ class _$GetAllDropDownEventImpl implements GetAllDropDownEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAllDropDownEvent,
+    TResult? Function(String branchid)? getsalesmansEvent,
   }) {
     return getAllDropDownEvent?.call();
   }
@@ -124,6 +132,7 @@ class _$GetAllDropDownEventImpl implements GetAllDropDownEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAllDropDownEvent,
+    TResult Function(String branchid)? getsalesmansEvent,
     required TResult orElse(),
   }) {
     if (getAllDropDownEvent != null) {
@@ -136,6 +145,7 @@ class _$GetAllDropDownEventImpl implements GetAllDropDownEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetAllDropDownEvent value) getAllDropDownEvent,
+    required TResult Function(GetetsalesmansEvent value) getsalesmansEvent,
   }) {
     return getAllDropDownEvent(this);
   }
@@ -144,6 +154,7 @@ class _$GetAllDropDownEventImpl implements GetAllDropDownEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetAllDropDownEvent value)? getAllDropDownEvent,
+    TResult? Function(GetetsalesmansEvent value)? getsalesmansEvent,
   }) {
     return getAllDropDownEvent?.call(this);
   }
@@ -152,6 +163,7 @@ class _$GetAllDropDownEventImpl implements GetAllDropDownEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetAllDropDownEvent value)? getAllDropDownEvent,
+    TResult Function(GetetsalesmansEvent value)? getsalesmansEvent,
     required TResult orElse(),
   }) {
     if (getAllDropDownEvent != null) {
@@ -166,6 +178,142 @@ abstract class GetAllDropDownEvent implements DropdownitemsEvent {
 }
 
 /// @nodoc
+abstract class _$$GetetsalesmansEventImplCopyWith<$Res> {
+  factory _$$GetetsalesmansEventImplCopyWith(_$GetetsalesmansEventImpl value,
+          $Res Function(_$GetetsalesmansEventImpl) then) =
+      __$$GetetsalesmansEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String branchid});
+}
+
+/// @nodoc
+class __$$GetetsalesmansEventImplCopyWithImpl<$Res>
+    extends _$DropdownitemsEventCopyWithImpl<$Res, _$GetetsalesmansEventImpl>
+    implements _$$GetetsalesmansEventImplCopyWith<$Res> {
+  __$$GetetsalesmansEventImplCopyWithImpl(_$GetetsalesmansEventImpl _value,
+      $Res Function(_$GetetsalesmansEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? branchid = null,
+  }) {
+    return _then(_$GetetsalesmansEventImpl(
+      branchid: null == branchid
+          ? _value.branchid
+          : branchid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetetsalesmansEventImpl implements GetetsalesmansEvent {
+  const _$GetetsalesmansEventImpl({required this.branchid});
+
+  @override
+  final String branchid;
+
+  @override
+  String toString() {
+    return 'DropdownitemsEvent.getsalesmansEvent(branchid: $branchid)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetetsalesmansEventImpl &&
+            (identical(other.branchid, branchid) ||
+                other.branchid == branchid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, branchid);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetetsalesmansEventImplCopyWith<_$GetetsalesmansEventImpl> get copyWith =>
+      __$$GetetsalesmansEventImplCopyWithImpl<_$GetetsalesmansEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAllDropDownEvent,
+    required TResult Function(String branchid) getsalesmansEvent,
+  }) {
+    return getsalesmansEvent(branchid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAllDropDownEvent,
+    TResult? Function(String branchid)? getsalesmansEvent,
+  }) {
+    return getsalesmansEvent?.call(branchid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAllDropDownEvent,
+    TResult Function(String branchid)? getsalesmansEvent,
+    required TResult orElse(),
+  }) {
+    if (getsalesmansEvent != null) {
+      return getsalesmansEvent(branchid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetAllDropDownEvent value) getAllDropDownEvent,
+    required TResult Function(GetetsalesmansEvent value) getsalesmansEvent,
+  }) {
+    return getsalesmansEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetAllDropDownEvent value)? getAllDropDownEvent,
+    TResult? Function(GetetsalesmansEvent value)? getsalesmansEvent,
+  }) {
+    return getsalesmansEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetAllDropDownEvent value)? getAllDropDownEvent,
+    TResult Function(GetetsalesmansEvent value)? getsalesmansEvent,
+    required TResult orElse(),
+  }) {
+    if (getsalesmansEvent != null) {
+      return getsalesmansEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetetsalesmansEvent implements DropdownitemsEvent {
+  const factory GetetsalesmansEvent({required final String branchid}) =
+      _$GetetsalesmansEventImpl;
+
+  String get branchid;
+  @JsonKey(ignore: true)
+  _$$GetetsalesmansEventImplCopyWith<_$GetetsalesmansEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$DropdownitemsState {
   List<RelationShipModel>? get relationshiplist =>
       throw _privateConstructorUsedError;
@@ -175,6 +323,7 @@ mixin _$DropdownitemsState {
   List<SchemeListModel>? get schemeslist => throw _privateConstructorUsedError;
   List<SchemeTenureModel>? get schemetenures =>
       throw _privateConstructorUsedError;
+  List<SalesManModel>? get salesmanmodel => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -182,7 +331,8 @@ mixin _$DropdownitemsState {
             List<DocumentTypeModel>? documentlist,
             List<BranchModel>? branches,
             List<SchemeListModel>? schemeslist,
-            List<SchemeTenureModel>? schemetenures)
+            List<SchemeTenureModel>? schemetenures,
+            List<SalesManModel>? salesmanmodel)
         getAllDrpDwnData,
   }) =>
       throw _privateConstructorUsedError;
@@ -193,7 +343,8 @@ mixin _$DropdownitemsState {
             List<DocumentTypeModel>? documentlist,
             List<BranchModel>? branches,
             List<SchemeListModel>? schemeslist,
-            List<SchemeTenureModel>? schemetenures)?
+            List<SchemeTenureModel>? schemetenures,
+            List<SalesManModel>? salesmanmodel)?
         getAllDrpDwnData,
   }) =>
       throw _privateConstructorUsedError;
@@ -204,7 +355,8 @@ mixin _$DropdownitemsState {
             List<DocumentTypeModel>? documentlist,
             List<BranchModel>? branches,
             List<SchemeListModel>? schemeslist,
-            List<SchemeTenureModel>? schemetenures)?
+            List<SchemeTenureModel>? schemetenures,
+            List<SalesManModel>? salesmanmodel)?
         getAllDrpDwnData,
     required TResult orElse(),
   }) =>
@@ -242,7 +394,8 @@ abstract class $DropdownitemsStateCopyWith<$Res> {
       List<DocumentTypeModel>? documentlist,
       List<BranchModel>? branches,
       List<SchemeListModel>? schemeslist,
-      List<SchemeTenureModel>? schemetenures});
+      List<SchemeTenureModel>? schemetenures,
+      List<SalesManModel>? salesmanmodel});
 }
 
 /// @nodoc
@@ -263,6 +416,7 @@ class _$DropdownitemsStateCopyWithImpl<$Res, $Val extends DropdownitemsState>
     Object? branches = freezed,
     Object? schemeslist = freezed,
     Object? schemetenures = freezed,
+    Object? salesmanmodel = freezed,
   }) {
     return _then(_value.copyWith(
       relationshiplist: freezed == relationshiplist
@@ -285,6 +439,10 @@ class _$DropdownitemsStateCopyWithImpl<$Res, $Val extends DropdownitemsState>
           ? _value.schemetenures
           : schemetenures // ignore: cast_nullable_to_non_nullable
               as List<SchemeTenureModel>?,
+      salesmanmodel: freezed == salesmanmodel
+          ? _value.salesmanmodel
+          : salesmanmodel // ignore: cast_nullable_to_non_nullable
+              as List<SalesManModel>?,
     ) as $Val);
   }
 }
@@ -303,7 +461,8 @@ abstract class _$$GetAllDrpDwnDataStateImplCopyWith<$Res>
       List<DocumentTypeModel>? documentlist,
       List<BranchModel>? branches,
       List<SchemeListModel>? schemeslist,
-      List<SchemeTenureModel>? schemetenures});
+      List<SchemeTenureModel>? schemetenures,
+      List<SalesManModel>? salesmanmodel});
 }
 
 /// @nodoc
@@ -322,6 +481,7 @@ class __$$GetAllDrpDwnDataStateImplCopyWithImpl<$Res>
     Object? branches = freezed,
     Object? schemeslist = freezed,
     Object? schemetenures = freezed,
+    Object? salesmanmodel = freezed,
   }) {
     return _then(_$GetAllDrpDwnDataStateImpl(
       relationshiplist: freezed == relationshiplist
@@ -344,6 +504,10 @@ class __$$GetAllDrpDwnDataStateImplCopyWithImpl<$Res>
           ? _value._schemetenures
           : schemetenures // ignore: cast_nullable_to_non_nullable
               as List<SchemeTenureModel>?,
+      salesmanmodel: freezed == salesmanmodel
+          ? _value._salesmanmodel
+          : salesmanmodel // ignore: cast_nullable_to_non_nullable
+              as List<SalesManModel>?,
     ));
   }
 }
@@ -356,12 +520,14 @@ class _$GetAllDrpDwnDataStateImpl implements GetAllDrpDwnDataState {
       required final List<DocumentTypeModel>? documentlist,
       required final List<BranchModel>? branches,
       required final List<SchemeListModel>? schemeslist,
-      required final List<SchemeTenureModel>? schemetenures})
+      required final List<SchemeTenureModel>? schemetenures,
+      required final List<SalesManModel>? salesmanmodel})
       : _relationshiplist = relationshiplist,
         _documentlist = documentlist,
         _branches = branches,
         _schemeslist = schemeslist,
-        _schemetenures = schemetenures;
+        _schemetenures = schemetenures,
+        _salesmanmodel = salesmanmodel;
 
   final List<RelationShipModel>? _relationshiplist;
   @override
@@ -414,9 +580,19 @@ class _$GetAllDrpDwnDataStateImpl implements GetAllDrpDwnDataState {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<SalesManModel>? _salesmanmodel;
+  @override
+  List<SalesManModel>? get salesmanmodel {
+    final value = _salesmanmodel;
+    if (value == null) return null;
+    if (_salesmanmodel is EqualUnmodifiableListView) return _salesmanmodel;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'DropdownitemsState.getAllDrpDwnData(relationshiplist: $relationshiplist, documentlist: $documentlist, branches: $branches, schemeslist: $schemeslist, schemetenures: $schemetenures)';
+    return 'DropdownitemsState.getAllDrpDwnData(relationshiplist: $relationshiplist, documentlist: $documentlist, branches: $branches, schemeslist: $schemeslist, schemetenures: $schemetenures, salesmanmodel: $salesmanmodel)';
   }
 
   @override
@@ -432,7 +608,9 @@ class _$GetAllDrpDwnDataStateImpl implements GetAllDrpDwnDataState {
             const DeepCollectionEquality()
                 .equals(other._schemeslist, _schemeslist) &&
             const DeepCollectionEquality()
-                .equals(other._schemetenures, _schemetenures));
+                .equals(other._schemetenures, _schemetenures) &&
+            const DeepCollectionEquality()
+                .equals(other._salesmanmodel, _salesmanmodel));
   }
 
   @override
@@ -442,7 +620,8 @@ class _$GetAllDrpDwnDataStateImpl implements GetAllDrpDwnDataState {
       const DeepCollectionEquality().hash(_documentlist),
       const DeepCollectionEquality().hash(_branches),
       const DeepCollectionEquality().hash(_schemeslist),
-      const DeepCollectionEquality().hash(_schemetenures));
+      const DeepCollectionEquality().hash(_schemetenures),
+      const DeepCollectionEquality().hash(_salesmanmodel));
 
   @JsonKey(ignore: true)
   @override
@@ -459,11 +638,12 @@ class _$GetAllDrpDwnDataStateImpl implements GetAllDrpDwnDataState {
             List<DocumentTypeModel>? documentlist,
             List<BranchModel>? branches,
             List<SchemeListModel>? schemeslist,
-            List<SchemeTenureModel>? schemetenures)
+            List<SchemeTenureModel>? schemetenures,
+            List<SalesManModel>? salesmanmodel)
         getAllDrpDwnData,
   }) {
-    return getAllDrpDwnData(
-        relationshiplist, documentlist, branches, schemeslist, schemetenures);
+    return getAllDrpDwnData(relationshiplist, documentlist, branches,
+        schemeslist, schemetenures, salesmanmodel);
   }
 
   @override
@@ -474,11 +654,12 @@ class _$GetAllDrpDwnDataStateImpl implements GetAllDrpDwnDataState {
             List<DocumentTypeModel>? documentlist,
             List<BranchModel>? branches,
             List<SchemeListModel>? schemeslist,
-            List<SchemeTenureModel>? schemetenures)?
+            List<SchemeTenureModel>? schemetenures,
+            List<SalesManModel>? salesmanmodel)?
         getAllDrpDwnData,
   }) {
-    return getAllDrpDwnData?.call(
-        relationshiplist, documentlist, branches, schemeslist, schemetenures);
+    return getAllDrpDwnData?.call(relationshiplist, documentlist, branches,
+        schemeslist, schemetenures, salesmanmodel);
   }
 
   @override
@@ -489,13 +670,14 @@ class _$GetAllDrpDwnDataStateImpl implements GetAllDrpDwnDataState {
             List<DocumentTypeModel>? documentlist,
             List<BranchModel>? branches,
             List<SchemeListModel>? schemeslist,
-            List<SchemeTenureModel>? schemetenures)?
+            List<SchemeTenureModel>? schemetenures,
+            List<SalesManModel>? salesmanmodel)?
         getAllDrpDwnData,
     required TResult orElse(),
   }) {
     if (getAllDrpDwnData != null) {
-      return getAllDrpDwnData(
-          relationshiplist, documentlist, branches, schemeslist, schemetenures);
+      return getAllDrpDwnData(relationshiplist, documentlist, branches,
+          schemeslist, schemetenures, salesmanmodel);
     }
     return orElse();
   }
@@ -535,7 +717,8 @@ abstract class GetAllDrpDwnDataState implements DropdownitemsState {
           required final List<DocumentTypeModel>? documentlist,
           required final List<BranchModel>? branches,
           required final List<SchemeListModel>? schemeslist,
-          required final List<SchemeTenureModel>? schemetenures}) =
+          required final List<SchemeTenureModel>? schemetenures,
+          required final List<SalesManModel>? salesmanmodel}) =
       _$GetAllDrpDwnDataStateImpl;
 
   @override
@@ -548,6 +731,8 @@ abstract class GetAllDrpDwnDataState implements DropdownitemsState {
   List<SchemeListModel>? get schemeslist;
   @override
   List<SchemeTenureModel>? get schemetenures;
+  @override
+  List<SalesManModel>? get salesmanmodel;
   @override
   @JsonKey(ignore: true)
   _$$GetAllDrpDwnDataStateImplCopyWith<_$GetAllDrpDwnDataStateImpl>

@@ -8,7 +8,7 @@ import 'package:paytm_allinonesdk/paytm_allinonesdk.dart';
 import 'package:android_intent_plus/android_intent.dart';
 // import 'package:android_intent_plus/flag.dart';
 
-Future<void> launchGooglePayUPIIntent(
+Future<bool> launchGooglePayUPIIntent(
     String upiID, String merchentCode, String orderID) async {
   // String googlePayPackageName = "com.google.android.apps.nbu.paisa.user";
   String callbackurl = baseurl + paymentcallbackurl;
@@ -25,11 +25,15 @@ Future<void> launchGooglePayUPIIntent(
       );
 
       logger.e('entha$issuccess');
+      return issuccess;
     } else {
       logger.e('Cannot launch Google Pay UPI Intent');
+      return false;
     }
   } catch (e) {
     logger.e('Error launching Google Pay UPI Intent: $e');
+
+    return false;
   }
 }
 

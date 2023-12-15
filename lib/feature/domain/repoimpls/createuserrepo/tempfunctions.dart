@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:path/path.dart';
-import 'package:async/async.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 
 Future<String> uploadimages(File imageFile) async {

@@ -6,6 +6,7 @@ import 'package:regal_app/core/failures/failures.dart';
 import 'package:regal_app/feature/data/models/branch_model/branch_model.dart';
 import 'package:regal_app/feature/data/models/document_type_model/document_type_model.dart';
 import 'package:regal_app/feature/data/models/relation_ship_model/relation_ship_model.dart';
+import 'package:regal_app/feature/data/models/sales_man_model/sales_man_model.dart';
 import 'package:regal_app/feature/data/models/scheme_list_model/scheme_list_model.dart';
 import 'package:regal_app/feature/data/models/scheme_tenure_model/scheme_tenure_model.dart';
 import 'package:regal_app/feature/data/repos/abstractrepos.dart';
@@ -112,6 +113,28 @@ class RelationShipRepo implements IDropdownRepo {
             .toList();
 
         return right(schemetenure);
+      } else {
+        return left(const MainFailures.clientfailure());
+      }
+    } catch (e) {
+      return left(const MainFailures.serverfailure());
+    }
+  }
+
+  @override
+  Future<Either<MainFailures, List<SalesManModel>>> getsalesman(
+      String branchID) async {
+    try {
+      final response = await http.post(Uri.parse(baseurl + getsalesmanurl),
+          body: {"datakey": datakey, "Branch_id": branchID});
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> json = jsonDecode(response.body);
+        final List<dynamic> productData = json['result'];
+        List<SalesManModel> salesman = productData
+            .map<SalesManModel>((json) => SalesManModel.fromJson(json))
+            .toList();
+
+        return right(salesman);
       } else {
         return left(const MainFailures.clientfailure());
       }

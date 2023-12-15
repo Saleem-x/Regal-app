@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:regal_app/core/failures/failures.dart';
 import 'package:regal_app/feature/data/models/scheme_list_model/scheme_list_model.dart';
+import 'package:regal_app/feature/data/models/scheme_tenure_model/scheme_tenure_model.dart';
 import 'package:regal_app/feature/data/repos/abstractrepos.dart';
 
 part 'newschemehome_event.dart';
@@ -22,10 +23,28 @@ class NewschemehomeBloc extends Bloc<NewschemehomeEvent, NewschemehomeState> {
         emit(
           scheme.fold(
             (l) => const Gettingschemefailed(),
-            (r) => GetallSchemesState(schemeslist: r),
+            (r) => GetallSchemesState(
+              schemeslist: r,
+              schemetenure: null,
+            ),
           ),
         );
       },
     );
+
+    on<GetSchemeTenureEvent>((event, emit) async {
+      Either<MainFailures, List<SchemeTenureModel>> schmtenrs =
+          await dropdownRepo.getschemetenure();
+
+      emit(
+        schmtenrs.fold(
+          (l) => const Gettingschemefailed(),
+          (r) => GetallSchemesState(
+            schemeslist: event.schemeslist,
+            schemetenure: r,
+          ),
+        ),
+      );
+    });
   }
 }
