@@ -15,7 +15,7 @@ const verifyotpurl = 'p_user_OTPVerification.php';
 const relationshipurl = 'p_user_SelRelationship.php';
 const documenttypeurl = 'p_user_SeltDocumentType.php';
 const getbranchesurl = 'p_user_SelBranch.php';
-
+const updatepaymentstatusurl = "p_user_insPayment.php";
 const getsalesmanurl = 'p_user_SelBranchEmployees.php';
 const getbranchschemesurl = 'p_user_SelBranchSchemes.php';
 const schemetenureurl = 'p_user_SelTenure.php';

@@ -20,6 +20,7 @@ class LoginRepo {
         final Map<String, dynamic> json = jsonDecode(response.body);
 
         final user = UserBaseModel.fromJson(json['result'][0]);
+
         if (user.cusName == null) {
           Map<String, dynamic> responseMap = jsonDecode(response.body);
 

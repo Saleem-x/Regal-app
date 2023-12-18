@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
@@ -29,7 +30,9 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [HomePopupMenu()],
+              children: [
+                HomePopupMenu(),
+              ],
             ),
           ),
         ),

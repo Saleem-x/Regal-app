@@ -1,19 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
+import 'package:regal_app/feature/data/models/payment_resp_model/payment_resp_model.dart';
+import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
+import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
+import 'package:regal_app/feature/state/bloc/paymentresponse/paymentresponse_bloc.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
+import 'package:regal_app/feature/views/viewdetails/viewdetailscreen.dart';
 
 class PaymentSuccessScreen extends StatelessWidget {
   final UserBaseModel user;
-
-  const PaymentSuccessScreen({super.key, required this.user});
+  final PaymentRespModel paymentRespM;
+  final String amount;
+  final SchemeDetailsModel schemeDetails;
+  final CustomerSchemeModel scheme;
+  const PaymentSuccessScreen(
+      {super.key,
+      required this.user,
+      required this.paymentRespM,
+      required this.amount,
+      required this.schemeDetails,
+      required this.scheme});
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    context.read<PaymentresponseBloc>().add(
+          const ResetresponseEvent(),
+        );
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 225, 162, 66),
@@ -64,7 +83,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Text(
-                      '₹100',
+                      '₹$amount',
                       style: TextStyle(
                           // fontFamily: kprimaryfont,
                           color: kcolorwhite.withOpacity(.9),
@@ -150,14 +169,14 @@ class PaymentSuccessScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'KT123-Ak',
+                                      "${scheme.schemeNo}",
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 18.sp,
                                       ),
                                     ),
                                     Text(
-                                      'AKSHAYANIDHI|0.00',
+                                      "${scheme.schemeName}",
                                       style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 16.sp,
@@ -169,19 +188,19 @@ class PaymentSuccessScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 15),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Trans.No:542322',
-                                style: TextStyle(
+                                'Trans.No: ${paymentRespM.txnRef}',
+                                style: const TextStyle(
                                   color: ktextgrey,
                                 ),
                               ),
-                              Text(
-                                '24 Oct 2023',
+                              const Text(
+                                "12/18/2023",
                                 style: TextStyle(
                                   color: ktextgrey,
                                 ),
@@ -211,7 +230,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                                         color: ktextgrey, fontSize: 12.sp),
                                   ),
                                   Text(
-                                    'Gold Rate: ₹5655',
+                                    'Gold Rate: ₹${schemeDetails.goldRate}',
                                     style: TextStyle(
                                         color: ktextgrey, fontSize: 12.sp),
                                   )
@@ -221,7 +240,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                                 height: 10.h,
                               ),
                               Text(
-                                'Total Wt:0.117 gm(s)',
+                                'Total Wt:${schemeDetails.goldWeight} gm(s)',
                                 style: TextStyle(
                                     color: ktextgrey, fontSize: 12.sp),
                               ),
@@ -237,7 +256,21 @@ class PaymentSuccessScreen extends StatelessWidget {
                             Column(
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context
+                                        .read<InstalmenthystoryBloc>()
+                                        .add(const ResetDataEvent());
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ViewDetailScreen(
+                                          scheme: scheme,
+                                          schemedetil: schemeDetails,
+                                          user: user,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                   icon: Icon(
                                     Icons.history,
                                     size: 30.sp,

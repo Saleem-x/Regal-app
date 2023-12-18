@@ -33,6 +33,19 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="RECEIVE_INTENT_EXAMPLE_ACTION" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.google.android.apps.nbu.paisa.user" />
+            </intent-filter>
 
             <meta-data android:name="flutter_deeplinking_enabled" android:value="true" />
             <intent-filter android:autoVerify="true">

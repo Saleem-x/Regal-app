@@ -13,6 +13,8 @@ import 'package:regal_app/feature/data/models/new_scheme_home_in_model/new_schem
 import 'package:regal_app/feature/data/models/new_scheme_home_out_model/new_scheme_home_out_model.dart';
 import 'package:regal_app/feature/data/models/payment_hystory_in_model/payment_hystory_in_model.dart';
 import 'package:regal_app/feature/data/models/payment_hystoryout_model/payment_hystoryout_model.dart';
+import 'package:regal_app/feature/data/models/payment_status_update_model/payment_status_update_model.dart';
+import 'package:regal_app/feature/data/models/payment_status_update_resp_model/payment_status_update_resp_model.dart';
 import 'package:regal_app/feature/data/models/pin_reset_otp_model/pin_reset_otp_model.dart';
 import 'package:regal_app/feature/data/models/relation_ship_model/relation_ship_model.dart';
 import 'package:regal_app/feature/data/models/sales_man_model/sales_man_model.dart';
@@ -88,4 +90,9 @@ abstract class IPaymentHystoryRepo {
 abstract class INewSchemeHomeRepo {
   Future<Either<MainFailures, NewSchemeHomeOutModel>> createnewscheme(
       NewSchemeHomeInModel newscheme);
+}
+
+abstract class IPaymentStatusUpdateRepo {
+  Future<Either<MainFailures, PaymentStatusUpdateRespModel>>
+      updatepaymentstatus(PaymentStatusUpdateModel paymentstatusresps);
 }

@@ -1,18 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
+import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
+import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
+import 'package:regal_app/feature/state/bloc/paymentresponse/paymentresponse_bloc.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
+import 'package:regal_app/feature/views/viewdetails/viewdetailscreen.dart';
 
 class PaymentFailedScreeen extends StatelessWidget {
   final UserBaseModel user;
-  const PaymentFailedScreeen({super.key, required this.user});
+  final String amount;
+  final SchemeDetailsModel schemeDetails;
+  final CustomerSchemeModel scheme;
+  const PaymentFailedScreeen(
+      {super.key,
+      required this.user,
+      required this.amount,
+      required this.schemeDetails,
+      required this.scheme});
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    context.read<PaymentresponseBloc>().add(
+          const ResetresponseEvent(),
+        );
     return Scaffold(
       backgroundColor: kcolorwhite,
       body: Column(
@@ -65,7 +82,7 @@ class PaymentFailedScreeen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Text(
-                      '₹100',
+                      '₹$amount',
                       style: TextStyle(
                           color: kcolorblack,
                           fontSize: 22.sp,
@@ -156,14 +173,14 @@ class PaymentFailedScreeen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'KT123-Ak',
+                                      '${scheme.schemeNo}',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 18.sp,
                                       ),
                                     ),
                                     Text(
-                                      'AKSHAYANIDHI|0.00',
+                                      '${scheme.schemeName}',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 16.sp,
@@ -198,7 +215,21 @@ class PaymentFailedScreeen extends StatelessWidget {
                         Column(
                           children: [
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context
+                                    .read<InstalmenthystoryBloc>()
+                                    .add(const ResetDataEvent());
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ViewDetailScreen(
+                                      scheme: scheme,
+                                      schemedetil: schemeDetails,
+                                      user: user,
+                                    ),
+                                  ),
+                                );
+                              },
                               icon: Icon(
                                 Icons.history,
                                 size: 30.sp,

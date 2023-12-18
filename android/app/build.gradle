@@ -27,7 +27,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     namespace "com.example.regal_app"
-    compileSdkVersion 33
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -41,6 +41,8 @@ android {
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += 'build/generated/source/protos/main/java'
+        test.java.srcDirs += 'src/test/kotlin/'
     }
 
     defaultConfig {
@@ -73,4 +75,7 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:4.8.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'com.android.support:multidex:1.0.3'
+
 }

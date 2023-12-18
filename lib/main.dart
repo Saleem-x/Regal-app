@@ -12,6 +12,8 @@ import 'package:regal_app/feature/state/bloc/newscheme/newscheme_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newschemecreate/newschemcreatehome_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newschemehome/newschemehome_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newschemeotp/newschemeotp_bloc.dart';
+import 'package:regal_app/feature/state/bloc/paymentresponse/paymentresponse_bloc.dart';
+import 'package:regal_app/feature/state/bloc/paymentstatusupdate/updatepaymentstatus_bloc.dart';
 import 'package:regal_app/feature/state/bloc/resetpin/resetpin_bloc.dart';
 import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/state/bloc/splash/splash_bloc.dart';
@@ -29,9 +31,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Stripe.publishableKey =
-  //     "pk_test_51OEllJSAO1FOABEim1fCjNzBIEcCyVE8ktxDDAppc6ioFeHwJnAyvbJ0kOfuneeV0TjanNYjjalEEU2LvCdMqTqs00Z52WID0G";
 
   configureinjection();
   runApp(const MyApp());
@@ -110,6 +109,12 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getit<NewschemcreatehomeBloc>(),
+          ),
+          BlocProvider<PaymentresponseBloc>(
+            create: (context) => PaymentresponseBloc(),
+          ),
+          BlocProvider(
+            create: (context) => getit<UpdatepaymentstatusBloc>(),
           ),
         ],
         child: MaterialApp(
