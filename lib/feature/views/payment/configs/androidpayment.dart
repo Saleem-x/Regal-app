@@ -5,7 +5,7 @@ import 'package:regal_app/core/api/endpoints.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'package:paytm_allinonesdk/paytm_allinonesdk.dart';
-import 'package:android_intent_plus/android_intent.dart';
+// import 'package:android_intent_plus/android_intent.dart';
 // import 'package:android_intent_plus/flag.dart';
 
 Future<bool> launchGooglePayUPIIntent(
@@ -86,39 +86,39 @@ paytmtxntoken(String upiID, String merchentCode, String orderID) async {
   }
 }
 
-intenting(String upiID, String merchantCode, String orderID) async {
-  String callbackurl = baseurl + paymentcallbackurl;
-  AndroidIntent intent = AndroidIntent(
-      action: 'action_view',
-      package: 'com.google.android.apps.nbu.paisa.user',
-      data:
-          "gpay://upi/pay?pa=saleemsaly8-1@okhdfcbank&pn=Regal Jewellers&tr=$orderID&tn=Test payment&am=1&cu=INR&mc=$merchantCode&url=$callbackurl"
-      // data:
-      //     "upi://pay?pa=$upiID&pn=Regal Jewellers&mc=$merchantCode&tr=$orderID&tn=test note&am=1&cu=inr&url=$callbackurl",
-      );
+// intenting(String upiID, String merchantCode, String orderID) async {
+//   String callbackurl = baseurl + paymentcallbackurl;
+//   AndroidIntent intent = AndroidIntent(
+//       action: 'action_view',
+//       package: 'com.google.android.apps.nbu.paisa.user',
+//       data:
+//           "gpay://upi/pay?pa=saleemsaly8-1@okhdfcbank&pn=Regal Jewellers&tr=$orderID&tn=Test payment&am=1&cu=INR&mc=$merchantCode&url=$callbackurl"
+//       // data:
+//       //     "upi://pay?pa=$upiID&pn=Regal Jewellers&mc=$merchantCode&tr=$orderID&tn=test note&am=1&cu=inr&url=$callbackurl",
+//       );
 
-  try {
-    await intent.launch();
+//   try {
+//     await intent.launch();
 
-    // intent.
-  } catch (e) {
-    logger.e('Error launching intent: $e');
-  }
-}
+//     // intent.
+//   } catch (e) {
+//     logger.e('Error launching intent: $e');
+//   }
+// }
 
-paytmapiintent(String upiID, String merchentCode, String orderID) async {
-  String callbackurl = baseurl + paymentcallbackurl;
-  AndroidIntent intent = AndroidIntent(
-    action: 'action_view',
-    package: 'net.one97.paytm',
-    data:
-        "upi://pay?pa=$upiID&pn=Regal Jewellers&tr=$orderID&tn=Test payment&am=1&cu=INR&mc=$merchentCode&url=$callbackurl",
-  );
-  try {
-    await intent.launch();
+// paytmapiintent(String upiID, String merchentCode, String orderID) async {
+//   String callbackurl = baseurl + paymentcallbackurl;
+//   AndroidIntent intent = AndroidIntent(
+//     action: 'action_view',
+//     package: 'net.one97.paytm',
+//     data:
+//         "upi://pay?pa=$upiID&pn=Regal Jewellers&tr=$orderID&tn=Test payment&am=1&cu=INR&mc=$merchentCode&url=$callbackurl",
+//   );
+//   try {
+//     await intent.launch();
 
-    // intent.
-  } catch (e) {
-    logger.e('Error launching intent: $e');
-  }
-}
+//     // intent.
+//   } catch (e) {
+//     logger.e('Error launching intent: $e');
+//   }
+// }

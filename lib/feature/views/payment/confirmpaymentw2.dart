@@ -14,7 +14,6 @@ import 'package:regal_app/feature/data/models/scheme_details_model/scheme_detail
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/paymentresponse/paymentresponse_bloc.dart';
 import 'package:regal_app/feature/state/bloc/paymentstatusupdate/updatepaymentstatus_bloc.dart';
-import 'package:regal_app/feature/views/payment/configs/androidpayment.dart';
 import 'package:regal_app/feature/views/payment/paymentfailedscreen.dart';
 import 'package:regal_app/feature/views/payment/paymentsucces.dart';
 
@@ -314,11 +313,11 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                     ),
                     InkWell(
                       onTap: () async {
-                        paytmapiintent(
-                          widget.scheme.subId!,
-                          widget.scheme.merchantCode!,
-                          widget.orderID,
-                        );
+                        // paytmapiintent(
+                        //   widget.scheme.subId!,
+                        //   widget.scheme.merchantCode!,
+                        //   widget.orderID,
+                        // );
                       },
                       child: SizedBox(
                         width: size.width,
