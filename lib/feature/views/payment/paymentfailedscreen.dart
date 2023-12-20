@@ -9,6 +9,7 @@ import 'package:regal_app/feature/data/models/scheme_details_model/scheme_detail
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
 import 'package:regal_app/feature/state/bloc/paymentresponse/paymentresponse_bloc.dart';
+import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
 import 'package:regal_app/feature/views/viewdetails/viewdetailscreen.dart';
 
@@ -17,12 +18,14 @@ class PaymentFailedScreeen extends StatelessWidget {
   final String amount;
   final SchemeDetailsModel schemeDetails;
   final CustomerSchemeModel scheme;
+  final bool? isNewScheme;
   const PaymentFailedScreeen(
       {super.key,
       required this.user,
       required this.amount,
       required this.schemeDetails,
-      required this.scheme});
+      required this.scheme,
+      this.isNewScheme});
 
   @override
   Widget build(BuildContext context) {
@@ -216,19 +219,22 @@ class PaymentFailedScreeen extends StatelessWidget {
                           children: [
                             IconButton(
                               onPressed: () {
-                                context
-                                    .read<InstalmenthystoryBloc>()
-                                    .add(const ResetDataEvent());
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ViewDetailScreen(
-                                      scheme: scheme,
-                                      schemedetil: schemeDetails,
-                                      user: user,
+                                if (isNewScheme == null &&
+                                    isNewScheme != true) {
+                                  context
+                                      .read<InstalmenthystoryBloc>()
+                                      .add(const ResetDataEvent());
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ViewDetailScreen(
+                                        scheme: scheme,
+                                        schemedetil: schemeDetails,
+                                        user: user,
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                }
                               },
                               icon: Icon(
                                 Icons.history,
@@ -247,14 +253,25 @@ class PaymentFailedScreeen extends StatelessWidget {
                           children: [
                             IconButton(
                               onPressed: () {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        HomeScreen(user: user),
-                                  ),
-                                  (route) => false,
-                                );
+                                if (isNewScheme != null &&
+                                    isNewScheme == true) {
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginScreen(),
+                                    ),
+                                    (route) => false,
+                                  );
+                                } else {
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          HomeScreen(user: user),
+                                    ),
+                                    (route) => false,
+                                  );
+                                }
                               },
                               icon: Icon(
                                 CupertinoIcons.forward,

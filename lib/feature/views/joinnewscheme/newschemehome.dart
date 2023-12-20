@@ -6,15 +6,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
 import 'package:regal_app/feature/data/models/new_scheme_home_in_model/new_scheme_home_in_model.dart';
+import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/data/models/scheme_list_model/scheme_list_model.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/newschemecreate/newschemcreatehome_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newschemehome/newschemehome_bloc.dart';
 import 'package:regal_app/feature/state/cubit/cubit/newschemehomeselector_cubit.dart';
 import 'package:regal_app/feature/state/cubit/newschemecheckbox/checkbox_cubit.dart';
-import 'package:regal_app/feature/views/home/homescreen.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/newschemedropdownmenu.dart';
+import 'package:regal_app/feature/views/payment/confirmpaymentw2.dart';
 
 class NewSchemefrHome extends StatefulWidget {
   final UserBaseModel user;
@@ -26,9 +28,9 @@ class NewSchemefrHome extends StatefulWidget {
 
 TextEditingController _schemectrl = TextEditingController();
 TextEditingController _intamountctrl = TextEditingController();
-final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
 class _NewSchemefrHomeState extends State<NewSchemefrHome> {
+  static final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -51,19 +53,38 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
         listener: (context, state) {
           state.when(
               newSchemeHomeCreatSuccessState: (newscheme) {
-                Navigator.of(context).pop();
-
-                ScaffoldMessenger.of(context).showSnackBar(
+                /*  ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('create scheme success'),
                   ),
-                );
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(user: widget.user),
-                  ),
-                );
+                ); */
+                Navigator.of(context).pop();
+                Future.delayed(const Duration(microseconds: 200), () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ConfirmPaymentTWO(
+                        schemeDetails: SchemeDetailsModel(
+                          goldRate: newscheme.goldRate,
+                          goldWeight: "0.00",
+                          schemeNo: newscheme.schemeNo,
+                          schemeName: newscheme.schemeName,
+                          joinId: newscheme.joinId,
+                        ),
+                        scheme: CustomerSchemeModel(
+                          joinId: newscheme.joinId,
+                          merchantCode: newscheme.merchantId,
+                          subId: newscheme.subCodes,
+                          schemeNo: newscheme.schemeNo,
+                          schemeName: newscheme.schemeName,
+                        ),
+                        orderID: '${newscheme.transId!}',
+                        payablecontroller: _intamountctrl,
+                        user: widget.user,
+                      ),
+                    ),
+                  );
+                });
               },
               newSchemeHomeCreatfailedState: (error) {
                 Navigator.of(context).pop();

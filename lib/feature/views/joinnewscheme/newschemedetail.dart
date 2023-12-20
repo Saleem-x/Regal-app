@@ -8,12 +8,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/create_user_in_model/create_user_in_model.dart';
+import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
+import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
+import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newscheme/newscheme_bloc.dart';
 import 'package:regal_app/feature/state/cubit/checkbranchselected/checkbranchslection_cubit.dart';
 import 'package:regal_app/feature/state/cubit/newschemecheckbox/checkbox_cubit.dart';
 import 'package:regal_app/feature/state/cubit/pickimage/pickimage_cubit.dart';
-import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
 import 'package:regal_app/feature/views/auth/widgets/otpfieldwidget.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/dobselecter.dart';
@@ -21,6 +23,7 @@ import 'package:regal_app/feature/views/joinnewscheme/widgets/docselector.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/imageselector.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/newschemdetailwidget.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/newschemedropdownmenu.dart';
+import 'package:regal_app/feature/views/payment/confirmpaymentw2.dart';
 import 'package:regal_app/feature/views/termsandpolicies/tandp.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -55,9 +58,8 @@ TextEditingController _adharNOcontroller = TextEditingController();
 // TextEditingController _schmtenurecontroller = TextEditingController();
 String otpfield = '';
 
-GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-
 class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
+  static final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -74,7 +76,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
             state.when(
                 createUserSuccess: (user) {
                   Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  /*  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       backgroundColor: Colors.green,
                       content: Row(
                         children: [
@@ -93,11 +95,32 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                             ),
                           ),
                         ],
-                      )));
+                      ))); */
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const LoginScreen(),
+                        builder: (context) => ConfirmPaymentTWO(
+                          schemeDetails: SchemeDetailsModel(
+                            goldRate: user.goldRate,
+                            goldWeight: "0.00",
+                            schemeNo: user.schemeNo,
+                            schemeName: "",
+                            joinId: user.joinId,
+                          ),
+                          scheme: CustomerSchemeModel(
+                            joinId: user.joinId,
+                            merchantCode: user.merchantId,
+                            subId: user.subCodes,
+                            schemeNo: user.schemeNo,
+                            schemeName: "",
+                          ),
+                          orderID: '${user.transId!}',
+                          payablecontroller: _instalmentcontroller,
+                          user: UserBaseModel(
+                            cusId: user.cusId,
+                          ),
+                          isNewScheme: true,
+                        ),
                       ),
                       (route) => false);
                 },

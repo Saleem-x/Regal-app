@@ -10,8 +10,10 @@ import 'package:regal_app/feature/data/models/scheme_details_model/scheme_detail
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
 import 'package:regal_app/feature/state/bloc/paymentresponse/paymentresponse_bloc.dart';
+import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
 import 'package:regal_app/feature/views/viewdetails/viewdetailscreen.dart';
+import 'package:intl/intl.dart';
 
 class PaymentSuccessScreen extends StatelessWidget {
   final UserBaseModel user;
@@ -19,13 +21,15 @@ class PaymentSuccessScreen extends StatelessWidget {
   final String amount;
   final SchemeDetailsModel schemeDetails;
   final CustomerSchemeModel scheme;
+  final bool? isNewScheme;
   const PaymentSuccessScreen(
       {super.key,
       required this.user,
       required this.paymentRespM,
       required this.amount,
       required this.schemeDetails,
-      required this.scheme});
+      required this.scheme,
+      this.isNewScheme});
 
   @override
   Widget build(BuildContext context) {
@@ -199,9 +203,9 @@ class PaymentSuccessScreen extends StatelessWidget {
                                   color: ktextgrey,
                                 ),
                               ),
-                              const Text(
-                                "12/18/2023",
-                                style: TextStyle(
+                              Text(
+                                DateFormat('dd/MM/yyyy').format(DateTime.now()),
+                                style: const TextStyle(
                                   color: ktextgrey,
                                 ),
                               )
@@ -288,14 +292,26 @@ class PaymentSuccessScreen extends StatelessWidget {
                               children: [
                                 IconButton(
                                   onPressed: () {
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            HomeScreen(user: user),
-                                      ),
-                                      (route) => false,
-                                    );
+                                    if (isNewScheme != null &&
+                                        isNewScheme == true) {
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginScreen(),
+                                        ),
+                                        (route) => false,
+                                      );
+                                    } else {
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              HomeScreen(user: user),
+                                        ),
+                                        (route) => false,
+                                      );
+                                    }
                                   },
                                   icon: Icon(
                                     CupertinoIcons.forward,

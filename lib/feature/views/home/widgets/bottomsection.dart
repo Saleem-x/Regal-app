@@ -21,9 +21,9 @@ class BottomSectionWidget extends StatefulWidget {
 }
 
 final TextEditingController _payablecontroller = TextEditingController();
-final GlobalKey<FormState> _bottomormkey = GlobalKey<FormState>();
 
 class _BottomSectionWidgetState extends State<BottomSectionWidget> {
+  static final _bottomormkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;

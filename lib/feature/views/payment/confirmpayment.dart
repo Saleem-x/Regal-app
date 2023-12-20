@@ -26,7 +26,6 @@ class ConfirmPaymentScreen extends StatefulWidget {
 }
 
 final TextEditingController _payablecontroller = TextEditingController();
-final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
 class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
   @override
@@ -34,6 +33,8 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
     _payablecontroller.text = widget.payablecontroller;
     super.initState();
   }
+
+  static final _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {

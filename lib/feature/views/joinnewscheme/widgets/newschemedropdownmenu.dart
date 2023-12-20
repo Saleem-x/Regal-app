@@ -241,6 +241,16 @@ class BranchDropDown extends StatelessWidget {
               GetetsalesmansEvent(branchid: value),
             );
       },
+      onSaved: (value) {
+        controller.text = value!;
+        context
+            .read<CheckbranchslectionCubit>()
+            .checkisselected(controller.text);
+
+        context.read<DropdownitemsBloc>().add(
+              GetetsalesmansEvent(branchid: value),
+            );
+      },
       decoration: InputDecoration(
         // labelText: 'Select an item',
         hintText: 'Select',
@@ -353,7 +363,11 @@ class SaleSMAnDD extends StatelessWidget {
           context
               .read<SalesmansearchCubit>()
               .searchedlist(state.salesmanmodel!, '');
-        }
+        } /* else if (state.salesmanmodel == null) {
+          context.read<DropdownitemsBloc>().add(
+                GetetsalesmansEvent(branchid: branchctrl!.text),
+              );
+        } */
         return TextFormField(
           controller: _salesmannamectrl,
           onTap: () {

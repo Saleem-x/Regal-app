@@ -25,13 +25,15 @@ class ConfirmPaymentTWO extends StatefulWidget {
   final String orderID;
   final TextEditingController payablecontroller;
   final UserBaseModel user;
+  final bool? isNewScheme;
   const ConfirmPaymentTWO(
       {super.key,
       required this.schemeDetails,
       required this.scheme,
       required this.orderID,
       required this.payablecontroller,
-      required this.user});
+      required this.user,
+      this.isNewScheme});
 
   @override
   State<ConfirmPaymentTWO> createState() => _ConfirmPaymentTWOState();
@@ -79,6 +81,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                         amount: widget.payablecontroller.text,
                         scheme: widget.scheme,
                         schemeDetails: widget.schemeDetails,
+                        isNewScheme: widget.isNewScheme,
                       ),
                     ),
                     (route) => false);
@@ -134,6 +137,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                                 amount: widget.payablecontroller.text,
                                 scheme: widget.scheme,
                                 schemeDetails: widget.schemeDetails,
+                                isNewScheme: widget.isNewScheme,
                               ),
                             ),
                             (route) => false);
@@ -151,18 +155,21 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                                       response: respModel.status,
                                       schemeId: widget.scheme.schemeNo,
                                       subCode: widget.scheme.subId,
-                                      wgt: ""),
+                                      wgt: getgoldweight(
+                                          double.parse(
+                                              widget.schemeDetails.goldRate!),
+                                          100.0)),
                                   gpayresp: respModel),
                             );
                       } else {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                               builder: (context) => PaymentFailedScreeen(
-                                user: widget.user,
-                                amount: widget.payablecontroller.text,
-                                scheme: widget.scheme,
-                                schemeDetails: widget.schemeDetails,
-                              ),
+                                  user: widget.user,
+                                  amount: widget.payablecontroller.text,
+                                  scheme: widget.scheme,
+                                  schemeDetails: widget.schemeDetails,
+                                  isNewScheme: widget.isNewScheme),
                             ),
                             (route) => false);
                       }
@@ -177,6 +184,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                               amount: widget.payablecontroller.text,
                               scheme: widget.scheme,
                               schemeDetails: widget.schemeDetails,
+                              isNewScheme: widget.isNewScheme,
                             ),
                           ),
                           (route) => false);
@@ -356,5 +364,10 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
         },
       ),
     );
+  }
+
+  getgoldweight(double goldRatePerGram, double amountSpent) {
+    double goldWeight = amountSpent / goldRatePerGram;
+    return goldWeight.toStringAsFixed(2);
   }
 }
