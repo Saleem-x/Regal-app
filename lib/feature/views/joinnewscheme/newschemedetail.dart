@@ -39,27 +39,48 @@ class JoinNewSchemeDetailScreen extends StatefulWidget {
       _JoinNewSchemeDetailScreenState();
 }
 
-TextEditingController _instalmentcontroller = TextEditingController();
-TextEditingController _citycontroller = TextEditingController();
-TextEditingController _pincontroller = TextEditingController();
-
-TextEditingController _addresscontroller = TextEditingController();
-TextEditingController _namecontroller = TextEditingController();
-TextEditingController _nomineecontroller = TextEditingController();
-TextEditingController _emailcontroller = TextEditingController();
-TextEditingController _dobcontroller = TextEditingController();
-TextEditingController _mobilecontroller = TextEditingController();
-TextEditingController _relationshipcontroller = TextEditingController();
-TextEditingController _doctypecontroller = TextEditingController();
-TextEditingController _branchcontroller = TextEditingController();
-TextEditingController _salesmancontroller = TextEditingController();
-TextEditingController _schemecontroller = TextEditingController();
-TextEditingController _adharNOcontroller = TextEditingController();
 // TextEditingController _schmtenurecontroller = TextEditingController();
 String otpfield = '';
 
 class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
+  final _instalmentcontroller = TextEditingController();
+  final _citycontroller = TextEditingController();
+  final _pincontroller = TextEditingController();
+
+  final _addresscontroller = TextEditingController();
+  final _namecontroller = TextEditingController();
+  final _nomineecontroller = TextEditingController();
+  final _emailcontroller = TextEditingController();
+  final _dobcontroller = TextEditingController();
+  final _mobilecontroller = TextEditingController();
+  final _relationshipcontroller = TextEditingController();
+  final _doctypecontroller = TextEditingController();
+  final _branchcontroller = TextEditingController();
+  final _salesmancontroller = TextEditingController();
+  final _schemecontroller = TextEditingController();
+  final _adharNOcontroller = TextEditingController();
   static final _formkey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _instalmentcontroller.dispose();
+    _citycontroller.dispose();
+    _pincontroller.dispose();
+    _addresscontroller.dispose();
+    _namecontroller.dispose();
+    _nomineecontroller.dispose();
+    _emailcontroller.dispose();
+    _dobcontroller.dispose();
+    _mobilecontroller.dispose();
+    _relationshipcontroller.dispose();
+    _doctypecontroller.dispose();
+    _branchcontroller.dispose();
+    _salesmancontroller.dispose();
+    _schemecontroller.dispose();
+    _adharNOcontroller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;

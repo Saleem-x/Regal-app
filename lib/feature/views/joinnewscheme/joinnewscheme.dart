@@ -21,11 +21,10 @@ class JoinNewSchemeScreen extends StatefulWidget {
   State<JoinNewSchemeScreen> createState() => _JoinNewSchemeScreenState();
 }
 
-final _mobilecontroller = TextEditingController();
-final _otpcontroller = TextEditingController();
-final _formkey = GlobalKey<FormState>();
-
 class _JoinNewSchemeScreenState extends State<JoinNewSchemeScreen> {
+  final _mobilecontroller = TextEditingController();
+  final _otpcontroller = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -33,9 +32,28 @@ class _JoinNewSchemeScreenState extends State<JoinNewSchemeScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: kbgcolor,
       body: size.height >= 640
-          ? SingleChildScrollView(child: ALLJoinScreenWidgets(size: size))
-          : SingleChildScrollView(child: ALLJoinScreenWidgets(size: size)),
+          ? SingleChildScrollView(
+              child: ALLJoinScreenWidgets(
+              size: size,
+              formkey: _formkey,
+              mobilecontroller: _mobilecontroller,
+              otpcontroller: _otpcontroller,
+            ))
+          : SingleChildScrollView(
+              child: ALLJoinScreenWidgets(
+              size: size,
+              formkey: _formkey,
+              mobilecontroller: _mobilecontroller,
+              otpcontroller: _otpcontroller,
+            )),
     );
+  }
+
+  @override
+  void dispose() {
+    _mobilecontroller.dispose();
+    _otpcontroller.dispose();
+    super.dispose();
   }
 }
 
@@ -43,14 +61,19 @@ class ALLJoinScreenWidgets extends StatelessWidget {
   const ALLJoinScreenWidgets({
     super.key,
     required this.size,
+    required this.mobilecontroller,
+    required this.otpcontroller,
+    required this.formkey,
   });
 
   final Size size;
+  final TextEditingController mobilecontroller, otpcontroller;
+  final GlobalKey<FormState> formkey;
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formkey,
+      key: formkey,
       child: BlocListener<NewschemeotpBloc, NewschemeotpState>(
         listener: (context, state) {
           logger.e('state ethhaaan$state');
@@ -65,7 +88,7 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => JoinNewSchemeDetailScreen(
-                      mobilenumber: _mobilecontroller.text),
+                      mobilenumber: mobilecontroller.text),
                 ),
               );
               otpfield = '';
@@ -185,7 +208,7 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                     ],
                   ),
                 ),
-                MobileFieldWidget(size: size, controller: _mobilecontroller),
+                MobileFieldWidget(size: size, controller: mobilecontroller),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
@@ -208,13 +231,13 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                           ),
                           color: kredbutton,
                           onPressed: () async {
-                            if (_formkey.currentState!.validate()) {
+                            if (formkey.currentState!.validate()) {
                               context
                                   .read<NewschemeotpBloc>()
                                   .add(const OtptimerStateEvent());
                               context.read<NewschemeotpBloc>().add(
                                     SendOtpEvent(
-                                      mobileNO: _mobilecontroller.text,
+                                      mobileNO: mobilecontroller.text,
                                     ),
                                   );
                             }
@@ -245,14 +268,14 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                                     ),
                                     color: kredbutton,
                                     onPressed: () async {
-                                      if (_formkey.currentState!.validate()) {
+                                      if (formkey.currentState!.validate()) {
                                         context
                                             .read<NewschemeotpBloc>()
                                             .add(const OtptimerStateEvent());
                                         context.read<NewschemeotpBloc>().add(
                                               SendOtpEvent(
                                                   mobileNO:
-                                                      _mobilecontroller.text),
+                                                      mobilecontroller.text),
                                             );
                                       }
                                     },
@@ -284,14 +307,14 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                                     ),
                                     color: kredbutton,
                                     onPressed: () async {
-                                      if (_formkey.currentState!.validate()) {
+                                      if (formkey.currentState!.validate()) {
                                         context
                                             .read<NewschemeotpBloc>()
                                             .add(const OtptimerStateEvent());
                                         context.read<NewschemeotpBloc>().add(
                                               SendOtpEvent(
                                                   mobileNO:
-                                                      _mobilecontroller.text),
+                                                      mobilecontroller.text),
                                             );
                                       }
                                     },
@@ -308,13 +331,13 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                           ),
                           color: kredbutton,
                           onPressed: () async {
-                            if (_formkey.currentState!.validate()) {
+                            if (formkey.currentState!.validate()) {
                               context
                                   .read<NewschemeotpBloc>()
                                   .add(const OtptimerStateEvent());
                               context.read<NewschemeotpBloc>().add(
                                     SendOtpEvent(
-                                        mobileNO: _mobilecontroller.text),
+                                        mobileNO: mobilecontroller.text),
                                   );
                             }
                           },
@@ -329,13 +352,13 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                           ),
                           color: kredbutton,
                           onPressed: () async {
-                            if (_formkey.currentState!.validate()) {
+                            if (formkey.currentState!.validate()) {
                               context
                                   .read<NewschemeotpBloc>()
                                   .add(const OtptimerStateEvent());
                               context.read<NewschemeotpBloc>().add(
                                     SendOtpEvent(
-                                        mobileNO: _mobilecontroller.text),
+                                        mobileNO: mobilecontroller.text),
                                   );
                             }
                           },
@@ -350,13 +373,13 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                           ),
                           color: kredbutton,
                           onPressed: () async {
-                            if (_formkey.currentState!.validate()) {
+                            if (formkey.currentState!.validate()) {
                               context
                                   .read<NewschemeotpBloc>()
                                   .add(const OtptimerStateEvent());
                               context.read<NewschemeotpBloc>().add(
                                     SendOtpEvent(
-                                        mobileNO: _mobilecontroller.text),
+                                        mobileNO: mobilecontroller.text),
                                   );
                             }
                           },
@@ -417,9 +440,9 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                 ),
                 SizedBox(height: 10.h),
                 ResetPinHeaderOtpField(
-                  newpin: _otpcontroller,
+                  newpin: otpcontroller,
                   size: size,
-                  mobNo: _mobilecontroller.text,
+                  mobNo: mobilecontroller.text,
                 ),
                 state.when(
                   otpstateinitial: () => const SizedBox.shrink(),
@@ -455,13 +478,13 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                     ),
                     minWidth: size.width,
                     onPressed: () async {
-                      if (_formkey.currentState!.validate()) {
-                        if (_otpcontroller.text.length == 4) {
+                      if (formkey.currentState!.validate()) {
+                        if (otpcontroller.text.length == 4) {
                           // logger.e(otpfield);
                           context.read<NewschemeotpBloc>().add(
                                 VerfiOtpEvent(
-                                  mobileNO: _mobilecontroller.text,
-                                  otp: _otpcontroller.text,
+                                  mobileNO: mobilecontroller.text,
+                                  otp: otpcontroller.text,
                                 ),
                               );
                         } else {

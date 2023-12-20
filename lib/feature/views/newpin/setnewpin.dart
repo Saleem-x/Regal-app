@@ -20,13 +20,11 @@ class SetNewPinScreen extends StatefulWidget {
   State<SetNewPinScreen> createState() => _SetNewPinScreenState();
 }
 
-final _mobilecontroller = TextEditingController();
-final _otpcontroller = TextEditingController();
-final _cusIdcontroller = TextEditingController();
-
-final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-
 class _SetNewPinScreenState extends State<SetNewPinScreen> {
+  final _mobilecontroller = TextEditingController();
+  final _otpcontroller = TextEditingController();
+  final _cusIdcontroller = TextEditingController();
+  static final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -225,11 +223,20 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                 //!cusId Issue
 
                 state.maybeWhen(
-                  orElse: () => ConfirmOtpButtonDisabled(size: size),
+                  orElse: () => ConfirmOtpButtonDisabled(
+                      size: size,
+                      cusIdcontroller: _cusIdcontroller,
+                      otpcontroller: _otpcontroller,
+                      formkey: _formkey),
                   otpSendSuccess: (pinResetOtpModel) {
                     logger.i(pinResetOtpModel.cusId);
                     return OtPConfirmButton(
-                        size: size, cusId: _cusIdcontroller.text);
+                      size: size,
+                      cusId: _cusIdcontroller.text,
+                      cusIdcontroller: _cusIdcontroller,
+                      otpcontroller: _otpcontroller,
+                      formkey: _formkey,
+                    );
                   },
                 ),
                 SizedBox(
@@ -259,10 +266,15 @@ class OtPConfirmButton extends StatelessWidget {
     super.key,
     required this.size,
     required this.cusId,
+    required this.otpcontroller,
+    required this.cusIdcontroller,
+    required this.formkey,
   });
 
   final Size size;
   final String cusId;
+  final TextEditingController otpcontroller, cusIdcontroller;
+  final GlobalKey<FormState> formkey;
 
   @override
   Widget build(BuildContext context) {
@@ -276,9 +288,9 @@ class OtPConfirmButton extends StatelessWidget {
         ),
         minWidth: size.width,
         onPressed: () {
-          if (_formkey.currentState!.validate()) {
-            if (_otpcontroller.text.length == 4) {
-              if (_cusIdcontroller.text.isEmpty) {
+          if (formkey.currentState!.validate()) {
+            if (otpcontroller.text.length == 4) {
+              if (cusIdcontroller.text.isEmpty) {
                 showCupertinoDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -299,10 +311,10 @@ class OtPConfirmButton extends StatelessWidget {
               } else {
                 //!change to _cusid controller
                 context.read<ResetpinBloc>().add(
-                      VerfiOtpEvent(mobileNO: cusId, otp: _otpcontroller.text),
+                      VerfiOtpEvent(mobileNO: cusId, otp: otpcontroller.text),
                     );
               }
-            } else if (_otpcontroller.text.length < 4) {
+            } else if (otpcontroller.text.length < 4) {
               if (!Platform.isAndroid) {
                 showDialog(
                   context: context,
@@ -364,8 +376,15 @@ class OtPConfirmButton extends StatelessWidget {
 }
 
 class ConfirmOtpButtonDisabled extends StatelessWidget {
-  const ConfirmOtpButtonDisabled({super.key, required this.size});
+  const ConfirmOtpButtonDisabled(
+      {super.key,
+      required this.size,
+      required this.otpcontroller,
+      required this.cusIdcontroller,
+      required this.formkey});
   final Size size;
+  final TextEditingController otpcontroller, cusIdcontroller;
+  final GlobalKey<FormState> formkey;
 
   @override
   Widget build(BuildContext context) {
@@ -381,9 +400,9 @@ class ConfirmOtpButtonDisabled extends StatelessWidget {
         onPressed: () {
           logger.d('disabled');
 
-          if (_formkey.currentState!.validate()) {
-            if (_otpcontroller.text.length == 4) {
-              if (_cusIdcontroller.text.isEmpty) {
+          if (formkey.currentState!.validate()) {
+            if (otpcontroller.text.length == 4) {
+              if (cusIdcontroller.text.isEmpty) {
                 showCupertinoDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -412,11 +431,11 @@ class ConfirmOtpButtonDisabled extends StatelessWidget {
                 //!change to _cusid controller
                 context.read<ResetpinBloc>().add(
                       VerfiOtpEvent(
-                          mobileNO: _cusIdcontroller.text,
-                          otp: _otpcontroller.text),
+                          mobileNO: cusIdcontroller.text,
+                          otp: otpcontroller.text),
                     );
               }
-            } else if (_otpcontroller.text.length < 4) {
+            } else if (otpcontroller.text.length < 4) {
               if (!Platform.isAndroid) {
                 showDialog(
                   context: context,

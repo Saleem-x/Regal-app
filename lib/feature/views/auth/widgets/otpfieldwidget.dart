@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:otp_text_field/otp_text_field.dart';
-import 'package:otp_text_field/style.dart';
+/* import 'package:otp_text_field/otp_text_field.dart';
+import 'package:otp_text_field/style.dart'; */
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/login_model/login_model.dart';
 import 'package:regal_app/feature/state/bloc/login/login_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:regal_app/feature/state/bloc/newschemeotp/newschemeotp_bloc.dart';
-import 'package:regal_app/feature/views/auth/loginscreen.dart';
-import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart';
-
+/* import 'package:regal_app/feature/views/auth/loginscreen.dart';
+import 'package:regal_app/feature/views/joinnewscheme/newschemedetail.dart'; */
+/* 
 class OtpFIeldWidget extends StatefulWidget {
   const OtpFIeldWidget(
       {super.key, required this.size, this.mobNo, this.newpin});
@@ -106,7 +106,7 @@ class _OtpFIeldWidgetState extends State<OtpFIeldWidget> {
       ),
     );
   }
-}
+} */
 
 class NewPinOtpFIeldWidget extends StatelessWidget {
   const NewPinOtpFIeldWidget(
@@ -133,7 +133,7 @@ class NewPinOtpFIeldWidget extends StatelessWidget {
             width: size.width * 0.05,
           ),
           Expanded(
-            child: OTPTextField(
+            child: /* OTPTextField(
               length: 4,
               keyboardType: TextInputType.number,
               width: size.width,
@@ -172,6 +172,44 @@ class NewPinOtpFIeldWidget extends StatelessWidget {
                   );
                 }
               },
+            ) */
+                PinCodeTextField(
+              controller: newpin,
+              appContext: context,
+              length: 4,
+              keyboardType: TextInputType.number,
+              autoDismissKeyboard: true,
+              enableActiveFill: true,
+              textStyle: TextStyle(
+                fontSize: 17.sp,
+                fontWeight: FontWeight.normal,
+              ),
+              pinTheme: PinTheme(
+                shape: PinCodeFieldShape.box,
+                borderRadius: BorderRadius.circular(
+                  10,
+                ),
+                fieldHeight: 35.h,
+                fieldWidth: 40.w,
+                activeFillColor: kcolorgrey.withOpacity(.09),
+                inactiveFillColor: kcolorgrey.withOpacity(.09),
+                selectedFillColor: kcolorgrey.withOpacity(.09),
+                activeColor: kbgcolor,
+                selectedColor: kbgcolor,
+                disabledColor: kbgcolor,
+                inactiveColor: kbgcolor,
+                errorBorderColor: kbgcolor,
+              ),
+              onChanged: (value) {
+                if (value.length == 4) {
+                  newpin.text = value;
+                }
+              },
+              onCompleted: (pin) {
+                if (pin.length == 4) {
+                  newpin.text = pin;
+                }
+              },
             ),
           ),
         ],
@@ -205,7 +243,7 @@ class ResetPinHeaderOtpField extends StatelessWidget {
             width: size.width * 0.05,
           ),
           Expanded(
-            child: OTPTextField(
+            child: /* OTPTextField(
               length: 4,
               keyboardType: TextInputType.number,
               width: size.width,
@@ -244,6 +282,51 @@ class ResetPinHeaderOtpField extends StatelessWidget {
                       ],
                     ),
                   );
+                }
+              },
+            ) */
+                PinCodeTextField(
+              controller: newpin,
+              appContext: context,
+              length: 4,
+              keyboardType: TextInputType.number,
+              autoDismissKeyboard: true,
+              enableActiveFill: true,
+              textStyle: TextStyle(
+                fontSize: 17.sp,
+                fontWeight: FontWeight.normal,
+              ),
+              pinTheme: PinTheme(
+                shape: PinCodeFieldShape.box,
+                borderRadius: BorderRadius.circular(
+                  10,
+                ),
+                fieldHeight: 35.h,
+                fieldWidth: 40.w,
+                activeFillColor: kcolorgrey.withOpacity(.09),
+                inactiveFillColor: kcolorgrey.withOpacity(.09),
+                selectedFillColor: kcolorgrey.withOpacity(.09),
+                activeColor: kbgcolor,
+                selectedColor: kbgcolor,
+                disabledColor: kbgcolor,
+                inactiveColor: kbgcolor,
+                errorBorderColor: kbgcolor,
+              ),
+              onChanged: (value) {
+                if (value.length == 4) {
+                  newpin.text = value;
+                  context.read<NewschemeotpBloc>().add(
+                        VerfiOtpEvent(mobileNO: mobNo!, otp: newpin.text),
+                      );
+                  // if (mobNo != null && mobNo!.length == 10) {}
+                }
+              },
+              onCompleted: (pin) {
+                if (pin.length == 4) {
+                  newpin.text = pin;
+                  context.read<NewschemeotpBloc>().add(
+                        VerfiOtpEvent(mobileNO: mobNo!, otp: newpin.text),
+                      );
                 }
               },
             ),

@@ -20,10 +20,18 @@ class BottomSectionWidget extends StatefulWidget {
   State<BottomSectionWidget> createState() => _BottomSectionWidgetState();
 }
 
-final TextEditingController _payablecontroller = TextEditingController();
-
 class _BottomSectionWidgetState extends State<BottomSectionWidget> {
+  static final TextEditingController _payablecontroller =
+      TextEditingController();
   static final _bottomormkey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _payablecontroller.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
