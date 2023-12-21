@@ -19,18 +19,21 @@ mixin _$PaymentresponseEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String response) checkpaymentresponse,
+    required TResult Function() addResponseLoadingEvent,
     required TResult Function() rsetresponseEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String response)? checkpaymentresponse,
+    TResult? Function()? addResponseLoadingEvent,
     TResult? Function()? rsetresponseEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String response)? checkpaymentresponse,
+    TResult Function()? addResponseLoadingEvent,
     TResult Function()? rsetresponseEvent,
     required TResult orElse(),
   }) =>
@@ -39,18 +42,22 @@ mixin _$PaymentresponseEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(CheckpaymentresponseEvent value)
         checkpaymentresponse,
+    required TResult Function(AddRresponseLoadingEvent value)
+        addResponseLoadingEvent,
     required TResult Function(ResetresponseEvent value) rsetresponseEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CheckpaymentresponseEvent value)? checkpaymentresponse,
+    TResult? Function(AddRresponseLoadingEvent value)? addResponseLoadingEvent,
     TResult? Function(ResetresponseEvent value)? rsetresponseEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CheckpaymentresponseEvent value)? checkpaymentresponse,
+    TResult Function(AddRresponseLoadingEvent value)? addResponseLoadingEvent,
     TResult Function(ResetresponseEvent value)? rsetresponseEvent,
     required TResult orElse(),
   }) =>
@@ -146,6 +153,7 @@ class _$CheckpaymentresponseEventImpl implements CheckpaymentresponseEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String response) checkpaymentresponse,
+    required TResult Function() addResponseLoadingEvent,
     required TResult Function() rsetresponseEvent,
   }) {
     return checkpaymentresponse(response);
@@ -155,6 +163,7 @@ class _$CheckpaymentresponseEventImpl implements CheckpaymentresponseEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String response)? checkpaymentresponse,
+    TResult? Function()? addResponseLoadingEvent,
     TResult? Function()? rsetresponseEvent,
   }) {
     return checkpaymentresponse?.call(response);
@@ -164,6 +173,7 @@ class _$CheckpaymentresponseEventImpl implements CheckpaymentresponseEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String response)? checkpaymentresponse,
+    TResult Function()? addResponseLoadingEvent,
     TResult Function()? rsetresponseEvent,
     required TResult orElse(),
   }) {
@@ -178,6 +188,8 @@ class _$CheckpaymentresponseEventImpl implements CheckpaymentresponseEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(CheckpaymentresponseEvent value)
         checkpaymentresponse,
+    required TResult Function(AddRresponseLoadingEvent value)
+        addResponseLoadingEvent,
     required TResult Function(ResetresponseEvent value) rsetresponseEvent,
   }) {
     return checkpaymentresponse(this);
@@ -187,6 +199,7 @@ class _$CheckpaymentresponseEventImpl implements CheckpaymentresponseEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CheckpaymentresponseEvent value)? checkpaymentresponse,
+    TResult? Function(AddRresponseLoadingEvent value)? addResponseLoadingEvent,
     TResult? Function(ResetresponseEvent value)? rsetresponseEvent,
   }) {
     return checkpaymentresponse?.call(this);
@@ -196,6 +209,7 @@ class _$CheckpaymentresponseEventImpl implements CheckpaymentresponseEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CheckpaymentresponseEvent value)? checkpaymentresponse,
+    TResult Function(AddRresponseLoadingEvent value)? addResponseLoadingEvent,
     TResult Function(ResetresponseEvent value)? rsetresponseEvent,
     required TResult orElse(),
   }) {
@@ -214,6 +228,120 @@ abstract class CheckpaymentresponseEvent implements PaymentresponseEvent {
   @JsonKey(ignore: true)
   _$$CheckpaymentresponseEventImplCopyWith<_$CheckpaymentresponseEventImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AddRresponseLoadingEventImplCopyWith<$Res> {
+  factory _$$AddRresponseLoadingEventImplCopyWith(
+          _$AddRresponseLoadingEventImpl value,
+          $Res Function(_$AddRresponseLoadingEventImpl) then) =
+      __$$AddRresponseLoadingEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AddRresponseLoadingEventImplCopyWithImpl<$Res>
+    extends _$PaymentresponseEventCopyWithImpl<$Res,
+        _$AddRresponseLoadingEventImpl>
+    implements _$$AddRresponseLoadingEventImplCopyWith<$Res> {
+  __$$AddRresponseLoadingEventImplCopyWithImpl(
+      _$AddRresponseLoadingEventImpl _value,
+      $Res Function(_$AddRresponseLoadingEventImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AddRresponseLoadingEventImpl implements AddRresponseLoadingEvent {
+  const _$AddRresponseLoadingEventImpl();
+
+  @override
+  String toString() {
+    return 'PaymentresponseEvent.addResponseLoadingEvent()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddRresponseLoadingEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String response) checkpaymentresponse,
+    required TResult Function() addResponseLoadingEvent,
+    required TResult Function() rsetresponseEvent,
+  }) {
+    return addResponseLoadingEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String response)? checkpaymentresponse,
+    TResult? Function()? addResponseLoadingEvent,
+    TResult? Function()? rsetresponseEvent,
+  }) {
+    return addResponseLoadingEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String response)? checkpaymentresponse,
+    TResult Function()? addResponseLoadingEvent,
+    TResult Function()? rsetresponseEvent,
+    required TResult orElse(),
+  }) {
+    if (addResponseLoadingEvent != null) {
+      return addResponseLoadingEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CheckpaymentresponseEvent value)
+        checkpaymentresponse,
+    required TResult Function(AddRresponseLoadingEvent value)
+        addResponseLoadingEvent,
+    required TResult Function(ResetresponseEvent value) rsetresponseEvent,
+  }) {
+    return addResponseLoadingEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CheckpaymentresponseEvent value)? checkpaymentresponse,
+    TResult? Function(AddRresponseLoadingEvent value)? addResponseLoadingEvent,
+    TResult? Function(ResetresponseEvent value)? rsetresponseEvent,
+  }) {
+    return addResponseLoadingEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CheckpaymentresponseEvent value)? checkpaymentresponse,
+    TResult Function(AddRresponseLoadingEvent value)? addResponseLoadingEvent,
+    TResult Function(ResetresponseEvent value)? rsetresponseEvent,
+    required TResult orElse(),
+  }) {
+    if (addResponseLoadingEvent != null) {
+      return addResponseLoadingEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddRresponseLoadingEvent implements PaymentresponseEvent {
+  const factory AddRresponseLoadingEvent() = _$AddRresponseLoadingEventImpl;
 }
 
 /// @nodoc
@@ -255,6 +383,7 @@ class _$ResetresponseEventImpl implements ResetresponseEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String response) checkpaymentresponse,
+    required TResult Function() addResponseLoadingEvent,
     required TResult Function() rsetresponseEvent,
   }) {
     return rsetresponseEvent();
@@ -264,6 +393,7 @@ class _$ResetresponseEventImpl implements ResetresponseEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String response)? checkpaymentresponse,
+    TResult? Function()? addResponseLoadingEvent,
     TResult? Function()? rsetresponseEvent,
   }) {
     return rsetresponseEvent?.call();
@@ -273,6 +403,7 @@ class _$ResetresponseEventImpl implements ResetresponseEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String response)? checkpaymentresponse,
+    TResult Function()? addResponseLoadingEvent,
     TResult Function()? rsetresponseEvent,
     required TResult orElse(),
   }) {
@@ -287,6 +418,8 @@ class _$ResetresponseEventImpl implements ResetresponseEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(CheckpaymentresponseEvent value)
         checkpaymentresponse,
+    required TResult Function(AddRresponseLoadingEvent value)
+        addResponseLoadingEvent,
     required TResult Function(ResetresponseEvent value) rsetresponseEvent,
   }) {
     return rsetresponseEvent(this);
@@ -296,6 +429,7 @@ class _$ResetresponseEventImpl implements ResetresponseEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CheckpaymentresponseEvent value)? checkpaymentresponse,
+    TResult? Function(AddRresponseLoadingEvent value)? addResponseLoadingEvent,
     TResult? Function(ResetresponseEvent value)? rsetresponseEvent,
   }) {
     return rsetresponseEvent?.call(this);
@@ -305,6 +439,7 @@ class _$ResetresponseEventImpl implements ResetresponseEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CheckpaymentresponseEvent value)? checkpaymentresponse,
+    TResult Function(AddRresponseLoadingEvent value)? addResponseLoadingEvent,
     TResult Function(ResetresponseEvent value)? rsetresponseEvent,
     required TResult orElse(),
   }) {
@@ -325,18 +460,21 @@ mixin _$PaymentresponseState {
   TResult when<TResult extends Object?>({
     required TResult Function(String? response) havepaymentResponseState,
     required TResult Function() paymentstateReset,
+    required TResult Function() responseLoadingState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? response)? havepaymentResponseState,
     TResult? Function()? paymentstateReset,
+    TResult? Function()? responseLoadingState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? response)? havepaymentResponseState,
     TResult Function()? paymentstateReset,
+    TResult Function()? responseLoadingState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -345,18 +483,21 @@ mixin _$PaymentresponseState {
     required TResult Function(HavePaymentResponseState value)
         havepaymentResponseState,
     required TResult Function(PaymentstateReset value) paymentstateReset,
+    required TResult Function(ResponseLoadingState value) responseLoadingState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HavePaymentResponseState value)? havepaymentResponseState,
     TResult? Function(PaymentstateReset value)? paymentstateReset,
+    TResult? Function(ResponseLoadingState value)? responseLoadingState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HavePaymentResponseState value)? havepaymentResponseState,
     TResult Function(PaymentstateReset value)? paymentstateReset,
+    TResult Function(ResponseLoadingState value)? responseLoadingState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -452,6 +593,7 @@ class _$HavePaymentResponseStateImpl implements HavePaymentResponseState {
   TResult when<TResult extends Object?>({
     required TResult Function(String? response) havepaymentResponseState,
     required TResult Function() paymentstateReset,
+    required TResult Function() responseLoadingState,
   }) {
     return havepaymentResponseState(response);
   }
@@ -461,6 +603,7 @@ class _$HavePaymentResponseStateImpl implements HavePaymentResponseState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? response)? havepaymentResponseState,
     TResult? Function()? paymentstateReset,
+    TResult? Function()? responseLoadingState,
   }) {
     return havepaymentResponseState?.call(response);
   }
@@ -470,6 +613,7 @@ class _$HavePaymentResponseStateImpl implements HavePaymentResponseState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? response)? havepaymentResponseState,
     TResult Function()? paymentstateReset,
+    TResult Function()? responseLoadingState,
     required TResult orElse(),
   }) {
     if (havepaymentResponseState != null) {
@@ -484,6 +628,7 @@ class _$HavePaymentResponseStateImpl implements HavePaymentResponseState {
     required TResult Function(HavePaymentResponseState value)
         havepaymentResponseState,
     required TResult Function(PaymentstateReset value) paymentstateReset,
+    required TResult Function(ResponseLoadingState value) responseLoadingState,
   }) {
     return havepaymentResponseState(this);
   }
@@ -493,6 +638,7 @@ class _$HavePaymentResponseStateImpl implements HavePaymentResponseState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HavePaymentResponseState value)? havepaymentResponseState,
     TResult? Function(PaymentstateReset value)? paymentstateReset,
+    TResult? Function(ResponseLoadingState value)? responseLoadingState,
   }) {
     return havepaymentResponseState?.call(this);
   }
@@ -502,6 +648,7 @@ class _$HavePaymentResponseStateImpl implements HavePaymentResponseState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HavePaymentResponseState value)? havepaymentResponseState,
     TResult Function(PaymentstateReset value)? paymentstateReset,
+    TResult Function(ResponseLoadingState value)? responseLoadingState,
     required TResult orElse(),
   }) {
     if (havepaymentResponseState != null) {
@@ -561,6 +708,7 @@ class _$PaymentstateResetImpl implements PaymentstateReset {
   TResult when<TResult extends Object?>({
     required TResult Function(String? response) havepaymentResponseState,
     required TResult Function() paymentstateReset,
+    required TResult Function() responseLoadingState,
   }) {
     return paymentstateReset();
   }
@@ -570,6 +718,7 @@ class _$PaymentstateResetImpl implements PaymentstateReset {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? response)? havepaymentResponseState,
     TResult? Function()? paymentstateReset,
+    TResult? Function()? responseLoadingState,
   }) {
     return paymentstateReset?.call();
   }
@@ -579,6 +728,7 @@ class _$PaymentstateResetImpl implements PaymentstateReset {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? response)? havepaymentResponseState,
     TResult Function()? paymentstateReset,
+    TResult Function()? responseLoadingState,
     required TResult orElse(),
   }) {
     if (paymentstateReset != null) {
@@ -593,6 +743,7 @@ class _$PaymentstateResetImpl implements PaymentstateReset {
     required TResult Function(HavePaymentResponseState value)
         havepaymentResponseState,
     required TResult Function(PaymentstateReset value) paymentstateReset,
+    required TResult Function(ResponseLoadingState value) responseLoadingState,
   }) {
     return paymentstateReset(this);
   }
@@ -602,6 +753,7 @@ class _$PaymentstateResetImpl implements PaymentstateReset {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HavePaymentResponseState value)? havepaymentResponseState,
     TResult? Function(PaymentstateReset value)? paymentstateReset,
+    TResult? Function(ResponseLoadingState value)? responseLoadingState,
   }) {
     return paymentstateReset?.call(this);
   }
@@ -611,6 +763,7 @@ class _$PaymentstateResetImpl implements PaymentstateReset {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HavePaymentResponseState value)? havepaymentResponseState,
     TResult Function(PaymentstateReset value)? paymentstateReset,
+    TResult Function(ResponseLoadingState value)? responseLoadingState,
     required TResult orElse(),
   }) {
     if (paymentstateReset != null) {
@@ -622,4 +775,114 @@ class _$PaymentstateResetImpl implements PaymentstateReset {
 
 abstract class PaymentstateReset implements PaymentresponseState {
   const factory PaymentstateReset() = _$PaymentstateResetImpl;
+}
+
+/// @nodoc
+abstract class _$$ResponseLoadingStateImplCopyWith<$Res> {
+  factory _$$ResponseLoadingStateImplCopyWith(_$ResponseLoadingStateImpl value,
+          $Res Function(_$ResponseLoadingStateImpl) then) =
+      __$$ResponseLoadingStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResponseLoadingStateImplCopyWithImpl<$Res>
+    extends _$PaymentresponseStateCopyWithImpl<$Res, _$ResponseLoadingStateImpl>
+    implements _$$ResponseLoadingStateImplCopyWith<$Res> {
+  __$$ResponseLoadingStateImplCopyWithImpl(_$ResponseLoadingStateImpl _value,
+      $Res Function(_$ResponseLoadingStateImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ResponseLoadingStateImpl implements ResponseLoadingState {
+  const _$ResponseLoadingStateImpl();
+
+  @override
+  String toString() {
+    return 'PaymentresponseState.responseLoadingState()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ResponseLoadingStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? response) havepaymentResponseState,
+    required TResult Function() paymentstateReset,
+    required TResult Function() responseLoadingState,
+  }) {
+    return responseLoadingState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? response)? havepaymentResponseState,
+    TResult? Function()? paymentstateReset,
+    TResult? Function()? responseLoadingState,
+  }) {
+    return responseLoadingState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? response)? havepaymentResponseState,
+    TResult Function()? paymentstateReset,
+    TResult Function()? responseLoadingState,
+    required TResult orElse(),
+  }) {
+    if (responseLoadingState != null) {
+      return responseLoadingState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HavePaymentResponseState value)
+        havepaymentResponseState,
+    required TResult Function(PaymentstateReset value) paymentstateReset,
+    required TResult Function(ResponseLoadingState value) responseLoadingState,
+  }) {
+    return responseLoadingState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HavePaymentResponseState value)? havepaymentResponseState,
+    TResult? Function(PaymentstateReset value)? paymentstateReset,
+    TResult? Function(ResponseLoadingState value)? responseLoadingState,
+  }) {
+    return responseLoadingState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HavePaymentResponseState value)? havepaymentResponseState,
+    TResult Function(PaymentstateReset value)? paymentstateReset,
+    TResult Function(ResponseLoadingState value)? responseLoadingState,
+    required TResult orElse(),
+  }) {
+    if (responseLoadingState != null) {
+      return responseLoadingState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ResponseLoadingState implements PaymentresponseState {
+  const factory ResponseLoadingState() = _$ResponseLoadingStateImpl;
 }

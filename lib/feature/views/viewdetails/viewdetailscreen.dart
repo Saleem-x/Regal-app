@@ -14,7 +14,7 @@ import 'package:regal_app/feature/views/payment/confirmpayment.dart';
 import 'package:regal_app/feature/views/viewdetails/schemtandc.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ViewDetailScreen extends StatelessWidget {
+class ViewDetailScreen extends StatefulWidget {
   final SchemeDetailsModel schemedetil;
   final CustomerSchemeModel scheme;
   final UserBaseModel user;
@@ -25,13 +25,20 @@ class ViewDetailScreen extends StatelessWidget {
       required this.user});
 
   @override
+  State<ViewDetailScreen> createState() => _ViewDetailScreenState();
+}
+
+bool canPop = true;
+
+class _ViewDetailScreenState extends State<ViewDetailScreen> {
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    context.read<InstalmenthystoryBloc>().add(
-        GetInstHystory(joinId: scheme.joinId!, schemeNO: scheme.schemeNo!));
+    context.read<InstalmenthystoryBloc>().add(GetInstHystory(
+        joinId: widget.scheme.joinId!, schemeNO: widget.scheme.schemeNo!));
     return PopScope(
-      // canPop: false,
+      canPop: canPop,
       child: Scaffold(
         backgroundColor: kbgcolor,
         appBar: AppBar(
@@ -64,6 +71,7 @@ class ViewDetailScreen extends StatelessWidget {
                     if (insthystry == null) {}
                   },
                   insthystryFailed: () {
+                    canPop = false;
                     showDialog(
                       context: context,
                       barrierDismissible: false,
@@ -78,13 +86,14 @@ class ViewDetailScreen extends StatelessWidget {
                       ),
                     );
                     Future.delayed(
-                      const Duration(seconds: 1),
+                      const Duration(seconds: 4),
                       () {
+                        canPop = true;
                         Navigator.pop(context);
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HomeScreen(user: user),
+                            builder: (context) => HomeScreen(user: widget.user),
                           ),
                         );
                       },
@@ -148,7 +157,7 @@ class ViewDetailScreen extends StatelessWidget {
                                   ),
                                 ),
                                 title: Text(
-                                  scheme.schemeNo ?? '',
+                                  widget.scheme.schemeNo ?? '',
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     // fontFamily: kprimaryfont,
@@ -158,7 +167,7 @@ class ViewDetailScreen extends StatelessWidget {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  '${scheme.schemeName} | ₹${scheme.totalAmount}',
+                                  '${widget.scheme.schemeName} | ₹${widget.scheme.totalAmount}',
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     // fontFamily: kprimaryfont,
@@ -183,7 +192,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    '${schemedetil.issueDate}',
+                                    '${widget.schemedetil.issueDate}',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -208,7 +217,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    ' ${schemedetil.closingDate}',
+                                    ' ${widget.schemedetil.closingDate}',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -233,7 +242,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    '${scheme.instAmount} ',
+                                    '${widget.scheme.instAmount} ',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -258,7 +267,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    '${schemedetil.totAmount}',
+                                    '${widget.schemedetil.totAmount}',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -283,7 +292,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    ' ${schemedetil.goldWeight == null ? schemedetil.goldWeight!.isEmpty ? "0.00" : double.parse(schemedetil.goldWeight ?? "0.00") : '0.00'} grams',
+                                    ' ${widget.schemedetil.goldWeight == null ? widget.schemedetil.goldWeight!.isEmpty ? "0.00" : double.parse(widget.schemedetil.goldWeight ?? "0.00") : '0.00'} grams',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -309,8 +318,8 @@ class ViewDetailScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     calculateInstallments(
-                                        scheme.totalNoofInstalment!,
-                                        schemedetil.paidInst!),
+                                        widget.scheme.totalNoofInstalment!,
+                                        widget.schemedetil.paidInst!),
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -471,6 +480,10 @@ class ViewDetailScreen extends StatelessWidget {
                                                     Colors.transparent,
                                               ),
                                               child: ExpansionTile(
+                                                onExpansionChanged: (vv) {
+                                                  logger.e(insthystry[index]
+                                                      .empName);
+                                                },
                                                 collapsedBackgroundColor:
                                                     kcolorwhite,
                                                 shape: RoundedRectangleBorder(
@@ -709,10 +722,10 @@ class ViewDetailScreen extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => ConfirmPaymentScreen(
-                  scheme: scheme,
-                  schemedetail: schemedetil,
-                  user: user,
-                  payablecontroller: scheme.instAmount!,
+                  scheme: widget.scheme,
+                  schemedetail: widget.schemedetil,
+                  user: widget.user,
+                  payablecontroller: widget.scheme.instAmount!,
                 ),
               ),
             );

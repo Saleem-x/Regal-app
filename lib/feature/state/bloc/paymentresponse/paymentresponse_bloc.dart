@@ -18,5 +18,9 @@ class PaymentresponseBloc
       logger.e("in bloc");
       return emit(const PaymentstateReset());
     });
+
+    on<AddRresponseLoadingEvent>((event, emit) {
+      emit(const ResponseLoadingState());
+    });
   }
 }

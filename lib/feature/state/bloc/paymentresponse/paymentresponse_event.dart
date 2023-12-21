@@ -5,5 +5,8 @@ class PaymentresponseEvent with _$PaymentresponseEvent {
   const factory PaymentresponseEvent.checkpaymentresponse(
       {required String response}) = CheckpaymentresponseEvent;
 
+  const factory PaymentresponseEvent.addResponseLoadingEvent() =
+      AddRresponseLoadingEvent;
+
   const factory PaymentresponseEvent.rsetresponseEvent() = ResetresponseEvent;
 }

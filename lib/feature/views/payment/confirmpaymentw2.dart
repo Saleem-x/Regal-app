@@ -41,6 +41,8 @@ class ConfirmPaymentTWO extends StatefulWidget {
 
 String deeplink = '';
 
+bool canPop = true;
+
 class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
   @override
   void initState() {
@@ -50,103 +52,112 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFFFBFBFB),
-      appBar: AppBar(
+    return PopScope(
+      canPop: canPop,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: const Color(0xFFFBFBFB),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            FontAwesomeIcons.arrowLeft,
+        appBar: AppBar(
+          backgroundColor: const Color(0xFFFBFBFB),
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(
+              FontAwesomeIcons.arrowLeft,
+            ),
+          ),
+          title: Text(
+            'Confirm Payment',
+            style: TextStyle(
+                // fontFamily: kboldfont,
+                fontSize: 17.sp,
+                fontWeight: FontWeight.w500),
           ),
         ),
-        title: Text(
-          'Confirm Payment',
-          style: TextStyle(
-              // fontFamily: kboldfont,
-              fontSize: 17.sp,
-              fontWeight: FontWeight.w500),
-        ),
-      ),
-      body: BlocConsumer<UpdatepaymentstatusBloc, UpdatepaymentstatusState>(
-        listener: (context, state) {
-          logger.e(state);
-          state.when(
-              paymentstatusUpdateState: (status, gpayresp) {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                      builder: (context) => PaymentSuccessScreen(
-                        user: widget.user,
-                        paymentRespM: gpayresp!,
-                        amount: widget.payablecontroller.text,
-                        scheme: widget.scheme,
-                        schemeDetails: widget.schemeDetails,
-                        isNewScheme: widget.isNewScheme,
+        body: BlocConsumer<UpdatepaymentstatusBloc, UpdatepaymentstatusState>(
+          listener: (context, state) {
+            logger.e(state);
+            state.when(
+                paymentstatusUpdateState: (status, gpayresp) {
+                  canPop = true;
+                  Navigator.pop(context);
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => PaymentSuccessScreen(
+                          user: widget.user,
+                          paymentRespM: gpayresp!,
+                          amount: widget.payablecontroller.text,
+                          scheme: widget.scheme,
+                          schemeDetails: widget.schemeDetails,
+                          isNewScheme: widget.isNewScheme,
+                        ),
                       ),
-                    ),
-                    (route) => false);
-              },
-              paymentstatusUpdateFailedState: (error) {});
-        },
-        builder: (context, state) {
-          return BlocConsumer<PaymentresponseBloc, PaymentresponseState>(
-            listener: (context, state) {
-              state.when(
-                  havepaymentResponseState: (response) async {
-                    logger.e("ithaan bloc response $response");
-                    if (response != null) {
-                      /*  await showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text('alert'),
-                        content: Text(response),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text("ok"),
-                          ),
-                        ],
-                      ),
-                    ); */
-
-                      List<String> keyValuePairs = response.split("&");
-                      Map<String, String> responseMap = {};
-                      for (String pair in keyValuePairs) {
-                        List<String> parts = pair.split("=");
-                        if (parts.length == 2) {
-                          responseMap[parts[0]] = parts[1];
-                        }
-                      }
-                      String jsonResponse = '''{
-                      "txnId": "${responseMap['txnId'] ?? ''}",
-                      "responseCode": "${responseMap['responseCode'] ?? ''}",
-                      "Status": "${responseMap['Status'] ?? ''}",
-                      "txnRef": "${responseMap['txnRef'] ?? ''}"
-                       }
-                        ''';
-                      PaymentRespModel respModel =
-                          PaymentRespModel.fromJson(jsonDecode(jsonResponse));
-
-                      if (response == "transaction failed || null") {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                              builder: (context) => PaymentFailedScreeen(
-                                user: widget.user,
-                                amount: widget.payablecontroller.text,
-                                scheme: widget.scheme,
-                                schemeDetails: widget.schemeDetails,
-                                isNewScheme: widget.isNewScheme,
-                              ),
+                      (route) => false);
+                },
+                paymentstatusUpdateFailedState: (error) {});
+          },
+          builder: (context, state) {
+            return BlocConsumer<PaymentresponseBloc, PaymentresponseState>(
+              listener: (context, state) {
+                state.when(
+                    havepaymentResponseState: (response) async {
+                      logger.e("ithaan bloc response $response");
+                      if (response != null) {
+                        /*  await showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('alert'),
+                          content: Text(response),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text("ok"),
                             ),
-                            (route) => false);
-                      } else if (respModel.status == "SUCCESS" ||
-                          respModel.responseCode == "0") {
-                        context.read<UpdatepaymentstatusBloc>().add(
-                              PaymentstatusUpdateEvent(
-                                  updatestatus: PaymentStatusUpdateModel(
+                          ],
+                        ),
+                      ); */
+
+                        List<String> keyValuePairs = response.split("&");
+                        Map<String, String> responseMap = {};
+                        for (String pair in keyValuePairs) {
+                          List<String> parts = pair.split("=");
+                          if (parts.length == 2) {
+                            responseMap[parts[0]] = parts[1];
+                          }
+                        }
+                        String jsonResponse = '''{
+                        "txnId": "${responseMap['txnId'] ?? ''}",
+                        "responseCode": "${responseMap['responseCode'] ?? ''}",
+                        "Status": "${responseMap['Status'] ?? ''}",
+                        "txnRef": "${responseMap['txnRef'] ?? ''}"
+                         }
+                          ''';
+                        PaymentRespModel respModel =
+                            PaymentRespModel.fromJson(jsonDecode(jsonResponse));
+
+                        if (response == "transaction failed || null") {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (context) => PaymentFailedScreeen(
+                                  user: widget.user,
+                                  amount: widget.payablecontroller.text,
+                                  scheme: widget.scheme,
+                                  schemeDetails: widget.schemeDetails,
+                                  isNewScheme: widget.isNewScheme,
+                                ),
+                              ),
+                              (route) => false);
+                        } else if (respModel.status == "SUCCESS" ||
+                            respModel.responseCode == "0") {
+                          context
+                              .read<PaymentresponseBloc>()
+                              .add(const AddRresponseLoadingEvent());
+
+                          canPop = false;
+                          context.read<UpdatepaymentstatusBloc>().add(
+                                PaymentstatusUpdateEvent(
+                                    updatestatus: PaymentStatusUpdateModel(
                                       amt: widget.payablecontroller.text,
                                       cusId: widget.user.cusId,
                                       goldRate: widget.schemeDetails.goldRate ??
@@ -157,10 +168,33 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                                       response: respModel.status,
                                       schemeId: widget.scheme.schemeNo,
                                       subCode: widget.scheme.subId,
-                                      wgt: '0'),
-                                  gpayresp: respModel),
-                            );
+                                      wgt: getgoldweight(
+                                        double.parse(
+                                            widget.schemeDetails.goldRate ??
+                                                "5770.00"),
+                                        double.parse(
+                                            widget.payablecontroller.text),
+                                      ),
+                                    ),
+                                    gpayresp: respModel),
+                              );
+                        } else {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (context) => PaymentFailedScreeen(
+                                  user: widget.user,
+                                  amount: widget.payablecontroller.text,
+                                  scheme: widget.scheme,
+                                  schemeDetails: widget.schemeDetails,
+                                  isNewScheme: widget.isNewScheme,
+                                ),
+                              ),
+                              (route) => false);
+                        }
+
+                        logger.e("ithaan bloc response inc $response");
                       } else {
+                        logger.e(response ?? "nulll");
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                               builder: (context) => PaymentFailedScreeen(
@@ -173,196 +207,198 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                             ),
                             (route) => false);
                       }
-
-                      logger.e("ithaan bloc response inc $response");
-                    } else {
-                      logger.e(response ?? "nulll");
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (context) => PaymentFailedScreeen(
-                              user: widget.user,
-                              amount: widget.payablecontroller.text,
-                              scheme: widget.scheme,
-                              schemeDetails: widget.schemeDetails,
-                              isNewScheme: widget.isNewScheme,
+                    },
+                    paymentstateReset: () {},
+                    responseLoadingState: () {
+                      showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (context) {
+                          return const AlertDialog(
+                            surfaceTintColor: Colors.transparent,
+                            backgroundColor: Colors.transparent,
+                            content: Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.green,
+                              ),
                             ),
-                          ),
-                          (route) => false);
-                    }
-                  },
-                  paymentstateReset: () {});
-            },
-            builder: (context, state) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                  vertical: 20,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Amount Payable',
-                      style: TextStyle(
-                        color: ktextgrey,
-                        fontSize: 17.sp,
-                      ),
-                    ),
-                    SizedBox(
-                      width: size.width,
-                      child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        controller: widget.payablecontroller,
-                        enabled: false,
+                          );
+                        },
+                      );
+                    });
+              },
+              builder: (context, state) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 20,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Amount Payable',
                         style: TextStyle(
-                            color: kcolorblack,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w600),
-                        decoration: const InputDecoration(
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFD1D1D1),
+                          color: ktextgrey,
+                          fontSize: 17.sp,
+                        ),
+                      ),
+                      SizedBox(
+                        width: size.width,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          controller: widget.payablecontroller,
+                          enabled: false,
+                          style: TextStyle(
+                              color: kcolorblack,
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w600),
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFFD1D1D1),
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(255, 208, 206, 206),
+                              ),
                             ),
                           ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color.fromARGB(255, 208, 206, 206),
-                            ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      Text(
+                        'PAYMENT OPTIONS',
+                        style: TextStyle(
+                          color: ktextgrey,
+                          fontSize: 15.sp,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          // launchGooglePayUPIIntent(
+                          //   widget.scheme.subId!,
+                          //   widget.scheme.merchantCode!,
+                          //   widget.orderID,
+                          // );
+                          const platform = MethodChannel(
+                              'com.example.your_flutter_app/googlePay');
+
+                          try {
+                            await platform
+                                .invokeMethod('makeGooglePayTransaction', {
+                              'merchantVpa': widget.scheme.subId!,
+                              'merchantName': "Regal Jewellers",
+                              'merchantCode': widget.scheme.merchantCode!,
+                              'transactionRefId': widget.orderID,
+                              'transactionNote': 'test payment',
+                              'orderAmount': '1',
+                            });
+
+                            platform.setMethodCallHandler((call) async {
+                              logger.e(call.method);
+                              if (call.method == "returnResult") {
+                                logger.e(
+                                    'call arrgs${call.arguments.toString()}');
+                                /* final trxtfinal = call.arguments["trxt"] ??
+                                      "transaction failed || null"; */
+
+                                context.read<PaymentresponseBloc>().add(
+                                      CheckpaymentresponseEvent(
+                                          response: call.arguments == null ||
+                                                  call.arguments["trxt"] ==
+                                                      null ||
+                                                  call.arguments.toString() ==
+                                                      "{trxt: null}"
+                                              ? "transaction failed || null"
+                                              : call.arguments["trxt"]),
+                                    );
+                              }
+                              return null;
+                            });
+                          } catch (e) {
+                            logger.e("Error: $e");
+                          }
+                        },
+                        child: SizedBox(
+                          width: size.width,
+                          height: 30.h,
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: kcolorwhite,
+                                radius: 20,
+                                child: Image.asset(
+                                  'assets/images/Google_Pay_Logo.svg.png',
+                                ),
+                              ),
+                              SizedBox(
+                                width: 20.w,
+                              ),
+                              Text(
+                                'Google Pay',
+                                style: TextStyle(
+                                  color: kcolorblack,
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Text(
-                      'PAYMENT OPTIONS',
-                      style: TextStyle(
-                        color: ktextgrey,
-                        fontSize: 15.sp,
+                      const Divider(
+                        color: Color(0xFFD1D1D1),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        // launchGooglePayUPIIntent(
-                        //   widget.scheme.subId!,
-                        //   widget.scheme.merchantCode!,
-                        //   widget.orderID,
-                        // );
-                        const platform = MethodChannel(
-                            'com.example.your_flutter_app/googlePay');
-
-                        try {
-                          await platform
-                              .invokeMethod('makeGooglePayTransaction', {
-                            'merchantVpa': widget.scheme.subId!,
-                            'merchantName': "Regal Jewellers",
-                            'merchantCode': widget.scheme.merchantCode!,
-                            'transactionRefId': widget.orderID,
-                            'transactionNote': 'test payment',
-                            'orderAmount': '1',
-                          });
-
-                          platform.setMethodCallHandler((call) async {
-                            logger.e(call.method);
-                            if (call.method == "returnResult") {
-                              logger
-                                  .e('call arrgs${call.arguments.toString()}');
-                              /* final trxtfinal = call.arguments["trxt"] ??
-                                    "transaction failed || null"; */
-
-                              context.read<PaymentresponseBloc>().add(
-                                    CheckpaymentresponseEvent(
-                                        response: call.arguments == null ||
-                                                call.arguments["trxt"] ==
-                                                    null ||
-                                                call.arguments.toString() ==
-                                                    "{trxt: null}"
-                                            ? "transaction failed || null"
-                                            : call.arguments["trxt"]),
-                                  );
-                            }
-                            return null;
-                          });
-                        } catch (e) {
-                          logger.e("Error: $e");
-                        }
-                      },
-                      child: SizedBox(
-                        width: size.width,
-                        height: 30.h,
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: kcolorwhite,
-                              radius: 20,
-                              child: Image.asset(
-                                'assets/images/Google_Pay_Logo.svg.png',
+                      InkWell(
+                        onTap: () async {
+                          // paytmapiintent(
+                          //   widget.scheme.subId!,
+                          //   widget.scheme.merchantCode!,
+                          //   widget.orderID,
+                          // );
+                        },
+                        child: SizedBox(
+                          width: size.width,
+                          height: 30.h,
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: kcolorwhite,
+                                radius: 20,
+                                child: Image.asset(
+                                  'assets/images/Paytm_Logo.jpg',
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 20.w,
-                            ),
-                            Text(
-                              'Google Pay',
-                              style: TextStyle(
-                                color: kcolorblack,
-                                fontSize: 16.sp,
+                              SizedBox(
+                                width: 20.w,
                               ),
-                            ),
-                          ],
+                              Text(
+                                'Paytm',
+                                style: TextStyle(
+                                  color: kcolorblack,
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    const Divider(
-                      color: Color(0xFFD1D1D1),
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        // paytmapiintent(
-                        //   widget.scheme.subId!,
-                        //   widget.scheme.merchantCode!,
-                        //   widget.orderID,
-                        // );
-                      },
-                      child: SizedBox(
-                        width: size.width,
-                        height: 30.h,
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: kcolorwhite,
-                              radius: 20,
-                              child: Image.asset(
-                                'assets/images/Paytm_Logo.jpg',
-                              ),
-                            ),
-                            SizedBox(
-                              width: 20.w,
-                            ),
-                            Text(
-                              'Paytm',
-                              style: TextStyle(
-                                color: kcolorblack,
-                                fontSize: 16.sp,
-                              ),
-                            ),
-                          ],
-                        ),
+                      const Divider(
+                        color: Color(0xFFD1D1D1),
                       ),
-                    ),
-                    const Divider(
-                      color: Color(0xFFD1D1D1),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
