@@ -12,7 +12,6 @@ import 'package:regal_app/feature/state/bloc/paymentresponse/paymentresponse_blo
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
 import 'package:regal_app/feature/views/payment/confirmpaymentw2.dart';
-import 'package:regal_app/feature/views/viewdetails/viewdetailscreen.dart';
 
 class PaymentFailedScreeen extends StatelessWidget {
   final UserBaseModel user;
@@ -225,6 +224,15 @@ class PaymentFailedScreeen extends StatelessWidget {
                                   context
                                       .read<InstalmenthystoryBloc>()
                                       .add(const ResetDataEvent());
+
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => HomeScreen(
+                                          user: user,
+                                        ),
+                                      ),
+                                      (route) => false);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -241,9 +249,14 @@ class PaymentFailedScreeen extends StatelessWidget {
                                   );
                                 }
                               },
-                              icon: Icon(
+                              icon: /* Icon(
                                 Icons.history,
                                 size: 30.sp,
+                              ) */
+                                  SvgPicture.asset(
+                                'assets/others/history.svg',
+                                height: 18.h,
+                                width: 18.w,
                               ),
                             ),
                             Text(

@@ -264,6 +264,14 @@ class PaymentSuccessScreen extends StatelessWidget {
                                     context
                                         .read<InstalmenthystoryBloc>()
                                         .add(const ResetDataEvent());
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => HomeScreen(
+                                            user: user,
+                                          ),
+                                        ),
+                                        (route) => false);
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -275,9 +283,14 @@ class PaymentSuccessScreen extends StatelessWidget {
                                       ),
                                     );
                                   },
-                                  icon: Icon(
+                                  icon: /* Icon(
                                     Icons.history,
                                     size: 30.sp,
+                                  ) */
+                                      SvgPicture.asset(
+                                    'assets/others/history.svg',
+                                    height: 18.h,
+                                    width: 18.w,
                                   ),
                                 ),
                                 Text(

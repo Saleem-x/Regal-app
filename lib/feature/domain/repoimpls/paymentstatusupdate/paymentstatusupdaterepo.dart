@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -30,6 +31,7 @@ class PaymentStatusRepo implements IPaymentStatusUpdateRepo {
         "subCode": paymentstatusresps.subCode
       });
       if (response.statusCode == 200) {
+        log(response.body);
         final Map<String, dynamic> json = jsonDecode(response.body);
         final responsestatus =
             PaymentStatusUpdateRespModel.fromJson(json['result'][0]);
@@ -39,7 +41,7 @@ class PaymentStatusRepo implements IPaymentStatusUpdateRepo {
         return left(const MainFailures.clientfailure());
       }
     } catch (e) {
-      logger.e(e);
+      logger.e('error aan update $e');
       return left(const MainFailures.serverfailure());
     }
   }

@@ -149,7 +149,8 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                                   updatestatus: PaymentStatusUpdateModel(
                                       amt: widget.payablecontroller.text,
                                       cusId: widget.user.cusId,
-                                      goldRate: widget.schemeDetails.goldRate,
+                                      goldRate: widget.schemeDetails.goldRate ??
+                                          "5770.00",
                                       joinId: widget.schemeDetails.joinId,
                                       orderId: widget.orderID,
                                       payableAmt: widget.payablecontroller.text,
