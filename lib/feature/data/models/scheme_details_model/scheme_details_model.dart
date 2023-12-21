@@ -8,6 +8,7 @@ class SchemeDetailsModel {
   String? schemeNo;
   @JsonKey(name: 'GoldWeight')
   String? goldWeight;
+  @JsonKey(name: 'goldRate')
   String? goldRate;
   @JsonKey(name: 'TotAmount')
   String? totAmount;

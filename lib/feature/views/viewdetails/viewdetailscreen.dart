@@ -258,7 +258,7 @@ class ViewDetailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    ' ${schemedetil.totAmount}',
+                                    '${schemedetil.totAmount}',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,

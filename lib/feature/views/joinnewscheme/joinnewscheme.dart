@@ -201,7 +201,7 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                       Text(
                         'Mobile Number',
                         style: TextStyle(
-                          fontSize: 12.sp,
+                          fontSize: 13.sp,
                           color: kcolordarkred.withOpacity(.7),
                         ),
                       ),
@@ -431,7 +431,7 @@ class ALLJoinScreenWidgets extends StatelessWidget {
                       Text(
                         'Enter OTP',
                         style: TextStyle(
-                          fontSize: 12.sp,
+                          fontSize: 13.sp,
                           color: kcolordarkred.withOpacity(.7),
                         ),
                       ),

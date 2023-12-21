@@ -48,7 +48,7 @@ class NewSchmDropDownWidget extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 10,
+                    fontSize: 13.sp,
                     color: kcolordarkred.withOpacity(.7),
                   ),
                 ),
@@ -392,7 +392,7 @@ class SaleSMAnDD extends StatelessWidget {
                               width: MediaQuery.of(context).size.width / 3.2,
                             ),
                             Text(
-                              'Select saleman',
+                              'Select salesman',
                               style: TextStyle(fontSize: 13.sp),
                             ),
                             const Spacer(),
@@ -483,7 +483,7 @@ class SaleSMAnDD extends StatelessWidget {
                                                   .salesmanlist![index].empId!;
 
                                               _salesmannamectrl.text =
-                                                  '${searched.salesmanlist![index].empCode!.replaceAll('|', '')} | ${searched.salesmanlist![index].empName}';
+                                                  '${searched.salesmanlist![index].empName}';
                                               log(controller.text);
                                               Navigator.pop(context);
                                             },
@@ -507,7 +507,7 @@ class SaleSMAnDD extends StatelessWidget {
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Text(
-                                                      '${searched.salesmanlist![index].empCode!.replaceAll('|', '')} | ${searched.salesmanlist![index].empName}'),
+                                                      '- ${searched.salesmanlist![index].empName}'),
                                                 ),
                                               ),
                                             ),

@@ -261,7 +261,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                     Text(
                                       'Mobile Number',
                                       style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 13.sp,
                                         color: kcolordarkred.withOpacity(.7),
                                       ),
                                     ),
@@ -635,7 +635,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                             Text(
                                               'Scheme Tenure: ${selectedscheme.schemeselected.isEmpty ? '' : state.schemetenures![0].tenure}',
                                               style: TextStyle(
-                                                  fontSize: 13,
+                                                  fontSize: 13.sp,
                                                   color: ktextgrey
                                                       .withOpacity(.7)),
                                             )
@@ -669,7 +669,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                     Text(
                                       'Set Pin',
                                       style: TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 13.sp,
                                           color: kredbutton.withOpacity(.9)),
                                     )
                                   ],

@@ -60,7 +60,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                 ); */
                 Navigator.of(context).pop();
                 Future.delayed(const Duration(microseconds: 200), () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ConfirmPaymentTWO(
@@ -156,7 +156,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                                           Text(
                                             'Select Scheme',
                                             style: TextStyle(
-                                              fontSize: 13,
+                                              fontSize: 13.sp,
                                               color:
                                                   kcolordarkred.withOpacity(.7),
                                             ),
@@ -294,7 +294,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                                           Text(
                                             'instalment amount',
                                             style: TextStyle(
-                                              fontSize: 13,
+                                              fontSize: 13.sp,
                                               color:
                                                   kcolordarkred.withOpacity(.7),
                                             ),

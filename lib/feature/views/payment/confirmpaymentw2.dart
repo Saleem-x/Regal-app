@@ -71,6 +71,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
       ),
       body: BlocConsumer<UpdatepaymentstatusBloc, UpdatepaymentstatusState>(
         listener: (context, state) {
+          logger.e(state);
           state.when(
               paymentstatusUpdateState: (status, gpayresp) {
                 Navigator.of(context).pushAndRemoveUntil(
@@ -155,21 +156,19 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                                       response: respModel.status,
                                       schemeId: widget.scheme.schemeNo,
                                       subCode: widget.scheme.subId,
-                                      wgt: getgoldweight(
-                                          double.parse(
-                                              widget.schemeDetails.goldRate!),
-                                          100.0)),
+                                      wgt: '0'),
                                   gpayresp: respModel),
                             );
                       } else {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                               builder: (context) => PaymentFailedScreeen(
-                                  user: widget.user,
-                                  amount: widget.payablecontroller.text,
-                                  scheme: widget.scheme,
-                                  schemeDetails: widget.schemeDetails,
-                                  isNewScheme: widget.isNewScheme),
+                                user: widget.user,
+                                amount: widget.payablecontroller.text,
+                                scheme: widget.scheme,
+                                schemeDetails: widget.schemeDetails,
+                                isNewScheme: widget.isNewScheme,
+                              ),
                             ),
                             (route) => false);
                       }
@@ -213,6 +212,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                       child: TextFormField(
                         keyboardType: TextInputType.number,
                         controller: widget.payablecontroller,
+                        enabled: false,
                         style: TextStyle(
                             color: kcolorblack,
                             fontSize: 18.sp,

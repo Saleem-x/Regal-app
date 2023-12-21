@@ -215,7 +215,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                   Text(
                     'Mobile Number',
                     style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 13.sp,
                       color: kcolordarkred.withOpacity(.7),
                     ),
                   ),
@@ -236,7 +236,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                   Text(
                     'PIN',
                     style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 13.sp,
                       color: kcolordarkred.withOpacity(.7),
                     ),
                   ),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/state/bloc/resetpin/resetpin_bloc.dart';
@@ -98,7 +99,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                       Text(
                         'Mobile Number',
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 13.sp,
                           color: kcolordarkred.withOpacity(.7),
                         ),
                       ),
@@ -207,7 +208,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                       Text(
                         'Enter Otp',
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 13.sp,
                           color: kcolordarkred.withOpacity(.7),
                         ),
                       ),

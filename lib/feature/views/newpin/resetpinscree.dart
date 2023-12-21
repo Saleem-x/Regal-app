@@ -110,7 +110,7 @@ class _ResetPInScreenState extends State<ResetPInScreen> {
                     Text(
                       'Enter New PIN',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 13.sp,
                         color: kcolordarkred.withOpacity(.7),
                       ),
                     ),

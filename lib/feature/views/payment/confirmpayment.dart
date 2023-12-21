@@ -129,6 +129,7 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
             ),
             widget.schemedetail.goldWeight == null ||
                     widget.schemedetail.goldWeight!.isEmpty ||
+                    widget.schemedetail.goldRate == null ||
                     double.parse(widget.schemedetail.goldWeight!) <= .000
                 ? const SizedBox.shrink()
                 : Padding(
@@ -151,7 +152,7 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                               height: 10.h,
                             ),
                             Text(
-                              '₹${widget.schemedetail.goldRate!}',
+                              '₹${widget.schemedetail.goldRate}',
                               style: TextStyle(
                                 color: kcolorblack,
                                 // fontFamily: kprimaryfont,

@@ -11,6 +11,7 @@ import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory
 import 'package:regal_app/feature/state/bloc/paymentresponse/paymentresponse_bloc.dart';
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
+import 'package:regal_app/feature/views/payment/confirmpaymentw2.dart';
 import 'package:regal_app/feature/views/viewdetails/viewdetailscreen.dart';
 
 class PaymentFailedScreeen extends StatelessWidget {
@@ -227,9 +228,13 @@ class PaymentFailedScreeen extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => ViewDetailScreen(
+                                      builder: (context) => ConfirmPaymentTWO(
                                         scheme: scheme,
-                                        schemedetil: schemeDetails,
+                                        orderID: generateOrderID(
+                                            "login", user.cusId!),
+                                        payablecontroller:
+                                            TextEditingController(text: amount),
+                                        schemeDetails: schemeDetails,
                                         user: user,
                                       ),
                                     ),
@@ -242,7 +247,7 @@ class PaymentFailedScreeen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'View History',
+                              'Try Again',
                               style: TextStyle(
                                   color: ktextgrey.withOpacity(.5),
                                   fontSize: 10.sp),
@@ -299,5 +304,27 @@ class PaymentFailedScreeen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String generateOrderID(String intentFlag, String cusID) {
+    int cusID1 = 0;
+    String orderID;
+
+    if (intentFlag == 'SIGNUP') {
+      cusID1 = int.parse(cusID);
+      orderID = '$cusID1' '1'.toString();
+    } else {
+      cusID1 = int.parse(user.cusId!);
+      int seq = user.orderSeq + 1.toInt();
+      orderID = '$cusID1$seq'.toString();
+      user.orderSeq = seq;
+    }
+
+    DateTime currentDateAndTime = DateTime.now();
+    int timeStamp = currentDateAndTime.microsecondsSinceEpoch;
+
+    orderID = '$cusID1$timeStamp';
+
+    return orderID;
   }
 }

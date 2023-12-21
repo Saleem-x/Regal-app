@@ -33,7 +33,7 @@ class NewSchmFieldWidget extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 10,
+                    fontSize: 13.sp,
                     color: kcolordarkred.withOpacity(.7),
                   ),
                 ),

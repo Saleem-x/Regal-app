@@ -26,7 +26,7 @@ class ImageSelectorWidget extends StatelessWidget {
                   Text(
                     'Attach your Photo',
                     style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 13.sp,
                       color: kcolordarkred.withOpacity(.7),
                     ),
                   ),

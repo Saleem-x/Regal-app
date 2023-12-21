@@ -23,7 +23,7 @@ class DobSelectorWidget extends StatelessWidget {
               Text(
                 'Date of Birth',
                 style: TextStyle(
-                  fontSize: 10,
+                  fontSize: 13.sp,
                   color: kcolordarkred.withOpacity(.7),
                 ),
               ),
@@ -77,13 +77,35 @@ class DobSelectorWidget extends StatelessWidget {
                         return Container(
                           color: kcolorwhite,
                           height: 250,
-                          child: CupertinoDatePicker(
-                            onDateTimeChanged: (value) {
-                              controller.text =
-                                  "${value.day}/${value.month}/${value.year}";
-                            },
-                            use24hFormat: true,
-                            mode: CupertinoDatePickerMode.date,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      'Done',
+                                      style: TextStyle(
+                                        color: kredbutton.withOpacity(.9),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Expanded(
+                                child: CupertinoDatePicker(
+                                  onDateTimeChanged: (value) {
+                                    controller.text =
+                                        "${value.day}/${value.month}/${value.year}";
+                                  },
+                                  use24hFormat: true,
+                                  mode: CupertinoDatePickerMode.date,
+                                ),
+                              ),
+                            ],
                           ),
                         );
                       },
@@ -136,13 +158,35 @@ class DobSelectorWidget extends StatelessWidget {
                             return Container(
                               color: kcolorwhite,
                               height: 250,
-                              child: CupertinoDatePicker(
-                                onDateTimeChanged: (value) {
-                                  controller.text =
-                                      "${value.day}/${value.month}/${value.year}";
-                                },
-                                use24hFormat: true,
-                                mode: CupertinoDatePickerMode.date,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          'Done',
+                                          style: TextStyle(
+                                            color: kredbutton.withOpacity(.9),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: CupertinoDatePicker(
+                                      onDateTimeChanged: (value) {
+                                        controller.text =
+                                            "${value.day}/${value.month}/${value.year}";
+                                      },
+                                      use24hFormat: true,
+                                      mode: CupertinoDatePickerMode.date,
+                                    ),
+                                  ),
+                                ],
                               ),
                             );
                           },
