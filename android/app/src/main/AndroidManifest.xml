@@ -66,7 +66,8 @@
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
         <service
-            android:name=".IsAppInstalledModule">
+            android:name=".IsAppInstalledModule"
+            android:exported="true">
             <intent-filter>
                 <action android:name="io.flutter.plugins.GeneratedPluginRegistrant.registerWith" />
             </intent-filter>

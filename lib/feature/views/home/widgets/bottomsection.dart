@@ -106,7 +106,7 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                   //   height: 6.h,
                                   // ),
                                   Text(
-                                    'Total Paid: ₹ ${schemedetail.totAmount}',
+                                    'Total Paid: ₹ ${double.parse(schemedetail.totAmount ?? '0.00').toStringAsFixed(2)}',
                                     style: TextStyle(
                                       color: ktextgrey,
                                       fontSize: 12.sp,

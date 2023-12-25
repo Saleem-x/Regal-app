@@ -86,7 +86,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                       ),
                     );
                     Future.delayed(
-                      const Duration(seconds: 4),
+                      const Duration(seconds: 1),
                       () {
                         canPop = true;
                         Navigator.pop(context);
@@ -481,8 +481,8 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                               ),
                                               child: ExpansionTile(
                                                 onExpansionChanged: (vv) {
-                                                  logger.e(insthystry[index]
-                                                      .empName);
+                                                  logger.e(widget
+                                                      .schemedetil.goldRate);
                                                 },
                                                 collapsedBackgroundColor:
                                                     kcolorwhite,

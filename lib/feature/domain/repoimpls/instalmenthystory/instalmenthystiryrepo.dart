@@ -18,6 +18,7 @@ class InstalmentHystoryRepo implements IinstalmentHystoryRepo {
       final response = await http.post(Uri.parse(baseurl + url),
           body: {"datakey": datakey, 'joinID': joinID});
       if (response.statusCode == 200) {
+        log(response.body);
         List<InstalmentHystoryModel> insthystry = [];
 
         final Map<String, dynamic> json = jsonDecode(response.body);
