@@ -51,8 +51,8 @@ class _JoinNewSchemeScreenState extends State<JoinNewSchemeScreen> {
 
   @override
   void dispose() {
-    _mobilecontroller.dispose();
-    _otpcontroller.dispose();
+    /* _mobilecontroller.dispose();
+    _otpcontroller.dispose(); */
     super.dispose();
   }
 }

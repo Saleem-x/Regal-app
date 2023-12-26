@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
 import 'package:regal_app/feature/data/models/payment_resp_model/payment_resp_model.dart';
@@ -10,6 +11,7 @@ import 'package:regal_app/feature/data/models/scheme_details_model/scheme_detail
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
 import 'package:regal_app/feature/state/bloc/paymentresponse/paymentresponse_bloc.dart';
+import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.dart';
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
 import 'package:regal_app/feature/views/viewdetails/viewdetailscreen.dart';
@@ -261,27 +263,59 @@ class PaymentSuccessScreen extends StatelessWidget {
                               children: [
                                 IconButton(
                                   onPressed: () {
-                                    context
-                                        .read<InstalmenthystoryBloc>()
-                                        .add(const ResetDataEvent());
-                                    Navigator.pushAndRemoveUntil(
+                                    if (isNewScheme != null ||
+                                        isNewScheme != true) {
+                                      context
+                                          .read<InstalmenthystoryBloc>()
+                                          .add(const ResetDataEvent());
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => HomeScreen(
+                                              user: user,
+                                            ),
+                                          ),
+                                          (route) => false);
+                                      Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => HomeScreen(
+                                          builder: (context) =>
+                                              ViewDetailScreen(
+                                            scheme: scheme,
+                                            schemedetil: schemeDetails,
                                             user: user,
                                           ),
                                         ),
-                                        (route) => false);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ViewDetailScreen(
-                                          scheme: scheme,
-                                          schemedetil: schemeDetails,
-                                          user: user,
+                                      );
+                                    } else {
+                                      context.read<SchemedetailsBloc>().add(
+                                            GetschemedetailsEvent(
+                                              cusid: user.cusId!,
+                                              schmId: scheme.schemeNo!,
+                                              datakeys: datakey,
+                                              scheme: scheme,
+                                            ),
+                                          );
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginScreen(),
                                         ),
-                                      ),
-                                    );
+                                        (route) => false,
+                                      );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ViewDetailScreen(
+                                            scheme: scheme,
+                                            schemedetil: schemeDetails,
+                                            user: user,
+                                          ),
+                                        ),
+                                      );
+                                    }
                                   },
                                   icon: /* Icon(
                                     Icons.history,

@@ -54,7 +54,7 @@ class GoldRateWidget extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          'Last Change ${goldrate.entryDate} | ${goldrate.entryTime}',
+                                          'Last Change ${goldrate.entryDate ?? ''} | ${goldrate.entryTime ?? ''}',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 10.sp,
@@ -67,13 +67,13 @@ class GoldRateWidget extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        '₹${goldrate.boardRate}',
+                                        '₹${goldrate.boardRate ?? ''}',
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 18.sp),
                                       ),
                                       Text(
-                                        '  (${goldrate.weight} gram)',
+                                        '  (${goldrate.weight ?? ''} gram)',
                                         style: TextStyle(
                                             fontWeight: FontWeight.w400,
                                             fontSize: 10.sp,
@@ -82,7 +82,7 @@ class GoldRateWidget extends StatelessWidget {
                                     ],
                                   ),
                                   Text(
-                                    '₹${goldrate.totalPrice} ( 8 grams )',
+                                    '₹${goldrate.totalPrice ?? ''} ( 8 grams )',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 10.sp,

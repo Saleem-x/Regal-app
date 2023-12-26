@@ -26,6 +26,7 @@ class ConfirmPaymentTWO extends StatefulWidget {
   final TextEditingController payablecontroller;
   final UserBaseModel user;
   final bool? isNewScheme;
+  final String goldWeight;
   const ConfirmPaymentTWO(
       {super.key,
       required this.schemeDetails,
@@ -33,7 +34,8 @@ class ConfirmPaymentTWO extends StatefulWidget {
       required this.orderID,
       required this.payablecontroller,
       required this.user,
-      this.isNewScheme});
+      this.isNewScheme,
+      required this.goldWeight});
 
   @override
   State<ConfirmPaymentTWO> createState() => _ConfirmPaymentTWOState();

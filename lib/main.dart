@@ -19,7 +19,8 @@ import 'package:regal_app/feature/state/bloc/schemedetails/schemedetails_bloc.da
 import 'package:regal_app/feature/state/bloc/splash/splash_bloc.dart';
 import 'package:regal_app/feature/state/bloc/updatenewpin/updatenewpin_bloc.dart';
 import 'package:regal_app/feature/state/cubit/checkbranchselected/checkbranchslection_cubit.dart';
-import 'package:regal_app/feature/state/cubit/cubit/newschemehomeselector_cubit.dart';
+import 'package:regal_app/feature/state/cubit/getgoldweight/getgoldweight_cubit.dart';
+import 'package:regal_app/feature/state/cubit/newschemehomeselector/newschemehomeselector_cubit.dart';
 import 'package:regal_app/feature/state/cubit/mobilevalidator/mobilevalidator_cubit.dart';
 import 'package:regal_app/feature/state/cubit/newschemecheckbox/checkbox_cubit.dart';
 import 'package:regal_app/feature/state/cubit/otptimer/otptimer_cubit.dart';
@@ -115,6 +116,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getit<UpdatepaymentstatusBloc>(),
+          ),
+          BlocProvider<GetgoldweightCubit>(
+            create: (context) => GetgoldweightCubit(),
           ),
         ],
         child: MaterialApp(

@@ -9,6 +9,7 @@ import 'package:regal_app/feature/data/models/customer_scheme_model/customer_sch
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
+import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
 import 'package:regal_app/feature/views/payment/confirmpayment.dart';
 import 'package:regal_app/feature/views/viewdetails/schemtandc.dart';
@@ -90,12 +91,23 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                       () {
                         canPop = true;
                         Navigator.pop(context);
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomeScreen(user: widget.user),
-                          ),
-                        );
+                        if (widget.user.cusName == null ||
+                            widget.user.cusName == '') {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                          );
+                        } else {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  HomeScreen(user: widget.user),
+                            ),
+                          );
+                        }
                       },
                     );
                   },
@@ -167,7 +179,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  '${widget.scheme.schemeName} | ₹${widget.scheme.totalAmount}',
+                                  '${widget.scheme.schemeName ?? ''} | ₹${widget.scheme.totalAmount ?? ''}',
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     // fontFamily: kprimaryfont,
@@ -192,7 +204,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                     ),
                                   ),
                                   Text(
-                                    '${widget.schemedetil.issueDate}',
+                                    widget.schemedetil.issueDate ?? '',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -217,7 +229,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                     ),
                                   ),
                                   Text(
-                                    ' ${widget.schemedetil.closingDate}',
+                                    ' ${widget.schemedetil.closingDate ?? ''}',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -242,7 +254,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                     ),
                                   ),
                                   Text(
-                                    '${widget.scheme.instAmount} ',
+                                    '${widget.scheme.instAmount ?? ''} ',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -267,7 +279,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                     ),
                                   ),
                                   Text(
-                                    '${widget.schemedetil.totAmount}',
+                                    widget.schemedetil.totAmount ?? '',
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,
@@ -278,30 +290,39 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                 ],
                               ),
                               SizedBox(
-                                height: size.height * 0.01,
+                                height: widget.schemedetil.goldWeight == null ||
+                                        widget
+                                            .schemedetil.goldWeight!.isEmpty ||
+                                        widget.scheme.schemeNo!.contains('RG')
+                                    ? 0
+                                    : size.height * 0.01,
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Current Total Weight : ',
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: ktextgrey,
+                              widget.schemedetil.goldWeight == null ||
+                                      widget.schemedetil.goldWeight!.isEmpty ||
+                                      widget.scheme.schemeNo!.contains('RG')
+                                  ? const SizedBox.shrink()
+                                  : Row(
+                                      children: [
+                                        Text(
+                                          'Current Total Weight : ',
+                                          style: TextStyle(
+                                            // fontFamily: kprimaryfont,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: ktextgrey,
+                                          ),
+                                        ),
+                                        Text(
+                                          '${double.parse(widget.schemedetil.goldWeight!).toStringAsFixed(3)} grams',
+                                          style: TextStyle(
+                                            // fontFamily: kprimaryfont,
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: kcolorblack,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Text(
-                                    ' ${widget.schemedetil.goldWeight == null ? widget.schemedetil.goldWeight!.isEmpty ? "0.00" : double.parse(widget.schemedetil.goldWeight ?? "0.00") : '0.00'} grams',
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: kcolorblack,
-                                    ),
-                                  ),
-                                ],
-                              ),
                               SizedBox(
                                 height: size.height * 0.01,
                               ),
@@ -317,9 +338,12 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                     ),
                                   ),
                                   Text(
-                                    calculateInstallments(
-                                        widget.scheme.totalNoofInstalment!,
-                                        widget.schemedetil.paidInst!),
+                                    widget.scheme.totalNoofInstalment == null ||
+                                            widget.schemedetil.paidInst == null
+                                        ? ''
+                                        : calculateInstallments(
+                                            widget.scheme.totalNoofInstalment!,
+                                            widget.schemedetil.paidInst!),
                                     style: TextStyle(
                                       // fontFamily: kprimaryfont,
                                       fontSize: 13.sp,

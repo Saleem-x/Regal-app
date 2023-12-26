@@ -219,35 +219,34 @@ class PaymentFailedScreeen extends StatelessWidget {
                           children: [
                             IconButton(
                               onPressed: () {
-                                if (isNewScheme == null &&
-                                    isNewScheme != true) {
-                                  context
-                                      .read<InstalmenthystoryBloc>()
-                                      .add(const ResetDataEvent());
+                                context
+                                    .read<InstalmenthystoryBloc>()
+                                    .add(const ResetDataEvent());
 
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => HomeScreen(
-                                          user: user,
-                                        ),
-                                      ),
-                                      (route) => false);
-                                  Navigator.push(
+                                Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => ConfirmPaymentTWO(
-                                        scheme: scheme,
-                                        orderID: generateOrderID(
-                                            "login", user.cusId!),
-                                        payablecontroller:
-                                            TextEditingController(text: amount),
-                                        schemeDetails: schemeDetails,
+                                      builder: (context) => HomeScreen(
                                         user: user,
                                       ),
                                     ),
-                                  );
-                                }
+                                    (route) => false);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ConfirmPaymentTWO(
+                                      scheme: scheme,
+                                      goldWeight: '',
+                                      isNewScheme: isNewScheme,
+                                      orderID:
+                                          generateOrderID("login", user.cusId!),
+                                      payablecontroller:
+                                          TextEditingController(text: amount),
+                                      schemeDetails: schemeDetails,
+                                      user: user,
+                                    ),
+                                  ),
+                                );
                               },
                               icon: /* Icon(
                                 Icons.history,
@@ -328,7 +327,8 @@ class PaymentFailedScreeen extends StatelessWidget {
       orderID = '$cusID1' '1'.toString();
     } else {
       cusID1 = int.parse(user.cusId!);
-      int seq = user.orderSeq + 1.toInt();
+      int seq =
+          user.orderSeq ?? DateTime.now().microsecondsSinceEpoch + 1.toInt();
       orderID = '$cusID1$seq'.toString();
       user.orderSeq = seq;
     }

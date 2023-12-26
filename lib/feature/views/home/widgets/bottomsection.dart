@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,7 +41,8 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
           schemedetails: (schemedetail, scheme) {
             if (scheme != null) {
               _payablecontroller.text =
-                  double.parse(scheme.instAmount!).toStringAsFixed(0);
+                  double.parse(scheme.instAmount ?? '0').toStringAsFixed(0);
+              log('${scheme.instAmount}');
             }
             return schemedetail == null || scheme == null
                 ? Container(

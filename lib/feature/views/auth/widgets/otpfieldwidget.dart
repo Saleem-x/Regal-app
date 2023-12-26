@@ -549,7 +549,7 @@ class NewSchemeOtpField extends StatelessWidget {
           ),
           Expanded(
             child: PinCodeTextField(
-              controller: password,
+              // controller: password,
               appContext: context,
               length: 4,
               keyboardType: TextInputType.number,

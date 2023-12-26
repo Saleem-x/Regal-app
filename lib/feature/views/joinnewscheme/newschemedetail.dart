@@ -63,7 +63,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
 
   @override
   void dispose() {
-    _instalmentcontroller.dispose();
+    /* _instalmentcontroller.dispose();
     _citycontroller.dispose();
     _pincontroller.dispose();
     _addresscontroller.dispose();
@@ -77,7 +77,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
     _branchcontroller.dispose();
     _salesmancontroller.dispose();
     _schemecontroller.dispose();
-    _adharNOcontroller.dispose();
+    _adharNOcontroller.dispose(); */
     super.dispose();
   }
 
@@ -121,12 +121,17 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ConfirmPaymentTWO(
+                          goldWeight:
+                              (double.parse(_instalmentcontroller.text) /
+                                      double.parse(user.goldRate!))
+                                  .toStringAsFixed(2),
                           schemeDetails: SchemeDetailsModel(
                             goldRate: user.goldRate,
                             goldWeight: "0.00",
                             schemeNo: user.schemeNo,
                             schemeName: "",
                             joinId: user.joinId,
+                            // noofInst: user.
                           ),
                           scheme: CustomerSchemeModel(
                             joinId: user.joinId,

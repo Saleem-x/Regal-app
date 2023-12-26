@@ -13,8 +13,8 @@ import 'package:regal_app/feature/data/models/scheme_list_model/scheme_list_mode
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/newschemecreate/newschemcreatehome_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newschemehome/newschemehome_bloc.dart';
-import 'package:regal_app/feature/state/cubit/cubit/newschemehomeselector_cubit.dart';
 import 'package:regal_app/feature/state/cubit/newschemecheckbox/checkbox_cubit.dart';
+import 'package:regal_app/feature/state/cubit/newschemehomeselector/newschemehomeselector_cubit.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/newschemedropdownmenu.dart';
 import 'package:regal_app/feature/views/payment/confirmpaymentw2.dart';
 
@@ -81,6 +81,9 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                         orderID: '${newscheme.transId!}',
                         payablecontroller: _intamountctrl,
                         user: widget.user,
+                        goldWeight: (double.parse(newscheme.instAmt!) /
+                                double.parse(newscheme.goldRate!))
+                            .toStringAsFixed(2),
                       ),
                     ),
                   );
@@ -651,8 +654,8 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
 
   @override
   void dispose() {
-    _schemectrl.clear();
-    _intamountctrl.clear();
+    /*   _schemectrl.clear();
+    _intamountctrl.clear(); */
     super.dispose();
   }
 }
