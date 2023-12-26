@@ -13,7 +13,7 @@ class GetgoldweightCubit extends Cubit<GetgoldweightState> {
     if (goldRateValue > 0) {
       double cumulativeWeight = amount / goldRateValue;
       emit(GetGOldWeightfromAmount(
-          weight: (cumulativeWeight).toStringAsFixed(2)));
+          weight: (cumulativeWeight * 100 / 100).toStringAsFixed(2)));
     } else {
       emit(const GetGOldWeightfromAmount(weight: '0.00'));
     }

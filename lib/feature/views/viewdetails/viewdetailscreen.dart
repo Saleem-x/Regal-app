@@ -764,20 +764,24 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '*24 will take to reflect the last payment',
-                style: TextStyle(
-                  color: kredbutton.withOpacity(.7),
-                  // fontFamily: kprimaryfont,
-                  fontSize: 10.sp,
-                ),
-              )
-            ],
+        bottomNavigationBar: BottomNavigationBarTheme(
+          data: const BottomNavigationBarThemeData(
+              backgroundColor: Colors.transparent, elevation: 0),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '*24 will take to reflect the last payment',
+                  style: TextStyle(
+                    color: kredbutton.withOpacity(.7),
+                    // fontFamily: kprimaryfont,
+                    fontSize: 10.sp,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

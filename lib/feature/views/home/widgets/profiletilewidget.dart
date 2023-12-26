@@ -23,11 +23,12 @@ class ProfileTileWidget extends StatelessWidget {
               width: 51.h,
               height: 47.h,
               decoration: BoxDecoration(
+                color: kcolorwhite,
                 borderRadius: BorderRadius.circular(14.sp),
-                image: const DecorationImage(
+                /* image: const DecorationImage(
                   image: AssetImage('assets/images/Portrait_Placeholder.png'),
                   fit: BoxFit.cover,
-                ),
+                ), */
                 /* boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.3),
@@ -36,6 +37,16 @@ class ProfileTileWidget extends StatelessWidget {
                     offset: const Offset(-1, 3),
                   ),
                 ], */
+              ),
+              child: Center(
+                child: Text(
+                  user.cusName.toString().split('')[0].toUpperCase(),
+                  style: TextStyle(
+                    color: const Color.fromARGB(227, 241, 191, 7),
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
               ),
             ),
           ),

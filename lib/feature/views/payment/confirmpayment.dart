@@ -184,7 +184,7 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'instalment Amount',
+                            'Instalment Amount',
                             style: TextStyle(
                               color: ktextgrey,
                               // fontFamily: kprimaryfont,
