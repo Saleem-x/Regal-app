@@ -119,11 +119,11 @@ class MainActivity : FlutterActivity() {
                 )
                 val trxt: String? = it.getStringExtra("response")
                 if (trxt != null) {
-                    Toast.makeText(context, trxt, Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(context, trxt, Toast.LENGTH_SHORT).show()
                     platformChannel.invokeMethod("returnResult",mapOf("trxt" to trxt))
 
                 } else {
-                    Toast.makeText(context, "text is null", Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(context, "text is null", Toast.LENGTH_SHORT).show()
                     platformChannel.invokeMethod("returnResult",mapOf("trxt" to trxt))
                 }
                 val dataList = ArrayList<String>()

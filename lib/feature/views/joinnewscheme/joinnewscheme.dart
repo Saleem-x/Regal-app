@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/state/bloc/dropsownitems/dropdownitems_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newschemeotp/newschemeotp_bloc.dart';
 import 'package:regal_app/feature/state/cubit/otptimer/otptimer_cubit.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
@@ -84,6 +85,9 @@ class ALLJoinScreenWidgets extends StatelessWidget {
               context.read<OtptimerCubit>().startTimer();
             },
             verifiedOtpState: () {
+              context
+                  .read<DropdownitemsBloc>()
+                  .add(const GetAllDropDownEvent());
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(

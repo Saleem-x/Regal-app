@@ -91,6 +91,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                           scheme: widget.scheme,
                           schemeDetails: widget.schemeDetails,
                           isNewScheme: widget.isNewScheme,
+                          goldWeight: widget.goldWeight,
                         ),
                       ),
                       (route) => false);

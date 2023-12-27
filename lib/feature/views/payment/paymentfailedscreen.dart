@@ -223,14 +223,24 @@ class PaymentFailedScreeen extends StatelessWidget {
                                     .read<InstalmenthystoryBloc>()
                                     .add(const ResetDataEvent());
 
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomeScreen(
-                                        user: user,
+                                if (isNewScheme == true) {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginScreen(),
                                       ),
-                                    ),
-                                    (route) => false);
+                                      (route) => false);
+                                } else {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => HomeScreen(
+                                          user: user,
+                                        ),
+                                      ),
+                                      (route) => false);
+                                }
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

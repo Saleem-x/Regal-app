@@ -12,6 +12,7 @@ import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
 import 'package:regal_app/feature/views/payment/confirmpayment.dart';
+import 'package:regal_app/feature/views/viewdetails/detailsrowwidget.dart';
 import 'package:regal_app/feature/views/viewdetails/schemtandc.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -189,170 +190,67 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Started On : ',
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: ktextgrey,
-                                    ),
-                                  ),
-                                  Text(
-                                    widget.schemedetil.issueDate ?? '',
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: kcolorblack,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Closing On : ',
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: ktextgrey,
-                                    ),
-                                  ),
-                                  Text(
-                                    ' ${widget.schemedetil.closingDate ?? ''}',
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: kcolorblack,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Due Amount : ',
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: ktextgrey,
-                                    ),
-                                  ),
-                                  Text(
-                                    '${widget.scheme.instAmount ?? ''} ',
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: kcolorblack,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Total Paid : ',
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: ktextgrey,
-                                    ),
-                                  ),
-                                  Text(
-                                    widget.schemedetil.totAmount ?? '',
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: kcolorblack,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: widget.schemedetil.goldWeight == null ||
-                                        widget
-                                            .schemedetil.goldWeight!.isEmpty ||
-                                        widget.scheme.schemeNo!.contains('RG')
-                                    ? 0
-                                    : size.height * 0.01,
-                              ),
-                              widget.schemedetil.goldWeight == null ||
-                                      widget.schemedetil.goldWeight!.isEmpty ||
-                                      widget.scheme.schemeNo!.contains('RG')
-                                  ? const SizedBox.shrink()
-                                  : Row(
-                                      children: [
-                                        Text(
-                                          'Current Total Weight : ',
-                                          style: TextStyle(
-                                            // fontFamily: kprimaryfont,
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: ktextgrey,
-                                          ),
-                                        ),
-                                        Text(
-                                          '${double.parse(widget.schemedetil.goldWeight!).toStringAsFixed(3)} grams',
-                                          style: TextStyle(
-                                            // fontFamily: kprimaryfont,
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: kcolorblack,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Pending Installents : ',
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: ktextgrey,
-                                    ),
-                                  ),
-                                  Text(
-                                    widget.scheme.totalNoofInstalment == null ||
-                                            widget.schemedetil.paidInst == null
-                                        ? ''
-                                        : calculateInstallments(
-                                            widget.scheme.totalNoofInstalment!,
-                                            widget.schemedetil.paidInst!),
-                                    style: TextStyle(
-                                      // fontFamily: kprimaryfont,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: kcolorblack,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              DetailsContainerRowWidget(
+                                  size: size,
+                                  title: 'Started On : ',
+                                  value: widget.schemedetil.issueDate ?? '',
+                                  visible: widget.schemedetil.issueDate ==
+                                              null ||
+                                          widget.schemedetil.issueDate!.isEmpty
+                                      ? false
+                                      : true),
+                              DetailsContainerRowWidget(
+                                  size: size,
+                                  title: 'Closing On : ',
+                                  value:
+                                      ' ${widget.schemedetil.closingDate ?? ''}',
+                                  visible:
+                                      widget.schemedetil.closingDate == null ||
+                                              widget.schemedetil.closingDate!
+                                                  .isEmpty
+                                          ? false
+                                          : true),
+                              DetailsContainerRowWidget(
+                                  size: size,
+                                  title: 'Due Amount : ',
+                                  value: widget.schemedetil.totAmount ?? '',
+                                  visible: widget.scheme.instAmount == null ||
+                                          widget.scheme.instAmount!.isEmpty
+                                      ? false
+                                      : true),
+                              DetailsContainerRowWidget(
+                                  size: size,
+                                  title: 'Total Paid : ',
+                                  value: '${widget.scheme.instAmount ?? ''} ',
+                                  visible: widget.schemedetil.totAmount ==
+                                              null ||
+                                          widget.schemedetil.totAmount!.isEmpty
+                                      ? false
+                                      : true),
+                              DetailsContainerRowWidget(
+                                  size: size,
+                                  title: 'Current Total Weight : ',
+                                  value:
+                                      '${double.parse(widget.schemedetil.goldWeight == null || widget.schemedetil.goldWeight!.isEmpty ? '0.0' : widget.schemedetil.goldWeight!).toStringAsFixed(3)} grams',
+                                  visible:
+                                      widget.schemedetil.goldWeight == null ||
+                                              widget.schemedetil.goldWeight!
+                                                  .isEmpty ||
+                                              widget.scheme.schemeNo!
+                                                  .contains('RG')
+                                          ? false
+                                          : true),
+                              DetailsContainerRowWidget(
+                                  size: size,
+                                  title: 'Pending Installents : ',
+                                  value: widget.scheme.totalNoofInstalment ==
+                                              null ||
+                                          widget.schemedetil.paidInst == null
+                                      ? ''
+                                      : calculateInstallments(
+                                          widget.scheme.totalNoofInstalment!,
+                                          widget.schemedetil.paidInst!),
+                                  visible: true),
                               Row(
                                 children: [
                                   SizedBox(
@@ -451,7 +349,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                             ? ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemCount: 3,
+                                itemCount: 5,
                                 itemBuilder: (context, index) => SizedBox(
                                   height: 70.h,
                                   width: size.width - 80,
@@ -766,7 +664,9 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
         ),
         bottomNavigationBar: BottomNavigationBarTheme(
           data: const BottomNavigationBarThemeData(
-              backgroundColor: Colors.transparent, elevation: 0),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Row(
@@ -787,26 +687,4 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
       ),
     );
   }
-}
-
-String calculateInstallments(String noOfInst, String paidInst) {
-  String inst;
-  logger.e(paidInst);
-  if (noOfInst.isEmpty) {
-    if (int.parse(paidInst) > 12) {
-      inst = paidInst;
-    } else {
-      inst = (12 - int.parse(paidInst)).toString();
-    }
-  } else {
-    if (int.parse(noOfInst) <= 0) {
-      inst = "0";
-    } else if (int.parse(paidInst) >= 12) {
-      inst = paidInst;
-    } else {
-      inst = (int.parse(noOfInst) - int.parse(paidInst)).toString();
-    }
-  }
-  logger.e(inst);
-  return inst;
 }

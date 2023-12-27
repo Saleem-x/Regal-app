@@ -62,7 +62,7 @@ class ProfileTileWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    user.cusName,
+                    user.cusName.toString().toUpperCase(),
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 19.sp,

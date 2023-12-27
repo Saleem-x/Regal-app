@@ -23,6 +23,7 @@ class PaymentSuccessScreen extends StatelessWidget {
   final String amount;
   final SchemeDetailsModel schemeDetails;
   final CustomerSchemeModel scheme;
+  final String goldWeight;
   final bool? isNewScheme;
   const PaymentSuccessScreen(
       {super.key,
@@ -31,7 +32,8 @@ class PaymentSuccessScreen extends StatelessWidget {
       required this.amount,
       required this.schemeDetails,
       required this.scheme,
-      this.isNewScheme});
+      this.isNewScheme,
+      required this.goldWeight});
 
   @override
   Widget build(BuildContext context) {
@@ -231,7 +233,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Weight:0.02 gm(s)',
+                                    'Weight: $goldWeight gm(s)',
                                     style: TextStyle(
                                         color: ktextgrey, fontSize: 12.sp),
                                   ),
@@ -263,7 +265,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                               children: [
                                 IconButton(
                                   onPressed: () {
-                                    if (isNewScheme != null ||
+                                    if (isNewScheme != null &&
                                         isNewScheme != true) {
                                       context
                                           .read<InstalmenthystoryBloc>()

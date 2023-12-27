@@ -85,7 +85,6 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    context.read<DropdownitemsBloc>().add(const GetAllDropDownEvent());
     context
         .read<CheckbranchslectionCubit>()
         .checkisselected(_branchcontroller.text);
