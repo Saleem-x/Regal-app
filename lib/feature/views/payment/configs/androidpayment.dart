@@ -55,7 +55,7 @@ paytmsdkpackage(String upiID, String merchentCode, String orderID) async {
   var response = AllInOneSdk.startTransaction(
       merchentCode, orderID, "1", orderID, callbackurl, true, false);
   response.then((value) {
-    print('ithaan$value');
+    // print('ithaan$value');
 
     result = value.toString();
   }).catchError((onError) {

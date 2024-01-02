@@ -28,11 +28,13 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: kbgcolor,
       resizeToAvoidBottomInset: false,
-      body: size.height > 640
-          ? AllLoginWidgets(size: size)
-          : SingleChildScrollView(
-              child: AllLoginWidgets(size: size),
-            ),
+      body: SafeArea(
+        child: size.height > 640
+            ? AllLoginWidgets(size: size)
+            : SingleChildScrollView(
+                child: AllLoginWidgets(size: size),
+              ),
+      ),
     );
   }
 }

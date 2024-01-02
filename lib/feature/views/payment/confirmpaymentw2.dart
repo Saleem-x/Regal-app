@@ -17,6 +17,7 @@ import 'package:regal_app/feature/state/bloc/paymentstatusupdate/updatepaymentst
 import 'package:regal_app/feature/views/payment/paymentfailedscreen.dart';
 import 'package:regal_app/feature/views/payment/paymentsucces.dart';
 
+// ignore: prefer_typing_uninitialized_variables
 var trxtfinal;
 
 class ConfirmPaymentTWO extends StatefulWidget {
@@ -54,6 +55,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    logger.e('isnew schem ${widget.isNewScheme}');
     return PopScope(
       canPop: canPop,
       child: Scaffold(

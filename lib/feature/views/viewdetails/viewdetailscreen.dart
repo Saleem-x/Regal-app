@@ -180,7 +180,12 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  '${widget.scheme.schemeName ?? ''} | ₹${widget.scheme.totalAmount ?? ''}',
+                                  widget.scheme.schemeName == null ||
+                                          widget.scheme.totalAmount == null
+                                      ? widget.scheme.schemeNo!.contains('RG')
+                                          ? 'REGALIA'
+                                          : ''
+                                      : '${widget.scheme.schemeName ?? ''} | ₹${widget.scheme.totalAmount ?? ''}',
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     // fontFamily: kprimaryfont,
@@ -213,7 +218,10 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                               DetailsContainerRowWidget(
                                   size: size,
                                   title: 'Due Amount : ',
-                                  value: widget.schemedetil.totAmount ?? '',
+                                  value:
+                                      getdoublevalue(widget.scheme.instAmount),
+                                  /* value:
+                                      "₹ ${double.parse(widget.scheme.instAmount == null || widget.scheme.instAmount!.isEmpty ? '0.00' : widget.scheme.instAmount!).toStringAsFixed(2)}", */
                                   visible: widget.scheme.instAmount == null ||
                                           widget.scheme.instAmount!.isEmpty
                                       ? false
@@ -221,7 +229,8 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                               DetailsContainerRowWidget(
                                   size: size,
                                   title: 'Total Paid : ',
-                                  value: '${widget.scheme.instAmount ?? ''} ',
+                                  value:
+                                      '₹ ${double.parse(widget.schemedetil.totAmount == null || widget.schemedetil.totAmount!.isEmpty ? '0.00' : getdoublevalue(widget.schemedetil.totAmount)).toStringAsFixed(2)} ',
                                   visible: widget.schemedetil.totAmount ==
                                               null ||
                                           widget.schemedetil.totAmount!.isEmpty
@@ -231,7 +240,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                   size: size,
                                   title: 'Current Total Weight : ',
                                   value:
-                                      '${double.parse(widget.schemedetil.goldWeight == null || widget.schemedetil.goldWeight!.isEmpty ? '0.0' : widget.schemedetil.goldWeight!).toStringAsFixed(3)} grams',
+                                      '${double.parse(widget.schemedetil.goldWeight == null || widget.schemedetil.goldWeight!.isEmpty ? '0.00' : widget.schemedetil.goldWeight!).toStringAsFixed(3)} grams',
                                   visible:
                                       widget.schemedetil.goldWeight == null ||
                                               widget.schemedetil.goldWeight!
@@ -245,12 +254,23 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                   title: 'Pending Installents : ',
                                   value: widget.scheme.totalNoofInstalment ==
                                               null ||
-                                          widget.schemedetil.paidInst == null
-                                      ? ''
+                                          widget.scheme.totalNoofInstalment!
+                                              .isEmpty ||
+                                          widget.schemedetil.paidInst == null ||
+                                          widget.schemedetil.paidInst!.isEmpty
+                                      ? '0'
                                       : calculateInstallments(
                                           widget.scheme.totalNoofInstalment!,
                                           widget.schemedetil.paidInst!),
-                                  visible: true),
+                                  visible: widget
+                                                  .scheme.totalNoofInstalment ==
+                                              null ||
+                                          widget.scheme.totalNoofInstalment!
+                                              .isEmpty ||
+                                          widget.schemedetil.paidInst == null ||
+                                          widget.schemedetil.paidInst!.isEmpty
+                                      ? false
+                                      : true),
                               Row(
                                 children: [
                                   SizedBox(
@@ -424,7 +444,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                                   height: 30.h,
                                                 ),
                                                 title: Text(
-                                                  '₹${double.parse(insthystry[index].credit ?? "0.00").toStringAsFixed(2)}',
+                                                  '₹${double.parse(insthystry[index].credit == null || insthystry[index].credit!.isEmpty ? "0.00" : insthystry[index].credit!).toStringAsFixed(2)}',
                                                   style: TextStyle(
                                                     // fontFamily: kprimaryfont,
                                                     fontSize: 16.sp,
@@ -433,7 +453,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                                   ),
                                                 ),
                                                 subtitle: Text(
-                                                  'Trans. No. : ${insthystry[index].receiptNo ?? 0}',
+                                                  'Trans. No. : ${insthystry[index].receiptNo ?? "0"}',
                                                   style: TextStyle(
                                                     // fontFamily: kprimaryfont,
                                                     fontSize: 12.sp,
@@ -482,7 +502,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                                                         .spaceBetween,
                                                                 children: [
                                                                   Text(
-                                                                    'Weight: ${double.parse(insthystry[index].goldWeight ?? "0.00")} gm(s)',
+                                                                    'Weight: ${double.parse(insthystry[index].goldWeight == null || insthystry[index].goldWeight!.isEmpty ? "0.00" : insthystry[index].goldWeight!)} gm(s)',
                                                                     style:
                                                                         TextStyle(
                                                                       // fontFamily:
@@ -497,7 +517,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                                                     ),
                                                                   ),
                                                                   Text(
-                                                                    'Gold Rate: ₹${double.parse(insthystry[index].goldRate ?? '0.00').toStringAsFixed(2)}',
+                                                                    'Gold Rate: ₹${double.parse(insthystry[index].goldRate == null || insthystry[index].goldRate!.isEmpty ? '0.00' : insthystry[index].goldRate!).toStringAsFixed(2)}',
                                                                     style:
                                                                         TextStyle(
                                                                       // fontFamily:
@@ -528,7 +548,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                                                         .spaceBetween,
                                                                 children: [
                                                                   Text(
-                                                                    'Total Wt: ${double.parse(insthystry[index].closingWt ?? "0.00")} gm(s)',
+                                                                    'Total Wt: ${double.parse(insthystry[index].closingWt == null || insthystry[index].closingWt!.isEmpty ? "0.00" : insthystry[index].closingWt!)} gm(s)',
                                                                     style:
                                                                         TextStyle(
                                                                       // fontFamily:
@@ -543,7 +563,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                                                     ),
                                                                   ),
                                                                   Text(
-                                                                    'Total Amt. : ₹${double.parse(insthystry[index].netAmount ?? "0.00").toStringAsFixed(2)}',
+                                                                    'Total Amt. : ₹${double.parse(insthystry[index].netAmount == null || insthystry[index].netAmount!.isEmpty ? "0.00" : insthystry[index].netAmount!).toStringAsFixed(2)}',
                                                                     style:
                                                                         TextStyle(
                                                                       // fontFamily:
@@ -575,7 +595,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                                                     .start,
                                                             children: [
                                                               Text(
-                                                                'Total Amt. : ₹${double.parse(insthystry[index].netAmount ?? "0.00").toStringAsFixed(2)}',
+                                                                'Total Amt. : ₹${double.parse(insthystry[index].netAmount == null || insthystry[index].netAmount!.isEmpty ? "0.00" : insthystry[index].netAmount!).toStringAsFixed(2)}',
                                                                 style:
                                                                     TextStyle(
                                                                   // fontFamily:
@@ -686,5 +706,16 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
         ),
       ),
     );
+  }
+
+  String getdoublevalue(String? value) {
+    try {
+      if (value == null) {
+        return "0.00";
+      }
+      return double.parse(value).toStringAsFixed(2);
+    } catch (e) {
+      return '0.00';
+    }
   }
 }

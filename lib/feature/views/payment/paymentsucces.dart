@@ -265,7 +265,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                               children: [
                                 IconButton(
                                   onPressed: () {
-                                    if (isNewScheme != null &&
+                                    if (isNewScheme == null ||
                                         isNewScheme != true) {
                                       context
                                           .read<InstalmenthystoryBloc>()

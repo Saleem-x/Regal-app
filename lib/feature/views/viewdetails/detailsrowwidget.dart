@@ -56,22 +56,26 @@ class DetailsContainerRowWidget extends StatelessWidget {
 
 String calculateInstallments(String noOfInst, String paidInst) {
   String inst;
-  logger.e(paidInst);
-  if (noOfInst.isEmpty) {
-    if (int.parse(paidInst) > 12) {
-      inst = paidInst;
+  try {
+    logger.e(paidInst);
+    if (noOfInst.isEmpty) {
+      if (int.parse(paidInst) > 12) {
+        inst = paidInst;
+      } else {
+        inst = (12 - int.parse(paidInst)).toString();
+      }
     } else {
-      inst = (12 - int.parse(paidInst)).toString();
+      if (int.parse(noOfInst) <= 0) {
+        inst = "0";
+      } else if (int.parse(paidInst) >= 12) {
+        inst = paidInst;
+      } else {
+        inst = (int.parse(noOfInst) - int.parse(paidInst)).toString();
+      }
     }
-  } else {
-    if (int.parse(noOfInst) <= 0) {
-      inst = "0";
-    } else if (int.parse(paidInst) >= 12) {
-      inst = paidInst;
-    } else {
-      inst = (int.parse(noOfInst) - int.parse(paidInst)).toString();
-    }
+    logger.e(inst);
+    return inst;
+  } catch (e) {
+    return '0';
   }
-  logger.e(inst);
-  return inst;
 }
