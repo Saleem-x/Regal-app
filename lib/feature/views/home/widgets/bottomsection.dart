@@ -26,28 +26,29 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
   static final _payablecontroller = TextEditingController();
   final _bottomormkey = GlobalKey<FormState>();
 
-  @override
+  /*  @override
   void dispose() {
     // _payablecontroller.dispose();
     super.dispose();
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return BlocBuilder<SchemedetailsBloc, SchemedetailsState>(
       builder: (context, state) {
         return state.when(
           schemedetails: (schemedetail, scheme) {
             if (scheme != null) {
-              _payablecontroller.text =
-                  double.parse(scheme.instAmount ?? '0').toStringAsFixed(0);
-              log('${scheme.instAmount}');
+              Future.delayed(const Duration(microseconds: 100), () {
+                _payablecontroller.text =
+                    double.parse(scheme.instAmount ?? '0').toStringAsFixed(0);
+                log('${scheme.instAmount}');
+              });
             }
             return schemedetail == null || scheme == null
                 ? Container(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                    width: size.width,
+                    width: MediaQuery.of(context).size.width,
                     height: 300.h,
                     decoration: const BoxDecoration(
                       color: Colors.transparent,
@@ -64,7 +65,7 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                     ),
                   )
                 : Container(
-                    width: size.width,
+                    width: MediaQuery.of(context).size.width,
                     // height: size.,
                     decoration: const BoxDecoration(
                       color: kcolorwhite,
@@ -196,7 +197,8 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                                       style: TextStyle(color: ktextgrey),
                                     ),
                                     SizedBox(
-                                      width: size.width / 2,
+                                      width:
+                                          MediaQuery.of(context).size.width / 2,
                                       child: Form(
                                         key: _bottomormkey,
                                         child: TextFormField(

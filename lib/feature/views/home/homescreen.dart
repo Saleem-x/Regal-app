@@ -19,7 +19,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    // final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: kbgcolor,
       appBar: const PreferredSize(
@@ -37,9 +38,6 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        physics: size.height > 857
-            ? const NeverScrollableScrollPhysics()
-            : const AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
             ProfileTileWidget(user: user),
@@ -89,11 +87,11 @@ class HomeScreen extends StatelessWidget {
                     minWidth: 40.w,
                     onPressed: () {
                       context
-                          .read<NewschemehomeBloc>()
-                          .add(const GetAllSchemesfromHomesEvent());
-                      context
                           .read<CheckbranchslectionCubit>()
                           .checkisselected('');
+                      context
+                          .read<NewschemehomeBloc>()
+                          .add(const GetAllSchemesfromHomesEvent());
                       Navigator.push(
                           context,
                           MaterialPageRoute(

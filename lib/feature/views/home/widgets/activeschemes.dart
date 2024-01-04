@@ -12,16 +12,23 @@ import 'package:regal_app/feature/state/cubit/schemeselector/schemeselector_cubi
 import 'package:regal_app/feature/widgets/activeschemeskelton.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ActiveSchemeWidget extends StatelessWidget {
+class ActiveSchemeWidget extends StatefulWidget {
   final UserBaseModel user;
   const ActiveSchemeWidget({super.key, required this.user});
 
   @override
+  State<ActiveSchemeWidget> createState() => _ActiveSchemeWidgetState();
+}
+
+class _ActiveSchemeWidgetState extends State<ActiveSchemeWidget> {
+  @override
   Widget build(BuildContext context) {
     // final Size size = MediaQuery.of(context).size;
-    context
-        .read<ActiveschemesBloc>()
-        .add(GetActiveSchemes(datakey: datakey, cusid: user.cusId!));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<ActiveschemesBloc>()
+          .add(GetActiveSchemes(datakey: datakey, cusid: widget.user.cusId!));
+    });
     return SizedBox(
       height: 110.h,
       // width: size.width.w,
@@ -32,7 +39,7 @@ class ActiveSchemeWidget extends StatelessWidget {
               if (schemes != null) {
                 context.read<SchemedetailsBloc>().add(
                       GetschemedetailsEvent(
-                        cusid: user.cusId!,
+                        cusid: widget.user.cusId!,
                         schmId: schemes[0].schemeNo!,
                         datakeys: datakey,
                         scheme: schemes[0],
@@ -79,7 +86,7 @@ class ActiveSchemeWidget extends StatelessWidget {
                                           .selectscheme(index);
                                       context.read<SchemedetailsBloc>().add(
                                             GetschemedetailsEvent(
-                                              cusid: user.cusId!,
+                                              cusid: widget.user.cusId!,
                                               schmId: schemes[index].schemeNo!,
                                               datakeys: datakey,
                                               scheme: schemes[index],
@@ -87,7 +94,7 @@ class ActiveSchemeWidget extends StatelessWidget {
                                           );
                                       context.read<SchemedetailsBloc>().add(
                                             GetschemedetailsEvent(
-                                              cusid: user.cusId!,
+                                              cusid: widget.user.cusId!,
                                               schmId: schemes[index].schemeNo!,
                                               datakeys: datakey,
                                               scheme: schemes[index],
@@ -120,11 +127,11 @@ class ActiveSchemeWidget extends StatelessWidget {
                                           boxShadow: [
                                             BoxShadow(
                                               color: const Color(0xFFB2B2B2)
-                                                  .withOpacity(0.3),
-                                              blurRadius: 5,
-                                              offset: const Offset(-1, 1),
-                                              blurStyle: BlurStyle.outer,
-                                              spreadRadius: 0.9,
+                                                  .withOpacity(0.1),
+                                              blurRadius: 4,
+                                              offset: const Offset(-3, 3),
+                                              blurStyle: BlurStyle.normal,
+                                              spreadRadius: 4,
                                             )
                                           ],
                                         ),

@@ -98,6 +98,7 @@ class RelationDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
+      dropdownColor: kcolorwhite,
       items: relations.map((RelationShipModel item) {
         return DropdownMenuItem<String>(
           value: item.relationId.toString(),
@@ -158,6 +159,7 @@ class DoctypeDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
+      dropdownColor: kcolorwhite,
       items: doctypes.map((DocumentTypeModel item) {
         return DropdownMenuItem<String>(
           value: item.docId.toString(),
@@ -219,6 +221,7 @@ class BranchDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
+      dropdownColor: kcolorwhite,
       items: branches.map((BranchModel item) {
         return DropdownMenuItem<String>(
           value: item.branchId.toString(),
