@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/newschemehome/newschemehome_bloc.dart';
+import 'package:regal_app/feature/state/cubit/checkbranchselected/checkbranchslection_cubit.dart';
 import 'package:regal_app/feature/views/home/widgets/activeschemes.dart';
 import 'package:regal_app/feature/views/home/widgets/bottomsection.dart';
 import 'package:regal_app/feature/views/home/widgets/goldratewidget.dart';
@@ -18,8 +19,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final Size size = MediaQuery.of(context).size;
-
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kbgcolor,
       appBar: const PreferredSize(
@@ -37,6 +37,9 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
+        physics: size.height > 857
+            ? const NeverScrollableScrollPhysics()
+            : const AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
             ProfileTileWidget(user: user),
@@ -88,6 +91,9 @@ class HomeScreen extends StatelessWidget {
                       context
                           .read<NewschemehomeBloc>()
                           .add(const GetAllSchemesfromHomesEvent());
+                      context
+                          .read<CheckbranchslectionCubit>()
+                          .checkisselected('');
                       Navigator.push(
                           context,
                           MaterialPageRoute(

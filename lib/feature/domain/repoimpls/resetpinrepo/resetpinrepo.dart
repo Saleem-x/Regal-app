@@ -23,7 +23,7 @@ class ResetPinRepo implements IResetPinRepo {
         final otpmodel = PinResetOtpModel.fromJson(json['result'][0]);
         if (otpmodel.cusId == '0') {
           return left(MainFailures.networkerror(
-              error: otpmodel.title! + otpmodel.descr!));
+              error: '${otpmodel.title!}^${otpmodel.descr!}'));
         }
 
         return right(otpmodel);
@@ -57,12 +57,12 @@ class ResetPinRepo implements IResetPinRepo {
           logger.i('entho sampavichu${response.body}');
           return left(MainFailures.networkerror(
               error: json['result'][0]['Title'] +
-                  ' ' +
+                  '^' +
                   json['result'][0]['Description']));
         } else if (json['result'][0]['cusID'] == '0') {
           logger.i('entho sampavichu2${response.body}');
           return left(MainFailures.networkerror(
-              error: verifyOtpModel.title! + verifyOtpModel.descr!));
+              error: '${verifyOtpModel.title!}^${verifyOtpModel.descr!}'));
         } else {
           logger.e('ithaaan adutha adhyaayam ${response.body}');
         }

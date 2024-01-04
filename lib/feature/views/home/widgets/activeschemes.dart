@@ -119,11 +119,12 @@ class ActiveSchemeWidget extends StatelessWidget {
                                               BorderRadius.circular(30.sp),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: ktextgrey.withOpacity(.18),
-                                              blurRadius: 2,
+                                              color: const Color(0xFFB2B2B2)
+                                                  .withOpacity(0.3),
+                                              blurRadius: 5,
                                               offset: const Offset(-1, 1),
-                                              blurStyle: BlurStyle.normal,
-                                              spreadRadius: 0.1,
+                                              blurStyle: BlurStyle.outer,
+                                              spreadRadius: 0.9,
                                             )
                                           ],
                                         ),

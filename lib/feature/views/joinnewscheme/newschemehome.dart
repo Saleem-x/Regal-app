@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/customer_scheme_model/customer_scheme_model.dart';
 import 'package:regal_app/feature/data/models/new_scheme_home_in_model/new_scheme_home_in_model.dart';
@@ -13,8 +16,10 @@ import 'package:regal_app/feature/data/models/scheme_list_model/scheme_list_mode
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/newschemecreate/newschemcreatehome_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newschemehome/newschemehome_bloc.dart';
+import 'package:regal_app/feature/state/cubit/checkbranchselected/checkbranchslection_cubit.dart';
 import 'package:regal_app/feature/state/cubit/newschemecheckbox/checkbox_cubit.dart';
 import 'package:regal_app/feature/state/cubit/newschemehomeselector/newschemehomeselector_cubit.dart';
+import 'package:regal_app/feature/views/joinnewscheme/widgets/newschemdetailwidget.dart';
 import 'package:regal_app/feature/views/joinnewscheme/widgets/newschemedropdownmenu.dart';
 import 'package:regal_app/feature/views/payment/confirmpaymentw2.dart';
 
@@ -28,14 +33,28 @@ class NewSchemefrHome extends StatefulWidget {
 
 TextEditingController _schemectrl = TextEditingController();
 TextEditingController _intamountctrl = TextEditingController();
+TextEditingController _cusnamectrl = TextEditingController();
+TextEditingController _salesmancontroller = TextEditingController();
+TextEditingController _branchctrl = TextEditingController();
 
 class _NewSchemefrHomeState extends State<NewSchemefrHome> {
+  @override
+  void initState() {
+    _schemectrl.clear();
+    _intamountctrl.clear();
+    _cusnamectrl.clear();
+    _salesmancontroller.clear();
+    _branchctrl.clear();
+    super.initState();
+  }
+
   static final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kbgcolor,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: kbgcolor,
         leading: IconButton(
@@ -51,81 +70,92 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
       ),
       body: BlocConsumer<NewschemcreatehomeBloc, NewschemcreatehomeState>(
         listener: (context, state) {
-          state.when(
-              newSchemeHomeCreatSuccessState: (newscheme) {
-                /*  ScaffoldMessenger.of(context).showSnackBar(
+          state.when(newSchemeHomeCreatSuccessState: (newscheme) {
+            /*  ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('create scheme success'),
                   ),
                 ); */
-                Navigator.of(context).pop();
-                Future.delayed(const Duration(microseconds: 200), () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ConfirmPaymentTWO(
-                        schemeDetails: SchemeDetailsModel(
-                          goldRate: newscheme.goldRate,
-                          goldWeight: "0.00",
-                          schemeNo: newscheme.schemeNo,
-                          schemeName: newscheme.schemeName,
-                          joinId: newscheme.joinId,
-                        ),
-                        scheme: CustomerSchemeModel(
-                          joinId: newscheme.joinId,
-                          merchantCode: newscheme.merchantId,
-                          subId: newscheme.subCodes,
-                          schemeNo: newscheme.schemeNo,
-                          schemeName: newscheme.schemeName,
-                        ),
-                        orderID: '${newscheme.transId!}',
-                        payablecontroller: _intamountctrl,
-                        user: widget.user,
-                        goldWeight: (double.parse(newscheme.instAmt!) /
-                                double.parse(newscheme.goldRate!))
-                            .toStringAsFixed(2),
-                      ),
+            Navigator.of(context).pop();
+            Future.delayed(const Duration(microseconds: 200), () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ConfirmPaymentTWO(
+                    schemeDetails: SchemeDetailsModel(
+                      goldRate: newscheme.goldRate,
+                      goldWeight: "0.00",
+                      schemeNo: newscheme.schemeNo,
+                      schemeName: newscheme.schemeName,
+                      joinId: newscheme.joinId,
                     ),
-                  );
-                });
+                    scheme: CustomerSchemeModel(
+                      joinId: newscheme.joinId,
+                      merchantCode: newscheme.merchantId,
+                      subId: newscheme.subCodes,
+                      schemeNo: newscheme.schemeNo,
+                      schemeName: newscheme.schemeName,
+                    ),
+                    orderID: '${newscheme.transId!}',
+                    payablecontroller: _intamountctrl,
+                    user: widget.user,
+                    goldWeight: (double.parse(newscheme.instAmt ?? '0.00') /
+                            double.parse(newscheme.goldRate ?? '0.00'))
+                        .toStringAsFixed(2),
+                  ),
+                ),
+              );
+            });
+          }, newSchemeHomeCreatfailedState: (error) {
+            Navigator.of(context).pop();
+            showCupertinoDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return CupertinoAlertDialog(
+                  title: Text(error.split('^')[0]),
+                  content: Text(
+                    error.split('^')[1],
+                  ),
+                  actions: <Widget>[
+                    /*  CupertinoDialogAction(
+                          child: const Text("Cancel"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ), */
+                    CupertinoDialogAction(
+                      child: const Text("OK"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
               },
-              newSchemeHomeCreatfailedState: (error) {
-                Navigator.of(context).pop();
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    backgroundColor: kcolorwhite,
-                    title: const Text("Alert"),
-                    content: Text(error),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Ok'),
-                      )
-                    ],
+            );
+          }, newschcmehomeloadingstate: () {
+            showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) {
+                return const AlertDialog(
+                  surfaceTintColor: Colors.transparent,
+                  backgroundColor: Colors.transparent,
+                  content: Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.green,
+                    ),
                   ),
                 );
               },
-              newschcmehomeloadingstate: () {
-                showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (context) {
-                    return const AlertDialog(
-                      surfaceTintColor: Colors.transparent,
-                      backgroundColor: Colors.transparent,
-                      content: Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.green,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              newSchemInitial: () {});
+            );
+          }, newSchemInitial: () {
+            /* _cusnamectrl.clear();
+            _branchctrl.clear();
+            _salesmancontroller.clear();
+            _schemectrl.clear();
+            _intamountctrl.clear(); */
+          });
         },
         builder: (context, state) {
           return BlocBuilder<CheckboxCubit, CheckboxState>(
@@ -135,20 +165,65 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                 child: BlocConsumer<NewschemehomeBloc, NewschemehomeState>(
                   listener: (context, state) {
                     state.when(
-                        getallSchemesState: (schemes, tenure) {
+                        getallSchemesState:
+                            (schemes, tenure, branchlist, salesmanlist) {
                           // if(schemes)
                         },
                         gettingschemefailed: () {});
                   },
                   builder: (context, state) {
                     return state.when(
-                        getallSchemesState: (schemeslist, tenure) => Column(
+                        getallSchemesState: (schemeslist, tenure, branchlist,
+                                salesmanlist) =>
+                            Column(
                               children: [
                                 SizedBox(
                                   height: 0.h,
                                 ),
                                 Column(
                                   children: [
+                                    NewSchmFieldWidget(
+                                        title: 'Customer',
+                                        icon: 'assets/others/name.svg',
+                                        controller: _cusnamectrl,
+                                        type: TextInputType.name),
+                                    NewSchmDropDownWidget(
+                                      controller: _branchctrl,
+                                      title: 'Branch',
+                                      preicon: 'assets/svg/branch.svg',
+                                      ddWindget: BranchDropDown(
+                                        branches: branchlist ?? [],
+                                        controller: _branchctrl,
+                                      ),
+                                    ),
+                                    NewSchmDropDownWidget(
+                                      controller: _salesmancontroller,
+                                      title: 'Sales Man',
+                                      preicon: 'assets/svg/salesmanopt.svg',
+                                      ddWindget: BlocBuilder<
+                                          CheckbranchslectionCubit,
+                                          CheckbranchslectionState>(
+                                        builder: (context, isbranchselected) {
+                                          log(isbranchselected.selectedbranch);
+                                          return isbranchselected
+                                                  .selectedbranch.isEmpty
+                                              ? SaleSMAnDD(
+                                                  salesman: const [],
+                                                  controller:
+                                                      TextEditingController(),
+                                                  issalman: true,
+                                                  branchctrl: _branchctrl,
+                                                )
+                                              : SaleSMAnDD(
+                                                  salesman: salesmanlist ?? [],
+                                                  controller:
+                                                      _salesmancontroller,
+                                                  issalman: true,
+                                                  branchctrl: _branchctrl,
+                                                );
+                                        },
+                                      ),
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           left: 80, top: 10),
@@ -230,9 +305,12 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                                                               NewschemehomeBloc>()
                                                           .add(
                                                             GetSchemeTenureEvent(
-                                                              schemeslist:
-                                                                  schemeslist,
-                                                            ),
+                                                                schemeslist:
+                                                                    schemeslist,
+                                                                branches:
+                                                                    branchlist,
+                                                                salesmanmodel:
+                                                                    salesmanlist),
                                                           );
                                                     },
                                                     decoration: InputDecoration(
@@ -321,7 +399,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                                         children: [
                                           SizedBox(
                                             child: SvgPicture.asset(
-                                              'assets/svg/money.svg',
+                                              /* 'assets/svg/money.svg' */ 'assets/svg/schemeopt.svg',
                                               height: 15.h,
                                               width: 15.w,
                                             ),
@@ -454,11 +532,27 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                'Scheme Tenure: ${tenure == null ? '' : tenure[0].tenure}',
+                                                'Scheme Total Amount: ${tenure == null ? '' : tenure[0].tenure}',
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     color: ktextgrey
                                                         .withOpacity(.7)),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 80, vertical: 5),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                'Scheme Tenure: ${tenure == null ? '' : tenure[0].tenure}',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color:
+                                                      ktextgrey.withOpacity(.7),
+                                                ),
                                               )
                                             ],
                                           ),
@@ -527,6 +621,8 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                                                   BorderRadius.circular(10),
                                             ),
                                             onPressed: () async {
+                                              logger.e(
+                                                  "${_branchctrl.text} ${_schemectrl.text} ${widget.user.cusId} ${_salesmancontroller.text}");
                                               if (checkbox.ischecked) {
                                                 if (_schemectrl.text.isEmpty) {
                                                   await showCupertinoDialog(
@@ -553,7 +649,35 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                                                     },
                                                   );
                                                 } else {
-                                                  if (_formkey.currentState!
+                                                  if (_branchctrl
+                                                          .text.isEmpty ||
+                                                      _salesmancontroller
+                                                          .text.isEmpty) {
+                                                    showCupertinoDialog(
+                                                      context: context,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        return CupertinoAlertDialog(
+                                                          title: const Text(
+                                                              "Alert"),
+                                                          content: const Text(
+                                                              "please enter all mandatory fields (*)"),
+                                                          actions: <Widget>[
+                                                            CupertinoDialogAction(
+                                                              child: const Text(
+                                                                  "OK"),
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  } else if (_formkey
+                                                      .currentState!
                                                       .validate()) {
                                                     showCupertinoDialog(
                                                       context: context,
@@ -589,23 +713,15 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                                                                         NewschemcreatehomeBloc>()
                                                                     .add(
                                                                       CreateNewSchemeHomeEvent(
-                                                                        newschemes:
-                                                                            NewSchemeHomeInModel(
-                                                                          branchId: widget
-                                                                              .user
-                                                                              .branchId
-                                                                              .toString(),
-                                                                          instAmt: _intamountctrl
-                                                                              .text
-                                                                              .toString(),
-                                                                          mobileNo: widget
-                                                                              .user
-                                                                              .cusMobileNumber
-                                                                              .toString(),
-                                                                          schemeGroupId: _schemectrl
-                                                                              .text
-                                                                              .toString(),
-                                                                        ),
+                                                                        newschemes: NewSchemeHomeInModel(
+                                                                            newCusName:
+                                                                                _cusnamectrl.text,
+                                                                            newCusId: widget.user.cusId,
+                                                                            branchId: _branchctrl.text,
+                                                                            instAmt: _intamountctrl.text.toString(),
+                                                                            mobileNo: widget.user.cusMobileNumber.toString(),
+                                                                            schemeGroupId: _schemectrl.text.toString(),
+                                                                            empId: _salesmancontroller.text),
                                                                       ),
                                                                     );
 
@@ -650,12 +766,5 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
         },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    /*   _schemectrl.clear();
-    _intamountctrl.clear(); */
-    super.dispose();
   }
 }

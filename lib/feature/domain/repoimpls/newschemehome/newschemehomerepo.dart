@@ -21,12 +21,30 @@ class NewSchemeHomeRepo implements INewSchemeHomeRepo {
         "SchemeGroupId": newscheme.schemeGroupId.toString(),
         "InstAmt": newscheme.instAmt.toString(),
         "BranchId": newscheme.branchId.toString(),
-        "datakey": datakey
+        "EmpId": newscheme.empId,
+        "datakey": datakey,
+        "NewCusName": newscheme.newCusName,
+        "NewCusId": newscheme.newCusId,
+      });
+      logger.e({
+        "MobileNo": newscheme.mobileNo.toString(),
+        "SchemeGroupId": newscheme.schemeGroupId.toString(),
+        "InstAmt": newscheme.instAmt.toString(),
+        "BranchId": newscheme.branchId.toString(),
+        "EmpId": newscheme.empId,
+        "datakey": datakey,
+        "NewCusName": newscheme.newCusName,
+        "NewCusId": newscheme.newCusId,
       });
       if (response.statusCode == 200) {
         logger.e(response.body);
         final Map<String, dynamic> json = jsonDecode(response.body);
         final newscheme = NewSchemeHomeOutModel.fromJson(json['result'][0]);
+
+        if (newscheme.cusId == null) {
+          return left(MainFailures.networkerror(
+              error: "${newscheme.title}^${newscheme.descr}"));
+        }
         return right(newscheme);
       } else {
         logger.e(response.statusCode.toString());

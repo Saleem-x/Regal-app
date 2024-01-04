@@ -75,7 +75,8 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(30.0),
+                      padding: const EdgeInsets.only(
+                          left: 30, right: 30, top: 30, bottom: 00),
                       child: Column(
                         children: [
                           Row(
@@ -299,7 +300,7 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            padding: const EdgeInsets.only(top: 20, bottom: 0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

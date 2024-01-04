@@ -69,8 +69,8 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                   context: context,
                   builder: (BuildContext context) {
                     return CupertinoAlertDialog(
-                      title: const Text('Alert'),
-                      content: Text(otpmodel),
+                      title: Text(otpmodel.split('^')[0]),
+                      content: Text(otpmodel.split('^')[1]),
                       actions: <Widget>[
                         CupertinoDialogAction(
                           child: const Text("OK"),

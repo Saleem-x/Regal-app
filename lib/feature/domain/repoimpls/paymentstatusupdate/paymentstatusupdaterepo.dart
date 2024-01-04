@@ -30,9 +30,28 @@ class PaymentStatusRepo implements IPaymentStatusUpdateRepo {
         "orderID": paymentstatusresps.orderId,
         "subCode": paymentstatusresps.subCode
       });
+
+      logger.e({
+        "datakey": datakey,
+        "cusID": paymentstatusresps.cusId,
+        "goldRate": paymentstatusresps.goldRate,
+        "amt": paymentstatusresps.amt,
+        "payableAmt": paymentstatusresps.payableAmt,
+        "wgt": paymentstatusresps.wgt,
+        "joinID": paymentstatusresps.joinId,
+        "schemeID": paymentstatusresps.schemeId,
+        "response": paymentstatusresps.response,
+        "orderID": paymentstatusresps.orderId,
+        "subCode": paymentstatusresps.subCode
+      });
       if (response.statusCode == 200) {
         log(response.body);
         final Map<String, dynamic> json = jsonDecode(response.body);
+
+        if (response.body.contains('NoData')) {
+          return left(
+              const MainFailures.networkerror(error: 'Something Went Wrong'));
+        }
         final responsestatus =
             PaymentStatusUpdateRespModel.fromJson(json['result'][0]);
         return right(responsestatus);

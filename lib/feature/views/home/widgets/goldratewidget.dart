@@ -98,7 +98,7 @@ class GoldRateWidget extends StatelessWidget {
                         height: 5.h,
                       ),
                       Text(
-                        'Gold rate shown in Thrissur is shown here. It may be varies with your region',
+                        'Gold rate shown here is based on Thrissur dist. It may be varies with your region',
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 8.sp,

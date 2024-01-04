@@ -35,6 +35,7 @@ class MobileFieldWidget extends StatelessWidget {
           Expanded(
             child: TextFormField(
               controller: controller,
+              cursorColor: kredbutton,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'please enter mobile number';
@@ -128,6 +129,7 @@ class CustomMobileField extends StatelessWidget {
               builder: (context, state) {
                 return TextFormField(
                   autofocus: false,
+                  cursorColor: kredbutton,
                   controller: controller,
                   validator: (value) {
                     if (value == null || value.isEmpty) {

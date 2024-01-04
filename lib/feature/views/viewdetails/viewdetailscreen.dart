@@ -92,8 +92,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                       () {
                         canPop = true;
                         Navigator.pop(context);
-                        if (widget.user.cusName == null ||
-                            widget.user.cusName == '') {
+                        if (widget.user.cusName == null) {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

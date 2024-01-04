@@ -175,6 +175,7 @@ class NewPinOtpFIeldWidget extends StatelessWidget {
             ) */
                 PinCodeTextField(
               controller: newpin,
+              cursorColor: kredbutton,
               appContext: context,
               length: 4,
               keyboardType: TextInputType.number,
@@ -286,6 +287,7 @@ class ResetPinHeaderOtpField extends StatelessWidget {
               },
             ) */
                 PinCodeTextField(
+              cursorColor: kredbutton,
               controller: newpin,
               appContext: context,
               length: 4,
@@ -423,6 +425,7 @@ class LoginPinOtpField extends StatelessWidget {
 
                 PinCodeTextField(
               appContext: context,
+              cursorColor: kredbutton,
               length: 4,
               keyboardType: TextInputType.number,
               autoDismissKeyboard: true,
@@ -550,6 +553,7 @@ class NewSchemeOtpField extends StatelessWidget {
           Expanded(
             child: PinCodeTextField(
               // controller: password,
+              cursorColor: kredbutton,
               appContext: context,
               length: 4,
               keyboardType: TextInputType.number,

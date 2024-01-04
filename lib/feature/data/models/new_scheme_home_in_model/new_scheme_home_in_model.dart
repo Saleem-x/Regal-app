@@ -13,6 +13,9 @@ class NewSchemeHomeInModel {
   @JsonKey(name: 'BranchId')
   String? branchId;
   String? datakey;
+  String? empId;
+  String? newCusName;
+  String? newCusId;
 
   NewSchemeHomeInModel({
     this.mobileNo,
@@ -20,6 +23,9 @@ class NewSchemeHomeInModel {
     this.instAmt,
     this.branchId,
     this.datakey,
+    this.empId,
+    this.newCusName,
+    this.newCusId,
   });
 
   factory NewSchemeHomeInModel.fromJson(Map<String, dynamic> json) {

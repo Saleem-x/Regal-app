@@ -6,5 +6,14 @@ class NewschemehomeEvent with _$NewschemehomeEvent {
       GetAllSchemesfromHomesEvent;
   const factory NewschemehomeEvent.getSchemeTenureEvent({
     required List<SchemeListModel>? schemeslist,
+    required List<BranchModel>? branches,
+    required List<SalesManModel>? salesmanmodel,
   }) = GetSchemeTenureEvent;
+
+  const factory NewschemehomeEvent.getsalesmanEvent({
+    required String branchid,
+    required List<SchemeListModel>? schemeslist,
+    required List<BranchModel>? branches,
+    required List<SalesManModel>? salesmanmodel,
+  }) = GetsalesmanHomeEvent;
 }

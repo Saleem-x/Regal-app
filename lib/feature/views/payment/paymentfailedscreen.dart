@@ -233,13 +233,14 @@ class PaymentFailedScreeen extends StatelessWidget {
                                       (route) => false);
                                 } else {
                                   Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => HomeScreen(
-                                          user: user,
-                                        ),
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomeScreen(
+                                        user: user,
                                       ),
-                                      (route) => false);
+                                    ),
+                                    (route) => false,
+                                  );
                                 }
                                 Navigator.push(
                                   context,

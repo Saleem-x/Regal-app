@@ -14,6 +14,9 @@ NewSchemeHomeInModel _$NewSchemeHomeInModelFromJson(
       instAmt: json['InstAmt'] as String?,
       branchId: json['BranchId'] as String?,
       datakey: json['datakey'] as String?,
+      empId: json['empId'] as String?,
+      newCusName: json['newCusName'] as String?,
+      newCusId: json['newCusId'] as String?,
     );
 
 Map<String, dynamic> _$NewSchemeHomeInModelToJson(
@@ -24,4 +27,7 @@ Map<String, dynamic> _$NewSchemeHomeInModelToJson(
       'InstAmt': instance.instAmt,
       'BranchId': instance.branchId,
       'datakey': instance.datakey,
+      'empId': instance.empId,
+      'newCusName': instance.newCusName,
+      'newCusId': instance.newCusId,
     };

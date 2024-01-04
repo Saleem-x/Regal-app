@@ -342,7 +342,7 @@ class SchemeListDropDown extends StatelessWidget {
   }
 }
 
-class SaleSMAnDD extends StatelessWidget {
+class SaleSMAnDD extends StatefulWidget {
   const SaleSMAnDD(
       {super.key,
       required this.salesman,
@@ -356,7 +356,16 @@ class SaleSMAnDD extends StatelessWidget {
   final TextEditingController? branchctrl;
 
   @override
+  State<SaleSMAnDD> createState() => _SaleSMAnDDState();
+}
+
+class _SaleSMAnDDState extends State<SaleSMAnDD> {
+  TextEditingController salesmannamectrl = TextEditingController();
+  @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<SalesmansearchCubit>().searchedlist(widget.salesman, '');
+    });
     return BlocBuilder<DropdownitemsBloc, DropdownitemsState>(
       builder: (context, state) {
         if (state.salesmanmodel != null) {
@@ -369,164 +378,191 @@ class SaleSMAnDD extends StatelessWidget {
               );
         } */
         return TextFormField(
-          controller: _salesmannamectrl,
+          controller: salesmannamectrl,
           onTap: () {
-            showCupertinoDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.9,
-                  width: MediaQuery.of(context).size.width,
-                  child: AlertDialog(
-                    insetPadding: const EdgeInsets.all(20),
-                    backgroundColor: kcolorwhite,
-                    surfaceTintColor: kcolorwhite,
-                    contentPadding: const EdgeInsets.all(10),
-                    titlePadding: const EdgeInsets.all(0),
-                    title: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 3.2,
-                            ),
-                            Text(
-                              'Select salesman',
-                              style: TextStyle(fontSize: 13.sp),
-                            ),
-                            const Spacer(),
-                            IconButton(
-                              onPressed: () {
-                                _salesmansearchctrl.clear();
-                                Navigator.pop(context);
-                              },
-                              icon: Icon(
-                                Icons.close,
-                                size: 16.sp,
+            if (widget.salesman.isEmpty) {
+              showCupertinoDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CupertinoAlertDialog(
+                    title: const Text("Alert"),
+                    content: const Text("please Selct Branch"),
+                    actions: <Widget>[
+                      CupertinoDialogAction(
+                        child: const Text("OK"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else {
+              showCupertinoDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.9,
+                    width: MediaQuery.of(context).size.width,
+                    child: AlertDialog(
+                      insetPadding: const EdgeInsets.all(20),
+                      backgroundColor: kcolorwhite,
+                      surfaceTintColor: kcolorwhite,
+                      contentPadding: const EdgeInsets.all(10),
+                      titlePadding: const EdgeInsets.all(0),
+                      title: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 3.2,
                               ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          child: SizedBox(
-                            height: 30.h,
-                            child: TextFormField(
-                              controller: _salesmansearchctrl,
-                              onChanged: (query) {
-                                context
-                                    .read<SalesmansearchCubit>()
-                                    .searchedlist(state.salesmanmodel!, query);
+                              Text(
+                                'Select salesman',
+                                style: TextStyle(fontSize: 13.sp),
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                onPressed: () {
+                                  _salesmansearchctrl.clear();
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(
+                                  Icons.close,
+                                  size: 16.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            child: SizedBox(
+                              height: 30.h,
+                              child: TextFormField(
+                                controller: _salesmansearchctrl,
+                                onChanged: (query) {
+                                  context
+                                      .read<SalesmansearchCubit>()
+                                      .searchedlist(
+                                          state.salesmanmodel!, query);
 
-                                log(query);
-                              },
-                              decoration: InputDecoration(
-                                hintText: 'Search here',
-                                hintStyle: TextStyle(fontSize: 14.sp),
-                                prefixIcon: const Icon(Icons.search),
-                                isDense: true,
-                                border: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: kcolorblack.withOpacity(
-                                      .3,
+                                  log(query);
+                                },
+                                decoration: InputDecoration(
+                                  hintText: 'Search here',
+                                  hintStyle: TextStyle(fontSize: 14.sp),
+                                  prefixIcon: const Icon(Icons.search),
+                                  isDense: true,
+                                  border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: kcolorblack.withOpacity(
+                                        .3,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                disabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: kcolorblack.withOpacity(
-                                      .3,
+                                  disabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: kcolorblack.withOpacity(
+                                        .3,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: kcolorblack.withOpacity(
-                                      .3,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: kcolorblack.withOpacity(
+                                        .3,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: kcolorblack.withOpacity(
-                                      .3,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: kcolorblack.withOpacity(
+                                        .3,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    content: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.7,
-                      width: MediaQuery.of(context).size.width,
-                      child: state.salesmanmodel == null
-                          ? const Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : BlocBuilder<SalesmansearchCubit,
-                              SalesmansearchState>(
-                              builder: (context, searched) {
-                                return searched.salesmanlist!.isEmpty
-                                    ? const Center(
-                                        child: Text('Salesman not found'),
-                                      )
-                                    : ListView.separated(
-                                        itemBuilder: (context, index) {
-                                          return InkWell(
-                                            onTap: () {
-                                              controller.text = searched
-                                                  .salesmanlist![index].empId!;
+                        ],
+                      ),
+                      content: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        width: MediaQuery.of(context).size.width,
+                        child: widget.salesman.isEmpty
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : BlocBuilder<SalesmansearchCubit,
+                                SalesmansearchState>(
+                                builder: (context, searched) {
+                                  return searched.salesmanlist!.isEmpty
+                                      ? const Center(
+                                          child: Text('Salesman not found'),
+                                        )
+                                      : ListView.separated(
+                                          itemBuilder: (context, index) {
+                                            return InkWell(
+                                              onTap: () {
+                                                widget.controller.text =
+                                                    searched
+                                                        .salesmanlist![index]
+                                                        .empId!;
 
-                                              _salesmannamectrl.text =
-                                                  '${searched.salesmanlist![index].empName}';
-                                              log(controller.text);
-                                              Navigator.pop(context);
-                                            },
-                                            child: Card(
-                                              color: kcolorwhite,
-                                              surfaceTintColor: kcolorwhite,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: Container(
-                                                // height: 20.h,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                      '- ${searched.salesmanlist![index].empName}'),
+                                                salesmannamectrl.text = searched
+                                                    .salesmanlist![index]
+                                                    .empName!
+                                                    .replaceAll('|', "-");
+                                                log(widget.controller.text);
+                                                Navigator.pop(context);
+                                              },
+                                              child: Card(
+                                                color: kcolorwhite,
+                                                surfaceTintColor: kcolorwhite,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: Container(
+                                                  // height: 20.h,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(
+                                                        '- ${searched.salesmanlist![index].empName}'),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          );
-                                        },
-                                        separatorBuilder: (context, index) {
-                                          return SizedBox(
-                                            height: 5.h,
-                                          );
-                                        },
-                                        itemCount:
-                                            searched.salesmanlist!.length);
-                              },
-                            ),
+                                            );
+                                          },
+                                          separatorBuilder: (context, index) {
+                                            return SizedBox(
+                                              height: 5.h,
+                                            );
+                                          },
+                                          itemCount:
+                                              searched.salesmanlist!.length);
+                                },
+                              ),
+                      ),
                     ),
-                  ),
-                );
-              },
-            );
+                  );
+                },
+              );
+            }
           },
           // controller: controller,
           validator: (value) {
@@ -605,7 +641,6 @@ class SaleSMAnDD extends StatelessWidget {
   }
 }
 
-TextEditingController _salesmannamectrl = TextEditingController();
 TextEditingController _salesmansearchctrl = TextEditingController();
 
 class SchmTEnureDRopDown extends StatelessWidget {

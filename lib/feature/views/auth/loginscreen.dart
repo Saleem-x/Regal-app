@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: kbgcolor,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: size.height > 640
+        child: size.height > 764
             ? AllLoginWidgets(size: size)
             : SingleChildScrollView(
                 child: AllLoginWidgets(size: size),
@@ -59,6 +60,7 @@ String otp = '';
 class _AllLoginWidgetsState extends State<AllLoginWidgets> {
   @override
   Widget build(BuildContext context) {
+    log(widget.size.height.toString());
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         logger.e(state);
@@ -152,8 +154,10 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            SizedBox(height: /* widget.size.height * 0.09 */ 60.h),
             Padding(
-              padding: EdgeInsets.only(top: widget.size.height > 640 ? 0 : 40),
+              padding: EdgeInsets.only(
+                  top: /*  widget.size.height >= 640 ? 0 : 40.h */ 0),
               child: SvgPicture.asset(
                 'assets/others/regal_logo-optimized.svg',
                 width: widget.size.width / 2,
@@ -161,7 +165,7 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: widget.size.height * 0.09),
+            SizedBox(height: /* widget.size.height * 0.09 */ 60.h),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Row(

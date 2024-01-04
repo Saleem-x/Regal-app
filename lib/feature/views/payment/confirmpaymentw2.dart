@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,25 +81,60 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
         body: BlocConsumer<UpdatepaymentstatusBloc, UpdatepaymentstatusState>(
           listener: (context, state) {
             logger.e(state);
-            state.when(
-                paymentstatusUpdateState: (status, gpayresp) {
-                  canPop = true;
-                  Navigator.pop(context);
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => PaymentSuccessScreen(
-                          user: widget.user,
-                          paymentRespM: gpayresp!,
-                          amount: widget.payablecontroller.text,
-                          scheme: widget.scheme,
-                          schemeDetails: widget.schemeDetails,
-                          isNewScheme: widget.isNewScheme,
-                          goldWeight: widget.goldWeight,
-                        ),
+            state.when(paymentstatusUpdateState: (status, gpayresp) {
+              canPop = true;
+              Navigator.pop(context);
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => PaymentSuccessScreen(
+                      user: widget.user,
+                      paymentRespM: gpayresp!,
+                      amount: widget.payablecontroller.text,
+                      scheme: widget.scheme,
+                      schemeDetails: widget.schemeDetails,
+                      isNewScheme: widget.isNewScheme,
+                      goldWeight: widget.goldWeight,
+                    ),
+                  ),
+                  (route) => false);
+            }, paymentstatusUpdateFailedState: (error) {
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => PaymentFailedScreeen(
+                      user: widget.user,
+                      amount: widget.payablecontroller.text,
+                      scheme: widget.scheme,
+                      schemeDetails: widget.schemeDetails,
+                      isNewScheme: widget.isNewScheme,
+                    ),
+                  ),
+                  (route) => false);
+              /* showCupertinoDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CupertinoAlertDialog(
+                    title: const Text('Alert'),
+                    content: Text(
+                      error,
+                    ),
+                    actions: <Widget>[
+                      /*  CupertinoDialogAction(
+                          child: const Text("Cancel"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ), */
+                      CupertinoDialogAction(
+                        child: const Text("OK"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
                       ),
-                      (route) => false);
+                    ],
+                  );
                 },
-                paymentstatusUpdateFailedState: (error) {});
+              ); */
+            });
           },
           builder: (context, state) {
             return BlocConsumer<PaymentresponseBloc, PaymentresponseState>(
