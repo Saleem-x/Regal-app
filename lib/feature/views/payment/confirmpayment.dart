@@ -375,6 +375,7 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => ConfirmPaymentTWO(
+                              isNewScheme: false,
                               schemeDetails: widget.schemedetail,
                               scheme: widget.scheme,
                               orderID: orderID,

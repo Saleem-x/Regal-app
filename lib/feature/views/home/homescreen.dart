@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 HomePopupMenu(),
               ],

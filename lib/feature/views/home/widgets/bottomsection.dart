@@ -46,24 +46,7 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
               });
             }
             return schemedetail == null || scheme == null
-                ? Container(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    width: MediaQuery.of(context).size.width,
-                    height: 300.h,
-                    decoration: const BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(
-                          60,
-                        ),
-                      ),
-                    ),
-                    child: Shimmer.fromColors(
-                      baseColor: kcolorgrey.withOpacity(0.2),
-                      highlightColor: kbgcolor.withOpacity(0.4),
-                      child: const Card(),
-                    ),
-                  )
+                ? const HomeBottoShimmer()
                 : Container(
                     width: MediaQuery.of(context).size.width,
                     // height: size.,
@@ -337,6 +320,193 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
           },
         );
       },
+    );
+  }
+}
+
+class HomeBottoShimmer extends StatelessWidget {
+  const HomeBottoShimmer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      width: MediaQuery.of(context).size.width,
+      // height: 300.h,
+      decoration: const BoxDecoration(
+        color: kcolorwhite,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(
+            60,
+          ),
+        ),
+      ),
+      /* child: Shimmer.fromColors(
+          baseColor: kcolorgrey.withOpacity(0.2),
+          highlightColor: kbgcolor.withOpacity(0.4),
+          child: const Card(),
+        ), */
+
+      child: Padding(
+        padding:
+            const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 00),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        ShimmerWidgetWrapper(
+                          height: 25,
+                          width: MediaQuery.of(context).size.width / 2.2,
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Row(
+                      children: [
+                        ShimmerWidgetWrapper(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width / 1.9,
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Row(
+                      children: [
+                        ShimmerWidgetWrapper(
+                          height: 25,
+                          width: MediaQuery.of(context).size.width / 2.4,
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Row(
+                      children: [
+                        ShimmerWidgetWrapper(
+                          height: 25,
+                          width: MediaQuery.of(context).size.width / 1.9,
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    ShimmerWidgetWrapper(
+                      height: 60.h,
+                      width: 70.w,
+                    )
+                  ],
+                ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: DottedLine(
+                dashColor: ktextgrey,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        ShimmerWidgetWrapper(
+                          height: 30.h,
+                          width: MediaQuery.of(context).size.width / 1.9,
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Row(
+                      children: [
+                        ShimmerWidgetWrapper(
+                          height: 50.h,
+                          width: MediaQuery.of(context).size.width / 1.9,
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    ShimmerWidgetWrapper(
+                      height: 60.h,
+                      width: 70.w,
+                    )
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ShimmerWidgetWrapper(
+                  height: 25.h,
+                  width: MediaQuery.of(context).size.width / 1.3,
+                )
+              ],
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ShimmerWidgetWrapper extends StatelessWidget {
+  const ShimmerWidgetWrapper({
+    super.key,
+    required this.height,
+    required this.width,
+  });
+
+  final double height, width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      decoration: const BoxDecoration(
+        color: kcolorwhite,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(
+            60,
+          ),
+        ),
+      ),
+      width: width,
+      child: Shimmer.fromColors(
+        baseColor: kcolorgrey.withOpacity(0.1),
+        highlightColor: kcolorwhite.withOpacity(0.4),
+        child: const Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(5),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
