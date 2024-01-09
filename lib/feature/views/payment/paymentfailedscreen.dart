@@ -182,18 +182,37 @@ class PaymentFailedScreeen extends StatelessWidget {
                                         fontSize: 18.sp,
                                       ),
                                     ),
-                                    Text(
-                                      '${scheme.schemeName}',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 16.sp,
+                                    Visibility(
+                                      visible: scheme.schemeName == null ||
+                                              scheme.schemeName!.isEmpty
+                                          ? scheme.schemeName!.contains('RG')
+                                              ? true
+                                              : false
+                                          : false,
+                                      child: Text(
+                                        scheme.schemeName == null ||
+                                                scheme.schemeName!.isEmpty
+                                            ? scheme.schemeName!.contains('RG')
+                                                ? 'REGALIA'
+                                                : ''
+                                            : '',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 16.sp,
+                                        ),
                                       ),
                                     ),
-                                    Text(
-                                      '${scheme.custName?.toUpperCase() ?? user.cusName}',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 16.sp,
+                                    Visibility(
+                                      visible: scheme.custName == null ||
+                                              scheme.custName!.isEmpty
+                                          ? false
+                                          : true,
+                                      child: Text(
+                                        '${scheme.custName?.toUpperCase() ?? user.cusName}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 16.sp,
+                                        ),
                                       ),
                                     ),
                                   ],

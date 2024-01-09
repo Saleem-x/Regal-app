@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/state/cubit/schemeselector/schemeselector_cubit.dart';
 import 'package:regal_app/feature/views/about/aboutus.dart';
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
 import 'package:regal_app/feature/views/contactus/contactusscreen.dart';
@@ -86,6 +88,7 @@ class HomePopupMenu extends StatelessWidget {
                     CupertinoDialogAction(
                       child: const Text("yes"),
                       onPressed: () {
+                        context.read<SchemeselectorCubit>().selectscheme(0);
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

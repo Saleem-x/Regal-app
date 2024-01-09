@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -197,14 +199,19 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                         color: ktextgrey,
                                       ),
                                     ),
-                                    Text(
-                                      '${widget.scheme.custName?.toUpperCase() ?? widget.user.cusName}',
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        // fontFamily: kprimaryfont,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: ktextgrey,
+                                    Visibility(
+                                      visible: widget.scheme.custName == null
+                                          ? false
+                                          : true,
+                                      child: Text(
+                                        '${widget.scheme.custName?.toUpperCase() ?? widget.user.cusName}',
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          // fontFamily: kprimaryfont,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: ktextgrey,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -695,6 +702,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
             borderRadius: BorderRadius.circular(20),
           ),
           onPressed: () {
+            log('${widget.scheme.instAmount}');
             Navigator.push(
               context,
               MaterialPageRoute(

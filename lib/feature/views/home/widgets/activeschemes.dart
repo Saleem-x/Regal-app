@@ -30,7 +30,7 @@ class _ActiveSchemeWidgetState extends State<ActiveSchemeWidget> {
           .add(GetActiveSchemes(datakey: datakey, cusid: widget.user.cusId!));
     });
     return SizedBox(
-      height: 118.h,
+      height: 120.h /*  140.sp */ /* size.height * 0.18 */,
       // width: size.width.w,
       child: BlocListener<ActiveschemesBloc, ActiveschemesState>(
         listener: (context, state) {
@@ -107,7 +107,7 @@ class _ActiveSchemeWidgetState extends State<ActiveSchemeWidget> {
                                       },
                                       child: Card(
                                         // shadowColor: ktextgrey,
-                                        elevation: 3,
+                                        // elevation: 3,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(30.sp),
@@ -131,13 +131,13 @@ class _ActiveSchemeWidgetState extends State<ActiveSchemeWidget> {
                                             boxShadow: [
                                               BoxShadow(
                                                 color: const Color(0xFFB2B2B2)
-                                                    .withOpacity(.2)
+                                                    .withOpacity(.5)
                                                 /*Colors.grey.withOpacity(0.2),*/
                                                 ,
-                                                blurRadius: 6,
-                                                offset: const Offset(1, 0),
+                                                blurRadius: 5,
+                                                offset: const Offset(0, 1),
                                                 blurStyle: BlurStyle.normal,
-                                                spreadRadius: 3,
+                                                spreadRadius: 1,
                                               )
                                             ],
                                             /* boxShadow: [

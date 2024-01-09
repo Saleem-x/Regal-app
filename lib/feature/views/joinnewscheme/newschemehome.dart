@@ -14,6 +14,7 @@ import 'package:regal_app/feature/data/models/new_scheme_home_in_model/new_schem
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/data/models/scheme_list_model/scheme_list_model.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
+import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newschemecreate/newschemcreatehome_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newschemehome/newschemehome_bloc.dart';
 import 'package:regal_app/feature/state/cubit/checkbranchselected/checkbranchslection_cubit.dart';
@@ -78,6 +79,8 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                 ); */
             Navigator.of(context).pop();
             Future.delayed(const Duration(microseconds: 200), () {
+              context.read<ActiveschemesBloc>().add(GetActiveSchemes(
+                  datakey: datakey, cusid: widget.user.cusId!));
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -90,13 +93,13 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                       joinId: newscheme.joinId,
                     ),
                     scheme: CustomerSchemeModel(
-                      joinId: newscheme.joinId,
-                      merchantCode: newscheme.merchantId,
-                      subId: newscheme.subCodes,
-                      schemeNo: newscheme.schemeNo,
-                      schemeName: newscheme.schemeName,
-                      instAmount: newscheme.instAmt,
-                    ),
+                        joinId: newscheme.joinId,
+                        merchantCode: newscheme.merchantId,
+                        subId: newscheme.subCodes,
+                        schemeNo: newscheme.schemeNo,
+                        schemeName: newscheme.schemeName,
+                        instAmount: newscheme.instAmt,
+                        goldRate: newscheme.goldRate),
                     orderID: '${newscheme.transId!}',
                     payablecontroller: _intamountctrl.text.isEmpty
                         ? TextEditingController(text: newscheme.instAmt)

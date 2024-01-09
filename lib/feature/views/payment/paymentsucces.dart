@@ -214,18 +214,43 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
                                           fontSize: 18.sp,
                                         ),
                                       ),
-                                      Text(
-                                        "${widget.scheme.schemeName}",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16.sp,
+                                      Visibility(
+                                        visible:
+                                            widget.scheme.schemeName == null ||
+                                                    widget.scheme.schemeName!
+                                                        .isEmpty
+                                                ? widget.scheme.schemeName!
+                                                        .contains('RG')
+                                                    ? true
+                                                    : false
+                                                : false,
+                                        child: Text(
+                                          widget.scheme.schemeName == null ||
+                                                  widget.scheme.schemeName!
+                                                      .isEmpty
+                                              ? widget.scheme.schemeName!
+                                                      .contains('RG')
+                                                  ? 'REGALIA'
+                                                  : ''
+                                              : '',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 16.sp,
+                                          ),
                                         ),
                                       ),
-                                      Text(
-                                        '${widget.scheme.custName?.toUpperCase() ?? widget.user.cusName}',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 16.sp,
+                                      Visibility(
+                                        visible: widget.scheme.custName ==
+                                                    null ||
+                                                widget.scheme.custName!.isEmpty
+                                            ? false
+                                            : true,
+                                        child: Text(
+                                          '${widget.scheme.custName?.toUpperCase() ?? widget.user.cusName}',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 16.sp,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -292,12 +317,12 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Weight: ${widget.goldWeight} gm(s)',
+                                      'Weight: ${getgolweight(widget.amount, widget.scheme.goldRate ?? '0.0')} gm(s)',
                                       style: TextStyle(
                                           color: ktextgrey, fontSize: 12.sp),
                                     ),
                                     Text(
-                                      'Gold Rate: ₹${widget.schemeDetails.goldRate}',
+                                      'Gold Rate: ₹${widget.scheme.goldRate}',
                                       style: TextStyle(
                                           color: ktextgrey, fontSize: 12.sp),
                                     )
@@ -447,5 +472,19 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
         ),
       ),
     );
+  }
+
+  String getgolweight(String amount, String goldrate) {
+    try {
+      double goldRateValue = double.parse(goldrate);
+      if (goldRateValue > 0) {
+        double cumulativeWeight = double.parse(amount) / goldRateValue;
+        return (cumulativeWeight * 100 / 100).toStringAsFixed(2);
+      } else {
+        return '0.0';
+      }
+    } catch (e) {
+      return '0.0';
+    }
   }
 }

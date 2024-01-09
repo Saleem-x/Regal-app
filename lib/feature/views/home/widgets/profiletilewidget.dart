@@ -8,11 +8,9 @@ import 'package:regal_app/feature/state/cubit/schemeselector/schemeselector_cubi
 
 class ProfileTileWidget extends StatelessWidget {
   final UserBaseModel user;
-  // final List<CustomerSchemeModel> schemes;
   const ProfileTileWidget({
     super.key,
     required this.user,
-    /* required this.schemes */
   });
 
   @override

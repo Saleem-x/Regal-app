@@ -34,24 +34,26 @@ class CustomerSchemeModel {
   String? address2;
   @JsonKey(name: 'MerchantCode')
   String? merchantCode;
+  @JsonKey(name: 'goldRate')
+  String? goldRate;
 
-  CustomerSchemeModel({
-    this.mobile,
-    this.joinId,
-    this.schemeName,
-    this.schemeNo,
-    this.branchId,
-    this.branchDispName,
-    this.instAmount,
-    this.totalAmount,
-    this.totalNoofInstalment,
-    this.subId,
-    this.custName,
-    this.houseName,
-    this.address1,
-    this.address2,
-    this.merchantCode,
-  });
+  CustomerSchemeModel(
+      {this.mobile,
+      this.joinId,
+      this.schemeName,
+      this.schemeNo,
+      this.branchId,
+      this.branchDispName,
+      this.instAmount,
+      this.totalAmount,
+      this.totalNoofInstalment,
+      this.subId,
+      this.custName,
+      this.houseName,
+      this.address1,
+      this.address2,
+      this.merchantCode,
+      this.goldRate});
 
   factory CustomerSchemeModel.fromJson(Map<String, dynamic> json) {
     return _$CustomerSchemeModelFromJson(json);

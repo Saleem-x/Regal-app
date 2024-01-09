@@ -27,6 +27,7 @@ class HomeScreen extends StatelessWidget {
           .read<ActiveschemesBloc>()
           .add(GetActiveSchemes(datakey: datakey, cusid: user.cusId!));
     });
+    // log(size.height.toString());
     return Scaffold(
       backgroundColor: kbgcolor,
       appBar: const PreferredSize(
@@ -44,6 +45,9 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
+        /* physics: MediaQuery.of(context).size.height > 855
+            ? const NeverScrollableScrollPhysics()
+            : const AlwaysScrollableScrollPhysics(), */
         child: Column(
           children: [
             ProfileTileWidget(
@@ -53,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                       failedstate: () => []), */
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               child: Row(
                 children: [
                   Text(
@@ -132,7 +136,12 @@ class HomeScreen extends StatelessWidget {
             ),
             BottomSectionWidget(
               user: user,
-            )
+            ),
+            /* Container(
+              height: 30,
+              width: MediaQuery.of(context).size.width,
+              color: kcolorwhite,
+            ), */
           ],
         ),
       ),

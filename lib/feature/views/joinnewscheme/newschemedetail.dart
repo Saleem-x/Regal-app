@@ -126,19 +126,22 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                   .toStringAsFixed(2),
                           schemeDetails: SchemeDetailsModel(
                             goldRate: user.goldRate,
-                            goldWeight: "0.00",
+                            goldWeight: getgolweight(_instalmentcontroller.text,
+                                user.goldRate ?? '0'),
                             schemeNo: user.schemeNo,
                             schemeName: "",
                             joinId: user.joinId,
+
                             // noofInst: user.
                           ),
                           scheme: CustomerSchemeModel(
-                            joinId: user.joinId,
-                            merchantCode: user.merchantId,
-                            subId: user.subCodes,
-                            schemeNo: user.schemeNo,
-                            schemeName: "",
-                          ),
+                              joinId: user.joinId,
+                              merchantCode: user.merchantId,
+                              subId: user.subCodes,
+                              schemeNo: user.schemeNo,
+                              schemeName: "",
+                              goldRate: user.goldRate,
+                              instAmount: _instalmentcontroller.text),
                           orderID: '${user.transId!}',
                           payablecontroller: _instalmentcontroller,
                           user: UserBaseModel(
@@ -1001,5 +1004,19 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
         ),
       ),
     );
+  }
+
+  String getgolweight(String amount, String goldrate) {
+    try {
+      double goldRateValue = double.parse(goldrate);
+      if (goldRateValue > 0) {
+        double cumulativeWeight = double.parse(amount) / goldRateValue;
+        return (cumulativeWeight * 100 / 100).toStringAsFixed(2);
+      } else {
+        return '0.0';
+      }
+    } catch (e) {
+      return '0.0';
+    }
   }
 }

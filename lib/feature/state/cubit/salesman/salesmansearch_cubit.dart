@@ -18,6 +18,11 @@ class SalesmansearchCubit extends Cubit<SalesmansearchState> {
           .toList();
     }
     emit(SearchedSalesmanList(
-        salesmanlist: query.isEmpty ? salesmanlist : searchedlist));
+        salesmanlist: query.isEmpty ? salesmanlist : searchedlist,
+        selectedsalesman: state.selectedsalesman));
+  }
+
+  void selectsalesman(String name) {
+    emit(state.copyWith(selectedsalesman: name));
   }
 }

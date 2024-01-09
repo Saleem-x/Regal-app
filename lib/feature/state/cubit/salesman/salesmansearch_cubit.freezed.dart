@@ -17,20 +17,26 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SalesmansearchState {
   List<SalesManModel>? get salesmanlist => throw _privateConstructorUsedError;
+  String? get selectedsalesman => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<SalesManModel>? salesmanlist)
+    required TResult Function(
+            List<SalesManModel>? salesmanlist, String? selectedsalesman)
         searchedsalesmanlist,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<SalesManModel>? salesmanlist)? searchedsalesmanlist,
+    TResult? Function(
+            List<SalesManModel>? salesmanlist, String? selectedsalesman)?
+        searchedsalesmanlist,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<SalesManModel>? salesmanlist)? searchedsalesmanlist,
+    TResult Function(
+            List<SalesManModel>? salesmanlist, String? selectedsalesman)?
+        searchedsalesmanlist,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -62,7 +68,7 @@ abstract class $SalesmansearchStateCopyWith<$Res> {
           SalesmansearchState value, $Res Function(SalesmansearchState) then) =
       _$SalesmansearchStateCopyWithImpl<$Res, SalesmansearchState>;
   @useResult
-  $Res call({List<SalesManModel>? salesmanlist});
+  $Res call({List<SalesManModel>? salesmanlist, String? selectedsalesman});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class _$SalesmansearchStateCopyWithImpl<$Res, $Val extends SalesmansearchState>
   @override
   $Res call({
     Object? salesmanlist = freezed,
+    Object? selectedsalesman = freezed,
   }) {
     return _then(_value.copyWith(
       salesmanlist: freezed == salesmanlist
           ? _value.salesmanlist
           : salesmanlist // ignore: cast_nullable_to_non_nullable
               as List<SalesManModel>?,
+      selectedsalesman: freezed == selectedsalesman
+          ? _value.selectedsalesman
+          : selectedsalesman // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -97,7 +108,7 @@ abstract class _$$SearchedSalesmanListImplCopyWith<$Res>
       __$$SearchedSalesmanListImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<SalesManModel>? salesmanlist});
+  $Res call({List<SalesManModel>? salesmanlist, String? selectedsalesman});
 }
 
 /// @nodoc
@@ -112,12 +123,17 @@ class __$$SearchedSalesmanListImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? salesmanlist = freezed,
+    Object? selectedsalesman = freezed,
   }) {
     return _then(_$SearchedSalesmanListImpl(
       salesmanlist: freezed == salesmanlist
           ? _value._salesmanlist
           : salesmanlist // ignore: cast_nullable_to_non_nullable
               as List<SalesManModel>?,
+      selectedsalesman: freezed == selectedsalesman
+          ? _value.selectedsalesman
+          : selectedsalesman // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -126,7 +142,8 @@ class __$$SearchedSalesmanListImplCopyWithImpl<$Res>
 
 class _$SearchedSalesmanListImpl implements SearchedSalesmanList {
   const _$SearchedSalesmanListImpl(
-      {required final List<SalesManModel>? salesmanlist})
+      {required final List<SalesManModel>? salesmanlist,
+      required this.selectedsalesman})
       : _salesmanlist = salesmanlist;
 
   final List<SalesManModel>? _salesmanlist;
@@ -140,8 +157,11 @@ class _$SearchedSalesmanListImpl implements SearchedSalesmanList {
   }
 
   @override
+  final String? selectedsalesman;
+
+  @override
   String toString() {
-    return 'SalesmansearchState.searchedsalesmanlist(salesmanlist: $salesmanlist)';
+    return 'SalesmansearchState.searchedsalesmanlist(salesmanlist: $salesmanlist, selectedsalesman: $selectedsalesman)';
   }
 
   @override
@@ -150,12 +170,14 @@ class _$SearchedSalesmanListImpl implements SearchedSalesmanList {
         (other.runtimeType == runtimeType &&
             other is _$SearchedSalesmanListImpl &&
             const DeepCollectionEquality()
-                .equals(other._salesmanlist, _salesmanlist));
+                .equals(other._salesmanlist, _salesmanlist) &&
+            (identical(other.selectedsalesman, selectedsalesman) ||
+                other.selectedsalesman == selectedsalesman));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_salesmanlist));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_salesmanlist), selectedsalesman);
 
   @JsonKey(ignore: true)
   @override
@@ -168,28 +190,33 @@ class _$SearchedSalesmanListImpl implements SearchedSalesmanList {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<SalesManModel>? salesmanlist)
+    required TResult Function(
+            List<SalesManModel>? salesmanlist, String? selectedsalesman)
         searchedsalesmanlist,
   }) {
-    return searchedsalesmanlist(salesmanlist);
+    return searchedsalesmanlist(salesmanlist, selectedsalesman);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<SalesManModel>? salesmanlist)? searchedsalesmanlist,
+    TResult? Function(
+            List<SalesManModel>? salesmanlist, String? selectedsalesman)?
+        searchedsalesmanlist,
   }) {
-    return searchedsalesmanlist?.call(salesmanlist);
+    return searchedsalesmanlist?.call(salesmanlist, selectedsalesman);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<SalesManModel>? salesmanlist)? searchedsalesmanlist,
+    TResult Function(
+            List<SalesManModel>? salesmanlist, String? selectedsalesman)?
+        searchedsalesmanlist,
     required TResult orElse(),
   }) {
     if (searchedsalesmanlist != null) {
-      return searchedsalesmanlist(salesmanlist);
+      return searchedsalesmanlist(salesmanlist, selectedsalesman);
     }
     return orElse();
   }
@@ -225,11 +252,13 @@ class _$SearchedSalesmanListImpl implements SearchedSalesmanList {
 
 abstract class SearchedSalesmanList implements SalesmansearchState {
   const factory SearchedSalesmanList(
-          {required final List<SalesManModel>? salesmanlist}) =
-      _$SearchedSalesmanListImpl;
+      {required final List<SalesManModel>? salesmanlist,
+      required final String? selectedsalesman}) = _$SearchedSalesmanListImpl;
 
   @override
   List<SalesManModel>? get salesmanlist;
+  @override
+  String? get selectedsalesman;
   @override
   @JsonKey(ignore: true)
   _$$SearchedSalesmanListImplCopyWith<_$SearchedSalesmanListImpl>

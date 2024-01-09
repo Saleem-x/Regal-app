@@ -116,7 +116,7 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                                 ),
                               ),
                               Text(
-                                '${widget.scheme.schemeName!} | ₹${double.parse(widget.scheme.totalAmount ?? '0.0').abs()}',
+                                '${widget.scheme.schemeName ?? (widget.scheme.schemeNo!.contains('RG') ? 'REGALIA' : '')} | ₹${double.parse(widget.scheme.totalAmount ?? '0.0').abs()}',
                                 style: TextStyle(
                                   // fontFamily: kboldfont,
                                   fontWeight: FontWeight.w400,
@@ -162,7 +162,7 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                                   height: 10.h,
                                 ),
                                 Text(
-                                  '₹${widget.schemedetail.goldRate}',
+                                  '₹${widget.scheme.goldRate}',
                                   style: TextStyle(
                                     color: kcolorblack,
                                     // fontFamily: kprimaryfont,
@@ -225,7 +225,10 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                               width: size.width,
                               child: TextFormField(
                                 keyboardType: TextInputType.number,
-                                controller: _payablecontroller,
+                                controller: _payablecontroller.text.isEmpty
+                                    ? TextEditingController(
+                                        text: widget.scheme.instAmount)
+                                    : _payablecontroller,
                                 onChanged: (value) {
                                   if (widget.schemedetail.goldRate != null) {
                                     logger.e(widget.schemedetail.goldRate);

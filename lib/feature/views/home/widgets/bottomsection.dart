@@ -21,14 +21,8 @@ class BottomSectionWidget extends StatefulWidget {
 }
 
 class _BottomSectionWidgetState extends State<BottomSectionWidget> {
-  static final _payablecontroller = TextEditingController();
+  final _payablecontroller = TextEditingController();
   final _bottomormkey = GlobalKey<FormState>();
-
-  /*  @override
-  void dispose() {
-    // _payablecontroller.dispose();
-    super.dispose();
-  } */
 
   @override
   Widget build(BuildContext context) {

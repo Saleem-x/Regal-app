@@ -769,7 +769,11 @@ class _SaleSMAnDDState extends State<SaleSMAnDD> {
                                                     searched
                                                         .salesmanlist![index]
                                                         .empId!;
-
+                                                context
+                                                    .read<SalesmansearchCubit>()
+                                                    .selectsalesman(searched
+                                                        .salesmanlist![index]
+                                                        .empName!);
                                                 salesmannamectrl.text = searched
                                                     .salesmanlist![index]
                                                     .empName!
@@ -838,14 +842,18 @@ class _SaleSMAnDDState extends State<SaleSMAnDD> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  salesmannamectrl.text.isEmpty
-                      ? "Select"
-                      : salesmannamectrl.text,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: kcolorblack,
-                      fontSize: 15.sp),
+                BlocBuilder<SalesmansearchCubit, SalesmansearchState>(
+                  builder: (context, state) {
+                    return Text(
+                      salesmannamectrl.text.isEmpty
+                          ? "Select"
+                          : salesmannamectrl.text,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          color: kcolorblack,
+                          fontSize: 15.sp),
+                    );
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 1),
