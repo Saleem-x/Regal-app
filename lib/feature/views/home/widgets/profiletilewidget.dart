@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
+import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart';
+import 'package:regal_app/feature/state/cubit/schemeselector/schemeselector_cubit.dart';
 
 class ProfileTileWidget extends StatelessWidget {
   final UserBaseModel user;
-  const ProfileTileWidget({super.key, required this.user});
+  // final List<CustomerSchemeModel> schemes;
+  const ProfileTileWidget({
+    super.key,
+    required this.user,
+    /* required this.schemes */
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +69,32 @@ class ProfileTileWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    user.cusName.toString().toUpperCase(),
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 19.sp,
-                    ),
+                  BlocBuilder<ActiveschemesBloc, ActiveschemesState>(
+                    builder: (context, state) {
+                      return BlocBuilder<SchemeselectorCubit,
+                          SchemeselectorState>(
+                        builder: (context, ind) {
+                          return state.when(
+                              activeAchemesState: (schemes) => Text(
+                                    schemes == null
+                                        ? user.cusName
+                                        : schemes[ind.idx].custName ??
+                                            '${user.cusName}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 19.sp,
+                                    ),
+                                  ),
+                              failedstate: () => Text(
+                                    '${user.cusName}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 19.sp,
+                                    ),
+                                  ));
+                        },
+                      );
+                    },
                   ),
                   SizedBox(
                     height: 3.h,

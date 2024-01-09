@@ -380,8 +380,8 @@ class _SaleSMAnDDState extends State<SaleSMAnDD> {
                 GetetsalesmansEvent(branchid: branchctrl!.text),
               );
         } */
-        return TextFormField(
-          controller: salesmannamectrl,
+        return /* TextFormField(
+          controller:                                                ,
           onTap: () {
             if (widget.salesman.isEmpty) {
               showCupertinoDialog(
@@ -544,8 +544,10 @@ class _SaleSMAnDDState extends State<SaleSMAnDD> {
                                                     padding:
                                                         const EdgeInsets.all(
                                                             8.0),
-                                                    child: Text(
-                                                        '- ${searched.salesmanlist![index].empName}'),
+                                                    child: Text(searched
+                                                        .salesmanlist![index]
+                                                        .empName!
+                                                        .replaceAll("|", "-")),
                                                   ),
                                                 ),
                                               ),
@@ -568,15 +570,7 @@ class _SaleSMAnDDState extends State<SaleSMAnDD> {
             }
           },
           // controller: controller,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'please enter mobile number';
-            } else if (value.length < 10) {
-              return 'mobile number should be 10';
-            } else {
-              return null;
-            }
-          },
+
           keyboardType: TextInputType.none,
           decoration: InputDecoration(
             isDense: true,
@@ -613,7 +607,7 @@ class _SaleSMAnDDState extends State<SaleSMAnDD> {
             ),
             suffixIcon: IconButton(
               onPressed: () {
-                showCupertinoDialog(
+                /*  showCupertinoDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return CupertinoAlertDialog(
@@ -631,11 +625,237 @@ class _SaleSMAnDDState extends State<SaleSMAnDD> {
                       ],
                     );
                   },
-                );
+                ); */
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_drop_down,
+                size: 20.sp,
               ),
+            ),
+          ),
+        ); */
+
+            GestureDetector(
+          onTap: () {
+            if (widget.salesman.isEmpty) {
+              showCupertinoDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CupertinoAlertDialog(
+                    title: const Text("Alert"),
+                    content: const Text("please Selct Branch"),
+                    actions: <Widget>[
+                      CupertinoDialogAction(
+                        child: const Text("OK"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else {
+              showCupertinoDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.9,
+                    width: MediaQuery.of(context).size.width,
+                    child: AlertDialog(
+                      insetPadding: const EdgeInsets.all(20),
+                      backgroundColor: kcolorwhite,
+                      surfaceTintColor: kcolorwhite,
+                      contentPadding: const EdgeInsets.all(10),
+                      titlePadding: const EdgeInsets.all(0),
+                      title: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 3.2,
+                              ),
+                              Text(
+                                'Select salesman',
+                                style: TextStyle(fontSize: 13.sp),
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                onPressed: () {
+                                  _salesmansearchctrl.clear();
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(
+                                  Icons.close,
+                                  size: 16.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            child: SizedBox(
+                              height: 30.h,
+                              child: TextFormField(
+                                controller: _salesmansearchctrl,
+                                onChanged: (query) {
+                                  context
+                                      .read<SalesmansearchCubit>()
+                                      .searchedlist(
+                                          state.salesmanmodel!, query);
+
+                                  log(query);
+                                },
+                                decoration: InputDecoration(
+                                  hintText: 'Search here',
+                                  hintStyle: TextStyle(fontSize: 14.sp),
+                                  prefixIcon: const Icon(Icons.search),
+                                  isDense: true,
+                                  border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: kcolorblack.withOpacity(
+                                        .3,
+                                      ),
+                                    ),
+                                  ),
+                                  disabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: kcolorblack.withOpacity(
+                                        .3,
+                                      ),
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: kcolorblack.withOpacity(
+                                        .3,
+                                      ),
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: kcolorblack.withOpacity(
+                                        .3,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      content: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        width: MediaQuery.of(context).size.width,
+                        child: widget.salesman.isEmpty
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : BlocBuilder<SalesmansearchCubit,
+                                SalesmansearchState>(
+                                builder: (context, searched) {
+                                  return searched.salesmanlist!.isEmpty
+                                      ? const Center(
+                                          child: Text('Salesman not found'),
+                                        )
+                                      : ListView.separated(
+                                          itemBuilder: (context, index) {
+                                            return InkWell(
+                                              onTap: () {
+                                                widget.controller.text =
+                                                    searched
+                                                        .salesmanlist![index]
+                                                        .empId!;
+
+                                                salesmannamectrl.text = searched
+                                                    .salesmanlist![index]
+                                                    .empName!
+                                                    .replaceAll('|', "-");
+                                                log(widget.controller.text);
+                                                Navigator.pop(context);
+                                              },
+                                              child: Card(
+                                                color: kcolorwhite,
+                                                surfaceTintColor: kcolorwhite,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                child: Container(
+                                                  // height: 20.h,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Text(searched
+                                                        .salesmanlist![index]
+                                                        .empName!
+                                                        .replaceAll("|", "-")),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          separatorBuilder: (context, index) {
+                                            return SizedBox(
+                                              height: 5.h,
+                                            );
+                                          },
+                                          itemCount:
+                                              searched.salesmanlist!.length);
+                                },
+                              ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+          },
+          child: Container(
+            height: 30.h,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: kcolorblack.withOpacity(
+                    .3,
+                  ),
+                ),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  salesmannamectrl.text.isEmpty
+                      ? "Select"
+                      : salesmannamectrl.text,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: kcolorblack,
+                      fontSize: 15.sp),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 1),
+                  child: Icon(
+                    Icons.arrow_drop_down,
+                    size: 22.sp,
+                    color: kcolorblack.withOpacity(.6),
+                  ),
+                )
+              ],
             ),
           ),
         );

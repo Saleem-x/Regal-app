@@ -116,7 +116,7 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                                 ),
                               ),
                               Text(
-                                '${widget.scheme.schemeName!} | ₹${double.parse(widget.scheme.totalAmount!).abs()}',
+                                '${widget.scheme.schemeName!} | ₹${double.parse(widget.scheme.totalAmount ?? '0.0').abs()}',
                                 style: TextStyle(
                                   // fontFamily: kboldfont,
                                   fontWeight: FontWeight.w400,
@@ -195,7 +195,7 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                             height: 10.h,
                           ),
                           Text(
-                            '₹${widget.scheme.instAmount!}',
+                            '₹${widget.scheme.instAmount ?? ''}',
                             style: TextStyle(
                               color: kcolorblack,
                               // fontFamily: kprimaryfont,

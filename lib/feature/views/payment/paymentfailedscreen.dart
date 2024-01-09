@@ -169,7 +169,7 @@ class PaymentFailedScreeen extends StatelessWidget {
                             ),
                             Expanded(
                               child: SizedBox(
-                                height: 60.h,
+                                height: 65.h,
                                 width: size.width.w,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,6 +184,13 @@ class PaymentFailedScreeen extends StatelessWidget {
                                     ),
                                     Text(
                                       '${scheme.schemeName}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16.sp,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${scheme.custName?.toUpperCase() ?? user.cusName}',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 16.sp,

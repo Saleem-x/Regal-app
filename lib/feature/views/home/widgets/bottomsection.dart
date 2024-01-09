@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,11 +36,12 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
       builder: (context, state) {
         return state.when(
           schemedetails: (schemedetail, scheme) {
+            // log(jsonEncode(schemedetail).toString());
             if (scheme != null) {
               Future.delayed(const Duration(microseconds: 100), () {
                 _payablecontroller.text =
                     double.parse(scheme.instAmount ?? '0').toStringAsFixed(0);
-                log('${scheme.instAmount}');
+                // log('${scheme.instAmount}');
               });
             }
             return schemedetail == null || scheme == null
@@ -59,8 +58,8 @@ class _BottomSectionWidgetState extends State<BottomSectionWidget> {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 30, right: 30, top: 30, bottom: 00),
+                      padding: EdgeInsets.only(
+                          left: 30, right: 30, top: 30, bottom: 5.sp),
                       child: Column(
                         children: [
                           Row(
@@ -350,8 +349,7 @@ class HomeBottoShimmer extends StatelessWidget {
         ), */
 
       child: Padding(
-        padding:
-            const EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 00),
+        padding: EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10.sp),
         child: Column(
           children: [
             Row(
@@ -364,7 +362,7 @@ class HomeBottoShimmer extends StatelessWidget {
                     Row(
                       children: [
                         ShimmerWidgetWrapper(
-                          height: 25,
+                          height: 25.h,
                           width: MediaQuery.of(context).size.width / 2.2,
                         )
                       ],
@@ -407,7 +405,7 @@ class HomeBottoShimmer extends StatelessWidget {
                 Row(
                   children: [
                     ShimmerWidgetWrapper(
-                      height: 60.h,
+                      height: 50.h,
                       width: 70.w,
                     )
                   ],
@@ -428,18 +426,18 @@ class HomeBottoShimmer extends StatelessWidget {
                     Row(
                       children: [
                         ShimmerWidgetWrapper(
-                          height: 30.h,
+                          height: 20.h,
                           width: MediaQuery.of(context).size.width / 1.9,
                         )
                       ],
                     ),
                     SizedBox(
-                      height: 10.h,
+                      height: 5.h,
                     ),
                     Row(
                       children: [
                         ShimmerWidgetWrapper(
-                          height: 50.h,
+                          height: 40.h,
                           width: MediaQuery.of(context).size.width / 1.9,
                         )
                       ],
@@ -449,7 +447,7 @@ class HomeBottoShimmer extends StatelessWidget {
                 Row(
                   children: [
                     ShimmerWidgetWrapper(
-                      height: 60.h,
+                      height: 50.h,
                       width: 70.w,
                     )
                   ],

@@ -54,7 +54,7 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
     context.read<PaymentresponseBloc>().add(
           const ResetresponseEvent(),
         );
-
+// widget.paymentRespM./
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 225, 162, 66),
       appBar: AppBar(
@@ -200,7 +200,7 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
                               ),
                               Expanded(
                                 child: SizedBox(
-                                  height: 60.h,
+                                  height: 65.h,
                                   width: size.width.w,
                                   child: Column(
                                     crossAxisAlignment:
@@ -221,6 +221,13 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
                                           fontSize: 16.sp,
                                         ),
                                       ),
+                                      Text(
+                                        '${widget.scheme.custName?.toUpperCase() ?? widget.user.cusName}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 16.sp,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -229,22 +236,42 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            child: Column(
                               children: [
-                                Text(
-                                  'Trans.No: ${widget.paymentRespM.txnRef}',
-                                  style: const TextStyle(
-                                    color: ktextgrey,
-                                  ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Trans.No: ${widget.paymentRespM.txnRef}',
+                                      style: const TextStyle(
+                                        color: ktextgrey,
+                                      ),
+                                    ),
+                                    Text(
+                                      DateFormat('dd/MM/yyyy')
+                                          .format(DateTime.now()),
+                                      style: const TextStyle(
+                                        color: ktextgrey,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  DateFormat('dd/MM/yyyy')
-                                      .format(DateTime.now()),
-                                  style: const TextStyle(
-                                    color: ktextgrey,
-                                  ),
-                                )
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                const Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Receipt. No: 123456',
+                                      style: TextStyle(
+                                        color: ktextgrey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),

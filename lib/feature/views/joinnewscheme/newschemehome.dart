@@ -95,9 +95,12 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                       subId: newscheme.subCodes,
                       schemeNo: newscheme.schemeNo,
                       schemeName: newscheme.schemeName,
+                      instAmount: newscheme.instAmt,
                     ),
                     orderID: '${newscheme.transId!}',
-                    payablecontroller: _intamountctrl,
+                    payablecontroller: _intamountctrl.text.isEmpty
+                        ? TextEditingController(text: newscheme.instAmt)
+                        : _intamountctrl,
                     user: widget.user,
                     goldWeight: (double.parse(newscheme.instAmt ?? '0.00') /
                             double.parse(newscheme.goldRate ?? '0.00'))
@@ -114,7 +117,8 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                 return CupertinoAlertDialog(
                   title: Text(error.split('^')[0]),
                   content: Text(
-                    error.split('^')[1],
+                    // ignore: unnecessary_string_interpolations
+                    "${error.split('^')[1]}",
                   ),
                   actions: <Widget>[
                     /*  CupertinoDialogAction(

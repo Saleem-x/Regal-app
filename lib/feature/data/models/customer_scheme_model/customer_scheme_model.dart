@@ -8,6 +8,7 @@ class CustomerSchemeModel {
   String? mobile;
   @JsonKey(name: 'JoinId')
   String? joinId;
+  @JsonKey(name: 'schemeName')
   String? schemeName;
   @JsonKey(name: 'SchemeNo')
   String? schemeNo;
@@ -23,6 +24,14 @@ class CustomerSchemeModel {
   String? totalNoofInstalment;
   @JsonKey(name: 'SubID')
   String? subId;
+  @JsonKey(name: 'CustName')
+  String? custName;
+  @JsonKey(name: 'HouseName')
+  String? houseName;
+  @JsonKey(name: 'Address1')
+  String? address1;
+  @JsonKey(name: 'Address2')
+  String? address2;
   @JsonKey(name: 'MerchantCode')
   String? merchantCode;
 
@@ -37,6 +46,10 @@ class CustomerSchemeModel {
     this.totalAmount,
     this.totalNoofInstalment,
     this.subId,
+    this.custName,
+    this.houseName,
+    this.address1,
+    this.address2,
     this.merchantCode,
   });
 

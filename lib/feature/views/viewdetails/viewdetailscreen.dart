@@ -178,20 +178,36 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                     color: ktextgrey,
                                   ),
                                 ),
-                                subtitle: Text(
-                                  widget.scheme.schemeName == null ||
-                                          widget.scheme.totalAmount == null
-                                      ? widget.scheme.schemeNo!.contains('RG')
-                                          ? 'REGALIA'
-                                          : ''
-                                      : '${widget.scheme.schemeName ?? ''} | ₹${widget.scheme.totalAmount ?? ''}',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    // fontFamily: kprimaryfont,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400,
-                                    color: ktextgrey,
-                                  ),
+                                subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      widget.scheme.schemeName == null ||
+                                              widget.scheme.totalAmount == null
+                                          ? widget.scheme.schemeNo!
+                                                  .contains('RG')
+                                              ? 'REGALIA'
+                                              : ''
+                                          : '${widget.scheme.schemeName ?? ''} | ₹${widget.scheme.totalAmount ?? ''}',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        // fontFamily: kprimaryfont,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: ktextgrey,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${widget.scheme.custName?.toUpperCase() ?? widget.user.cusName}',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        // fontFamily: kprimaryfont,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: ktextgrey,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               DetailsContainerRowWidget(
@@ -451,16 +467,36 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                                     color: ktextgrey,
                                                   ),
                                                 ),
-                                                subtitle: Text(
-                                                  'Trans. No. : ${insthystry[index].receiptNo ?? "0"}',
-                                                  style: TextStyle(
-                                                    // fontFamily: kprimaryfont,
-                                                    fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: ktextgrey,
-                                                  ),
+                                                subtitle: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Receipt. No. : ${insthystry[index].receiptNo ?? "0"}',
+                                                      style: TextStyle(
+                                                        // fontFamily: kprimaryfont,
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: ktextgrey,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3.h,
+                                                    ),
+                                                    Text(
+                                                      '${insthystry[index].receiptDate ?? 0}',
+                                                      style: TextStyle(
+                                                        // fontFamily: kprimaryfont,
+                                                        fontSize: 12.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: ktextgrey,
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
-                                                trailing: Column(
+                                                /*  trailing: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.end,
                                                   children: [
@@ -475,7 +511,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                                       ),
                                                     )
                                                   ],
-                                                ),
+                                                ), */
                                                 children: [
                                                   SizedBox(
                                                     height: 5.h,
@@ -666,7 +702,9 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                   scheme: widget.scheme,
                   schemedetail: widget.schemedetil,
                   user: widget.user,
-                  payablecontroller: widget.scheme.instAmount!,
+                  payablecontroller: widget.scheme.instAmount ??
+                      widget.schemedetil.schemeAmount ??
+                      '0.0',
                 ),
               ),
             );
@@ -692,7 +730,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '*24 will take to reflect the last payment',
+                  'It will take 24 hours to reflect the last payment',
                   style: TextStyle(
                     color: kredbutton.withOpacity(.7),
                     // fontFamily: kprimaryfont,

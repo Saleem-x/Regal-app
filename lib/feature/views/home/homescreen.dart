@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
+import 'package:regal_app/feature/state/bloc/activeschemes/activeschemes_bloc.dart';
 import 'package:regal_app/feature/state/bloc/newschemehome/newschemehome_bloc.dart';
 import 'package:regal_app/feature/state/cubit/checkbranchselected/checkbranchslection_cubit.dart';
 import 'package:regal_app/feature/views/home/widgets/activeschemes.dart';
@@ -20,7 +22,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final Size size = MediaQuery.of(context).size;
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context
+          .read<ActiveschemesBloc>()
+          .add(GetActiveSchemes(datakey: datakey, cusid: user.cusId!));
+    });
     return Scaffold(
       backgroundColor: kbgcolor,
       appBar: const PreferredSize(
@@ -40,9 +46,14 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ProfileTileWidget(user: user),
+            ProfileTileWidget(
+              user: user,
+              /*  schemes: state.when(
+                      activeAchemesState: (schemes) => schemes ?? [],
+                      failedstate: () => []), */
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
               child: Row(
                 children: [
                   Text(

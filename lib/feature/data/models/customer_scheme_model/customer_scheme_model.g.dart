@@ -18,6 +18,10 @@ CustomerSchemeModel _$CustomerSchemeModelFromJson(Map<String, dynamic> json) =>
       totalAmount: json['TotalAmount'] as String?,
       totalNoofInstalment: json['TotalNoofInstalment'] as String?,
       subId: json['SubID'] as String?,
+      custName: json['CustName'] as String?,
+      houseName: json['HouseName'] as String?,
+      address1: json['Address1'] as String?,
+      address2: json['Address2'] as String?,
       merchantCode: json['MerchantCode'] as String?,
     );
 
@@ -34,5 +38,9 @@ Map<String, dynamic> _$CustomerSchemeModelToJson(
       'TotalAmount': instance.totalAmount,
       'TotalNoofInstalment': instance.totalNoofInstalment,
       'SubID': instance.subId,
+      'CustName': instance.custName,
+      'HouseName': instance.houseName,
+      'Address1': instance.address1,
+      'Address2': instance.address2,
       'MerchantCode': instance.merchantCode,
     };
