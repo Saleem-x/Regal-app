@@ -18,7 +18,6 @@ class ActiveSchemesRepo implements IUserSchemes {
           body: {"datakey": datakey, "cusID": cusId});
       if (response.statusCode == 200) {
         // log(response.body);
-
         final Map<String, dynamic> json = jsonDecode(response.body);
         final List<dynamic> productData = json['result'];
         List<CustomerSchemeModel> schemes = productData

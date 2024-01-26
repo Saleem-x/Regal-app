@@ -19,6 +19,7 @@ import 'package:regal_app/feature/views/contactus/contactusscreen.dart';
 import 'package:regal_app/feature/views/home/homescreen.dart';
 import 'package:regal_app/feature/views/joinnewscheme/joinnewscheme.dart';
 import 'package:regal_app/feature/views/newpin/setnewpin.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -56,8 +57,22 @@ final _mobilecontroller = TextEditingController();
 final _pincontroller = TextEditingController();
 final _formkey = GlobalKey<FormState>();
 String otp = '';
+String? mob;
+getstoredphonNO() async {
+  final sharedprefs = await SharedPreferences.getInstance();
+  mob = sharedprefs.getString('phone');
+  if (mob != null) {
+    _mobilecontroller.text = mob!;
+  }
+}
 
 class _AllLoginWidgetsState extends State<AllLoginWidgets> {
+  @override
+  void initState() {
+    getstoredphonNO();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     log(widget.size.height.toString());
@@ -66,14 +81,18 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
         logger.e(state);
         state.when(
           initialstate: () {},
-          loginSuccessState: (user) {
-            Navigator.pop(context);
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomeScreen(user: user),
-                ),
-                (route) => false);
+          loginSuccessState: (user) async {
+            final sharedprefs = await SharedPreferences.getInstance();
+            sharedprefs.setString('phone', _mobilecontroller.text);
+            Future.delayed(const Duration(microseconds: 100), () {
+              Navigator.pop(context);
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(user: user),
+                  ),
+                  (route) => false);
+            });
             otp = '';
             _pincontroller.clear();
           },
@@ -135,12 +154,15 @@ class _AllLoginWidgetsState extends State<AllLoginWidgets> {
               barrierDismissible: false,
               context: context,
               builder: (context) {
-                return const AlertDialog(
-                  surfaceTintColor: Colors.transparent,
-                  backgroundColor: Colors.transparent,
-                  content: Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.green,
+                return const PopScope(
+                  canPop: false,
+                  child: AlertDialog(
+                    surfaceTintColor: Colors.transparent,
+                    backgroundColor: Colors.transparent,
+                    content: Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.green,
+                      ),
                     ),
                   ),
                 );

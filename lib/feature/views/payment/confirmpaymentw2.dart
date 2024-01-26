@@ -15,6 +15,8 @@ import 'package:regal_app/feature/data/models/scheme_details_model/scheme_detail
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/paymentresponse/paymentresponse_bloc.dart';
 import 'package:regal_app/feature/state/bloc/paymentstatusupdate/updatepaymentstatus_bloc.dart';
+import 'package:regal_app/feature/views/auth/loginscreen.dart';
+import 'package:regal_app/feature/views/home/homescreen.dart';
 import 'package:regal_app/feature/views/payment/paymentfailedscreen.dart';
 import 'package:regal_app/feature/views/payment/paymentsucces.dart';
 
@@ -84,7 +86,40 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
             state.when(paymentstatusUpdateState: (status, gpayresp) {
               canPop = true;
               Navigator.pop(context);
-              Navigator.of(context).pushAndRemoveUntil(
+
+              if (widget.isNewScheme == null || widget.isNewScheme != true) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(
+                        user: widget.user,
+                      ),
+                    ),
+                    (route) => false);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PaymentSuccessScreen(
+                        user: widget.user,
+                        paymentRespM: gpayresp!,
+                        amount: widget.payablecontroller.text,
+                        scheme: widget.scheme,
+                        schemeDetails: widget.schemeDetails,
+                        isNewScheme: widget.isNewScheme,
+                        goldWeight: widget.goldWeight,
+                      ),
+                    ));
+              } else {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(
+                          // user: widget.user,
+                          ),
+                    ),
+                    (route) => false);
+                Navigator.push(
+                  context,
                   MaterialPageRoute(
                     builder: (context) => PaymentSuccessScreen(
                       user: widget.user,
@@ -96,9 +131,24 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                       goldWeight: widget.goldWeight,
                     ),
                   ),
-                  (route) => false);
+                );
+              }
+
+              /*  Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => PaymentSuccessScreen(
+                      user: widget.user,
+                      paymentRespM: gpayresp!,
+                      amount: widget.payablecontroller.text,
+                      scheme: widget.scheme,
+                      schemeDetails: widget.schemeDetails,
+                      isNewScheme: widget.isNewScheme,
+                      goldWeight: widget.goldWeight,
+                    ),
+                  ),
+                  (route) => false); */
             }, paymentstatusUpdateFailedState: (error) {
-              Navigator.of(context).pushAndRemoveUntil(
+              /*  Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
                     builder: (context) => PaymentFailedScreeen(
                       user: widget.user,
@@ -108,7 +158,50 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                       isNewScheme: widget.isNewScheme,
                     ),
                   ),
-                  (route) => false);
+                  (route) => false); */
+
+              if (widget.isNewScheme == null || widget.isNewScheme != true) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(
+                        user: widget.user,
+                      ),
+                    ),
+                    (route) => false);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PaymentFailedScreeen(
+                        user: widget.user,
+                        amount: widget.payablecontroller.text,
+                        scheme: widget.scheme,
+                        schemeDetails: widget.schemeDetails,
+                        isNewScheme: widget.isNewScheme,
+                      ),
+                    ));
+              } else {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(
+                          // user: widget.user,
+                          ),
+                    ),
+                    (route) => false);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentFailedScreeen(
+                      user: widget.user,
+                      amount: widget.payablecontroller.text,
+                      scheme: widget.scheme,
+                      schemeDetails: widget.schemeDetails,
+                      isNewScheme: widget.isNewScheme,
+                    ),
+                  ),
+                );
+              }
               /* showCupertinoDialog(
                 context: context,
                 builder: (BuildContext context) {
@@ -178,7 +271,7 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                             PaymentRespModel.fromJson(jsonDecode(jsonResponse));
 
                         if (response == "transaction failed || null") {
-                          Navigator.of(context).pushAndRemoveUntil(
+                          /* Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                 builder: (context) => PaymentFailedScreeen(
                                   user: widget.user,
@@ -188,7 +281,51 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                                   isNewScheme: widget.isNewScheme,
                                 ),
                               ),
-                              (route) => false);
+                              (route) => false); */
+
+                          if (widget.isNewScheme == null ||
+                              widget.isNewScheme != true) {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeScreen(
+                                    user: widget.user,
+                                  ),
+                                ),
+                                (route) => false);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PaymentFailedScreeen(
+                                    user: widget.user,
+                                    amount: widget.payablecontroller.text,
+                                    scheme: widget.scheme,
+                                    schemeDetails: widget.schemeDetails,
+                                    isNewScheme: widget.isNewScheme,
+                                  ),
+                                ));
+                          } else {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginScreen(
+                                      // user: widget.user,
+                                      ),
+                                ),
+                                (route) => false);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PaymentFailedScreeen(
+                                  user: widget.user,
+                                  amount: widget.payablecontroller.text,
+                                  scheme: widget.scheme,
+                                  schemeDetails: widget.schemeDetails,
+                                  isNewScheme: widget.isNewScheme,
+                                ),
+                              ),
+                            );
+                          }
                         } else if (respModel.status == "SUCCESS" ||
                             respModel.responseCode == "0") {
                           context
@@ -220,7 +357,38 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                                     gpayresp: respModel),
                               );
                         } else {
-                          Navigator.of(context).pushAndRemoveUntil(
+                          if (widget.isNewScheme == null ||
+                              widget.isNewScheme != true) {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomeScreen(
+                                    user: widget.user,
+                                  ),
+                                ),
+                                (route) => false);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PaymentFailedScreeen(
+                                    user: widget.user,
+                                    amount: widget.payablecontroller.text,
+                                    scheme: widget.scheme,
+                                    schemeDetails: widget.schemeDetails,
+                                    isNewScheme: widget.isNewScheme,
+                                  ),
+                                ));
+                          } else {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginScreen(
+                                      // user: widget.user,
+                                      ),
+                                ),
+                                (route) => false);
+                            Navigator.push(
+                              context,
                               MaterialPageRoute(
                                 builder: (context) => PaymentFailedScreeen(
                                   user: widget.user,
@@ -230,13 +398,46 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                                   isNewScheme: widget.isNewScheme,
                                 ),
                               ),
-                              (route) => false);
+                            );
+                          }
                         }
 
                         logger.e("ithaan bloc response inc $response");
                       } else {
                         logger.e(response ?? "nulll");
-                        Navigator.of(context).pushAndRemoveUntil(
+
+                        if (widget.isNewScheme == null ||
+                            widget.isNewScheme != true) {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomeScreen(
+                                  user: widget.user,
+                                ),
+                              ),
+                              (route) => false);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PaymentFailedScreeen(
+                                  user: widget.user,
+                                  amount: widget.payablecontroller.text,
+                                  scheme: widget.scheme,
+                                  schemeDetails: widget.schemeDetails,
+                                  isNewScheme: widget.isNewScheme,
+                                ),
+                              ));
+                        } else {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(
+                                    // user: widget.user,
+                                    ),
+                              ),
+                              (route) => false);
+                          Navigator.push(
+                            context,
                             MaterialPageRoute(
                               builder: (context) => PaymentFailedScreeen(
                                 user: widget.user,
@@ -246,7 +447,8 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                                 isNewScheme: widget.isNewScheme,
                               ),
                             ),
-                            (route) => false);
+                          );
+                        }
                       }
                     },
                     paymentstateReset: () {},
@@ -255,12 +457,15 @@ class _ConfirmPaymentTWOState extends State<ConfirmPaymentTWO> {
                         barrierDismissible: false,
                         context: context,
                         builder: (context) {
-                          return const AlertDialog(
-                            surfaceTintColor: Colors.transparent,
-                            backgroundColor: Colors.transparent,
-                            content: Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.green,
+                          return const PopScope(
+                            canPop: false,
+                            child: AlertDialog(
+                              surfaceTintColor: Colors.transparent,
+                              backgroundColor: Colors.transparent,
+                              content: Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.green,
+                                ),
                               ),
                             ),
                           );

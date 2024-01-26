@@ -183,19 +183,26 @@ class PaymentFailedScreeen extends StatelessWidget {
                                       ),
                                     ),
                                     Visibility(
-                                      visible: scheme.schemeName == null ||
+                                      /*  visible: scheme.schemeName == null ||
                                               scheme.schemeName!.isEmpty
                                           ? scheme.schemeName!.contains('RG')
                                               ? true
                                               : false
-                                          : false,
+                                          : false, */
+
+                                      visible: scheme.schemeName == null
+                                          ? false
+                                          : true,
                                       child: Text(
-                                        scheme.schemeName == null ||
+                                        /* scheme.schemeName == null ||
                                                 scheme.schemeName!.isEmpty
-                                            ? scheme.schemeName!.contains('RG')
+                                            ? */
+                                        scheme.schemeName ??
+                                            '' /* !.contains('RG')
                                                 ? 'REGALIA'
                                                 : ''
-                                            : '',
+                                            : '', */
+                                        ,
                                         style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 16.sp,

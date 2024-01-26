@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
@@ -36,6 +37,7 @@ class NewSchemeHomeRepo implements INewSchemeHomeRepo {
         "NewCusName": newscheme.newCusName,
         "NewCusId": newscheme.newCusId,
       });
+      log(response.body);
       if (response.statusCode == 200) {
         logger.e(response.body);
         final Map<String, dynamic> json = jsonDecode(response.body);

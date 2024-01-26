@@ -125,21 +125,23 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                       double.parse(user.goldRate!))
                                   .toStringAsFixed(2),
                           schemeDetails: SchemeDetailsModel(
+                            custName: _namecontroller.text,
                             goldRate: user.goldRate,
                             goldWeight: getgolweight(_instalmentcontroller.text,
                                 user.goldRate ?? '0'),
                             schemeNo: user.schemeNo,
-                            schemeName: "",
+                            schemeName: user.schemeName ?? '',
                             joinId: user.joinId,
 
                             // noofInst: user.
                           ),
                           scheme: CustomerSchemeModel(
+                              custName: _namecontroller.text,
                               joinId: user.joinId,
                               merchantCode: user.merchantId,
                               subId: user.subCodes,
                               schemeNo: user.schemeNo,
-                              schemeName: "",
+                              schemeName: user.schemeName ?? '',
                               goldRate: user.goldRate,
                               instAmount: _instalmentcontroller.text),
                           orderID: '${user.transId!}',
@@ -173,12 +175,15 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                     barrierDismissible: false,
                     context: context,
                     builder: (context) {
-                      return const AlertDialog(
-                        surfaceTintColor: Colors.transparent,
-                        backgroundColor: Colors.transparent,
-                        content: Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.green,
+                      return const PopScope(
+                        canPop: false,
+                        child: AlertDialog(
+                          surfaceTintColor: Colors.transparent,
+                          backgroundColor: Colors.transparent,
+                          content: Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.green,
+                            ),
                           ),
                         ),
                       );
@@ -300,6 +305,8 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                     Expanded(
                                       child: TextFormField(
                                         controller: _mobilecontroller,
+                                        // enabled: false,
+                                        showCursor: false,
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return 'please enter mobile number';
@@ -400,7 +407,7 @@ class _JoinNewSchemeDetailScreenState extends State<JoinNewSchemeDetailScreen> {
                                   return state.document == 'ADHAR'
                                       ? NewSchmFieldWidget(
                                           controller: _adharNOcontroller,
-                                          icon: 'assets/svg/terms.svg',
+                                          icon: 'assets/svg/document.svg',
                                           title: 'Document Number',
                                           type: TextInputType.name,
                                         )

@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:regal_app/core/api/endpoints.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
+import 'package:regal_app/feature/data/models/pin_reset_otp_model/pin_reset_otp_model.dart';
 import 'package:regal_app/feature/state/bloc/resetpin/resetpin_bloc.dart';
 import 'package:regal_app/feature/state/cubit/otptimer/otptimer_cubit.dart';
 import 'package:regal_app/feature/views/auth/widgets/linewidget.dart';
@@ -25,7 +28,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
   final _mobilecontroller = TextEditingController();
   final _otpcontroller = TextEditingController();
   final _cusIdcontroller = TextEditingController();
-  static final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -45,7 +48,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
             state.when(
               otpSendSuccess: (resentotpmodel) {
                 _cusIdcontroller.text = resentotpmodel.cusId!;
-                logger.e(_cusIdcontroller.text);
+                log('ithaan cusid ${_cusIdcontroller.text}');
               },
               otpstateinitial: () {
                 _otpcontroller.clear();
@@ -54,10 +57,16 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                 context.read<OtptimerCubit>().startTimer();
               },
               verifiedOtpState: (verotpmodel) {
+                logger.i(jsonEncode(verotpmodel));
+                log('ithaan cusid ${_cusIdcontroller.text}');
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ResetPInScreen(otpmodel: verotpmodel),
+                    builder: (context) => ResetPInScreen(
+                        otpmodel: PinResetOtpModel(
+                            cusId: _cusIdcontroller.text,
+                            title: verotpmodel.title,
+                            descr: verotpmodel.descr)),
                   ),
                 );
                 _otpcontroller.clear();
@@ -127,7 +136,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                       state.when(
                         otpstateinitial: () => ResetPinOtpButton(
                           formkey: _formkey,
-                          mobile: _mobilecontroller.text,
+                          mobile: _mobilecontroller,
                         ),
                         otpSendState: () =>
                             BlocBuilder<OtptimerCubit, OtptimerState>(
@@ -136,7 +145,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                                 ? const ResetPinOtpButtonDisable()
                                 : ResetPinOtpButton(
                                     formkey: _formkey,
-                                    mobile: _mobilecontroller.text,
+                                    mobile: _mobilecontroller,
                                   );
                           },
                         ),
@@ -147,21 +156,21 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                                 ? const ResetPinOtpButtonDisable()
                                 : ResetPinOtpButton(
                                     formkey: _formkey,
-                                    mobile: _mobilecontroller.text,
+                                    mobile: _mobilecontroller,
                                   );
                           },
                         ),
                         verifiedOtpState: (verotpmodel) => ResetPinOtpButton(
                           formkey: _formkey,
-                          mobile: _mobilecontroller.text,
+                          mobile: _mobilecontroller,
                         ),
                         facingissuestate: () => ResetPinOtpButton(
                           formkey: _formkey,
-                          mobile: _mobilecontroller.text,
+                          mobile: _mobilecontroller,
                         ),
                         otpVerificationFailed: (otpmodel) => ResetPinOtpButton(
                           formkey: _formkey,
-                          mobile: _mobilecontroller.text,
+                          mobile: _mobilecontroller,
                         ),
                       ),
                     ],
@@ -233,7 +242,7 @@ class _SetNewPinScreenState extends State<SetNewPinScreen> {
                     logger.i(pinResetOtpModel.cusId);
                     return OtPConfirmButton(
                       size: size,
-                      cusId: _cusIdcontroller.text,
+                      cusId: _mobilecontroller.text,
                       cusIdcontroller: _cusIdcontroller,
                       otpcontroller: _otpcontroller,
                       formkey: _formkey,
@@ -312,7 +321,9 @@ class OtPConfirmButton extends StatelessWidget {
               } else {
                 //!change to _cusid controller
                 context.read<ResetpinBloc>().add(
-                      VerfiOtpEvent(mobileNO: cusId, otp: otpcontroller.text),
+                      VerfiOtpEvent(
+                          mobileNO: cusIdcontroller.text,
+                          otp: otpcontroller.text),
                     );
               }
             } else if (otpcontroller.text.length < 4) {
@@ -520,7 +531,7 @@ class ResetPinOtpButton extends StatelessWidget {
   });
 
   final GlobalKey<FormState> formkey;
-  final String mobile;
+  final TextEditingController mobile;
 
   @override
   Widget build(BuildContext context) {
@@ -534,7 +545,7 @@ class ResetPinOtpButton extends StatelessWidget {
           context.read<ResetpinBloc>().add(const OtptimerStateEvent());
           context.read<ResetpinBloc>().add(
                 SendOtpEvent(
-                  mobileNO: mobile,
+                  mobileNO: mobile.text,
                 ),
               );
         }
@@ -546,3 +557,9 @@ class ResetPinOtpButton extends StatelessWidget {
     );
   }
 }
+
+
+
+/* [log] ithaan cusid 68933
+[log] ithaan cusid 68933
+ */

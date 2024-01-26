@@ -58,7 +58,7 @@ class _ActiveSchemeWidgetState extends State<ActiveSchemeWidget> {
                   : Padding(
                       padding: const EdgeInsets.symmetric(vertical: 3),
                       child: SingleChildScrollView(
-                        dragStartBehavior: DragStartBehavior.start,
+                        // dragStartBehavior: DragStartBehavior.start,
                         scrollDirection: Axis.horizontal,
                         padding: const EdgeInsets.all(0),
                         physics: const BouncingScrollPhysics(),
@@ -72,7 +72,7 @@ class _ActiveSchemeWidgetState extends State<ActiveSchemeWidget> {
                               shrinkWrap: true,
                               padding: EdgeInsets.zero,
                               physics: const NeverScrollableScrollPhysics(),
-                              dragStartBehavior: DragStartBehavior.start,
+                              // dragStartBehavior: DragStartBehavior.start,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) => Padding(
                                 padding: EdgeInsets.only(
@@ -107,7 +107,7 @@ class _ActiveSchemeWidgetState extends State<ActiveSchemeWidget> {
                                       },
                                       child: Card(
                                         // shadowColor: ktextgrey,
-                                        // elevation: 3,
+                                        elevation: 2,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(30.sp),
@@ -183,7 +183,7 @@ class _ActiveSchemeWidgetState extends State<ActiveSchemeWidget> {
                                                   height: 3.h,
                                                 ),
                                                 Text(
-                                                  '${schemes[index].schemeName} | ₹${schemes[index].totalAmount}',
+                                                  '${schemes[index].schemeName} | ₹${double.parse(schemes[index].totalAmount ?? '0.0').toStringAsFixed(2)}',
                                                   style: TextStyle(
                                                       fontSize: 12.sp,
                                                       color:

@@ -15,7 +15,7 @@ class GoldrateBloc extends Bloc<GoldrateEvent, GoldrateState> {
   final IGoldRateRepo goldRateRepo;
   GoldrateBloc(this.goldRateRepo) : super(GoldrateState.initial()) {
     on<GetgoldRateEvent>((event, emit) async {
-      Either<MainFailures, GoldRateModel> goldrate =
+      Either<MainFailures, List<GoldRateModel>> goldrate =
           await goldRateRepo.getGoldrate(event.datakey);
 
       emit(goldrate.fold(

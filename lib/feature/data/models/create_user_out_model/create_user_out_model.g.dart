@@ -17,6 +17,7 @@ CreateUserOutModel _$CreateUserOutModelFromJson(Map<String, dynamic> json) =>
       schemeNo: json['SchemeNo'] as String?,
       joinId: json['JoinID'] as String?,
       merchantId: json['MerchantId'] as String?,
+      schemeName: json['SchemeName'] as String?,
     );
 
 Map<String, dynamic> _$CreateUserOutModelToJson(CreateUserOutModel instance) =>
@@ -30,4 +31,5 @@ Map<String, dynamic> _$CreateUserOutModelToJson(CreateUserOutModel instance) =>
       'SchemeNo': instance.schemeNo,
       'JoinID': instance.joinId,
       'MerchantId': instance.merchantId,
+      'SchemeName': instance.schemeName,
     };

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,8 +9,8 @@ import 'package:regal_app/feature/data/models/customer_scheme_model/customer_sch
 import 'package:regal_app/feature/data/models/scheme_details_model/scheme_details_model.dart';
 import 'package:regal_app/feature/data/models/uset_base_model/uset_base_model.dart';
 import 'package:regal_app/feature/state/bloc/instalmenthystory/instalmenthystory_bloc.dart';
-import 'package:regal_app/feature/views/auth/loginscreen.dart';
-import 'package:regal_app/feature/views/home/homescreen.dart';
+import 'package:regal_app/feature/views/home/widgets/datecalculator.dart';
+
 import 'package:regal_app/feature/views/payment/confirmpayment.dart';
 import 'package:regal_app/feature/views/viewdetails/detailsrowwidget.dart';
 import 'package:regal_app/feature/views/viewdetails/schemtandc.dart';
@@ -41,6 +39,9 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
 
     context.read<InstalmenthystoryBloc>().add(GetInstHystory(
         joinId: widget.scheme.joinId!, schemeNO: widget.scheme.schemeNo!));
+
+    logger.e(
+        {"joinId": widget.scheme.joinId!, "schemeNO": widget.scheme.schemeNo!});
     return PopScope(
       canPop: canPop,
       child: Scaffold(
@@ -70,7 +71,9 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
             child: BlocConsumer<InstalmenthystoryBloc, InstalmenthystoryState>(
               listener: (context, state) {
                 state.when(
-                  hystoryLoadigState: () {},
+                  hystoryLoadigState: () {
+                    canPop = false;
+                  },
                   getinstalmentHystoryState: (insthystry) async {
                     if (insthystry == null) {}
                   },
@@ -79,14 +82,17 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                     showDialog(
                       context: context,
                       barrierDismissible: false,
-                      builder: (context) => AlertDialog(
-                        surfaceTintColor: kcolorwhite,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                      builder: (context) => PopScope(
+                        canPop: false,
+                        child: AlertDialog(
+                          surfaceTintColor: kcolorwhite,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          backgroundColor: kcolorwhite,
+                          title: const Text("Fetching History"),
+                          content: const Text("No History Available"),
                         ),
-                        backgroundColor: kcolorwhite,
-                        title: const Text("Fetching History"),
-                        content: const Text("No History Available"),
                       ),
                     );
                     Future.delayed(
@@ -94,7 +100,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                       () {
                         canPop = true;
                         Navigator.pop(context);
-                        if (widget.user.cusName == null) {
+                        /* if (widget.user.cusName == null) {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -109,7 +115,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                   HomeScreen(user: widget.user),
                             ),
                           );
-                        }
+                        } */
                       },
                     );
                   },
@@ -190,7 +196,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                                   .contains('RG')
                                               ? 'REGALIA'
                                               : ''
-                                          : '${widget.scheme.schemeName ?? ''} | ₹${widget.scheme.totalAmount ?? ''}',
+                                          : '${widget.scheme.schemeName ?? ''} | ₹${double.parse(widget.scheme.totalAmount ?? '0').toStringAsFixed(2)}',
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         // fontFamily: kprimaryfont,
@@ -200,11 +206,11 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                       ),
                                     ),
                                     Visibility(
-                                      visible: widget.scheme.custName == null
+                                      /* visible: widget.scheme.custName == null
                                           ? false
-                                          : true,
+                                          : true, */
                                       child: Text(
-                                        '${widget.scheme.custName?.toUpperCase() ?? widget.user.cusName}',
+                                        '${widget.scheme.custName?.toUpperCase() ?? widget.user.cusName ?? ''}',
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                           // fontFamily: kprimaryfont,
@@ -323,7 +329,7 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
                                     ),
                                   )
                                 ],
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -702,20 +708,74 @@ class _ViewDetailScreenState extends State<ViewDetailScreen> {
             borderRadius: BorderRadius.circular(20),
           ),
           onPressed: () {
-            log('${widget.scheme.instAmount}');
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ConfirmPaymentScreen(
-                  scheme: widget.scheme,
-                  schemedetail: widget.schemedetil,
-                  user: widget.user,
-                  payablecontroller: widget.scheme.instAmount ??
-                      widget.schemedetil.schemeAmount ??
-                      '0.0',
+            bool isdued = checkdateisvailid(widget.schemedetil.dueDate);
+            if (isdued) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ConfirmPaymentScreen(
+                    scheme: widget.scheme,
+                    schemedetail: widget.schemedetil,
+                    user: widget.user,
+                    payablecontroller: widget.scheme.instAmount ??
+                        widget.schemedetil.schemeAmount ??
+                        '0.0',
+                  ),
                 ),
-              ),
-            );
+              );
+            } else {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  backgroundColor: kcolorwhite,
+                  surfaceTintColor: kcolorwhite,
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Oops!',
+                        style: TextStyle(
+                            color: kcolorblack,
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
+                  content: Text(
+                    textAlign: TextAlign.center,
+                    '''Unfortunately, you do not meet the eligibility criteria for the selected scheme benefits. We kindly suggest contacting the nearest Regal store for assistance in either concluding the current scheme or initiating a new one through the app.\n Thank you for your understanding.''',
+                    style: TextStyle(color: ktextgrey, fontSize: 14.sp),
+                  ),
+                  actions: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MaterialButton(
+                          minWidth: 55.w,
+                          height: 35.h,
+                          color: kredbutton,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.sp),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Close',
+                            style: TextStyle(
+                                color: kcolorwhite,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              );
+            }
           },
           child: Text(
             'Pay',

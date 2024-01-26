@@ -215,7 +215,7 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
                                         ),
                                       ),
                                       Visibility(
-                                        visible:
+                                        /* visible:
                                             widget.scheme.schemeName == null ||
                                                     widget.scheme.schemeName!
                                                         .isEmpty
@@ -223,16 +223,22 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
                                                         .contains('RG')
                                                     ? true
                                                     : false
-                                                : false,
+                                                : false, */
+
+                                        visible:
+                                            widget.scheme.schemeName == null
+                                                ? false
+                                                : true,
                                         child: Text(
-                                          widget.scheme.schemeName == null ||
+                                          /* widget.scheme.schemeName == null ||
                                                   widget.scheme.schemeName!
                                                       .isEmpty
                                               ? widget.scheme.schemeName!
                                                       .contains('RG')
                                                   ? 'REGALIA'
                                                   : ''
-                                              : '',
+                                              : '' */
+                                          widget.scheme.schemeName ?? '',
                                           style: TextStyle(
                                             fontWeight: FontWeight.w400,
                                             fontSize: 16.sp,
@@ -322,7 +328,7 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
                                           color: ktextgrey, fontSize: 12.sp),
                                     ),
                                     Text(
-                                      'Gold Rate: ₹${widget.scheme.goldRate}',
+                                      'Gold Rate: ₹${double.parse(widget.scheme.goldRate ?? '0').toStringAsFixed(2)}',
                                       style: TextStyle(
                                           color: ktextgrey, fontSize: 12.sp),
                                     )

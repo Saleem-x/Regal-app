@@ -24,7 +24,7 @@ import 'package:regal_app/feature/data/models/scheme_tenure_model/scheme_tenure_
 import 'package:regal_app/feature/data/models/verify_otp_model/verify_otp_model.dart';
 
 abstract class IGoldRateRepo {
-  Future<Either<MainFailures, GoldRateModel>> getGoldrate(String datakey);
+  Future<Either<MainFailures, List<GoldRateModel>>> getGoldrate(String datakey);
 }
 
 abstract class IUserSchemes {

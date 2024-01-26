@@ -16,6 +16,8 @@ class ResetPinRepo implements IResetPinRepo {
     try {
       final response = await http.post(Uri.parse(baseurl + resetpinotpurl),
           body: {"datakey": datakey, "mob": mobileNo});
+
+      logger.e({"datakey": datakey, "mob": mobileNo});
       if (response.statusCode == 200) {
         logger.e(response.body + mobileNo);
         final Map<String, dynamic> json = jsonDecode(response.body);
@@ -43,6 +45,9 @@ class ResetPinRepo implements IResetPinRepo {
         Uri.parse(baseurl + resetpinotpverifyurl),
         body: {"cusID": cusId, "otp": otp, "datakey": datakey},
       );
+
+      logger.e({"cusID": cusId, "otp": otp, "datakey": datakey});
+
       if (response.statusCode == 200) {
         logger.e(response.body);
         logger.e(cusId);
@@ -86,6 +91,7 @@ class ResetPinRepo implements IResetPinRepo {
         Uri.parse(baseurl + resetpinurl),
         body: {"cusID": cusId, "pin": pin, "datakey": datakey},
       );
+      logger.e({"cusID": cusId, "pin": pin, "datakey": datakey});
       if (response.statusCode == 200) {
         logger.e(response.body);
         logger.e(cusId);

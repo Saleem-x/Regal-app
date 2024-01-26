@@ -78,10 +78,39 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                   ),
                 ); */
             Navigator.of(context).pop();
-            Future.delayed(const Duration(microseconds: 200), () {
+            /* logger.e(jsonEncode(
+              ConfirmPaymentTWO(
+                schemeDetails: SchemeDetailsModel(
+                  goldRate: newscheme.goldRate,
+                  goldWeight: "0.00",
+                  schemeNo: newscheme.schemeNo,
+                  schemeName: newscheme.schemeName,
+                  joinId: newscheme.joinId,
+                  custName: _cusnamectrl.text,
+                ),
+                scheme: CustomerSchemeModel(
+                    joinId: newscheme.joinId,
+                    custName: _cusnamectrl.text,
+                    merchantCode: newscheme.merchantId,
+                    subId: newscheme.subCodes,
+                    schemeNo: newscheme.schemeNo,
+                    schemeName: newscheme.schemeName,
+                    instAmount: newscheme.instAmt,
+                    goldRate: newscheme.goldRate),
+                orderID: '${newscheme.transId!}',
+                payablecontroller: _intamountctrl.text.isEmpty
+                    ? TextEditingController(text: newscheme.instAmt)
+                    : _intamountctrl,
+                user: widget.user,
+                goldWeight: (double.parse(newscheme.instAmt ?? '0.00') /
+                        double.parse(newscheme.goldRate ?? '0.00'))
+                    .toStringAsFixed(2),
+              ),
+            )); */
+            Future.delayed(const Duration(microseconds: 200), () async {
               context.read<ActiveschemesBloc>().add(GetActiveSchemes(
                   datakey: datakey, cusid: widget.user.cusId!));
-              Navigator.push(
+              await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ConfirmPaymentTWO(
@@ -91,16 +120,18 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                       schemeNo: newscheme.schemeNo,
                       schemeName: newscheme.schemeName,
                       joinId: newscheme.joinId,
+                      custName: _cusnamectrl.text,
                     ),
                     scheme: CustomerSchemeModel(
                         joinId: newscheme.joinId,
+                        custName: _cusnamectrl.text,
                         merchantCode: newscheme.merchantId,
                         subId: newscheme.subCodes,
                         schemeNo: newscheme.schemeNo,
                         schemeName: newscheme.schemeName,
                         instAmount: newscheme.instAmt,
                         goldRate: newscheme.goldRate),
-                    orderID: '${newscheme.transId!}',
+                    orderID: generateOrderID('SIGNIN', '${widget.user.cusId}'),
                     payablecontroller: _intamountctrl.text.isEmpty
                         ? TextEditingController(text: newscheme.instAmt)
                         : _intamountctrl,
@@ -141,21 +172,26 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
               },
             );
           }, newschcmehomeloadingstate: () {
+            canPop = false;
             showDialog(
               barrierDismissible: false,
               context: context,
               builder: (context) {
-                return const AlertDialog(
-                  surfaceTintColor: Colors.transparent,
-                  backgroundColor: Colors.transparent,
-                  content: Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.green,
+                return const PopScope(
+                  canPop: false,
+                  child: AlertDialog(
+                    surfaceTintColor: Colors.transparent,
+                    backgroundColor: Colors.transparent,
+                    content: Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.green,
+                      ),
                     ),
                   ),
                 );
               },
             );
+            canPop = true;
           }, newSchemInitial: () {
             /* _cusnamectrl.clear();
             _branchctrl.clear();
@@ -417,6 +453,18 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                                           Expanded(
                                             child: TextFormField(
                                               controller: _intamountctrl,
+                                              onChanged: (value) {
+                                                context
+                                                    .read<NewschemehomeBloc>()
+                                                    .add(
+                                                      GetSchemeTenureEvent(
+                                                          schemeslist:
+                                                              schemeslist,
+                                                          branches: branchlist,
+                                                          salesmanmodel:
+                                                              salesmanlist),
+                                                    );
+                                              },
                                               validator: (value) {
                                                 if (value == null ||
                                                     value.isEmpty) {
@@ -539,7 +587,7 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                'Scheme Total Amount: ${tenure == null ? '' : tenure[0].tenure}',
+                                                'Scheme Total Amount: ${tenure == null ? '' : (double.parse(_intamountctrl.text == '' ? '0' : _intamountctrl.text) * int.parse("${tenure[0].tenure}")).toStringAsFixed(2)}',
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     color: ktextgrey
@@ -773,5 +821,36 @@ class _NewSchemefrHomeState extends State<NewSchemefrHome> {
         },
       ),
     );
+  }
+
+  String generateOrderID(String intentFlag, String cusID) {
+    try {
+      int cusID1 = 0;
+      String orderID;
+
+      if (intentFlag == 'SIGNUP') {
+        cusID1 = int.parse(cusID);
+        orderID = '$cusID1' '1'.toString();
+      } else {
+        logger.e(1);
+        cusID1 = int.parse(widget.user.cusId!);
+        logger.e(2);
+        int seq = widget.user.orderSeq + 1.toInt();
+        logger.e(3);
+        orderID = '$cusID1$seq'.toString();
+        logger.e(4);
+        widget.user.orderSeq = seq;
+      }
+
+      DateTime currentDateAndTime = DateTime.now();
+      int timeStamp = currentDateAndTime.microsecondsSinceEpoch;
+
+      orderID = '$cusID1$timeStamp';
+
+      logger.e(orderID);
+      return orderID;
+    } catch (e) {
+      return DateTime.now().millisecondsSinceEpoch.toString();
+    }
   }
 }

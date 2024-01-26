@@ -225,19 +225,19 @@ abstract class GetgoldRateEvent implements GoldrateEvent {
 mixin _$GoldrateState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(GoldRateModel? goldrate) goldratestate,
+    required TResult Function(List<GoldRateModel>? goldrate) goldratestate,
     required TResult Function() failedState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(GoldRateModel? goldrate)? goldratestate,
+    TResult? Function(List<GoldRateModel>? goldrate)? goldratestate,
     TResult? Function()? failedState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(GoldRateModel? goldrate)? goldratestate,
+    TResult Function(List<GoldRateModel>? goldrate)? goldratestate,
     TResult Function()? failedState,
     required TResult orElse(),
   }) =>
@@ -287,7 +287,7 @@ abstract class _$$GoldratestateImplCopyWith<$Res> {
           _$GoldratestateImpl value, $Res Function(_$GoldratestateImpl) then) =
       __$$GoldratestateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({GoldRateModel? goldrate});
+  $Res call({List<GoldRateModel>? goldrate});
 }
 
 /// @nodoc
@@ -305,9 +305,9 @@ class __$$GoldratestateImplCopyWithImpl<$Res>
   }) {
     return _then(_$GoldratestateImpl(
       goldrate: freezed == goldrate
-          ? _value.goldrate
+          ? _value._goldrate
           : goldrate // ignore: cast_nullable_to_non_nullable
-              as GoldRateModel?,
+              as List<GoldRateModel>?,
     ));
   }
 }
@@ -315,10 +315,18 @@ class __$$GoldratestateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GoldratestateImpl implements Goldratestate {
-  const _$GoldratestateImpl({required this.goldrate});
+  const _$GoldratestateImpl({required final List<GoldRateModel>? goldrate})
+      : _goldrate = goldrate;
 
+  final List<GoldRateModel>? _goldrate;
   @override
-  final GoldRateModel? goldrate;
+  List<GoldRateModel>? get goldrate {
+    final value = _goldrate;
+    if (value == null) return null;
+    if (_goldrate is EqualUnmodifiableListView) return _goldrate;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
@@ -330,12 +338,12 @@ class _$GoldratestateImpl implements Goldratestate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GoldratestateImpl &&
-            (identical(other.goldrate, goldrate) ||
-                other.goldrate == goldrate));
+            const DeepCollectionEquality().equals(other._goldrate, _goldrate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, goldrate);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_goldrate));
 
   @JsonKey(ignore: true)
   @override
@@ -346,7 +354,7 @@ class _$GoldratestateImpl implements Goldratestate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(GoldRateModel? goldrate) goldratestate,
+    required TResult Function(List<GoldRateModel>? goldrate) goldratestate,
     required TResult Function() failedState,
   }) {
     return goldratestate(goldrate);
@@ -355,7 +363,7 @@ class _$GoldratestateImpl implements Goldratestate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(GoldRateModel? goldrate)? goldratestate,
+    TResult? Function(List<GoldRateModel>? goldrate)? goldratestate,
     TResult? Function()? failedState,
   }) {
     return goldratestate?.call(goldrate);
@@ -364,7 +372,7 @@ class _$GoldratestateImpl implements Goldratestate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(GoldRateModel? goldrate)? goldratestate,
+    TResult Function(List<GoldRateModel>? goldrate)? goldratestate,
     TResult Function()? failedState,
     required TResult orElse(),
   }) {
@@ -407,10 +415,10 @@ class _$GoldratestateImpl implements Goldratestate {
 }
 
 abstract class Goldratestate implements GoldrateState {
-  const factory Goldratestate({required final GoldRateModel? goldrate}) =
+  const factory Goldratestate({required final List<GoldRateModel>? goldrate}) =
       _$GoldratestateImpl;
 
-  GoldRateModel? get goldrate;
+  List<GoldRateModel>? get goldrate;
   @JsonKey(ignore: true)
   _$$GoldratestateImplCopyWith<_$GoldratestateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -454,7 +462,7 @@ class _$FailedStateImpl implements FailedState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(GoldRateModel? goldrate) goldratestate,
+    required TResult Function(List<GoldRateModel>? goldrate) goldratestate,
     required TResult Function() failedState,
   }) {
     return failedState();
@@ -463,7 +471,7 @@ class _$FailedStateImpl implements FailedState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(GoldRateModel? goldrate)? goldratestate,
+    TResult? Function(List<GoldRateModel>? goldrate)? goldratestate,
     TResult? Function()? failedState,
   }) {
     return failedState?.call();
@@ -472,7 +480,7 @@ class _$FailedStateImpl implements FailedState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(GoldRateModel? goldrate)? goldratestate,
+    TResult Function(List<GoldRateModel>? goldrate)? goldratestate,
     TResult Function()? failedState,
     required TResult orElse(),
   }) {

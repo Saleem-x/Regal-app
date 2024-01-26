@@ -13,7 +13,7 @@ import 'package:regal_app/feature/data/repos/abstractrepos.dart';
 @LazySingleton(as: IGoldRateRepo)
 class GoldRateRepo implements IGoldRateRepo {
   @override
-  Future<Either<MainFailures, GoldRateModel>> getGoldrate(
+  Future<Either<MainFailures, List<GoldRateModel>>> getGoldrate(
       String datakey) async {
     try {
       final response = await http
@@ -22,11 +22,14 @@ class GoldRateRepo implements IGoldRateRepo {
         // log(response.body);
         final Map<String, dynamic> json = jsonDecode(response.body);
 
-        final goldrate = GoldRateModel.fromJson(json['result'][0]);
+        // final goldrate = GoldRateModel.fromJson(json['result'][0]);
 
-        // log(response.statusCode.toString());
-
-        return right(goldrate);
+        final List<dynamic> goldratedata = json['result'];
+        List<GoldRateModel> goldratemodel = goldratedata
+            .map<GoldRateModel>((json) => GoldRateModel.fromJson(json))
+            .toList();
+        log(goldratemodel.length.toString());
+        return right(goldratemodel);
       } else {
         log(response.statusCode.toString());
         return left(const MainFailures.clientfailure());

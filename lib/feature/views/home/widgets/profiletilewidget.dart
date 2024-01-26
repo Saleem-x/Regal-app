@@ -18,66 +18,100 @@ class ProfileTileWidget extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0),
-      child: Row(
-        children: [
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14.sp),
-            ),
-            color: kcolorwhite,
-            child: Container(
-              width: 51.h,
-              height: 47.h,
-              decoration: BoxDecoration(
-                color: kcolorwhite,
-                borderRadius: BorderRadius.circular(14.sp),
-                /* image: const DecorationImage(
-                  image: AssetImage('assets/images/Portrait_Placeholder.png'),
-                  fit: BoxFit.cover,
-                ), */
-                /* boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: const Offset(-1, 3),
-                  ),
-                ], */
-              ),
-              child: Center(
-                child: Text(
-                  user.cusName.toString().split('')[0].toUpperCase(),
-                  style: TextStyle(
-                    color: const Color.fromARGB(227, 241, 191, 7),
-                    fontSize: 30.sp,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 15.w,
-          ),
-          Expanded(
-            child: SizedBox(
-              height: 66.h,
-              width: size.width.w,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+      child: BlocBuilder<SchemeselectorCubit, SchemeselectorState>(
+        builder: (context, ind) {
+          return BlocBuilder<ActiveschemesBloc, ActiveschemesState>(
+            builder: (context, state) {
+              return Row(
                 children: [
-                  BlocBuilder<ActiveschemesBloc, ActiveschemesState>(
-                    builder: (context, state) {
-                      return BlocBuilder<SchemeselectorCubit,
-                          SchemeselectorState>(
-                        builder: (context, ind) {
-                          return state.when(
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14.sp),
+                    ),
+                    color: kcolorwhite,
+                    child: Container(
+                      width: 51.h,
+                      height: 47.h,
+                      decoration: BoxDecoration(
+                        color: kcolorwhite,
+                        borderRadius: BorderRadius.circular(14.sp),
+                        /* image: const DecorationImage(
+                                  image: AssetImage('assets/images/Portrait_Placeholder.png'),
+                                  fit: BoxFit.cover,
+                                ), */
+                        /* boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: const Offset(-1, 3),
+                                  ),
+                                ], */
+                      ),
+                      /* child: Center(
+                        child: Text(
+                          user.cusName.toString().split('')[0].toUpperCase(),
+                          style: TextStyle(
+                            color: const Color.fromARGB(227, 241, 191, 7),
+                            fontSize: 30.sp,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ), */
+
+                      child: Center(
+                        child: state.when(
+                            activeAchemesState: (schemes) => Text(
+                                  schemes == null
+                                      ? user.cusName
+                                          .toString()
+                                          .split('')[0]
+                                          .toUpperCase()
+                                      : schemes[ind.idx]
+                                              .custName
+                                              ?.split('')[0]
+                                              .toUpperCase() ??
+                                          user.cusName
+                                              .toString()
+                                              .split('')[0]
+                                              .toUpperCase(),
+                                  style: TextStyle(
+                                    color:
+                                        const Color.fromARGB(227, 241, 191, 7),
+                                    fontSize: 30.sp,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                            failedstate: () => Text(
+                                  // '${user.cusName}',
+                                  'R',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 19.sp,
+                                  ),
+                                )),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15.w,
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                      height: 66.h,
+                      width: size.width.w,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          state.when(
                               activeAchemesState: (schemes) => Text(
                                     schemes == null
-                                        ? user.cusName
-                                        : schemes[ind.idx].custName ??
-                                            '${user.cusName}',
+                                        ? ' ${user.cusName}'.toUpperCase()
+                                        : schemes[ind.idx]
+                                                .custName
+                                                ?.toUpperCase() ??
+                                            '${user.cusName}'.toUpperCase(),
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 19.sp,
@@ -89,29 +123,29 @@ class ProfileTileWidget extends StatelessWidget {
                                       fontWeight: FontWeight.w600,
                                       fontSize: 19.sp,
                                     ),
-                                  ));
-                        },
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 3.h,
-                  ),
-                  Text(
-                    '+91 ${user.cusMobileNumber}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16.sp,
+                                  )),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Text(
+                            '+91 ${user.cusMobileNumber}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  SizedBox(
-                    height: 3.h,
-                  ),
                 ],
-              ),
-            ),
-          ),
-        ],
+              );
+            },
+          );
+        },
       ),
     );
   }

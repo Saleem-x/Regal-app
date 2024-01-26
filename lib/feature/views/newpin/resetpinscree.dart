@@ -1,14 +1,16 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:regal_app/core/constents/colors/kcolors.dart';
 import 'package:regal_app/feature/data/models/pin_reset_otp_model/pin_reset_otp_model.dart';
 import 'package:regal_app/feature/state/bloc/updatenewpin/updatenewpin_bloc.dart';
 import 'package:regal_app/feature/views/auth/loginscreen.dart';
-import 'package:regal_app/feature/views/auth/widgets/otpfieldwidget.dart';
 
 class ResetPInScreen extends StatefulWidget {
   final PinResetOtpModel otpmodel;
@@ -18,13 +20,12 @@ class ResetPInScreen extends StatefulWidget {
   State<ResetPInScreen> createState() => _ResetPInScreenState();
 }
 
-final TextEditingController _pincontroller = TextEditingController();
-
 class _ResetPInScreenState extends State<ResetPInScreen> {
+  final _pincontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-
+    log('ithaan cusid ${widget.otpmodel.cusId}');
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -120,7 +121,66 @@ class _ResetPInScreenState extends State<ResetPInScreen> {
               SizedBox(
                 height: size.height * 0.02,
               ),
-              NewPinOtpFIeldWidget(size: size, newpin: _pincontroller),
+              /* NewPinOtpFIeldWidget(size: size, newpin: _pincontroller), */
+
+              Padding(
+                padding: const EdgeInsets.only(left: 40, right: 30),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      child: SvgPicture.asset(
+                        'assets/svg/lockre.svg',
+                        height: 15.h,
+                        width: 15.w,
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width * 0.05,
+                    ),
+                    Expanded(
+                      child: PinCodeTextField(
+                        controller: _pincontroller,
+                        cursorColor: kredbutton,
+                        appContext: context,
+                        length: 4,
+                        keyboardType: TextInputType.number,
+                        autoDismissKeyboard: true,
+                        enableActiveFill: true,
+                        textStyle: TextStyle(
+                          fontSize: 17.sp,
+                          fontWeight: FontWeight.normal,
+                        ),
+                        pinTheme: PinTheme(
+                          shape: PinCodeFieldShape.box,
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
+                          fieldHeight: 35.h,
+                          fieldWidth: 40.w,
+                          activeFillColor: kcolorgrey.withOpacity(.09),
+                          inactiveFillColor: kcolorgrey.withOpacity(.09),
+                          selectedFillColor: kcolorgrey.withOpacity(.09),
+                          activeColor: kbgcolor,
+                          selectedColor: kbgcolor,
+                          disabledColor: kbgcolor,
+                          inactiveColor: kbgcolor,
+                          errorBorderColor: kbgcolor,
+                        ),
+                        onChanged: (value) {
+                          if (value.length == 4) {
+                            _pincontroller.text = value;
+                          }
+                        },
+                        onCompleted: (pin) {
+                          if (pin.length == 4) {
+                            _pincontroller.text = pin;
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
@@ -179,7 +239,8 @@ class _ResetPInScreenState extends State<ResetPInScreen> {
                     } else {
                       context.read<UpdatenewpinBloc>().add(
                             updateNewPinEvent(
-                                pin: _pincontroller.text, cusID: '47663'),
+                                pin: _pincontroller.text,
+                                cusID: widget.otpmodel.cusId!),
                           );
                     }
                   },

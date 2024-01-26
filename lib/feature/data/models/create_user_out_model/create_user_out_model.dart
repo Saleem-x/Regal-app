@@ -22,6 +22,8 @@ class CreateUserOutModel {
   String? joinId;
   @JsonKey(name: 'MerchantId')
   String? merchantId;
+  @JsonKey(name: 'SchemeName')
+  String? schemeName;
 
   CreateUserOutModel({
     this.transId,
@@ -33,6 +35,7 @@ class CreateUserOutModel {
     this.schemeNo,
     this.joinId,
     this.merchantId,
+    this.schemeName,
   });
 
   factory CreateUserOutModel.fromJson(Map<String, dynamic> json) {

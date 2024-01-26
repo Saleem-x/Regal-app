@@ -123,6 +123,16 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                                   fontSize: 14.sp,
                                 ),
                               ),
+                              Text(
+                                '${widget.scheme.custName?.toUpperCase() ?? widget.user.cusName ?? ''}',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  // fontFamily: kprimaryfont,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: ktextgrey,
+                                ),
+                              ),
                             ],
                           ),
                         ),

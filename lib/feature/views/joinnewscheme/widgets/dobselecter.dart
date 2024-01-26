@@ -97,6 +97,8 @@ class DobSelectorWidget extends StatelessWidget {
                               ),
                               Expanded(
                                 child: CupertinoDatePicker(
+                                  initialDateTime: DateTime.now(),
+                                  maximumDate: DateTime.now(),
                                   onDateTimeChanged: (value) {
                                     controller.text =
                                         "${value.day}/${value.month}/${value.year}";

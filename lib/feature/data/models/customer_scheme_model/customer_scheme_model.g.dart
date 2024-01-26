@@ -23,7 +23,8 @@ CustomerSchemeModel _$CustomerSchemeModelFromJson(Map<String, dynamic> json) =>
       address1: json['Address1'] as String?,
       address2: json['Address2'] as String?,
       merchantCode: json['MerchantCode'] as String?,
-    )..goldRate = json['goldRate'] as String?;
+      goldRate: json['goldRate'] as String?,
+    );
 
 Map<String, dynamic> _$CustomerSchemeModelToJson(
         CustomerSchemeModel instance) =>
